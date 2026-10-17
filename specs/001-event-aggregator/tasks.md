@@ -75,8 +75,8 @@ the per-source runner. **No user story work begins until this phase is complete.
 
 ### Sanitization and URL safety
 
-- [ ] T024 [P] Write failing tests in `discovery/tests/security/test_sanitize.py` using fixtures with `<script>`, `<img onerror>`, `<style>`, HTML entities, zero-width and control characters, and 10 MB strings: output is plain text only, whitespace-normalized, truncated to the field limit; `safe_url()` accepts only `https://` URLs with a public hostname and rejects `javascript:`, `data:`, `http:`, user-info, IP literals, and non-443 ports.
-- [ ] T025 Implement `discovery/src/netc/pipeline/sanitize.py` (`to_plain_text(html_or_text, max_len)` via nh3 with no allowed tags, `safe_url(url)`, `scrub_pii(text)` removing e-mail addresses and phone numbers) so T024 passes.
+- [X] T024 [P] Write failing tests in `discovery/tests/security/test_sanitize.py` using fixtures with `<script>`, `<img onerror>`, `<style>`, HTML entities, zero-width and control characters, and 10 MB strings: output is plain text only, whitespace-normalized, truncated to the field limit; `safe_url()` accepts only `https://` URLs with a public hostname and rejects `javascript:`, `data:`, `http:`, user-info, IP literals, and non-443 ports.
+- [X] T025 Implement `discovery/src/netc/pipeline/sanitize.py` (`to_plain_text(html_or_text, max_len)` via nh3 with no allowed tags, `safe_url(url)`, `scrub_pii(text)` removing e-mail addresses and phone numbers) so T024 passes.
 
 ### Models, schemas, and storage
 
