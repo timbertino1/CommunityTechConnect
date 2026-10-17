@@ -489,6 +489,9 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   on behalf of users. Automatic discovery relies on public search features of event platforms, web
   search, newsletter subscriptions, and public websites; which specific services and methods are
   used is decided during planning, and some channels may be ruled out by their terms of use.
+- "Launch" means the public announcement of NETechConnect (sharing it with the community and
+  pointing the custom domain at it). Before launch the site may run unannounced at its default
+  hosting address for testing.
 - The site owner is the only administrator at launch and wants near-zero routine effort; the
   review queue and summary exist so attention is needed only when something is held or broken.
 - Past events are kept indefinitely unless an administrator removes them.

@@ -22,6 +22,7 @@ data/
 ├── candidates.json              # Candidate sources and their evaluation history
 ├── mentions.json                # Event mentions awaiting resolution to an original page
 ├── review/queue.json            # Items held for administrator review
+├── review/open.json             # Snapshot of rev_ ids in the open review PR (written only by it)
 ├── state/source_status.json     # Per-source run health (last success, errors, counts)
 └── cache/ai/<YYYY-MM>.jsonl     # AI results keyed by content hash (cost control)
 ```
@@ -133,6 +134,10 @@ status:  active ──rejected > approved (≥ 3 reviewed)──▶ paused   (au
 | `reason` | string | Short reason for the result |
 | `last_evaluated` | datetime | Re-evaluation not before `last_evaluated + 30 days` when rejected (FR-015) |
 
+**Privacy**: visitor suggestion notes are **never** stored in `data/` or shown in PRs or
+issues. They stay only in the private KV inbox (30-day TTL) and are passed in memory to
+evaluation (FR-020).
+
 ### Event Mention
 
 An event seen only as a mention (newsletter, news post, search snippet) — never published
@@ -159,11 +164,6 @@ directly (FR-014).
 | `created` | datetime | |
 | `decision` | enum | `pending` \| `approved` \| `rejected` |
 | `decided_in_pr` | int \| null | PR number (audit trail, FR-046) |
-
-### Candidate Source privacy note
-
-Visitor suggestion notes are **never** stored in `data/` or shown in PRs or issues. They stay
-only in the private KV inbox (30-day TTL) and are passed in memory to evaluation (FR-020).
 
 ### Override
 
