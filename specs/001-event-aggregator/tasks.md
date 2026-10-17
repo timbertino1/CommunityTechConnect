@@ -97,8 +97,8 @@ the per-source runner. **No user story work begins until this phase is complete.
 
 ### Per-source runner (isolation and observability)
 
-- [ ] T037 [P] Write failing tests in `discovery/tests/unit/test_runner.py`: a connector that raises, times out, or returns garbage is recorded in `state/source_status.json` (`last_attempt`, `last_error` sanitized, `consecutive_failures`) while other sources still complete (FR-008); paused and `blocked_by_terms` sources are skipped; a run emits structured JSON log lines and per-source metrics.
-- [ ] T038 Implement `discovery/src/netc/connectors/base.py` (the `Connector` protocol and `RawPayload` from contracts/connectors-and-finders.md) and `discovery/src/netc/pipeline/runner.py` so T037 passes.
+- [X] T037 [P] Write failing tests in `discovery/tests/unit/test_runner.py`: a connector that raises, times out, or returns garbage is recorded in `state/source_status.json` (`last_attempt`, `last_error` sanitized, `consecutive_failures`) while other sources still complete (FR-008); paused and `blocked_by_terms` sources are skipped; a run emits structured JSON log lines and per-source metrics.
+- [X] T038 Implement `discovery/src/netc/connectors/base.py` (the `Connector` protocol and `RawPayload` from contracts/connectors-and-finders.md) and `discovery/src/netc/pipeline/runner.py` so T037 passes.
 
 ### Validation gates (each blocks only its listed dependents)
 

@@ -10,7 +10,12 @@ class Connector(Protocol):
     kind: ClassVar[str]                     # "ical" | "rss" | "jsonld" | "eventbrite_org" | "html_rules"
 
     def fetch(self, source: Source, http: SafeHttp) -> RawPayload: ...
-    def parse(self, source: Source, payload: RawPayload) -> list[RawListing]: ...
+    def parse(self, source: Source, payload: RawPayload) -> ParseResult: ...
+
+@dataclass(frozen=True)
+class ParseResult:
+    listings: list[RawListing]
+    warnings: list[str]                     # what was skipped and why
 ```
 
 - `fetch` MUST use only the provided `SafeHttp` (SSRF protection, robots.txt, rate limits,
