@@ -908,6 +908,7 @@ dependencies = [
     { name = "rapidfuzz" },
     { name = "recurring-ical-events" },
     { name = "selectolax" },
+    { name = "tzdata" },
 ]
 
 [package.dev-dependencies]
@@ -936,6 +937,7 @@ requires-dist = [
     { name = "rapidfuzz", specifier = ">=3" },
     { name = "recurring-ical-events", specifier = ">=3" },
     { name = "selectolax", specifier = ">=0.3" },
+    { name = "tzdata", specifier = ">=2025.1" },
 ]
 
 [package.metadata.requires-dev]

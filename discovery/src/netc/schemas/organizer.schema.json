@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/organizer.schema.json",
+  "title": "Organizer",
+  "description": "A group or organization that runs events, stored as an item of data/organizers.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "home_city", "url", "aliases"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^org_[a-z0-9-]{1,80}$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "home_city": { "type": ["string", "null"], "maxLength": 100 },
+    "url": { "anyOf": [{ "type": "string", "format": "uri", "pattern": "^https://[^/\\s]+\\.[^/\\s]+(/.*)?$", "maxLength": 2048 }, { "type": "null" }] },
+    "aliases": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 200 } }
+  }
+}

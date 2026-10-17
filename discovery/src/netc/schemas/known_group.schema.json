@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/known_group.schema.json",
+  "title": "KnownGroup",
+  "description": "A known group or organization, with or without a working source, stored as an item of data/known_groups.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "aliases", "area", "links", "source_ids", "last_searched", "cadence_days", "status"],
+  "$defs": {
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://[^/\\s]+\\.[^/\\s]+(/.*)?$", "maxLength": 2048 }
+  },
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "aliases": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 200 } },
+    "area": { "enum": ["omaha", "lincoln", "other_ne", "online", null] },
+    "links": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/httpsUrl" } },
+    "source_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^src_[a-z0-9-]{1,80}$" } },
+    "last_searched": { "anyOf": [{ "type": "string", "format": "date-time", "pattern": "Z$" }, { "type": "null" }] },
+    "cadence_days": { "type": ["integer", "null"], "minimum": 1 },
+    "status": { "enum": ["active", "quiet", "defunct"] }
+  }
+}
