@@ -138,6 +138,11 @@ small, simple system is easier to secure and maintain.
   established.
 - Every pull request MUST be reviewed for correctness and security; changes touching
   authentication, input handling, fetching, or secrets require explicit security review.
+- Exception for machine-generated data: pull requests opened by the project's bot App that
+  change only files under `data/` MAY merge without human review when every required CI gate
+  passes (schema validation, data-safety rules, security scans). Any change outside `data/`,
+  and any change to code, workflows, or configuration, MUST have human review. CI MUST reject
+  bot pull requests that touch anything outside `data/`.
 - Required CI gates: automated tests, linting/formatting, type checking (where applicable),
   dependency vulnerability scanning, and secret scanning.
 - Deviations from a principle MUST be documented in the plan's Complexity Tracking section with
@@ -156,4 +161,4 @@ small, simple system is easier to secure and maintain.
 - Compliance is verified at plan time (Constitution Check), at review time (every PR), and
   through a periodic review of the constitution at least once per year.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-16 | **Last Amended**: 2026-10-16
+**Version**: 1.1.0 | **Ratified**: 2026-10-16 | **Last Amended**: 2026-10-16
