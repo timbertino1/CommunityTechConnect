@@ -1,1 +1,211 @@
-[]
+- aliases:
+  - NENUG
+  - Nebraska Networking User Group
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.usnua.com/
+  name: (NE)NUG Nebraska Networking User Group
+  source_ids:
+  - src_nenug
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: AI Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://lincoln-omaha.aitinkerers.org/
+  name: AI Tinkerers Lincoln/Omaha
+  source_ids: []
+  status: active
+- aliases:
+  - Heartland Developers Conference
+  - HDC
+  - Infotec
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.aiminstitute.org/
+  name: AIM Institute
+  source_ids: []
+  status: active
+- aliases:
+  - Omaha Drupal Meetup
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://groups.drupal.org/nebraska
+  name: Drupal Nebraska
+  source_ids:
+  - src_drupal-nebraska
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: InfraGard Nebraska
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: INTERFACE Omaha
+  source_ids: []
+  status: active
+- aliases:
+  - ISACA Omaha Chapter
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://engage.isaca.org/omahachapter/
+  name: ISACA Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://kernelcon.org/
+  name: Kernelcon
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Learn Swift Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Nebraska Data and Analytics Forum
+  source_ids: []
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://innovate.unl.edu/
+  name: Nebraska Innovation Campus
+  source_ids:
+  - src_unl-nic
+  status: active
+- aliases:
+  - Nebraska Code
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://nebraskacode.amegala.com/
+  name: Nebraska.Code()
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.nebraskacert.org/
+  name: NEbraskaCERT
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/omaha-azure-user-group/
+  name: Omaha Azure User Group
+  source_ids:
+  - src_omaha-azure
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://omahamakergroup.org/
+  name: Omaha Maker Group
+  source_ids: []
+  status: active
+- aliases:
+  - Omaha RHUG
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/omaha-rhug/
+  name: Omaha Red Hat User Group
+  source_ids:
+  - src_omaha-rhug
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://owasp.org/chapters/omaha
+  name: OWASP Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/prairie-python/
+  name: Prairie Python
+  source_ids:
+  - src_prairie-python
+  status: active
+- aliases:
+  - UNO
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://events.unomaha.edu/
+  name: University of Nebraska Omaha
+  source_ids:
+  - src_uno-events
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://computing.unl.edu/
+  name: UNL School of Computing
+  source_ids:
+  - src_unl-computing
+  status: active
+- aliases:
+  - WiTH
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Women in Technology of the Heartland
+  source_ids: []
+  status: active

@@ -11,6 +11,7 @@ from netc.fetch.errors import (
     TooManyRedirectsError,
     UnsafeURLError,
 )
+from netc.fetch.offline import FixtureHttp, HttpClient
 from netc.fetch.safe_fetch import (
     DEFAULT_CONTENT_TYPES,
     MAX_BYTES,
@@ -30,6 +31,8 @@ __all__ = [
     "FetchKind",
     "FetchResponse",
     "FetchTimeoutError",
+    "FixtureHttp",
+    "HttpClient",
     "IPAddress",
     "Resolver",
     "ResponseTooLargeError",

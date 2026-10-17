@@ -21,7 +21,7 @@ from datetime import datetime, timedelta
 from typing import Any, Final, Literal
 
 from netc.connectors.base import Connector, ParseResult
-from netc.fetch import SafeHttp
+from netc.fetch import HttpClient
 from netc.models import RawListing, Source, SourceStatus
 from netc.pipeline.sanitize import scrub_pii, to_plain_text
 
@@ -78,7 +78,7 @@ def stderr_sink(line: str) -> None:
 def run_sources(
     sources: Sequence[Source],
     connectors: Mapping[str, Connector],
-    http: SafeHttp,
+    http: HttpClient,
     previous: Mapping[str, SourceStatus],
     *,
     now: datetime,
@@ -187,7 +187,7 @@ def _skip_reason(source: Source, status: SourceStatus, now: datetime, force: boo
     return None if now >= due_at else "not_due"
 
 
-def _fetch_and_parse(connector: Connector, source: Source, http: SafeHttp) -> object:
+def _fetch_and_parse(connector: Connector, source: Source, http: HttpClient) -> object:
     payload = connector.fetch(source, http)
     return connector.parse(source, payload)
 

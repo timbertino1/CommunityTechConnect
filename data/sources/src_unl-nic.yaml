@@ -1,0 +1,22 @@
+added_at: '2026-10-17'
+approved_count: 0
+check_interval_hours: 24
+connector: ical
+default_area: lincoln
+feed_url: https://events.unl.edu/nic/upcoming/?format=ics&limit=-1
+follow_links: null
+found_via: null
+html_rules: null
+id: src_unl-nic
+name: Nebraska Innovation Campus
+notes: 'Gate V7. This is a venue calendar: most entries are conferences, socials and workshops unrelated
+  to tech (a live dry run on 2026-10-17 held 184 of 222 for review). Paused until the AI classification
+  step (Phase 4), or until a feed limited to Nebraska Innovation Studio maker events is found.'
+organizer_id: org_unl-nic
+origin: preconfigured
+rate_limit_seconds: 5
+rejected_count: 0
+status: paused
+trust: trusted
+updated_at: null
+url: https://events.unl.edu/nic/upcoming/

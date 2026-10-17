@@ -312,7 +312,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li class="now"><div class="bar"><span style="width:41%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="now"><div class="bar"><span style="width:52%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 11 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 14 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -1249,14 +1249,14 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
     </div>
     <p class="lede">Phase 3 is the MVP: read the five starting sources every day, turn what they publish into clean events, and put a fast, accessible list of upcoming Nebraska tech events on the web, each one linking to the organizer's own page.</p>
     <div class="stats">
-      <div class="stat"><span class="n">11<small> of 27</small></span><p>Tasks done in this phase.</p></div>
-      <div class="stat"><span class="n">691</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">14<small> of 27</small></span><p>Tasks done in this phase.</p></div>
+      <div class="stat"><span class="n">699</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">3<small> of 4</small></span><p>Live sources read end to end on the first try (the fourth had no upcoming events).</p></div>
     </div>
     <ul class="checklist">
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Reading sources</b><small>Calendar feeds and event data built into web pages. Merged in PR #14.</small></div><span class="ids">T046&ndash;T048, T056&ndash;T057</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed. Built, PR pending.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>The daily run</b><small>The five sources added and <code>netc discover-events</code> wired up.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed. Merged in PR #15.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The daily run</b><small>Eight sources added (six active) and <code>netc discover-events</code> wired up. Built, PR pending.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Going live</b><small>A bot for data updates, deploys to Cloudflare Pages, a final security check.</small></div><span class="ids">T065&ndash;T072</span></li>
     </ul>
@@ -1402,6 +1402,40 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 3 &middot; The daily run</p>
+      <h2>One command reads every source and updates the data</h2>
+      <p class="muted prose"><code>netc discover-events</code> reads every source that is due, runs each listing through the four steps, and saves events, source health and the review queue. A second run at the same moment changes nothing, byte for byte.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Area</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>UNL School of Computing</td><td>Lincoln</td><td><span class="status now">Active, each event reviewed</span></td></tr>
+          <tr><td>Drupal Nebraska</td><td>Omaha</td><td><span class="status done">Active</span></td></tr>
+          <tr><td>(NE)NUG Nebraska Networking User Group</td><td>Omaha</td><td><span class="status done">Active</span></td></tr>
+          <tr><td>Prairie Python (Meetup)</td><td>Omaha</td><td><span class="status done">Active</span></td></tr>
+          <tr><td>Omaha Azure User Group (Meetup)</td><td>Omaha</td><td><span class="status done">Active</span></td></tr>
+          <tr><td>Omaha Red Hat User Group (Meetup)</td><td>Omaha</td><td><span class="status done">Active</span></td></tr>
+          <tr><td>Nebraska Innovation Campus</td><td>Lincoln</td><td><span class="status next">Paused</span></td></tr>
+          <tr><td>UNO events</td><td>Omaha</td><td><span class="status next">Paused</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">10</span><p>Events kept in the first live dry run.</p></div>
+      <div class="stat"><span class="n">44</span><p>Rejected: breaks, exams, holidays, socials.</p></div>
+      <div class="stat"><span class="n">9</span><p>Waiting for a person to look at them.</p></div>
+      <div class="stat"><span class="n">0</span><p>Sources that failed.</p></div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>192 items for review in one run</h3><p>The first live dry run would have filled the review queue with 192 items. Almost all came from the Nebraska Innovation Campus calendar, which turned out to be a venue calendar: happy hours, trivia nights, optometry and tourism conferences. Worse, the word "innovation" in the venue's own name counted as a tech keyword. The source is paused until the AI step can sort it, and the vague keyword is gone. Next run: 9 items to review.</p></div></div>
+      <div class="note"><div><h3>Tests that won't expire</h3><p>The readers used the real clock to decide which events are "upcoming", so tests built on October 2026 sample data would have started failing in a few weeks. The clock is now passed in, and <code>--now</code> lets a run pretend to be any moment.</p></div></div>
+      <div class="note"><div><h3>Practice runs without the internet</h3><p><code>--offline</code> replays saved pages from a folder, so the whole run (four sources, a duplicate across two of them, one broken) is tested without touching the web.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share Phase 3 so far</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
       <label class="eyebrow" for="post-phase-3">Suggested post (edit freely)</label>
@@ -1415,7 +1449,9 @@ Lesson of the day: Meetup builds its event links with JavaScript, so a normal li
 
 Step two turns listings into events: clean text, Central Time, the right part of Nebraska, topics, and duplicates merged. On the UNL computing calendar the rules kept 9 real events, threw out 40 holidays and exam dates, and sent 12 unclear ones to a human.
 
-691 tests and counting.
+Step three is the daily run. First live practice run: 6 sources read, 0 failures, 10 events kept. It also showed one calendar was really a venue's calendar (110 happy hours!), so that one is paused for now.
+
+699 tests and counting.
 
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-3"></span>

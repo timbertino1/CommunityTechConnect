@@ -1,0 +1,21 @@
+added_at: '2026-10-17'
+approved_count: 0
+check_interval_hours: 24
+connector: ical
+default_area: omaha
+feed_url: https://groups.drupal.org/ical/4145
+follow_links: null
+found_via: null
+html_rules: null
+id: src_drupal-nebraska
+name: Drupal Nebraska
+notes: 'Gate V7. groups.drupal.org asks for crawl-delay 10. Content is CC BY-SA 2.0: keep summaries short
+  and link the original.'
+organizer_id: org_drupal-nebraska
+origin: preconfigured
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: trusted
+updated_at: null
+url: https://groups.drupal.org/nebraska

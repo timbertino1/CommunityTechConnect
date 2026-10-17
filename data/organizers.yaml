@@ -1,1 +1,40 @@
-[]
+- aliases: []
+  home_city: Omaha
+  id: org_drupal-nebraska
+  name: Drupal Nebraska
+  url: https://groups.drupal.org/nebraska
+- aliases: []
+  home_city: Omaha
+  id: org_nenug
+  name: (NE)NUG Nebraska Networking User Group
+  url: https://www.usnua.com/
+- aliases: []
+  home_city: Omaha
+  id: org_omaha-azure
+  name: Omaha Azure User Group
+  url: https://www.meetup.com/omaha-azure-user-group/
+- aliases: []
+  home_city: Omaha
+  id: org_omaha-rhug
+  name: Omaha Red Hat User Group
+  url: https://www.meetup.com/omaha-rhug/
+- aliases: []
+  home_city: Omaha
+  id: org_prairie-python
+  name: Prairie Python
+  url: https://www.meetup.com/prairie-python/
+- aliases: []
+  home_city: Lincoln
+  id: org_unl-computing
+  name: UNL School of Computing
+  url: https://computing.unl.edu/
+- aliases: []
+  home_city: Lincoln
+  id: org_unl-nic
+  name: Nebraska Innovation Campus
+  url: https://innovate.unl.edu/
+- aliases: []
+  home_city: Omaha
+  id: org_uno
+  name: University of Nebraska Omaha
+  url: https://www.unomaha.edu/

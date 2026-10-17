@@ -1,0 +1,22 @@
+added_at: '2026-10-17'
+approved_count: 0
+check_interval_hours: 24
+connector: jsonld
+default_area: omaha
+feed_url: null
+follow_links:
+  max_pages: 3
+  path_glob: /omaha-azure-user-group/events/[0-9]*
+found_via: null
+html_rules: null
+id: src_omaha-azure
+name: Omaha Azure User Group
+notes: 'Meetup (gate V1 decision): public event pages only, 10 s apart, no member data.'
+organizer_id: org_omaha-azure
+origin: preconfigured
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: trusted
+updated_at: null
+url: https://www.meetup.com/omaha-azure-user-group/events/
