@@ -1,0 +1,121 @@
+# Location areas used for filtering (FR-036) and the gazetteer used to place events in them.
+# Matching order when normalizing an event: venue, then city, then ZIP, then ZIP prefix; the
+# omaha and lincoln entries are checked before other_ne. Places listed under out_of_state are
+# outside Nebraska: their events are kept only when a Nebraska-based group hosts them (FR-003).
+# Seed list, 2026-10-17: extend by pull request when a real event is misplaced.
+areas:
+  - id: omaha
+    label: Omaha area
+    cities:
+      - Omaha
+      - Bellevue
+      - Papillion
+      - La Vista
+      - Ralston
+      - Elkhorn
+      - Gretna
+      - Bennington
+      - Offutt AFB
+      - Boys Town
+      - Valley
+      - Waterloo
+      - Springfield
+      - Chalco
+    zips:
+      - "68005" # Bellevue
+      - "68007" # Bennington
+      - "68010" # Boys Town
+      - "68022" # Elkhorn
+      - "68028" # Gretna
+      - "68046" # Papillion
+      - "68059" # Springfield
+      - "68064" # Valley
+      - "68069" # Waterloo
+    zip_prefixes:
+      - "681" # Omaha, including La Vista, Ralston, Offutt AFB and parts of Bellevue/Papillion
+    venues:
+      - AIM Institute
+      - CHI Health Center
+      - Scott Conference Center
+      - Peter Kiewit Institute
+      - University of Nebraska Omaha
+      - Creighton University
+      - Bellevue University
+      - Metropolitan Community College
+  - id: lincoln
+    label: Lincoln area
+    cities:
+      - Lincoln
+      - Waverly
+      - Hickman
+      - Bennet
+      - Firth
+      - Malcolm
+      - Raymond
+      - Davey
+      - Panama
+      - Roca
+      - Sprague
+      - Hallam
+      - Denton
+    zips:
+      - "68317" # Bennet
+      - "68336" # Davey
+      - "68339" # Denton
+      - "68358" # Firth
+      - "68368" # Hallam
+      - "68372" # Hickman
+      - "68402" # Malcolm
+      - "68419" # Panama
+      - "68428" # Raymond
+      - "68430" # Roca
+      - "68438" # Sprague
+      - "68462" # Waverly
+    zip_prefixes:
+      - "685" # Lincoln
+    venues:
+      - University of Nebraska-Lincoln
+      - Nebraska Innovation Campus
+      - FUSE Coworking
+  - id: other_ne
+    label: Other Nebraska
+    cities:
+      - Grand Island
+      - Kearney
+      - Hastings
+      - Norfolk
+      - North Platte
+      - Columbus
+      - Fremont
+      - Scottsbluff
+      - South Sioux City
+      - Beatrice
+      - York
+      - Lexington
+      - Blair
+      - Seward
+      - Wayne
+      - Chadron
+      - McCook
+      - Nebraska City
+      - Ashland
+      - Wahoo
+      - Crete
+      - Sidney
+      - Alliance
+    zips: []
+    zip_prefixes: ["680", "681", "683", "684", "685", "686", "687", "688", "689", "690", "691", "692", "693"]
+    venues: []
+  - id: online
+    label: Online
+    cities: []
+    zips: []
+    zip_prefixes: []
+    venues: []
+out_of_state:
+  - name: Council Bluffs
+    state: IA
+    zips: ["51501", "51502", "51503"]
+  - name: Carter Lake
+    state: IA
+    zips: ["51510"]

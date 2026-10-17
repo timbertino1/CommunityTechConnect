@@ -1,0 +1,6 @@
+# Reviewed false positives, one exact finding per line (commit:file:rule:line).
+# Add an entry only after confirming the match is not a secret, and say why.
+
+# A test input "../../etc/passwd" (path traversal in a time zone name) followed by the string
+# "America/Chicago" matched generic-api-key. No secret; the input was changed in a later commit.
+75d8e07c9d3e699ebe2ea747c801acba1eca0ba9:discovery/tests/unit/test_timeutil.py:generic-api-key:47

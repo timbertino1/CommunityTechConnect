@@ -311,7 +311,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <nav class="rail" aria-label="Roadmap progress">
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
-      <li class="now"><div class="bar"><span style="width:52%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
+      <li class="now"><div class="bar"><span style="width:67%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
       <li><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 14 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 18 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -703,15 +703,15 @@ Next up: teaching the bot to browse the web safely.
     </div>
     <p class="lede">Before the site can show a single event, the discovery bot needs to read the web without being tricked, clean what it reads, and store it reliably. Phase 2 builds those pieces. Nothing visible yet; everything after depends on it.</p>
     <div class="stats">
-      <div class="stat"><span class="n">14<small> of 27</small></span><p>Tasks done so far in this phase.</p></div>
-      <div class="stat"><span class="n">411</span><p>Automated tests, all passing, running in about 3 seconds.</p></div>
+      <div class="stat"><span class="n">18<small> of 27</small></span><p>Tasks done so far in this phase.</p></div>
+      <div class="stat"><span class="n">506</span><p>Automated tests, all passing, running in about 3 seconds.</p></div>
       <div class="stat"><span class="n">~8,000&times;</span><p>Speed-up from fixing one slow pattern found by attacking my own code.</p></div>
     </div>
     <ul class="checklist">
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Safe fetching</b><small>The one gate for all web access. Merged in PR #7.</small></div><span class="ids">T019&ndash;T023</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Cleaning untrusted text</b><small>Plain text, safe links, no personal contact details. Merged in PR #8.</small></div><span class="ids">T024&ndash;T025</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Data models, schemas and storage</b><small>Exact rules for every record, tidy files, a data check in CI. Built, PR pending.</small></div><span class="ids">T026&ndash;T032</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>Time zones and categories</b><small>Central Time done right, topic and city lists.</small></div><span class="ids">T033&ndash;T036</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Data models, schemas and storage</b><small>Exact rules for every record, tidy files, a data check in CI. Merged in PR #10.</small></div><span class="ids">T026&ndash;T032</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Time zones and categories</b><small>Central Time done right, 11 topics, the Nebraska town list. Built, PR pending.</small></div><span class="ids">T033&ndash;T036</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Per-source runner</b><small>One broken source never stops the rest.</small></div><span class="ids">T037&ndash;T038</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Research checks</b><small>Terms, prices and limits for Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare.</small></div><span class="ids">T039&ndash;T045</span></li>
     </ul>
@@ -855,39 +855,45 @@ Next up: teaching the bot to browse the web safely.
     </div>
     <figure>
       <div class="chart-box">
-        <svg id="tests-chart" viewBox="0 0 640 260" role="img" aria-label="Automated tests: 2 after Phase 1, 143 after safe fetching, 261 after cleaning untrusted text, 411 after data models and storage.">
+        <svg id="tests-chart" viewBox="0 0 640 260" role="img" aria-label="Automated tests: 2 after Phase 1, 143 after safe fetching, 261 after cleaning untrusted text, 411 after data models and storage, 506 after time and places.">
           <line class="grid" x1="56" y1="210" x2="620" y2="210"/>
           <line class="grid" x1="56" y1="150" x2="620" y2="150"/>
           <line class="grid" x1="56" y1="90" x2="620" y2="90"/>
           <line class="grid" x1="56" y1="30" x2="620" y2="30"/>
           <text class="axis" x="46" y="214" text-anchor="end">0</text>
-          <text class="axis" x="46" y="154" text-anchor="end">150</text>
-          <text class="axis" x="46" y="94" text-anchor="end">300</text>
-          <text class="axis" x="46" y="34" text-anchor="end">450</text>
-          <!-- scale: 0.4 px per test, baseline y=210 -->
+          <text class="axis" x="46" y="154" text-anchor="end">200</text>
+          <text class="axis" x="46" y="94" text-anchor="end">400</text>
+          <text class="axis" x="46" y="34" text-anchor="end">600</text>
+          <!-- scale: 0.3 px per test, baseline y=210 -->
           <g data-tip="End of Phase 1: 2 tests">
-            <rect class="bar-hit" x="68" y="20" width="120" height="190"/>
-            <path class="bar" d="M96 210 V208.8 a1.2 1.2 0 0 1 1.2 -1.2 H158.8 a1.2 1.2 0 0 1 1.2 1.2 V210 Z"/>
-            <text class="val" x="128" y="199" text-anchor="middle">2</text>
-            <text class="axis" x="128" y="232" text-anchor="middle">End of Phase 1</text>
+            <rect class="bar-hit" x="56" y="20" width="112" height="190"/>
+            <path class="bar" d="M84 210 V208.8 a1.2 1.2 0 0 1 1.2 -1.2 H138.8 a1.2 1.2 0 0 1 1.2 1.2 V210 Z"/>
+            <text class="val" x="112" y="199" text-anchor="middle">2</text>
+            <text class="axis" x="112" y="232" text-anchor="middle">Phase 1</text>
           </g>
           <g data-tip="After safe fetching: 143 tests">
-            <rect class="bar-hit" x="208" y="20" width="120" height="190"/>
-            <path class="bar" d="M236 210 V156.8 a4 4 0 0 1 4 -4 H296 a4 4 0 0 1 4 4 V210 Z"/>
-            <text class="val" x="268" y="145" text-anchor="middle">143</text>
-            <text class="axis" x="268" y="232" text-anchor="middle">+ Safe fetching</text>
+            <rect class="bar-hit" x="169" y="20" width="112" height="190"/>
+            <path class="bar" d="M197 210 V171.1 a4 4 0 0 1 4 -4 H249 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="225" y="159" text-anchor="middle">143</text>
+            <text class="axis" x="225" y="232" text-anchor="middle">+ Safe fetch</text>
           </g>
           <g data-tip="After cleaning untrusted text: 261 tests">
-            <rect class="bar-hit" x="348" y="20" width="120" height="190"/>
-            <path class="bar" d="M376 210 V109.6 a4 4 0 0 1 4 -4 H436 a4 4 0 0 1 4 4 V210 Z"/>
-            <text class="val" x="408" y="98" text-anchor="middle">261</text>
-            <text class="axis" x="408" y="232" text-anchor="middle">+ Cleaning text</text>
+            <rect class="bar-hit" x="282" y="20" width="112" height="190"/>
+            <path class="bar" d="M310 210 V135.7 a4 4 0 0 1 4 -4 H362 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="338" y="124" text-anchor="middle">261</text>
+            <text class="axis" x="338" y="232" text-anchor="middle">+ Cleaning</text>
           </g>
           <g data-tip="After data models and storage: 411 tests">
-            <rect class="bar-hit" x="488" y="20" width="120" height="190"/>
-            <path class="bar" d="M516 210 V49.6 a4 4 0 0 1 4 -4 H576 a4 4 0 0 1 4 4 V210 Z"/>
-            <text class="val" x="548" y="38" text-anchor="middle">411</text>
-            <text class="axis" x="548" y="232" text-anchor="middle">+ Models &amp; storage</text>
+            <rect class="bar-hit" x="395" y="20" width="112" height="190"/>
+            <path class="bar" d="M423 210 V90.7 a4 4 0 0 1 4 -4 H475 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="451" y="79" text-anchor="middle">411</text>
+            <text class="axis" x="451" y="232" text-anchor="middle">+ Models</text>
+          </g>
+          <g data-tip="After time zones, categories and places: 506 tests">
+            <rect class="bar-hit" x="508" y="20" width="112" height="190"/>
+            <path class="bar" d="M536 210 V62.2 a4 4 0 0 1 4 -4 H588 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="564" y="50" text-anchor="middle">506</text>
+            <text class="axis" x="564" y="232" text-anchor="middle">+ Time &amp; places</text>
           </g>
         </svg>
         <div class="tip" id="tip" hidden></div>
@@ -897,7 +903,7 @@ Next up: teaching the bot to browse the web safely.
         <summary>Show as a table</summary>
         <div class="table-wrap"><table>
           <thead><tr><th>Milestone</th><th>Tests</th></tr></thead>
-          <tbody><tr><td>End of Phase 1</td><td>2</td></tr><tr><td>+ Safe fetching</td><td>143</td></tr><tr><td>+ Cleaning text</td><td>261</td></tr><tr><td>+ Models &amp; storage</td><td>411</td></tr></tbody>
+          <tbody><tr><td>End of Phase 1</td><td>2</td></tr><tr><td>+ Safe fetching</td><td>143</td></tr><tr><td>+ Cleaning text</td><td>261</td></tr><tr><td>+ Models &amp; storage</td><td>411</td></tr><tr><td>+ Time &amp; places</td><td>506</td></tr></tbody>
         </table></div>
       </details>
     </figure>
@@ -990,11 +996,102 @@ Next up: teaching the bot to browse the web safely.
 
   <section>
     <div class="section-head">
+      <p class="eyebrow">Part 4 &middot; Time and place</p>
+      <h2>Every event in Central Time, in the right part of Nebraska</h2>
+      <p class="muted prose">Sources describe time in all kinds of ways. Each event is stored once in UTC, with the source's own time zone kept beside it, and always shown in Central Time with a "CT" label.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>The source says</th><th>Stored (UTC)</th><th>Shown on the site</th></tr></thead>
+        <tbody>
+          <tr><td>6:30 PM, Oct 20, no time zone given</td><td class="num">2026-10-20T23:30:00Z<br>zone assumed: Central</td><td>Tue, Oct 20, 2026, 6:30 PM CT</td></tr>
+          <tr><td>7:00 PM Eastern</td><td class="num">2026-10-20T23:00:00Z</td><td>Tue, Oct 20, 2026, 6:00 PM CT</td></tr>
+          <tr><td>"Central Standard Time" (an Outlook export)</td><td class="num">read as America/Chicago</td><td>No "assumed" flag: the source did say Central</td></tr>
+          <tr><td>10 PM to 1 AM, both on Oct 20</td><td class="num">end moved to the next day</td><td>Tue, Oct 20, 2026, 10:00 PM &ndash; Wed, Oct 21, 1:00 AM CT</td></tr>
+          <tr><td>All day, Oct 20 to 22 (calendar style, end not included)</td><td class="num">2026-10-20T05:00:00Z &rarr;<br>2026-10-22T05:00:00Z</td><td>Tue, Oct 20 &ndash; Wed, Oct 21, 2026 (all day)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figure>
+      <div class="diagram wide">
+        <svg viewBox="0 0 800 176" role="img" aria-label="On Sunday November 1, 2026, clocks in Omaha fall back at 2:00 AM. The UTC instants 06:30 and 07:30 both show as 1:30 AM in Central Time; storing UTC keeps them in the right order.">
+          <text class="t-head" x="20" y="34">STORED IN UTC</text>
+          <text class="t-head" x="20" y="150">SHOWN IN OMAHA</text>
+          <line class="edge" x1="150" y1="60" x2="780" y2="60"/>
+          <line class="edge" x1="150" y1="116" x2="780" y2="116"/>
+          <g>
+            <line class="edge-dash" x1="200" y1="60" x2="200" y2="116"/>
+            <text class="t-sub" x="200" y="48" text-anchor="middle">05:30Z</text>
+            <text class="t-title" x="200" y="136" text-anchor="middle">12:30 AM</text>
+            <text class="t-sub" x="200" y="152" text-anchor="middle">CDT</text>
+          </g>
+          <g>
+            <line class="edge-accent" x1="360" y1="60" x2="360" y2="116"/>
+            <text class="t-sub" x="360" y="48" text-anchor="middle">06:30Z</text>
+            <text class="t-accent" x="360" y="136" text-anchor="middle">1:30 AM</text>
+            <text class="t-sub" x="360" y="152" text-anchor="middle">CDT, first time</text>
+          </g>
+          <g>
+            <line class="edge-accent" x1="520" y1="60" x2="520" y2="116"/>
+            <text class="t-sub" x="520" y="48" text-anchor="middle">07:30Z</text>
+            <text class="t-accent" x="520" y="136" text-anchor="middle">1:30 AM</text>
+            <text class="t-sub" x="520" y="152" text-anchor="middle">CST, second time</text>
+          </g>
+          <g>
+            <line class="edge-dash" x1="680" y1="60" x2="680" y2="116"/>
+            <text class="t-sub" x="680" y="48" text-anchor="middle">08:30Z</text>
+            <text class="t-title" x="680" y="136" text-anchor="middle">2:30 AM</text>
+            <text class="t-sub" x="680" y="152" text-anchor="middle">CST</text>
+          </g>
+          <text class="t-edge" x="440" y="88" text-anchor="middle">clocks fall back</text>
+        </svg>
+      </div>
+      <figcaption>On Nov 1, 2026, 1:30 AM happens twice in Omaha. Storing UTC keeps the two moments apart and in order; the site still shows each one as the clock on the wall read. Tests cover the exact minutes of the 2026 and 2027 changes in both directions.</figcaption>
+    </figure>
+    <div class="two">
+      <div style="display:grid;gap:8px;min-width:0">
+        <h3>11 topics, matched by keywords</h3>
+        <div class="ranges" style="--x:0">
+          <span style="background:var(--sky-soft);color:var(--sky)">AI &amp; Machine Learning</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Information Security / Cybersecurity</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Software Development &amp; Programming</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Computer Networking &amp; Infrastructure</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Cloud &amp; DevOps</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Data &amp; Analytics</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Web &amp; Mobile</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Product, Design &amp; UX</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Career &amp; Professional Networking</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">Hardware, IoT &amp; Makers</span>
+          <span style="background:var(--sky-soft);color:var(--sky)">General Tech</span>
+        </div>
+        <p class="muted" style="font-size:0.9rem">Each topic has a keyword list ("owasp", "kubernetes", "raspberry pi") that the classifier will use first, before any AI. Everyday words like "data" or "event" are kept out on purpose, and a test enforces it.</p>
+      </div>
+      <div style="display:grid;gap:8px;min-width:0">
+        <h3>Four places to filter by</h3>
+        <div class="table-wrap">
+          <table class="mini">
+            <tr><td>Omaha area</td><td>Omaha, Bellevue, Papillion, La Vista, Ralston, Elkhorn, Gretna, Offutt AFB&hellip; and ZIPs starting 681</td></tr>
+            <tr><td>Lincoln area</td><td>Lincoln and the Lancaster County towns, ZIPs starting 685</td></tr>
+            <tr><td>Other Nebraska</td><td>Grand Island, Kearney, Norfolk, Scottsbluff&hellip; any Nebraska ZIP</td></tr>
+            <tr><td>Online</td><td>Online events hosted by Nebraska groups</td></tr>
+            <tr><td>Out of state</td><td>Council Bluffs and Carter Lake, IA: only when a Nebraska group hosts</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Calendars that don't speak the standard</h3><p>Calendars exported from Outlook name time zones the Windows way, like "Central Standard Time", instead of "America/Chicago". Those names are now recognized, so those events aren't flagged as having a guessed time zone.</p></div></div>
+      <div class="note"><div><h3>"10 PM to 1 AM"</h3><p>Some sources give a late-night event an end time that looks earlier than its start on the same date. Instead of throwing the end away, it's read as the next morning, which is what the organizer meant.</p></div></div>
+      <div class="note"><div><h3>The secret scanner caught... a test</h3><p>The PR's secret scan failed. A test checks that a hostile time zone name like <code>../../etc/passwd</code> is rejected, and the scanner read "passwd" followed by a string as a leaked password. It wasn't one, so the test now uses a different file name and that one finding is recorded as reviewed. Every other match still fails the check, so the scanner stays strict.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
       <p class="eyebrow">Coming next in Phase 2</p>
-      <h2>Time, places, the runner and the research checks</h2>
+      <h2>The runner and the research checks</h2>
     </div>
     <div class="cards">
-      <div class="card"><span class="tag">T033&ndash;T036</span><h3>Time and place</h3><p>Central Time across daylight saving changes, and which towns count as Omaha, Lincoln or elsewhere in Nebraska.</p></div>
       <div class="card"><span class="tag">T037&ndash;T038</span><h3>One bad source can't stop the run</h3><p>Failures are recorded and the rest of the sources carry on.</p></div>
       <div class="card"><span class="tag">T039&ndash;T045</span><h3>Research checks</h3><p>Reading the terms and limits of Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare before relying on them.</p></div>
     </div>
@@ -1004,17 +1101,19 @@ Next up: teaching the bot to browse the web safely.
     <div class="share">
       <div class="share-head"><h3>Share Phase 2 so far</h3><button class="btn" type="button" data-copy="post-phase-2">Copy post</button></div>
       <label class="eyebrow" for="post-phase-2">Suggested post (edit freely)</label>
-      <textarea id="post-phase-2">NETechConnect build log, Phase 2: 14 of 27 foundation tasks done.
+      <textarea id="post-phase-2">NETechConnect build log, Phase 2: 18 of 27 foundation tasks done.
 
 What's in so far:
 - one gate for every web request the bot makes: https only, never an internal address, robots.txt respected, hard limits on time and size
 - everything it collects is cleaned to plain text before it's stored, so nothing a source writes can run in your browser
 - exact rules for every kind of record, with the data kept as plain files in the repo and written the same way byte for byte, so each day's changes are a small, readable diff
 - a data check on every pull request that lists every problem at once
+- every event stored in UTC and shown in Central Time, correct even in the hour when 1:30 AM happens twice
+- 11 topics and a Nebraska town list, so events land in Omaha, Lincoln, elsewhere in Nebraska or online
 
 Favorite moment: after all the planned tests passed, I threw junk at my own code. One input took 127 seconds to clean. One fix later: 0.015 s, and it's a permanent test now.
 
-411 tests and counting.
+506 tests and counting.
 
 #BuildInPublic #AppSec #Nebraska #OmahaTech</textarea>
       <span class="count" data-count-for="post-phase-2"></span>

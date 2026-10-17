@@ -292,6 +292,17 @@ def test_open_review_ids_must_exist_in_the_queue(
     assert "rev_aaaaaaaaaaaa" in out
 
 
+def test_broken_areas_file_fails(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    (data / "areas.yaml").write_text(
+        "areas:\n  - id: omaha\n    label: Omaha area\n    cities: []\n    zips: []\n"
+        "    zip_prefixes: []\n    venues: []\nout_of_state: []\n",
+        encoding="utf-8",
+    )
+    code, out = run(data, capsys)
+    assert code == 1
+    assert "areas.yaml" in out
+
+
 def test_all_problems_are_reported_in_one_run(
     data: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

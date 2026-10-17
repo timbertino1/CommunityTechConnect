@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/areas.schema.json",
+  "title": "Areas",
+  "description": "data/areas.yaml: the four location areas (FR-036) and the Nebraska gazetteer used to place events in them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["areas", "out_of_state"],
+  "$defs": {
+    "place": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "zip": { "type": "string", "pattern": "^[0-9]{5}$" },
+    "area": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "cities", "zips", "zip_prefixes", "venues"],
+      "properties": {
+        "id": { "enum": ["omaha", "lincoln", "other_ne", "online"] },
+        "label": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "cities": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/place" } },
+        "zips": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/zip" } },
+        "zip_prefixes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[0-9]{3}$" } },
+        "venues": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 200 } }
+      }
+    }
+  },
+  "properties": {
+    "areas": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "$ref": "#/$defs/area" } },
+    "out_of_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "state", "zips"],
+        "properties": {
+          "name": { "$ref": "#/$defs/place" },
+          "state": { "type": "string", "pattern": "^[A-Z]{2}$" },
+          "zips": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/zip" } }
+        }
+      }
+    }
+  }
+}
