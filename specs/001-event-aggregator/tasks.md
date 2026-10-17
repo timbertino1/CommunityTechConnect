@@ -90,10 +90,10 @@ the per-source runner. **No user story work begins until this phase is complete.
 
 ### Time handling and categories
 
-- [ ] T033 [P] Write failing tests in `discovery/tests/unit/test_timeutil.py`: conversion to UTC from source time zones, missing zone assumes `America/Chicago` and sets `tz_assumed: true`, all-day events, events crossing midnight, and correct Central Time display across both 2026 and 2027 DST transitions.
-- [ ] T034 Implement `discovery/src/netc/pipeline/timeutil.py` (zoneinfo-based) so T033 passes.
-- [ ] T035 [P] Create `data/categories.yaml` with the seed ids, labels, and keyword vocabularies: `ai-ml`, `security`, `software-dev`, `networking-infra`, `cloud-devops`, `data-analytics`, `web-mobile`, `product-design-ux`, `career-networking`, `hardware-iot-makers`, `general-tech`.
-- [ ] T036 [P] Create `data/areas.yaml`: area definitions and a gazetteer mapping Nebraska cities/ZIPs to `omaha` (Omaha, Bellevue, Papillion, La Vista, Ralston, Elkhorn, Gretna, Bennington, Offutt AFB), `lincoln` (Lincoln and surrounding Lancaster County towns), and `other_ne`; list Council Bluffs, IA as out-of-state.
+- [X] T033 [P] Write failing tests in `discovery/tests/unit/test_timeutil.py`: conversion to UTC from source time zones, missing zone assumes `America/Chicago` and sets `tz_assumed: true`, all-day events, events crossing midnight, and correct Central Time display across both 2026 and 2027 DST transitions.
+- [X] T034 Implement `discovery/src/netc/pipeline/timeutil.py` (zoneinfo-based) so T033 passes.
+- [X] T035 [P] Create `data/categories.yaml` with the seed ids, labels, and keyword vocabularies: `ai-ml`, `security`, `software-dev`, `networking-infra`, `cloud-devops`, `data-analytics`, `web-mobile`, `product-design-ux`, `career-networking`, `hardware-iot-makers`, `general-tech`.
+- [X] T036 [P] Create `data/areas.yaml`: area definitions and a gazetteer mapping Nebraska cities/ZIPs to `omaha` (Omaha, Bellevue, Papillion, La Vista, Ralston, Elkhorn, Gretna, Bennington, Offutt AFB), `lincoln` (Lincoln and surrounding Lancaster County towns), and `other_ne`; list Council Bluffs, IA as out-of-state.
 
 ### Per-source runner (isolation and observability)
 

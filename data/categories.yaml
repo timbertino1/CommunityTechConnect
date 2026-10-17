@@ -1,0 +1,254 @@
+# Event categories (FR-028). Administrators may add categories or keywords by pull request.
+# The order here is the display order on the site. Keywords are lowercase phrases matched on
+# word boundaries by the rules classifier; keep them specific enough not to match everyday words.
+- id: ai-ml
+  label: AI & Machine Learning
+  keywords:
+    - artificial intelligence
+    - ai
+    - machine learning
+    - deep learning
+    - neural network
+    - llm
+    - large language model
+    - generative ai
+    - genai
+    - chatgpt
+    - prompt engineering
+    - natural language processing
+    - nlp
+    - computer vision
+    - pytorch
+    - tensorflow
+    - hugging face
+    - rag
+    - ai agents
+    - mlops
+- id: security
+  label: Information Security / Cybersecurity
+  keywords:
+    - cybersecurity
+    - cyber security
+    - infosec
+    - information security
+    - owasp
+    - bsides
+    - isaca
+    - isc2
+    - infragard
+    - wicys
+    - penetration testing
+    - pentest
+    - red team
+    - blue team
+    - threat intelligence
+    - incident response
+    - malware
+    - ransomware
+    - capture the flag
+    - ctf
+    - appsec
+    - application security
+    - devsecops
+    - zero trust
+    - cissp
+    - vulnerability
+    - phishing
+    - ethical hacking
+- id: software-dev
+  label: Software Development & Programming
+  keywords:
+    - software development
+    - software engineering
+    - programming
+    - coding
+    - developer
+    - developers
+    - python
+    - javascript
+    - typescript
+    - java
+    - .net
+    - dotnet
+    - c#
+    - golang
+    - rust
+    - ruby
+    - php
+    - elixir
+    - code camp
+    - hackathon
+    - open source
+    - github
+    - test-driven development
+    - agile
+    - api design
+    - microservices
+- id: networking-infra
+  label: Computer Networking & Infrastructure
+  keywords:
+    - networking
+    - network engineering
+    - cisco
+    - ccna
+    - ccnp
+    - juniper
+    - routing
+    - sd-wan
+    - wireless networking
+    - data center
+    - infrastructure
+    - sysadmin
+    - system administration
+    - linux
+    - windows server
+    - vmware
+    - virtualization
+    - red hat
+    - homelab
+- id: cloud-devops
+  label: Cloud & DevOps
+  keywords:
+    - cloud
+    - aws
+    - amazon web services
+    - azure
+    - google cloud
+    - gcp
+    - devops
+    - kubernetes
+    - k8s
+    - docker
+    - containers
+    - terraform
+    - infrastructure as code
+    - ci/cd
+    - continuous integration
+    - site reliability
+    - sre
+    - observability
+    - platform engineering
+    - serverless
+    - ansible
+    - openshift
+    - cloud native
+- id: data-analytics
+  label: Data & Analytics
+  keywords:
+    - data science
+    - data engineering
+    - data analytics
+    - analytics
+    - business intelligence
+    - power bi
+    - tableau
+    - sql
+    - database
+    - data warehouse
+    - snowflake
+    - databricks
+    - apache spark
+    - big data
+    - data visualization
+    - etl
+    - dbt
+    - postgres
+- id: web-mobile
+  label: Web & Mobile
+  keywords:
+    - web development
+    - front end
+    - frontend
+    - full stack
+    - react
+    - angular
+    - vue
+    - svelte
+    - node.js
+    - css
+    - web accessibility
+    - wordpress
+    - drupal
+    - mobile development
+    - ios
+    - android
+    - swift
+    - kotlin
+    - flutter
+    - react native
+- id: product-design-ux
+  label: Product, Design & UX
+  keywords:
+    - product management
+    - product manager
+    - product owner
+    - ux
+    - user experience
+    - ui design
+    - user research
+    - design thinking
+    - figma
+    - service design
+    - interaction design
+    - design system
+    - prototyping
+    - product design
+    - content design
+- id: career-networking
+  label: Career & Professional Networking
+  keywords:
+    - career
+    - career fair
+    - job fair
+    - hiring
+    - recruiting
+    - resume
+    - interviewing
+    - mentorship
+    - mentoring
+    - women in tech
+    - diversity in tech
+    - professional development
+    - leadership
+    - startup
+    - founders
+    - entrepreneurship
+    - pitch night
+    - 1 million cups
+    - demo day
+    - internship
+    - networking event
+- id: hardware-iot-makers
+  label: Hardware, IoT & Makers
+  keywords:
+    - hardware
+    - iot
+    - internet of things
+    - embedded
+    - arduino
+    - raspberry pi
+    - maker
+    - makerspace
+    - hackerspace
+    - 3d printing
+    - electronics
+    - robotics
+    - drones
+    - soldering
+    - fpga
+    - microcontroller
+    - home automation
+    - amateur radio
+- id: general-tech
+  label: General Tech
+  keywords:
+    - technology
+    - tech talk
+    - tech meetup
+    - user group
+    - lightning talks
+    - tech conference
+    - hack night
+    - innovation
+    - emerging technology
+    - show and tell

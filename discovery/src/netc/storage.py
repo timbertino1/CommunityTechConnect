@@ -22,6 +22,7 @@ from pydantic import BaseModel, ValidationError
 
 from netc.models import (
     DEFAULT_TZ,
+    AreaConfig,
     CandidateSource,
     Category,
     Event,
@@ -230,6 +231,11 @@ class DataStore:
     def write_categories(self, items: Iterable[Category]) -> None:
         # Kept in the given order: it is the display order chosen by the administrator.
         self._write_list("categories.yaml", items, key=None)
+
+    def read_areas(self) -> AreaConfig | None:
+        """data/areas.yaml, edited by hand only (no writer: comments must survive)."""
+        path = self.root / "areas.yaml"
+        return _parse(AreaConfig, read_raw(path), path) if path.exists() else None
 
     def read_overrides(self) -> list[Override]:
         return self._read_list("overrides.yaml", Override)

@@ -15,6 +15,7 @@ from jsonschema import Draft202012Validator
 from pydantic import BaseModel, ValidationError
 
 from netc.models import (
+    AreaConfig,
     CandidateSource,
     Category,
     Event,
@@ -203,6 +204,14 @@ class _Checker:
                 self.error(where, "keys must be source ids (src_...)")
             self.check_item(value, "source_status", SourceStatus, where)
 
+    def check_areas(self) -> None:
+        path = self.root / "areas.yaml"
+        if not path.exists():
+            return
+        raw = self.load(path)
+        if raw is not _UNREADABLE:
+            self.check_item(raw, "areas", AreaConfig, self.rel(path))
+
     def check_review_open(self) -> None:
         path = self.root / "review" / "open.json"
         if not path.exists():
@@ -293,5 +302,6 @@ def validate_data(root: Path) -> ValidationReport:
     checker.check_sources()
     checker.check_source_status()
     checker.check_review_open()
+    checker.check_areas()
     checker.check_cross_file()
     return checker.report

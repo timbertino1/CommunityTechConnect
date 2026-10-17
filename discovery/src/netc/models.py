@@ -390,6 +390,63 @@ class Category(_Model):
     ]
 
 
+Place = Annotated[str, StringConstraints(min_length=1, max_length=100), AfterValidator(_plain)]
+Zip = Annotated[str, StringConstraints(pattern=r"^[0-9]{5}$")]
+ZipPrefix = Annotated[str, StringConstraints(pattern=r"^[0-9]{3}$")]
+
+# Nebraska ZIP codes run from 680xx to 693xx (682 is unused).
+NEBRASKA_ZIP_PREFIXES: Final = frozenset(f"{n:03d}" for n in range(680, 694)) - {"682"}
+
+
+class AreaEntry(_Model):
+    id: Area
+    label: Annotated[str, StringConstraints(min_length=1, max_length=60), AfterValidator(_plain)]
+    cities: Annotated[list[Place], AfterValidator(_unique)] = []
+    zips: Annotated[list[Zip], AfterValidator(_unique)] = []
+    zip_prefixes: Annotated[list[ZipPrefix], AfterValidator(_unique)] = []
+    venues: Annotated[list[Name], AfterValidator(_unique)] = []
+
+
+class OutOfStatePlace(_Model):
+    name: Place
+    state: Annotated[str, StringConstraints(pattern=r"^[A-Z]{2}$")]
+    zips: Annotated[list[Zip], AfterValidator(_unique)] = []
+
+
+class AreaConfig(_Model):
+    """data/areas.yaml: the four areas and the gazetteer that places events in them."""
+
+    areas: list[AreaEntry]
+    out_of_state: list[OutOfStatePlace] = []
+
+    @model_validator(mode="after")
+    def _consistent(self) -> Self:
+        if sorted(a.id for a in self.areas) != sorted(["omaha", "lincoln", "other_ne", "online"]):
+            raise ValueError("areas must list omaha, lincoln, other_ne and online exactly once")
+        _no_overlap("city", [(a.id, c.casefold()) for a in self.areas for c in a.cities])
+        _no_overlap("ZIP", [(a.id, z) for a in self.areas for z in a.zips])
+        _no_overlap("venue", [(a.id, v.casefold()) for a in self.areas for v in a.venues])
+        for area in self.areas:
+            for code in [*area.zips, *(p + "00" for p in area.zip_prefixes)]:
+                if code[:3] not in NEBRASKA_ZIP_PREFIXES:
+                    raise ValueError(f"{area.id}: {code[:3]}xx is not a Nebraska ZIP code range")
+        nebraska_cities = {c.casefold() for a in self.areas for c in a.cities}
+        for place in self.out_of_state:
+            if place.state == "NE" or place.name.casefold() in nebraska_cities:
+                raise ValueError(f"{place.name} is listed both in Nebraska and out of state")
+        return self
+
+    def area(self, area_id: str) -> AreaEntry:
+        return next(a for a in self.areas if a.id == area_id)
+
+
+def _no_overlap(kind: str, pairs: list[tuple[str, str]]) -> None:
+    owner: dict[str, str] = {}
+    for area_id, value in pairs:
+        if owner.setdefault(value, area_id) != area_id:
+            raise ValueError(f"{kind} {value!r} is listed in both {owner[value]} and {area_id}")
+
+
 class KnownGroup(_Model):
     name: Name
     aliases: Annotated[list[Name], AfterValidator(_unique)] = []
