@@ -55,8 +55,8 @@ ignore = []
 [tool.ruff.lint.per-file-ignores]
 # The fetch package is the only place allowed to use httpx directly.
 "src/netc/fetch/**" = ["TID251"]
-# Tests use assert and fixtures with fake secrets.
-"tests/**" = ["S101", "S105", "S106"]
+# Tests use assert, fixtures with fake secrets, and httpx to build mocked responses.
+"tests/**" = ["S101", "S105", "S106", "TID251"]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "httpx".msg = "Use netc.fetch.SafeHttp; direct httpx use is only allowed in netc.fetch (SSRF protection)."

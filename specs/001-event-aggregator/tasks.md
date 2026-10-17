@@ -67,11 +67,11 @@ the per-source runner. **No user story work begins until this phase is complete.
 
 ### Safe fetching (research R12)
 
-- [ ] T019 [P] Write failing SSRF tests in `discovery/tests/security/test_safe_fetch_ssrf.py`: reject `http://` (unless upgrading to https), non-443 ports, IP literals, `localhost`, and DNS answers in private (10/8, 172.16/12, 192.168/16), loopback, link-local incl. `169.254.169.254`, CGNAT 100.64/10, multicast, and IPv6 equivalents (`::1`, `fc00::/7`, `fe80::/10`, IPv4-mapped); reject a redirect chain that hops to a private IP; cap redirects at 5.
-- [ ] T020 [P] Write failing limit tests in `discovery/tests/security/test_safe_fetch_limits.py`: connect timeout 10 s and total 30 s; response size caps "5 MB pages, 2 MB feeds" abort mid-stream; disallowed content types rejected; the User-Agent is `NETechConnectBot/1.0 (+https://<domain>/about)`.
-- [ ] T021 [P] Write failing robots and rate-limit tests in `discovery/tests/unit/test_robots_ratelimit.py`: robots.txt disallow is honored per path, robots fetch failure (5xx) means skip, per-host delay "default ≥ 5 s" and source `rate_limit_seconds` override are honored, and a per-host request budget per run is enforced.
-- [ ] T022 Implement `discovery/src/netc/fetch/safe_fetch.py` (`SafeHttp` class wrapping `httpx`: resolve, vet IPs, connect to the vetted IP with correct SNI/Host, re-vet each redirect, enforce timeouts, size caps, and content types) so T019–T020 pass.
-- [ ] T023 Implement `discovery/src/netc/fetch/robots.py` (protego, cached per host per run) and `discovery/src/netc/fetch/ratelimit.py` (per-host delay and budget), wired into `SafeHttp`, so T021 passes.
+- [X] T019 [P] Write failing SSRF tests in `discovery/tests/security/test_safe_fetch_ssrf.py`: reject `http://` (unless upgrading to https), non-443 ports, IP literals, `localhost`, and DNS answers in private (10/8, 172.16/12, 192.168/16), loopback, link-local incl. `169.254.169.254`, CGNAT 100.64/10, multicast, and IPv6 equivalents (`::1`, `fc00::/7`, `fe80::/10`, IPv4-mapped); reject a redirect chain that hops to a private IP; cap redirects at 5.
+- [X] T020 [P] Write failing limit tests in `discovery/tests/security/test_safe_fetch_limits.py`: connect timeout 10 s and total 30 s; response size caps "5 MB pages, 2 MB feeds" abort mid-stream; disallowed content types rejected; the User-Agent is `NETechConnectBot/1.0 (+https://<domain>/about)`.
+- [X] T021 [P] Write failing robots and rate-limit tests in `discovery/tests/unit/test_robots_ratelimit.py`: robots.txt disallow is honored per path, robots fetch failure (5xx) means skip, per-host delay "default ≥ 5 s" and source `rate_limit_seconds` override are honored, and a per-host request budget per run is enforced.
+- [X] T022 Implement `discovery/src/netc/fetch/safe_fetch.py` (`SafeHttp` class wrapping `httpx`: resolve, vet IPs, connect to the vetted IP with correct SNI/Host, re-vet each redirect, enforce timeouts, size caps, and content types) so T019–T020 pass.
+- [X] T023 Implement `discovery/src/netc/fetch/robots.py` (protego, cached per host per run) and `discovery/src/netc/fetch/ratelimit.py` (per-host delay and budget), wired into `SafeHttp`, so T021 passes.
 
 ### Sanitization and URL safety
 
