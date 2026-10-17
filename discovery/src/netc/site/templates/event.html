@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ e.title }}{% endblock %}
+{% block description %}{{ e.when }}. {{ e.where }}. {{ e.summary[:150] }}{% endblock %}
+{% block content %}
+<article class="event-detail{% if e.status != "scheduled" %} event--{{ e.status }}{% endif %}">
+  <p class="when"><time datetime="{{ e.start_iso }}">{{ e.when }}</time></p>
+  <h1>{{ e.title }}</h1>
+  {% if e.status == "cancelled" %}<p class="badge badge--cancelled">Cancelled</p>
+  {% elif e.status == "unverified" %}<p class="badge badge--unverified">Not confirmed recently: check the organizer's page</p>{% endif %}
+  <dl class="facts">
+    <div><dt>Where</dt><dd>{{ e.where_full }}</dd></div>
+    {% if e.organizer %}<div><dt>Organizer</dt><dd>{{ e.organizer }}</dd></div>{% endif %}
+    <div><dt>Topics</dt><dd><ul class="tags">{% for label in e.category_labels %}<li>{{ label }}</li>{% endfor %}</ul></dd></div>
+  </dl>
+  {% if e.summary %}<p class="summary">{{ e.summary }}</p>{% endif %}
+  <p class="cta"><a class="primary" href="{{ e.original_url }}" rel="noopener external">View and register on {{ e.host }}</a></p>
+  {% if e.original_unavailable %}<p class="note">The organizer's page could not be reached when last checked.</p>{% endif %}
+  {% if e.also_listed %}
+  <h2>Also listed on</h2>
+  <ul class="also">{% for link in e.also_listed %}<li><a href="{{ link.url }}" rel="noopener external">{{ link.host }}</a></li>{% endfor %}</ul>
+  {% endif %}
+  <p class="meta">Last checked {{ e.last_verified }}.{% if e.inferred_note %} {{ e.inferred_note }}{% endif %}</p>
+  <p><a href="/">All upcoming events</a></p>
+</article>
+{% endblock %}

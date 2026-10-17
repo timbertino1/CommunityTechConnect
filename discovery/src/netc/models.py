@@ -175,12 +175,20 @@ def event_id_for(url: str) -> str:
 _SLUG_DATE_LEN: Final = len("-2026-01-01")
 
 
+SLUG_MAX: Final = 80
+"""Short enough to share, and to keep build paths under Windows' 260-character limit."""
+
+
 def make_slug(title: str, day: date) -> str:
-    """URL-safe slug from the title and the event's local date."""
+    """URL-safe slug from the title and the event's local date, at most SLUG_MAX characters,
+    cut at a word boundary."""
     ascii_title = unicodedata.normalize("NFKD", title).encode("ascii", "ignore").decode("ascii")
     base = re.sub(r"[^a-z0-9]+", "-", ascii_title.lower()).strip("-")
-    base = base[: 120 - _SLUG_DATE_LEN].rstrip("-") or "event"
-    return f"{base}-{day.isoformat()}"
+    limit = SLUG_MAX - _SLUG_DATE_LEN
+    if len(base) > limit:
+        cut = base[: limit + 1]
+        base = cut[: cut.rfind("-")] if "-" in cut else base[:limit]
+    return f"{base.strip('-') or 'event'}-{day.isoformat()}"
 
 
 @functools.cache

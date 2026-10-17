@@ -312,7 +312,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li class="now"><div class="bar"><span style="width:52%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="now"><div class="bar"><span style="width:70%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 14 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 19 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -1249,15 +1249,15 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
     </div>
     <p class="lede">Phase 3 is the MVP: read the five starting sources every day, turn what they publish into clean events, and put a fast, accessible list of upcoming Nebraska tech events on the web, each one linking to the organizer's own page.</p>
     <div class="stats">
-      <div class="stat"><span class="n">14<small> of 27</small></span><p>Tasks done in this phase.</p></div>
-      <div class="stat"><span class="n">699</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">19<small> of 27</small></span><p>Tasks done in this phase.</p></div>
+      <div class="stat"><span class="n">719</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">3<small> of 4</small></span><p>Live sources read end to end on the first try (the fourth had no upcoming events).</p></div>
     </div>
     <ul class="checklist">
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Reading sources</b><small>Calendar feeds and event data built into web pages. Merged in PR #14.</small></div><span class="ids">T046&ndash;T048, T056&ndash;T057</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed. Merged in PR #15.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The daily run</b><small>Eight sources added (six active) and <code>netc discover-events</code> wired up. Built, PR pending.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The daily run</b><small>Eight sources added (six active) and <code>netc discover-events</code> wired up. Merged in PR #16.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>. Built, PR pending.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Going live</b><small>A bot for data updates, deploys to Cloudflare Pages, a final security check.</small></div><span class="ids">T065&ndash;T072</span></li>
     </ul>
   </section>
@@ -1436,6 +1436,25 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 4 &middot; The website</p>
+      <h2>A plain, fast page that sends you to the organizer</h2>
+      <p class="muted prose"><code>netc build-site</code> turns the data into static pages: the upcoming list, one page per event, and an About page that tells website owners who our bot is and how to reach us. Every card's main button reads "View and register on &hellip;" and goes straight to the organizer.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Nothing runs but our own files</h3><p>No inline scripts or styles, nothing loaded from other sites, and a strict Content Security Policy that tells browsers to refuse anything else.</p></div>
+      <div class="card"><h3>Escaped twice over</h3><p>Event text is stored as plain text and escaped again when the page is built. Tests feed real hostile pages through the whole pipeline and check the result.</p></div>
+      <div class="card"><h3>No cookies, no forms, no tracking</h3><p>The public pages don't ask for anything. There is nothing to sign up for and nothing to log in to.</p></div>
+      <div class="card"><h3>Readable everywhere</h3><p>Built mobile-first for small screens, with visible keyboard focus, AA color contrast, and a dark mode that follows your device.</p></div>
+      <div class="card"><h3>Husker colors</h3><p>Scarlet, black and cream, with <b>NE</b> in red and TechConnect in black. Every color pair was measured and passes accessibility contrast in both light and dark mode.</p></div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>A 110-character web address</h3><p>Drupal Nebraska's long meeting title produced an event address so long that, on Windows, the file path passed the 260-character limit and the build failed. Event addresses are now capped at 80 characters and cut at a word, which is also kinder to anyone sharing a link.</p></div></div>
+      <div class="note"><div><h3>The model said no first</h3><p>A test tried to put <code>&lt;your&gt;</code> in an event description to check the page escapes it. It never got that far: the data model refuses to store anything that looks like a tag. The test now uses text like "5 &lt; 6 &gt; 4", which is legal and still has to be escaped.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share Phase 3 so far</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
       <label class="eyebrow" for="post-phase-3">Suggested post (edit freely)</label>
@@ -1451,7 +1470,9 @@ Step two turns listings into events: clean text, Central Time, the right part of
 
 Step three is the daily run. First live practice run: 6 sources read, 0 failures, 10 events kept. It also showed one calendar was really a venue's calendar (110 happy hours!), so that one is paused for now.
 
-699 tests and counting.
+Step four is the website itself: a plain, fast list where every event's main button sends you to the organizer to register. No cookies, no forms, no tracking, nothing loaded from other sites.
+
+719 tests and counting. Next: going live.
 
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-3"></span>

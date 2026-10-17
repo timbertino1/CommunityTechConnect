@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h1>About NETechConnect</h1>
+<p class="lede">One place to find community tech events across Nebraska, starting with Omaha and Lincoln.</p>
+
+<h2>How events are found</h2>
+<p>Twice a day, a small program reads the public event calendars and event pages of Nebraska tech groups, universities and organizations. It keeps events that are about technology and happen in Nebraska (or online, hosted by a Nebraska group), merges the same event listed in two places, and links each one to the organizer's own page. New sources are reviewed by a person before their events appear.</p>
+<p>NETechConnect does not sell tickets, take registrations or keep attendee lists. To go to an event, follow its link to the organizer.</p>
+
+<h2>For website owners</h2>
+<p>Our bot identifies itself as <code>{{ user_agent }}</code>. It only reads public pages, follows robots.txt, waits at least 5 seconds between requests to the same site (longer if your robots.txt asks), and reads each source at most once or twice a day.</p>
+<p>To ask us to stop reading your site, or to correct an event, open an issue at <a href="{{ repo_url }}/issues" rel="noopener external">{{ repo_host }}</a>. We will respond within a week.</p>
+
+<h2>Privacy</h2>
+<p>This site uses no cookies, no accounts and no tracking, and it loads nothing from other websites. We store only public event details: titles, times, places, organizers and short descriptions.</p>
+{% endblock %}

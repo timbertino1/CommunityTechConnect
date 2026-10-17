@@ -13,12 +13,12 @@ from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp, SafeHttp
 from netc.pipeline.discover_events import discover_events
 from netc.pipeline.validate import validate_data
+from netc.site.build import BuildError, build_site
 from netc.storage import DataStore, StorageError
 
 PLANNED_COMMANDS = {
     "discover-sources": "Find and evaluate new event sources.",
     "apply-review": "Apply decisions from a merged review pull request.",
-    "build-site": "Build the static site from data/.",
 }
 
 
@@ -44,6 +44,15 @@ def _parser() -> argparse.ArgumentParser:
     discover.add_argument(
         "--now", type=_utc_datetime, help="run as if it were this UTC time (ISO 8601)"
     )
+    site = commands.add_parser(
+        "build-site",
+        help="Build the static site from data/.",
+        description="Build the static site from data/.",
+    )
+    site.add_argument("--data", type=Path, default=Path("data"), help="data directory")
+    site.add_argument("--out", type=Path, default=Path("dist"), help="output directory")
+    site.add_argument("--web", type=Path, default=Path("web"), help="web assets directory")
+    site.add_argument("--now", type=_utc_datetime, help="build as if it were this UTC time")
     validate = commands.add_parser(
         "validate-data",
         help="Check every file in data/ against its schema and the data rules.",
@@ -61,6 +70,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _validate(args.data_dir)
     if args.command == "discover-events":
         return _discover(args)
+    if args.command == "build-site":
+        return _build_site(args)
     print(f"netc {args.command}: not implemented yet", file=sys.stderr)
     return 2
 
@@ -99,6 +110,21 @@ def _discover(args: argparse.Namespace) -> int:
         f"Sources: {report.sources}. Listings: {listings}. "
         f"Events stored: {report.events_total}. New review items: {report.new_reviews}."
         + ("" if report.written else " (dry run: nothing written)")
+    )
+    return 0
+
+
+def _build_site(args: argparse.Namespace) -> int:
+    now: datetime = args.now or datetime.now(UTC)
+    domain = os.environ.get("NETC_SITE_DOMAIN", "netechconnect.example")
+    try:
+        report = build_site(args.data, args.out, args.web, now=now, site_domain=domain)
+    except (StorageError, BuildError) as exc:
+        print(f"netc build-site: {exc}", file=sys.stderr)
+        return 1
+    print(
+        f"Built {report.pages} pages into {args.out}; "
+        f"{report.events_listed} upcoming events listed."
     )
     return 0
 
