@@ -482,6 +482,8 @@ or (b). This is an interpretation of a contract, not legal advice; the owner dec
 page per 10 seconds on meetup.com, a small per-run budget, no member or attendee data, and stop
 immediately if Meetup objects or its terms change (set the sources to `blocked_by_terms`).
 
+**Decision (owner, 2026-10-17): JSON-LD on event pages allowed**, with the limits above. T102 is unblocked.
+
 **Engineering note.** selectolax 1.0 removed the `selectolax.parser` (Modest) backend; HTML code must
 use `selectolax.lexbor.LexborHTMLParser`.
 

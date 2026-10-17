@@ -109,7 +109,7 @@ Each gate records its decision, date, and the links checked in the "Validation g
 - [ ] T040 [P] Gate V6: confirm the current cheapest OpenAI model that supports Structured Outputs, and its price, from OpenAI's official docs. Record the model id. **Blocks**: T081–T083.
 - [ ] T041 [P] Gate V4: confirm the Brave Search API's current free credit/tier, price, rate limit, and terms on caching results; compare with one alternative. Record the choice. **Blocks**: T085, T086, T089, T091.
 - [ ] T042 [P] Gate V5: confirm Cloudflare Workers KV free limits (reads/writes/day, storage) and Email Workers free-plan CPU behavior. Record the results. **Blocks**: T075, T096–T100.
-- [ ] T043 [P] Gate V1: read Meetup's current Terms of Service and API license and test (logged out) whether a public group's `/events/ical/` feed and event pages are reachable. Record one decision: *iCal allowed*, *JSON-LD on event pages allowed*, or *collect not allowed (discover and list only)*. **Blocks**: T102.
+- [X] T043 [P] Gate V1: read Meetup's current Terms of Service and API license and test (logged out) whether a public group's `/events/ical/` feed and event pages are reachable. Record one decision: *iCal allowed*, *JSON-LD on event pages allowed*, or *collect not allowed (discover and list only)*. **Blocks**: T102.
 - [ ] T044 [P] Gate V3: check Luma's terms for public calendar iCal feeds and whether an Omaha/Lincoln Discover page exists. Record the results. **Blocks**: T101.
 - [ ] T045 [P] Gate V2: check whether Eventbrite's API terms allow listing a third-party organization's public events with a private token. Record the results. **Blocks**: T103, T104.
 
