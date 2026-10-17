@@ -326,7 +326,7 @@ def test_huge_values_do_not_flood_the_report(
 # --- Other subcommands are registered
 
 
-@pytest.mark.parametrize("command", ["discover-sources", "apply-review", "build-site"])
+@pytest.mark.parametrize("command", ["discover-sources", "apply-review"])
 def test_planned_subcommands_exist_but_are_not_implemented_yet(
     command: str, capsys: pytest.CaptureFixture[str]
 ) -> None:

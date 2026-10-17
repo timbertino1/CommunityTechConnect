@@ -97,6 +97,7 @@ def discover_events(
                 review_state="pending_review",
                 now=now,
                 area=area,
+                organizer_id=source.organizer_id,
             )
             if verdict.relevant is None:
                 holds[(item.listing.source_id, item.listing.url)] = (

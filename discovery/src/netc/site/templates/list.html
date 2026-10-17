@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Upcoming tech events in Nebraska{% endblock %}
+{% block content %}
+<h1>Upcoming tech events in Nebraska</h1>
+<p class="lede">Meetups, talks and conferences around Omaha, Lincoln and the rest of the state. Every event links to its organizer's page, where you can read more and register.</p>
+{% if events %}
+<ol class="events">
+{% for e in events %}
+  <li>{% include "_card.html" %}</li>
+{% endfor %}
+</ol>
+{% else %}
+<p class="empty">No events found. New events are added twice a day.</p>
+{% endif %}
+{% endblock %}

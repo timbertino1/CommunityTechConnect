@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %} · NETechConnect</title>
+<meta name="description" content="{% block description %}Community tech events across Nebraska, each linking to its organizer's own page.{% endblock %}">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/"><span class="brand-ne">NE</span>TechConnect</a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="/"{% if nav == "upcoming" %} aria-current="page"{% endif %}>Upcoming</a></li>
+        <li><a href="/about/"{% if nav == "about" %} aria-current="page"{% endif %}>About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap" tabindex="-1">
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>NETechConnect lists community tech events across Nebraska and sends you to each organizer's own page. It is not the organizer of any event.</p>
+    <p>Updated {{ updated }}. <a href="/about/">How events are found</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

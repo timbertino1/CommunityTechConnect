@@ -137,7 +137,13 @@ def test_slug_comes_from_title_and_date() -> None:
     )
     assert make_slug("Café & Código", date(2026, 1, 2)) == "cafe-codigo-2026-01-02"
     assert make_slug("!!!", date(2026, 1, 2)) == "event-2026-01-02"
-    assert len(make_slug("word " * 100, date(2026, 1, 2))) <= 120
+    assert len(make_slug("word " * 100, date(2026, 1, 2))) <= 80
+    long_title = (
+        "Drupal Nebraska Oct 2026/US Central Timezone Quarterly Meeting: AI Framework for Drupal"
+    )
+    assert make_slug(long_title, date(2026, 10, 21)) == (
+        "drupal-nebraska-oct-2026-us-central-timezone-quarterly-meeting-ai-2026-10-21"
+    )
 
 
 # --- Event fields

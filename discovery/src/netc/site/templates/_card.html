@@ -1,0 +1,12 @@
+<article class="event{% if e.status != "scheduled" %} event--{{ e.status }}{% endif %}" aria-labelledby="ev-{{ e.id }}">
+  <p class="when"><time datetime="{{ e.start_iso }}">{{ e.when }}</time></p>
+  <h2 id="ev-{{ e.id }}"><a href="/events/{{ e.slug }}/">{{ e.title }}</a></h2>
+  {% if e.status == "cancelled" %}<p class="badge badge--cancelled">Cancelled</p>
+  {% elif e.status == "unverified" %}<p class="badge badge--unverified">Not confirmed recently</p>{% endif %}
+  <dl class="facts">
+    <div><dt>Where</dt><dd>{{ e.where }}</dd></div>
+    {% if e.organizer %}<div><dt>Organizer</dt><dd>{{ e.organizer }}</dd></div>{% endif %}
+    <div><dt>Topics</dt><dd><ul class="tags">{% for label in e.category_labels %}<li>{{ label }}</li>{% endfor %}</ul></dd></div>
+  </dl>
+  <p class="cta"><a class="primary" href="{{ e.original_url }}" rel="noopener external">View and register on {{ e.host }}</a></p>
+</article>

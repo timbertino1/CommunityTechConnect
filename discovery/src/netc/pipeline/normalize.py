@@ -150,6 +150,7 @@ def to_event(
     review_state: ReviewState,
     now: datetime,
     area: Area | None = None,
+    organizer_id: str | None = None,
 ) -> Event:
     """Build the Event. ``area`` (from classification) is used only when normalize found none."""
     inferred: list[InferredField] = ["categories", *item.inferred]
@@ -170,6 +171,7 @@ def to_event(
         all_day=item.all_day,
         location=item.location,
         area=final_area,
+        organizer_id=organizer_id,
         summary=item.summary,
         categories=categories,
         original_url=item.original_url,
