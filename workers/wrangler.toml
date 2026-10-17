@@ -1,0 +1,30 @@
+# Two Workers share this config through environments:
+#   wrangler deploy --env suggest   -> POST /suggest (see specs/001-event-aggregator/contracts/workers.md)
+#   wrangler deploy --env inbox     -> Email Worker for newsletters
+# Secrets (TURNSTILE_SECRET, IP_HASH_SALT) are set with `wrangler secret put`, never in this file.
+# KV namespace ids below are placeholders until the namespaces are created.
+
+name = "netc"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+[env.suggest]
+name = "netc-suggest"
+main = "suggest/index.ts"
+kv_namespaces = [
+  { binding = "SUGGESTIONS", id = "REPLACE_WITH_SUGGESTIONS_KV_ID" },
+]
+
+[env.suggest.vars]
+SITE_ORIGIN = "https://REPLACE_WITH_SITE_DOMAIN"
+
+[env.inbox]
+name = "netc-inbox"
+main = "inbox/index.ts"
+kv_namespaces = [
+  { binding = "NEWSLETTERS", id = "REPLACE_WITH_NEWSLETTERS_KV_ID" },
+]
+
+[env.inbox.vars]
+ALLOWED_SENDERS = ""
+OWNER_FORWARD_ADDRESS = ""

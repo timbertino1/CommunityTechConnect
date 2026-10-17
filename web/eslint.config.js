@@ -1,0 +1,42 @@
+import js from "@eslint/js";
+import globals from "globals";
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: "module",
+      globals: { ...globals.browser },
+    },
+    rules: {
+      // Constitution I: no dynamic code or raw HTML injection in the browser.
+      "no-eval": "error",
+      "no-implied-eval": "error",
+      "no-new-func": "error",
+      "no-restricted-properties": [
+        "error",
+        { property: "innerHTML", message: "Use textContent or DOM APIs instead of innerHTML." },
+        { property: "outerHTML", message: "Use DOM APIs instead of outerHTML." },
+        { object: "document", property: "write", message: "document.write is not allowed." },
+        { object: "document", property: "writeln", message: "document.writeln is not allowed." },
+      ],
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "AssignmentExpression[left.property.name='innerHTML']",
+          message: "Use textContent or DOM APIs instead of innerHTML.",
+        },
+        {
+          selector: "CallExpression[callee.property.name='insertAdjacentHTML']",
+          message: "insertAdjacentHTML is not allowed.",
+        },
+      ],
+    },
+  },
+  {
+    files: ["eslint.config.js", "playwright.config.js", "tests/**/*.js"],
+    languageOptions: { globals: { ...globals.node } },
+  },
+];

@@ -1,0 +1,86 @@
+[project]
+name = "netc"
+version = "0.1.0"
+description = "NETechConnect discovery pipeline and static site generator"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28",
+    "icalendar>=6",
+    "recurring-ical-events>=3",
+    "feedparser>=6",
+    "selectolax>=0.3",
+    "nh3>=0.2",
+    "pydantic>=2",
+    "jinja2>=3.1",
+    "protego>=0.4",
+    "rapidfuzz>=3",
+    "openai>=1",
+    "pyyaml>=6",
+    "jsonschema>=4",
+]
+
+[project.scripts]
+netc = "netc.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "respx>=0.22",
+    "ruff>=0.9",
+    "mypy>=1.14",
+    "pip-audit>=2.7",
+    "types-PyYAML>=6",
+    "types-jsonschema>=4",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/netc"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "S", "N", "SIM", "RUF", "TID"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# The fetch package is the only place allowed to use httpx directly.
+"src/netc/fetch/**" = ["TID251"]
+# Tests use assert and fixtures with fake secrets.
+"tests/**" = ["S101", "S105", "S106"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"httpx".msg = "Use netc.fetch.SafeHttp; direct httpx use is only allowed in netc.fetch (SSRF protection)."
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.13"
+strict = true
+files = ["src", "tests"]
+mypy_path = "src"
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "unit: fast, isolated tests",
+    "contract: connector and schema contract tests against recorded fixtures",
+    "integration: discovery -> data -> built site",
+    "security: SSRF, sanitization, prompt-injection, and header tests",
+    "allow_network: test may open real network connections (never used in CI)",
+]
+
+# ---------------------------------------------------------------- uv
+[tool.uv]
+# Supply-chain hygiene: only resolve package versions published at least 14 days ago.
+exclude-newer = "14 days"

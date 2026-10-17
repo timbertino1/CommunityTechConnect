@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/discovery"
+    schedule:
+      interval: "weekly"
+    groups:
+      python-minor-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "npm"
+    directory: "/web"
+    schedule:
+      interval: "weekly"
+    groups:
+      web-minor-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "npm"
+    directory: "/workers"
+    schedule:
+      interval: "weekly"
+    groups:
+      workers-minor-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions-minor-patch:
+        update-types: ["minor", "patch"]
