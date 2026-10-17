@@ -95,6 +95,35 @@ jobs:
       - name: Dependency audit
         run: npm audit --audit-level=high
 
+  bot-data-only:
+    # Always runs so it can be a required check; the path rule applies only to the bot's PRs
+    # (constitution v1.1.0: bot PRs may auto-merge only when they change nothing but data/).
+    name: Bot PRs change only data/
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'netechconnect-bot[bot]'
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check changed paths
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'netechconnect-bot[bot]'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          outside="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | grep -v '^data/' || true)"
+          if [ -n "$outside" ]; then
+            echo "::error::A bot PR may change only data/. These files are outside it:"
+            echo "$outside"
+            exit 1
+          fi
+          echo "All changed files are under data/."
+      - name: Not a bot PR
+        if: github.event_name != 'pull_request' || github.event.pull_request.user.login != 'netechconnect-bot[bot]'
+        run: echo "Not a data PR from netechconnect-bot; nothing to check."
+
   secrets:
     name: Secret scan (gitleaks)
     runs-on: ubuntu-latest
