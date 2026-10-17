@@ -279,6 +279,14 @@ class HtmlRules(_OmitNone):
     location: Annotated[str, StringConstraints(max_length=200)] | None = None
 
 
+class FollowLinks(_Model):
+    """jsonld sources: also read same-site pages linked from the source URL whose path matches
+    ``path_glob`` (shell-style, e.g. ``/live/nenug-*``), up to ``max_pages``."""
+
+    path_glob: Annotated[str, StringConstraints(pattern=r"^/", max_length=200)]
+    max_pages: Annotated[int, Field(ge=1, le=25)] = 10
+
+
 class Source(_Model):
     id: SourceId
     name: Name
@@ -296,6 +304,7 @@ class Source(_Model):
     check_interval_hours: Annotated[int, Field(ge=1, le=24)] = 24
     rate_limit_seconds: Annotated[int, Field(ge=1, le=3600)] = 5
     html_rules: HtmlRules | None = None
+    follow_links: FollowLinks | None = None
     notes: (
         Annotated[str, StringConstraints(max_length=1000), AfterValidator(_plain_note)] | None
     ) = None

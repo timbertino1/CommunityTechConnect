@@ -304,7 +304,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span><strong>Phase 2 of 10 done</strong>, Phase 3 next</span>
+    <span>Now in <strong>Phase 3 of 10</strong></span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -312,7 +312,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li class="now"><div class="bar"><span style="width:0%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="now"><div class="bar"><span style="width:19%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>Up next (Phase 3: the first live site)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 5 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -329,6 +329,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-project" aria-controls="project" aria-selected="true">The project</button>
   <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill now">in progress</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -524,7 +525,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
         <tbody>
           <tr><td class="num">01</td><td><b>Setup.</b> Repo, three projects, automatic checks, branch protection.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">02</td><td><b>Foundation.</b> Safe fetching, cleaning, data models and storage, time zones, the per-source runner, research checks.</td><td><span class="status done">Done</span></td></tr>
-          <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status next">Next</span></td></tr>
+          <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status now">In progress</span></td></tr>
           <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">06</td><td><b>Filters.</b> By city (Omaha, Lincoln, elsewhere in Nebraska, online) and by topic.</td><td><span class="status next">Planned</span></td></tr>
@@ -713,7 +714,7 @@ Next up: teaching the bot to browse the web safely.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Data models, schemas and storage</b><small>Exact rules for every record, tidy files, a data check in CI. Merged in PR #10.</small></div><span class="ids">T026&ndash;T032</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Time zones and categories</b><small>Central Time done right, 11 topics, the Nebraska town list. Merged in PR #11.</small></div><span class="ids">T033&ndash;T036</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Per-source runner</b><small>One broken source never stops the rest. Merged in PR #12.</small></div><span class="ids">T037&ndash;T038</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Research checks</b><small>Seeds, Meetup, Luma, Eventbrite, AI model, search API and Cloudflare all decided. PR pending.</small></div><span class="ids">T039&ndash;T045</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Research checks</b><small>Seeds, Meetup, Luma, Eventbrite, AI model, search API and Cloudflare all decided. Merged in PR #13.</small></div><span class="ids">T039&ndash;T045</span></li>
     </ul>
   </section>
 
@@ -1234,6 +1235,119 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
 
 #BuildInPublic #AppSec #Nebraska #OmahaTech</textarea>
       <span class="count" data-count-for="post-phase-2"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 3 -->
+<div class="panel" role="tabpanel" id="phase-3" aria-labelledby="tab-phase-3" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 3 &middot; First live site &middot; started Oct 17, 2026</p>
+      <h2>From five sources to a page anyone can open</h2>
+    </div>
+    <p class="lede">Phase 3 is the MVP: read the five starting sources every day, turn what they publish into clean events, and put a fast, accessible list of upcoming Nebraska tech events on the web, each one linking to the organizer's own page.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">5<small> of 27</small></span><p>Tasks done in this phase.</p></div>
+      <div class="stat"><span class="n">574</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">3<small> of 4</small></span><p>Live sources read end to end on the first try (the fourth had no upcoming events).</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Reading sources</b><small>Calendar feeds and event data built into web pages. Built, PR pending.</small></div><span class="ids">T046&ndash;T048, T056&ndash;T057</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>The daily run</b><small>The five sources added and <code>netc discover-events</code> wired up.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>Going live</b><small>A bot for data updates, deploys to Cloudflare Pages, a final security check.</small></div><span class="ids">T065&ndash;T072</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 1 &middot; Reading sources</p>
+      <h2>Two readers cover very different websites</h2>
+      <p class="muted prose">Each source names its reader. Both go through the same safe fetcher from Phase 2, and both only collect raw listings; cleaning happens in the next step.</p>
+    </div>
+    <figure>
+      <div class="diagram wide">
+        <svg viewBox="0 0 1000 250" role="img" aria-label="A source file names its connector. The iCal connector fetches the calendar feed and expands repeating events up to 180 days ahead. The JSON-LD connector fetches the page, optionally follows matching same-site links, and reads schema.org Event data. Both produce raw listings for the next step.">
+          <defs>
+            <marker id="ah6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+          </defs>
+          <rect class="box" x="16" y="88" width="150" height="74" rx="8"/>
+          <text class="t-title" x="30" y="114">Source file</text>
+          <text class="t-sub" x="30" y="134">sources/src_*.yaml</text>
+          <text class="t-sub" x="30" y="150">connector: ical | jsonld</text>
+
+          <text class="t-head" x="210" y="26">ICAL</text>
+          <rect class="box" x="210" y="36" width="170" height="60" rx="7"/>
+          <text class="t-title" x="224" y="60">Fetch the feed</text>
+          <text class="t-sub" x="224" y="80">.ics, 2 MB limit</text>
+          <rect class="box" x="410" y="36" width="200" height="60" rx="7"/>
+          <text class="t-title" x="424" y="60">Expand repeats</text>
+          <text class="t-sub" x="424" y="80">yesterday to 180 days out</text>
+
+          <text class="t-head" x="210" y="144">JSON-LD</text>
+          <rect class="box" x="210" y="154" width="170" height="60" rx="7"/>
+          <text class="t-title" x="224" y="178">Fetch the page</text>
+          <text class="t-sub" x="224" y="198">5 MB limit</text>
+          <rect class="box-accent" x="410" y="154" width="200" height="60" rx="7"/>
+          <text class="t-title" x="424" y="178">Follow matching links</text>
+          <text class="t-sub" x="424" y="198">same site, /live/nenug-*, max N</text>
+          <rect class="box" x="640" y="154" width="170" height="60" rx="7"/>
+          <text class="t-title" x="654" y="178">Read Event data</text>
+          <text class="t-sub" x="654" y="198">JSON-LD or microdata</text>
+
+          <rect class="box-ok" x="850" y="88" width="134" height="74" rx="8"/>
+          <text class="t-title" x="864" y="114">Raw listings</text>
+          <text class="t-sub" x="864" y="134">plus warnings</text>
+          <text class="t-sub" x="864" y="150">to be cleaned next</text>
+
+          <path class="edge" d="M166 125 H190 V66 H208" marker-end="url(#ah6)"/>
+          <path class="edge" d="M190 125 V184 H208" marker-end="url(#ah6)"/>
+          <line class="edge" x1="380" y1="66" x2="408" y2="66" marker-end="url(#ah6)"/>
+          <line class="edge" x1="380" y1="184" x2="408" y2="184" marker-end="url(#ah6)"/>
+          <line class="edge" x1="610" y1="184" x2="638" y2="184" marker-end="url(#ah6)"/>
+          <path class="edge" d="M610 66 H830 V112 H848" marker-end="url(#ah6)"/>
+          <path class="edge" d="M810 184 H830 V140 H848" marker-end="url(#ah6)"/>
+        </svg>
+      </div>
+      <figcaption>The gold step is new: some groups don't have a page of their own, so the reader starts from a listing page and follows only the links that match, on the same site, up to a set number of pages.</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Live test (Oct 17)</th><th>Reader</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>UNL School of Computing</td><td>iCal</td><td>61 events, e.g. Industry in Residence: Nelnet</td></tr>
+          <tr><td>Drupal Nebraska</td><td>iCal</td><td>Oct 21 quarterly meeting</td></tr>
+          <tr><td>(NE)NUG on usnua.com</td><td>JSON-LD, following <code>/live/nenug-*</code></td><td>Fall Event, Nov 12 at Smash Park, La Vista</td></tr>
+          <tr><td>A Meetup group</td><td>JSON-LD, following event links</td><td>3 pages read, 10 s apart; all were past events, so correctly none kept</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Meetup hides its links in JavaScript</h3><p>The first live run found nothing on Meetup. Its event pages are linked only from data embedded for JavaScript, not from ordinary links. The reader now also looks for same-site addresses written in the page, still limited to the matching pattern and page count.</p></div></div>
+      <div class="note"><div><h3>A rescheduled event would have looked new</h3><p>The calendar library marks even one-off events as if they were repeats, so their ids picked up a date suffix. If an organizer moved such an event to a new time, it would have looked like a brand-new event. Ids now get a date suffix only when an event really repeats.</p></div></div>
+      <div class="note"><div><h3>A hostile page broke itself</h3><p>A test page hid a <code>&lt;/script&gt;</code> inside its event data. Browsers end the script right there, so the data is broken, and the reader now treats it the same way: skipped, with a warning. Real attacks escape it, and that version is what the tests now use.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 3 so far</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-3">Suggested post (edit freely)</label>
+      <textarea id="post-phase-3">NETechConnect build log, Phase 3 has started: the first live site.
+
+Step one is reading the sources. Two readers cover very different websites: calendar feeds (with repeating events expanded six months ahead) and event data built into web pages.
+
+The Nebraska Networking User Group doesn't have its own website, so the reader starts at the national association's page and follows only the Nebraska links. First live run: their Fall Event, Nov 12 at Smash Park in La Vista.
+
+Lesson of the day: Meetup builds its event links with JavaScript, so a normal link-follower sees nothing. Found it, fixed it, wrote a test for it.
+
+574 tests and counting.
+
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-3"></span>
     </div>
   </section>
 </div>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><title>Events</title>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+  {"@type":"Organization","@id":"https://lincoln-omaha.example.org/#org","name":"AI Builders Lincoln/Omaha"},
+  {"@type":"Event","@id":"https://lincoln-omaha.example.org/p/demo-night#event","name":"AI Demo Night",
+   "url":"https://lincoln-omaha.example.org/p/demo-night","startDate":"2026-11-05T18:00:00-06:00",
+   "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+   "location":{"@type":"Place","name":"FUSE Coworking","address":"1033 O St, Lincoln, NE 68508"},
+   "organizer":{"@id":"https://lincoln-omaha.example.org/#org"}},
+  {"@type":["Event","EducationEvent"],"name":"Intro to RAG workshop","url":"https://lincoln-omaha.example.org/p/rag",
+   "startDate":"2026-12-03T17:30:00-06:00","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode",
+   "location":{"@type":"VirtualLocation","url":"https://zoom.example.com/j/1"}}
+]}
+</script>
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"BusinessEvent","name":"Startup pitch night","url":"https://lincoln-omaha.example.org/p/pitch",
+  "startDate":"2026-11-20","eventStatus":"https://schema.org/EventPostponed"},
+ {"@context":"https://schema.org","@type":"ItemList","itemListElement":[
+   {"@type":"ListItem","position":1,"item":{"@type":"Event","name":"Hackathon weekend","url":"https://lincoln-omaha.example.org/p/hack",
+     "startDate":"2027-01-16T09:00:00-06:00","endDate":"2027-01-17T17:00:00-06:00","eventStatus":"https://schema.org/EventCancelled"}}]}]
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"No start date here","url":"https://lincoln-omaha.example.org/p/nostart"}</script>
+</head><body></body></html>

@@ -69,6 +69,11 @@ strict = true
 files = ["src", "tests"]
 mypy_path = "src"
 
+[[tool.mypy.overrides]]
+# Ships without type information (no py.typed).
+module = ["recurring_ical_events", "recurring_ical_events.*"]
+ignore_missing_imports = true
+
 # ---------------------------------------------------------------- pytest
 [tool.pytest.ini_options]
 testpaths = ["tests"]

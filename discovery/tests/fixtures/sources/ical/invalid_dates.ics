@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NETechConnect tests//invalid//EN
+BEGIN:VEVENT
+UID:no-date@example.org
+SUMMARY:No start date
+END:VEVENT
+BEGIN:VEVENT
+UID:bad-date@example.org
+SUMMARY:Broken start date
+DTSTART:notadate
+END:VEVENT
+BEGIN:VEVENT
+UID:feb30@example.org
+SUMMARY:February thirtieth
+DTSTART:20270230T180000Z
+END:VEVENT
+BEGIN:VEVENT
+UID:no-title@example.org
+DTSTART:20261101T180000Z
+END:VEVENT
+BEGIN:VEVENT
+UID:good@example.org
+SUMMARY:The one good event
+DTSTART:20261101T230000Z
+URL:https://good.example.org/e
+END:VEVENT
+END:VCALENDAR

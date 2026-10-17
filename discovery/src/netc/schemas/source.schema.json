@@ -37,6 +37,16 @@
         "location": { "type": "string", "maxLength": 200 }
       }
     },
+    "follow_links": {
+      "type": ["object", "null"],
+      "description": "jsonld only: also read same-site pages linked from url whose path matches path_glob (e.g. /live/nenug-*), up to max_pages.",
+      "additionalProperties": false,
+      "required": ["path_glob"],
+      "properties": {
+        "path_glob": { "type": "string", "pattern": "^/", "maxLength": 200 },
+        "max_pages": { "type": "integer", "minimum": 1, "maximum": 25 }
+      }
+    },
     "notes": { "type": ["string", "null"], "maxLength": 1000 },
     "added_at": { "type": "string", "format": "date" },
     "updated_at": { "type": ["string", "null"], "format": "date" }

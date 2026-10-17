@@ -8,11 +8,15 @@ listings it could read plus warnings describing what it skipped.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
-from typing import ClassVar, Protocol
+from datetime import datetime, timedelta
+from typing import ClassVar, Final, Protocol
 
 from netc.fetch import FetchResponse, SafeHttp
 from netc.models import RawListing, Source
+
+# Every connector reports events from one day before the fetch to 180 days after it.
+WINDOW_BEHIND: Final = timedelta(days=1)
+WINDOW_AHEAD: Final = timedelta(days=180)
 
 
 @dataclass(frozen=True)
@@ -26,6 +30,10 @@ class RawPayload:
     fetched_at: datetime
     text: str = ""
     """Decoded body (charset from the response, UTF-8 otherwise)."""
+    linked: tuple[RawPayload, ...] = ()
+    """Further pages fetched by following links from this one (jsonld ``follow_links``)."""
+    warnings: tuple[str, ...] = ()
+    """Problems met while fetching (e.g. a linked page that could not be read)."""
 
     @classmethod
     def from_response(cls, response: FetchResponse, fetched_at: datetime) -> RawPayload:
