@@ -41,14 +41,64 @@ the original event page.
 
 ---
 
-### User Story 2 - View events on a calendar (Priority: P2)
+### User Story 2 - Automatically find events from groups the system doesn't know yet (Priority: P2)
+
+A core promise of NETechConnect is that it finds tech events on its own, so the site owner does
+not have to track down groups and figure out where they post events. On a regular schedule, the
+system goes looking for events and groups it has never seen before, across many kinds of public
+places — not just event platforms: organization and company websites, universities and their
+departments, libraries, coworking spaces and incubators, professional associations, conference
+websites, web search results, local tech newsletters and mailing lists, local tech news and
+blogs, and links from pages of organizers, sponsors, venues, and speakers it already knows. When
+it finds a relevant new group or event, it adds it automatically (on probation) and keeps
+collecting from it from then on. It also notices when coverage may be slipping — for example,
+a group that normally meets monthly with nothing upcoming — and goes looking for where that
+group now posts.
+
+**Why this priority**: This is what makes the service comprehensive and keeps it from becoming
+manual work for the owner. The list view (P1) can be demonstrated with a starting set of
+sources, but the product's value depends on this capability.
+
+**Independent Test**: Start with a small set of known sources. Run the discovery cycle and
+confirm it finds relevant Nebraska tech groups and events that were not in the starting set,
+from at least three different kinds of channels (e.g., an event platform, an organization
+website, and a newsletter), adds them on probation, and does not add irrelevant or out-of-state
+groups.
+
+**Acceptance Scenarios**:
+
+1. **Given** a Nebraska tech meetup group exists on a public event platform but is not yet a
+   source, **When** the next discovery cycle runs, **Then** it is added as a probationary source
+   and its events are collected.
+2. **Given** a Nebraska organization's own website lists tech events but is not on any event
+   platform, **When** discovery finds the site through search or a link, **Then** the site is
+   added as a probationary source and its events are collected.
+3. **Given** a local tech newsletter received by the system mentions an event the system does not
+   know, **When** the newsletter is processed, **Then** the event is identified, its original
+   event page is located, and the event and its host are added for review.
+4. **Given** a known event lists a co-host, sponsor, or venue organization that is not yet a
+   source, **When** discovery runs, **Then** that organization is evaluated as a candidate source.
+5. **Given** a candidate whose events are mostly non-tech or outside Nebraska, **When** discovery
+   evaluates it, **Then** it is not added.
+6. **Given** a group that usually holds monthly events has had no upcoming event for two
+   expected cycles, **When** discovery runs, **Then** the group is flagged as possibly moved and
+   the system searches for its new event location.
+7. **Given** an annual conference's past edition is known, **When** next year's edition is
+   announced publicly, **Then** discovery finds it.
+8. **Given** a probationary source has had several of its events approved and none rejected,
+   **When** it reaches the promotion threshold, **Then** it becomes trusted automatically and its
+   future events publish without review.
+
+---
+
+### User Story 3 - View events on a calendar (Priority: P3)
 
 A visitor wants to see how events are spread across the month to plan their schedule. They
 switch to a calendar view that shows events on the days they occur and can move between months
 and weeks. Selecting an event shows its essentials and the link to the original event page.
 
 **Why this priority**: The calendar is the second explicitly requested way to browse and helps
-people plan, but the list alone already delivers the core value.
+people plan, but the list alone already lets people find events.
 
 **Independent Test**: Switch to the calendar view and confirm events appear on the correct
 days, navigation between periods works, and each event links to its original page.
@@ -66,7 +116,7 @@ days, navigation between periods works, and each event links to its original pag
 
 ---
 
-### User Story 3 - Filter events by location and category (Priority: P3)
+### User Story 4 - Filter events by location and category (Priority: P4)
 
 A visitor only cares about events near them or about a certain topic, such as information
 security in Lincoln. They filter the list or calendar by location (Omaha, Lincoln, Other
@@ -92,7 +142,7 @@ are shown in both the list and calendar views.
 
 ---
 
-### User Story 4 - Browse past events (Priority: P4)
+### User Story 5 - Browse past events (Priority: P5)
 
 A visitor wants to see what happened recently — to find a group's past talks, see how active a
 meetup is, or locate a recording. They switch to past events and browse them most recent first,
@@ -112,37 +162,6 @@ remain viewable in list and calendar views, and still link to the original page.
    most recent first and remain filterable by location and category.
 3. **Given** a past event's original page no longer exists, **When** a visitor views it,
    **Then** the listing indicates the original page may no longer be available.
-
----
-
-### User Story 5 - Automatic discovery of new event sources (Priority: P5)
-
-The site owner does not want to hunt for event sources by hand. On a recurring schedule, the
-system searches known public event platforms and the web for Nebraska tech groups, user groups,
-and organizations that publish events, and also follows organizers mentioned in events it
-already knows about. Promising new sources are added automatically on probation, so coverage
-grows over time without the owner doing anything.
-
-**Why this priority**: Coverage beyond the initial source list depends on this, and it is what
-keeps the service from becoming manual work. The core experience still works with a starting
-list of sources.
-
-**Independent Test**: With a starting list of sources, run the source-discovery cycle and confirm
-it finds at least one relevant Nebraska tech source not in the list, adds it on probation, and
-does not add clearly irrelevant or out-of-state sources.
-
-**Acceptance Scenarios**:
-
-1. **Given** a Nebraska tech meetup group exists on a monitored event platform but is not yet a
-   source, **When** the next source-discovery cycle runs, **Then** it is added as a probationary
-   source and its events are collected.
-2. **Given** a candidate source whose events are mostly non-tech or outside Nebraska, **When**
-   source discovery evaluates it, **Then** it is not added.
-3. **Given** a known event lists a co-host organization that is not yet a source, **When**
-   source discovery runs, **Then** that organization is evaluated as a candidate source.
-4. **Given** a probationary source has had several of its events approved and none rejected,
-   **When** it reaches the promotion threshold, **Then** it becomes trusted automatically and its
-   future events publish without review.
 
 ---
 
@@ -228,6 +247,13 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
 - An event that is not tech-related or is a purely commercial sales pitch is found on a general
   source: it is excluded or hidden from public views.
 - Daylight saving time transitions: event times remain correct across the change.
+- An event is found in a newsletter, news article, or search result rather than on its own
+  page: the system looks for the event's original page; if none can be found, the event is not
+  published (it may be held for review with the place it was mentioned).
+- The same new event is found through several channels at once (e.g., a newsletter and a
+  search result): it is recorded once, with each place it was found noted.
+- A discovered website forbids automated access in its access rules or terms: it is not
+  collected from, and is recorded so it is not re-evaluated repeatedly.
 
 ## Clarifications
 
@@ -239,6 +265,10 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   trusted sources publish automatically; events from new/probationary sources are held for
   review until the source earns trust.
 - Discovery of sources MUST itself be automatic so the site owner has no routine manual work.
+- Finding events from groups the system doesn't already know is a core capability (raised to
+  P2): it must search well beyond event platforms — organization websites, web search,
+  newsletters, news/blogs, and links from known pages — and detect coverage gaps on its own.
+  The owner may occasionally add sources by hand but must not need to.
 
 ## Requirements *(mandatory)*
 
@@ -265,105 +295,122 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   fails, and MUST record each failure for administrators.
 - **FR-009**: System MUST respect each source's published access rules and terms of use, and
   MUST limit how often it requests content from each source.
-- **FR-010**: System MUST automatically find new candidate event sources on a recurring schedule
-  (at least weekly) by searching known public event platforms and the public web for Nebraska
-  technology groups and organizations, and by evaluating organizers and co-hosts named in
-  already-discovered events.
-- **FR-011**: System MUST evaluate each candidate source for relevance (technology focus and
+- **FR-010**: System MUST, on a recurring schedule (at least weekly) and without administrator
+  action, look for events and groups it does not already know about. Identifying, evaluating,
+  and adding candidates MUST be fully automatic; administrators only approve or reject held
+  items.
+- **FR-011**: Discovery of unknown groups and events MUST use multiple kinds of public channels,
+  including at least: public event platforms; organization and company websites (including
+  universities and departments, libraries, coworking spaces, incubators, professional
+  associations, and conference websites); web search; local tech newsletters and mailing lists
+  the system subscribes to; local tech news and blogs; and links from pages of known organizers,
+  sponsors, venues, and speakers. Public community announcement channels MAY be used only where
+  their terms allow automated access.
+- **FR-012**: System MUST automatically detect standard event information and calendar feeds
+  published on discovered websites, so that a new website can become a source without
+  hand-written setup for that site whenever such information is available.
+- **FR-013**: System MUST detect likely coverage gaps — recurring groups with no upcoming event
+  when one is expected, annual events whose next edition is not yet listed, and known Nebraska
+  tech groups or organizations with no working source — and MUST automatically search for the
+  missing information.
+- **FR-014**: An event found only as a mention (in a newsletter, article, or search result) MUST
+  NOT be published until its original event page is identified, so that every listing links to
+  the organizer's page.
+- **FR-015**: System MUST evaluate each candidate source for relevance (technology focus and
   Nebraska connection) and MUST add relevant candidates automatically as probationary sources;
   irrelevant candidates MUST NOT be added and MUST NOT be re-evaluated more than once per month.
-- **FR-012**: Every source MUST have a trust level: trusted or probationary. Sources configured
+- **FR-016**: Every source MUST have a trust level: trusted or probationary. Sources configured
   before launch or added by an administrator start as trusted; automatically discovered and
   visitor-suggested sources start as probationary.
-- **FR-013**: Events from trusted sources MUST be published automatically when discovered.
+- **FR-017**: Events from trusted sources MUST be published automatically when discovered.
   Events from probationary sources MUST be held for administrator review before appearing
   publicly.
-- **FR-014**: A probationary source MUST be promoted to trusted automatically once at least 3 of
+- **FR-018**: A probationary source MUST be promoted to trusted automatically once at least 3 of
   its events have been approved and none rejected; a source with rejected events MUST stay
   probationary, and a source with a majority of its reviewed events rejected MUST be paused
   automatically.
-- **FR-015**: Administrators MUST be able to hide any published event, including events from
+- **FR-019**: Administrators MUST be able to hide any published event, including events from
   trusted sources, and to demote a trusted source to probationary.
-- **FR-016**: Visitors MUST be able to suggest a new event source by submitting a public web
+- **FR-020**: Visitors MUST be able to suggest a new event source by submitting a public web
   address and an optional note, without creating an account or providing personal information.
-- **FR-017**: Suggested sources MUST be evaluated automatically like any other candidate; those
+- **FR-021**: Suggested sources MUST be evaluated automatically like any other candidate; those
   passing evaluation become probationary sources, and those that cannot be evaluated
   automatically go to the administrator review queue.
-- **FR-018**: Source suggestions MUST be rate limited per visitor, protected against automated
+- **FR-022**: Source suggestions MUST be rate limited per visitor, protected against automated
   abuse, and validated so that only public web addresses are accepted; addresses pointing to
   private, internal, or non-web locations MUST be rejected without being fetched.
-- **FR-019**: Visitors MUST NOT be able to submit individual events; events come only from
+- **FR-023**: Visitors MUST NOT be able to submit individual events; events come only from
   sources.
 
 **Event information**
 
-- **FR-020**: Each event MUST display title, start date and time, end date and time (when
+- **FR-024**: Each event MUST display title, start date and time, end date and time (when
   provided), location (venue and city) or "Online", organizer or group name, categories, a short
   description, and the source it was found on.
-- **FR-021**: Each event MUST include a link to its original event page, and that link MUST be
+- **FR-025**: Each event MUST include a link to its original event page, and that link MUST be
   the primary way for visitors to get full details and register.
-- **FR-022**: System MUST NOT create calendar invites or calendar files, send reminders, or
+- **FR-026**: System MUST NOT create calendar invites or calendar files, send reminders, or
   handle registration, RSVP, ticketing, or payment for any event.
-- **FR-023**: Event times MUST be displayed in Central Time (America/Chicago) and labeled as such.
-- **FR-024**: Each event MUST be assigned one or more categories from a defined list that
+- **FR-027**: Event times MUST be displayed in Central Time (America/Chicago) and labeled as such.
+- **FR-028**: Each event MUST be assigned one or more categories from a defined list that
   includes at least: AI & Machine Learning; Information Security / Cybersecurity; Software
   Development & Programming; Computer Networking & Infrastructure; Cloud & DevOps; Data &
   Analytics; Web & Mobile; Product, Design & UX; Career & Professional Networking; Hardware, IoT
   & Makers; and General Tech. The list MUST be extendable by administrators.
-- **FR-025**: Categories, locations, or other details inferred by the system (rather than stated
+- **FR-029**: Categories, locations, or other details inferred by the system (rather than stated
   by the source) MUST be distinguishable from source-provided details.
-- **FR-026**: Each event MUST record when it was last verified against its source.
-- **FR-027**: Descriptions shown on NETechConnect MUST be limited to a short summary (no more than
+- **FR-030**: Each event MUST record when it was last verified against its source.
+- **FR-031**: Descriptions shown on NETechConnect MUST be limited to a short summary (no more than
   roughly 500 characters), with the full description left on the original event page.
 
 **Browsing**
 
-- **FR-028**: Visitors MUST be able to view upcoming events as a list sorted soonest first.
-- **FR-029**: Visitors MUST be able to view events in a calendar with month and week views and
+- **FR-032**: Visitors MUST be able to view upcoming events as a list sorted soonest first.
+- **FR-033**: Visitors MUST be able to view events in a calendar with month and week views and
   navigate between periods.
-- **FR-030**: Visitors MUST be able to switch between upcoming and past events in both views;
+- **FR-034**: Visitors MUST be able to switch between upcoming and past events in both views;
   past events are sorted most recent first in the list view.
-- **FR-031**: An event MUST be treated as upcoming until its end time (or its start time when no
+- **FR-035**: An event MUST be treated as upcoming until its end time (or its start time when no
   end time is provided) has passed.
-- **FR-032**: Visitors MUST be able to filter by location (Omaha area, Lincoln area, Other
+- **FR-036**: Visitors MUST be able to filter by location (Omaha area, Lincoln area, Other
   Nebraska, Online), by one or more categories, and by date range, in both views.
-- **FR-033**: Visitors MUST be able to search events by keyword across title, organizer, and
+- **FR-037**: Visitors MUST be able to search events by keyword across title, organizer, and
   description.
-- **FR-034**: The current view and filters MUST be reflected in the page address so it can be
+- **FR-038**: The current view and filters MUST be reflected in the page address so it can be
   bookmarked or shared.
-- **FR-035**: Visitors MUST NOT need an account or provide any personal information to browse.
-- **FR-036**: Past events MUST be retained and remain viewable as a historical archive.
+- **FR-039**: Visitors MUST NOT need an account or provide any personal information to browse.
+- **FR-040**: Past events MUST be retained and remain viewable as a historical archive.
 
 **Administration and security**
 
-- **FR-037**: Administrators MUST sign in with multi-factor authentication to reach any
+- **FR-041**: Administrators MUST sign in with multi-factor authentication to reach any
   administrative function; all other users MUST be denied access.
-- **FR-038**: Administrators MUST be able to add, edit, pause, and remove event sources, and see
+- **FR-042**: Administrators MUST be able to add, edit, pause, and remove event sources, and see
   each source's status, trust level, how it was found (pre-configured, discovered, suggested),
   last successful check, number of events found, and recent errors.
-- **FR-039**: Administrators MUST have a single review queue showing held events and
+- **FR-043**: Administrators MUST have a single review queue showing held events and
   unevaluated source suggestions, with the reason each item is held, and MUST be able to approve
   or reject each item in one action.
-- **FR-040**: System MUST send administrators a periodic summary (at most daily, and only when
+- **FR-044**: System MUST send administrators a periodic summary (at most daily, and only when
   something needs attention) of items awaiting review and of sources that are failing, so that
   no routine monitoring is required.
-- **FR-041**: Administrators MUST be able to hide or unhide an event and correct its categories
+- **FR-045**: Administrators MUST be able to hide or unhide an event and correct its categories
   or location.
-- **FR-042**: Every administrative action MUST be recorded in an audit log showing who did what
+- **FR-046**: Every administrative action MUST be recorded in an audit log showing who did what
   and when.
-- **FR-043**: All content obtained from sources MUST be treated as untrusted and neutralized
+- **FR-047**: All content obtained from sources MUST be treated as untrusted and neutralized
   before display, so that no source can cause scripts or active content to run in a visitor's
   browser.
-- **FR-044**: Links to original event pages MUST use only safe web addresses (secure web links);
+- **FR-048**: Links to original event pages MUST use only safe web addresses (secure web links);
   any other kind of link MUST be discarded.
-- **FR-045**: The public site and administrative functions MUST be served only over encrypted
+- **FR-049**: The public site and administrative functions MUST be served only over encrypted
   connections.
 
 **Accessibility**
 
-- **FR-046**: List and calendar views MUST meet WCAG 2.2 Level AA, including full keyboard
+- **FR-050**: List and calendar views MUST meet WCAG 2.2 Level AA, including full keyboard
   operation and screen-reader support for the calendar.
-- **FR-047**: All public views MUST be usable on mobile phones as well as desktop browsers.
+- **FR-051**: All public views MUST be usable on mobile phones as well as desktop browsers.
 
 ### Key Entities
 
@@ -399,8 +446,9 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
 
 - **SC-001**: A first-time visitor can find the next upcoming tech event in their chosen city and
   reach its original event page within 30 seconds.
-- **SC-002**: At least 90% of community tech events publicly listed by the monitored Omaha and
-  Lincoln groups during a sample month appear on NETechConnect.
+- **SC-002**: In a quarterly coverage check, at least 85% of Nebraska community tech events in an
+  independently compiled sample (found by hand from sources not given to the system) already
+  appear on NETechConnect, and at least 95% for Omaha and Lincoln groups the system monitors.
 - **SC-003**: New or changed events on monitored sources are reflected on NETechConnect within 24
   hours.
 - **SC-004**: Fewer than 2% of displayed events are duplicates, and fewer than 5% are
@@ -417,8 +465,9 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   WCAG 2.2 AA failures.
 - **SC-010**: Ongoing administration (reviewing held items and responding to failing sources)
   takes no more than 15 minutes per week on average after the first month of operation.
-- **SC-011**: Within 60 days of launch, automatic source discovery adds at least 5 relevant
-  Nebraska sources that were not in the initial source list.
+- **SC-011**: Within 60 days of launch, automatic discovery adds at least 10 relevant Nebraska
+  groups or organizations that were not in the initial source list, from at least 3 different
+  kinds of channels, with no manual source research by the owner.
 
 ## Assumptions
 
@@ -435,8 +484,9 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
 - Free and paid community events (e.g., paid regional conferences) are both in scope; vendor
   product pitches and sales webinars are not.
 - Discovery uses only publicly available information and does not require logging into sources
-  on behalf of users. Automatic source discovery relies on the public search features of event
-  platforms and the web; which platforms and methods are used is decided during planning.
+  on behalf of users. Automatic discovery relies on public search features of event platforms, web
+  search, newsletter subscriptions, and public websites; which specific services and methods are
+  used is decided during planning, and some channels may be ruled out by their terms of use.
 - The site owner is the only administrator at launch and wants near-zero routine effort; the
   review queue and summary exist so attention is needed only when something is held or broken.
 - Past events are kept indefinitely unless an administrator removes them.

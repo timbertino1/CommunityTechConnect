@@ -35,5 +35,8 @@
   approval).
 - Iteration 2 (2026-10-16): resolved — visitors may suggest sources (Q1: B); trusted sources
   auto-publish, probationary sources held for review (Q2: C). Added automatic source discovery
-  (User Story 5) and visitor suggestions (User Story 7). All items pass.
+  and visitor suggestions (User Story 7). All items pass.
+- Iteration 3 (2026-10-16): raised discovery of unknown groups to P2 (User Story 2); expanded
+  discovery channels beyond event platforms, added coverage-gap detection, and made coverage
+  success criteria measure events found independently. All items pass.
 - Ready for `/speckit-clarify` (optional) or `/speckit-plan`.
