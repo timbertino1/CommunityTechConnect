@@ -1,2 +1,4 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Auto detect text files and perform LF normalization, and also check them out with LF on
+# every OS. The pipeline writes data/ with LF, so CRLF checkouts on Windows would otherwise
+# show files as changed when they are not.
+* text=auto eol=lf
