@@ -105,7 +105,7 @@ the per-source runner. **No user story work begins until this phase is complete.
 Each gate records its decision, date, and the links checked in the "Validation gates" table of
 `specs/001-event-aggregator/research.md`.
 
-- [ ] T039 [P] Gate V7: verify each seed lead in research.md R14 (active page, iCal/JSON-LD/RSS present, robots.txt and terms allow automated reading). Record the results and pick 5–10 verified seeds (Omaha and Lincoln). **Blocks**: T060.
+- [X] T039 [P] Gate V7: verify each seed lead in research.md R14 (active page, iCal/JSON-LD/RSS present, robots.txt and terms allow automated reading). Record the results and pick 5–10 verified seeds (Omaha and Lincoln). **Blocks**: T060.
 - [ ] T040 [P] Gate V6: confirm the current cheapest OpenAI model that supports Structured Outputs, and its price, from OpenAI's official docs. Record the model id. **Blocks**: T081–T083.
 - [ ] T041 [P] Gate V4: confirm the Brave Search API's current free credit/tier, price, rate limit, and terms on caching results; compare with one alternative. Record the choice. **Blocks**: T085, T086, T089, T091.
 - [ ] T042 [P] Gate V5: confirm Cloudflare Workers KV free limits (reads/writes/day, storage) and Email Workers free-plan CPU behavior. Record the results. **Blocks**: T075, T096–T100.

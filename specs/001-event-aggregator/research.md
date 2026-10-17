@@ -450,6 +450,38 @@ terms forbids automated reading of public feeds):
 community groups publish on Meetup or Luma, which gates V1 and V3 decide. Final seed selection
 for T060: the four above (UNO as `probationary`), plus any Meetup/Luma groups once V1/V3 allow.
 
+**Added 2026-10-17 at the owner's request: Nebraska Networking User Group, (NE)NUG.** (NE)NUG has
+no site of its own; its events are hosted by the (US) Networking User Association at
+`usnua.com` (HubSpot). robots.txt allows everything except HubSpot preview/preference paths; no
+terms of use are published. The homepage links every upcoming affiliated-group event as
+`/live/<state>nug-<city>-<season>-event-<year>`; Nebraska events start with `/live/nenug-`. Each
+event page has complete `schema.org/Event` JSON-LD (verified: "(NE)NUG Omaha Fall Event 2026",
+2026-11-12 5-9 PM, Smash Park, La Vista). The sitemap does not list event pages and the groups page
+is built by JavaScript, so the homepage is the listing to follow. **Seed:** `src_nenug`, area
+`omaha`, connector `jsonld`, `url: https://www.usnua.com/`, following only links that contain
+`/live/nenug-`. This needs one optional source field for "follow links matching a pattern" in the
+`jsonld` connector (T048/T057); usnua.com is the organizer's own platform, so it is a valid
+`original_url`. With it, V7 has **five** seeds.
+
+### Gate V1 result: Meetup (checked 2026-10-17)
+
+| Check | Finding |
+|---|---|
+| robots.txt (`www.meetup.com`) | Allows group pages, `/events/` lists, event pages, and `/events/ical/`; disallows the old RSS/Atom/XML feeds, `/api/` and `/meetup_api/`, and search filter parameters. No crawl-delay. |
+| Terms of Service (last updated 2026-10-01), section 5.4 | Users must not "(a) extract data from the Platform for a commercial purpose not permitted by these Terms, whether through use of an automated system or software ... or (b) engage in any activity that ... imposes undue burdens on the Platform". Personal data from the Platform may be used only to administer and participate in Meetup groups and events. |
+| API | GraphQL API requires an active **Meetup Pro** subscription and Meetup's approval ([help center][meetup-api-access]). Not an option for a ~$0 project. |
+| iCal, logged out | `/events/ical/` answers 200 `text/calendar` but contains **no events**, even for very active groups (tested Omaha Azure User Group, Omaha Red Hat User Group, SF Python, NYC Python). Not usable. |
+| Event pages, logged out | Each event page has complete `schema.org/Event` JSON-LD (name, start/end with offset, `eventStatus`, `eventAttendanceMode`, location, description). The group `/events/` page links its event pages. |
+
+**Reading.** NETechConnect is non-commercial (free, no ads, no accounts), reads public pages
+slowly, follows robots.txt, stores no personal data (titles, times, places and the group's name
+only), and sends visitors to the Meetup page to RSVP. That use does not appear to fall under 5.4(a)
+or (b). This is an interpretation of a contract, not legal advice; the owner decides.
+
+**Recommended decision:** *JSON-LD on event pages allowed*, limited to public groups, at most one
+page per 10 seconds on meetup.com, a small per-run budget, no member or attendee data, and stop
+immediately if Meetup objects or its terms change (set the sources to `blocked_by_terms`).
+
 **Engineering note.** selectolax 1.0 removed the `selectolax.parser` (Modest) backend; HTML code must
 use `selectolax.lexbor.LexborHTMLParser`.
 
@@ -479,3 +511,5 @@ use `selectolax.lexbor.LexborHTMLParser`.
 [infosec]: https://infosec-conferences.com/us-state/nebraska
 [sfdg]: https://trailblazercommunitygroups.com/salesforce-developer-group-omaha-united-states
 [drupal]: https://groups.drupal.org/nebraska
+[meetup-api-access]: https://help.meetup.com/hc/en-us/articles/41453576628749-How-can-I-get-access-to-Meetup-s-API
+[meetup-tos]: https://help.meetup.com/hc/en-us/articles/360027447252-Terms-of-Service
