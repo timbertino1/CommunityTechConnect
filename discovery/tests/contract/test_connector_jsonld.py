@@ -255,3 +255,16 @@ def test_events_outside_the_window_are_left_out() -> None:
     )
     result = CONNECTOR.parse(jsonld_source(), payload(past + far + soon, content_type="text/html"))
     assert [x.title for x in result.listings] == ["Next week"]
+
+
+def test_address_parts_already_in_the_street_line_are_not_repeated() -> None:
+    # Meetup puts city and state inside streetAddress as well as in their own fields.
+    page = (
+        '<script type="application/ld+json">{"@type":"Event","name":"Prairie Python Meetup",'
+        '"startDate":"2026-11-10T17:30:00-06:00","location":{"@type":"Place","name":"Improving",'
+        '"address":{"@type":"PostalAddress",'
+        '"streetAddress":"18881 W Dodge Road Suite 120E, Omaha, NE",'
+        '"addressLocality":"Omaha","addressRegion":"NE"}}}</script>'
+    )
+    (event,) = CONNECTOR.parse(jsonld_source(), payload(page, content_type="text/html")).listings
+    assert event.location_text == "Improving, 18881 W Dodge Road Suite 120E, Omaha, NE"

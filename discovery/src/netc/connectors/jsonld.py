@@ -306,7 +306,16 @@ def _place_text(places: list[Any], index: dict[str, dict[str, Any]]) -> str | No
             ]
         else:
             parts.append(_str(address))
-        text = ", ".join(p for p in parts if p)
+        # Skip parts already written earlier (Meetup repeats "Omaha, NE" inside streetAddress).
+        # Compare whole comma-separated pieces, so "NE" is not mistaken for part of "Nelnet".
+        kept: list[str] = []
+        seen: set[str] = set()
+        for part in parts:
+            pieces = [p.strip().casefold() for p in part.split(",") if p.strip()]
+            if pieces and not all(p in seen for p in pieces):
+                kept.append(part)
+                seen.update(pieces)
+        text = ", ".join(kept)
         if text:
             return text[:MAX_SHORT_CHARS]
     return None
