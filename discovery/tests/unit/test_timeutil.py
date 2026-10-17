@@ -44,7 +44,7 @@ def utc(*parts: int) -> datetime:
         ("", "America/Chicago", True),
         ("   ", "America/Chicago", True),
         ("Mars/Olympus_Mons", "America/Chicago", True),
-        ("../../etc/passwd", "America/Chicago", True),
+        ("../../etc/hosts", "America/Chicago", True),  # path traversal in a zone name
     ],
 )
 def test_resolve_zone(given: str | None, name: str, assumed: bool) -> None:
