@@ -40,6 +40,8 @@ jobs:
         run: uv run mypy
       - name: Tests
         run: uv run pytest
+      - name: Validate data
+        run: uv run netc validate-data --data-dir ../data
       - name: Dependency audit
         run: |
           uv export --locked --no-emit-project --format requirements.txt -o "$RUNNER_TEMP/requirements.txt"

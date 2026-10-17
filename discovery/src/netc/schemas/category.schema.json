@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/category.schema.json",
+  "title": "Category",
+  "description": "An event category, stored as an item of data/categories.yaml (FR-028).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "keywords"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]{1,40}$" },
+    "label": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "keywords": { "type": "array", "maxItems": 300, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 60 } }
+  }
+}

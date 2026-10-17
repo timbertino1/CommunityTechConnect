@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/mention.schema.json",
+  "title": "EventMention",
+  "description": "An event seen only as a mention (newsletter, news, search snippet), stored as an item of data/mentions.json. Never published directly (FR-014).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "channel", "title", "date_hint", "place_hint", "organizer_hint", "links", "resolution", "event_id", "attempts"],
+  "$defs": {
+    "cleanHttpsUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "HTTPS link with query string and fragment removed.",
+      "pattern": "^https://[^/\\s?#]+\\.[^/\\s?#]+(/[^\\s?#]*)?$",
+      "maxLength": 2048
+    },
+    "hint": { "type": ["string", "null"], "maxLength": 200 }
+  },
+  "properties": {
+    "id": { "type": "string", "pattern": "^men_[a-f0-9]{12}$" },
+    "channel": { "enum": ["newsletter", "news", "web_search"] },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "date_hint": { "$ref": "#/$defs/hint" },
+    "place_hint": { "$ref": "#/$defs/hint" },
+    "organizer_hint": { "$ref": "#/$defs/hint" },
+    "links": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "$ref": "#/$defs/cleanHttpsUrl" } },
+    "resolution": { "enum": ["unresolved", "resolved", "held", "discarded"] },
+    "event_id": { "anyOf": [{ "type": "string", "pattern": "^evt_[a-f0-9]{12}$" }, { "type": "null" }] },
+    "attempts": { "type": "integer", "minimum": 0 }
+  }
+}

@@ -311,7 +311,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <nav class="rail" aria-label="Roadmap progress">
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
-      <li class="now"><div class="bar"><span style="width:26%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
+      <li class="now"><div class="bar"><span style="width:52%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
       <li><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 7 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 14 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -703,14 +703,14 @@ Next up: teaching the bot to browse the web safely.
     </div>
     <p class="lede">Before the site can show a single event, the discovery bot needs to read the web without being tricked, clean what it reads, and store it reliably. Phase 2 builds those pieces. Nothing visible yet; everything after depends on it.</p>
     <div class="stats">
-      <div class="stat"><span class="n">7<small> of 27</small></span><p>Tasks done so far in this phase.</p></div>
-      <div class="stat"><span class="n">261</span><p>Automated tests, all passing, running in about 2 seconds.</p></div>
+      <div class="stat"><span class="n">14<small> of 27</small></span><p>Tasks done so far in this phase.</p></div>
+      <div class="stat"><span class="n">411</span><p>Automated tests, all passing, running in about 3 seconds.</p></div>
       <div class="stat"><span class="n">~8,000&times;</span><p>Speed-up from fixing one slow pattern found by attacking my own code.</p></div>
     </div>
     <ul class="checklist">
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Safe fetching</b><small>The one gate for all web access. Merged in PR #7.</small></div><span class="ids">T019&ndash;T023</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Cleaning untrusted text</b><small>Plain text, safe links, no personal contact details. Merged in PR #8.</small></div><span class="ids">T024&ndash;T025</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>Data models, schemas and storage</b><small>What an event is, and how it's saved as files.</small></div><span class="ids">T026&ndash;T032</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Data models, schemas and storage</b><small>Exact rules for every record, tidy files, a data check in CI. Built, PR pending.</small></div><span class="ids">T026&ndash;T032</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Time zones and categories</b><small>Central Time done right, topic and city lists.</small></div><span class="ids">T033&ndash;T036</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Per-source runner</b><small>One broken source never stops the rest.</small></div><span class="ids">T037&ndash;T038</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Research checks</b><small>Terms, prices and limits for Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare.</small></div><span class="ids">T039&ndash;T045</span></li>
@@ -855,33 +855,39 @@ Next up: teaching the bot to browse the web safely.
     </div>
     <figure>
       <div class="chart-box">
-        <svg id="tests-chart" viewBox="0 0 640 260" role="img" aria-label="Automated tests: 2 after Phase 1, 143 after safe fetching, 261 after cleaning untrusted text.">
+        <svg id="tests-chart" viewBox="0 0 640 260" role="img" aria-label="Automated tests: 2 after Phase 1, 143 after safe fetching, 261 after cleaning untrusted text, 411 after data models and storage.">
           <line class="grid" x1="56" y1="210" x2="620" y2="210"/>
           <line class="grid" x1="56" y1="150" x2="620" y2="150"/>
           <line class="grid" x1="56" y1="90" x2="620" y2="90"/>
           <line class="grid" x1="56" y1="30" x2="620" y2="30"/>
           <text class="axis" x="46" y="214" text-anchor="end">0</text>
-          <text class="axis" x="46" y="154" text-anchor="end">100</text>
-          <text class="axis" x="46" y="94" text-anchor="end">200</text>
-          <text class="axis" x="46" y="34" text-anchor="end">300</text>
-          <!-- scale: 0.6 px per test, baseline y=210 -->
+          <text class="axis" x="46" y="154" text-anchor="end">150</text>
+          <text class="axis" x="46" y="94" text-anchor="end">300</text>
+          <text class="axis" x="46" y="34" text-anchor="end">450</text>
+          <!-- scale: 0.4 px per test, baseline y=210 -->
           <g data-tip="End of Phase 1: 2 tests">
-            <rect class="bar-hit" x="100" y="20" width="120" height="190"/>
-            <path class="bar" d="M128 210 V208.8 a1.2 1.2 0 0 1 1.2 -1.2 H190.8 a1.2 1.2 0 0 1 1.2 1.2 V210 Z"/>
-            <text class="val" x="160" y="199" text-anchor="middle">2</text>
-            <text class="axis" x="160" y="232" text-anchor="middle">End of Phase 1</text>
+            <rect class="bar-hit" x="68" y="20" width="120" height="190"/>
+            <path class="bar" d="M96 210 V208.8 a1.2 1.2 0 0 1 1.2 -1.2 H158.8 a1.2 1.2 0 0 1 1.2 1.2 V210 Z"/>
+            <text class="val" x="128" y="199" text-anchor="middle">2</text>
+            <text class="axis" x="128" y="232" text-anchor="middle">End of Phase 1</text>
           </g>
           <g data-tip="After safe fetching: 143 tests">
-            <rect class="bar-hit" x="278" y="20" width="120" height="190"/>
-            <path class="bar" d="M306 210 V128.2 a4 4 0 0 1 4 -4 H364 a4 4 0 0 1 4 4 V210 Z"/>
-            <text class="val" x="338" y="116" text-anchor="middle">143</text>
-            <text class="axis" x="338" y="232" text-anchor="middle">+ Safe fetching</text>
+            <rect class="bar-hit" x="208" y="20" width="120" height="190"/>
+            <path class="bar" d="M236 210 V156.8 a4 4 0 0 1 4 -4 H296 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="268" y="145" text-anchor="middle">143</text>
+            <text class="axis" x="268" y="232" text-anchor="middle">+ Safe fetching</text>
           </g>
           <g data-tip="After cleaning untrusted text: 261 tests">
-            <rect class="bar-hit" x="456" y="20" width="120" height="190"/>
-            <path class="bar" d="M484 210 V57.4 a4 4 0 0 1 4 -4 H542 a4 4 0 0 1 4 4 V210 Z"/>
-            <text class="val" x="516" y="45" text-anchor="middle">261</text>
-            <text class="axis" x="516" y="232" text-anchor="middle">+ Cleaning text</text>
+            <rect class="bar-hit" x="348" y="20" width="120" height="190"/>
+            <path class="bar" d="M376 210 V109.6 a4 4 0 0 1 4 -4 H436 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="408" y="98" text-anchor="middle">261</text>
+            <text class="axis" x="408" y="232" text-anchor="middle">+ Cleaning text</text>
+          </g>
+          <g data-tip="After data models and storage: 411 tests">
+            <rect class="bar-hit" x="488" y="20" width="120" height="190"/>
+            <path class="bar" d="M516 210 V49.6 a4 4 0 0 1 4 -4 H576 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="548" y="38" text-anchor="middle">411</text>
+            <text class="axis" x="548" y="232" text-anchor="middle">+ Models &amp; storage</text>
           </g>
         </svg>
         <div class="tip" id="tip" hidden></div>
@@ -891,7 +897,7 @@ Next up: teaching the bot to browse the web safely.
         <summary>Show as a table</summary>
         <div class="table-wrap"><table>
           <thead><tr><th>Milestone</th><th>Tests</th></tr></thead>
-          <tbody><tr><td>End of Phase 1</td><td>2</td></tr><tr><td>+ Safe fetching</td><td>143</td></tr><tr><td>+ Cleaning text</td><td>261</td></tr></tbody>
+          <tbody><tr><td>End of Phase 1</td><td>2</td></tr><tr><td>+ Safe fetching</td><td>143</td></tr><tr><td>+ Cleaning text</td><td>261</td></tr><tr><td>+ Models &amp; storage</td><td>411</td></tr></tbody>
         </table></div>
       </details>
     </figure>
@@ -899,13 +905,98 @@ Next up: teaching the bot to browse the web safely.
 
   <section>
     <div class="section-head">
+      <p class="eyebrow">Part 3 &middot; Data models and storage</p>
+      <h2>Every record has exact rules, and every change is checked</h2>
+      <p class="muted prose">All of NETechConnect's data lives as plain files in the repository. Each kind of record (event, source, review item and so on) has a written schema and a matching model, and the files are written the same way byte for byte every time, so a day's changes show up as a small, readable diff.</p>
+    </div>
+    <figure>
+      <div class="diagram wide">
+        <svg viewBox="0 0 1060 216" role="img" aria-label="netc validate-data runs on every pull request. It reads each data file, matches it against its schema, checks each record's rules, then checks rules across files. If anything fails, every problem is listed with its file and field and CI fails; otherwise the change can merge.">
+          <defs>
+            <marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+            <marker id="ah4-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head-accent"/></marker>
+          </defs>
+          <rect class="box" x="16" y="20" width="140" height="86" rx="8"/>
+          <text class="t-title" x="30" y="46">Pull request</text>
+          <text class="t-sub" x="30" y="66">changes files</text>
+          <text class="t-sub" x="30" y="82">in data/</text>
+
+          <rect class="box" x="186" y="20" width="170" height="86" rx="8"/>
+          <text class="t-title" x="200" y="46">Read the file</text>
+          <text class="t-sub" x="200" y="66">valid JSON or YAML</text>
+          <text class="t-sub" x="200" y="82">the right kind of list</text>
+          <rect class="box" x="376" y="20" width="170" height="86" rx="8"/>
+          <text class="t-title" x="390" y="46">Match the schema</text>
+          <text class="t-sub" x="390" y="66">required fields, types</text>
+          <text class="t-sub" x="390" y="82">allowed values only</text>
+          <rect class="box" x="566" y="20" width="170" height="86" rx="8"/>
+          <text class="t-title" x="580" y="46">Check each record</text>
+          <text class="t-sub" x="580" y="66">plain text, https links</text>
+          <text class="t-sub" x="580" y="82">end after start, real zone</text>
+          <rect class="box" x="756" y="20" width="170" height="86" rx="8"/>
+          <text class="t-title" x="770" y="46">Check across files</text>
+          <text class="t-sub" x="770" y="66">sources exist, no dupes</text>
+          <text class="t-sub" x="770" y="82">right month, review rule</text>
+
+          <line class="edge" x1="156" y1="63" x2="184" y2="63" marker-end="url(#ah4)"/>
+          <line class="edge" x1="356" y1="63" x2="374" y2="63" marker-end="url(#ah4)"/>
+          <line class="edge" x1="546" y1="63" x2="564" y2="63" marker-end="url(#ah4)"/>
+          <line class="edge" x1="736" y1="63" x2="754" y2="63" marker-end="url(#ah4)"/>
+
+          <line class="edge-accent" x1="926" y1="63" x2="954" y2="63" marker-end="url(#ah4-ok)"/>
+          <rect class="box-ok" x="956" y="20" width="92" height="86" rx="8"/>
+          <text class="t-title" x="1002" y="56" text-anchor="middle">All clear</text>
+          <text class="t-sub" x="1002" y="76" text-anchor="middle">can merge</text>
+
+          <line class="edge-dash" x1="271" y1="106" x2="271" y2="160"/>
+          <line class="edge-dash" x1="461" y1="106" x2="461" y2="160"/>
+          <line class="edge-dash" x1="651" y1="106" x2="651" y2="160"/>
+          <line class="edge-dash" x1="841" y1="106" x2="841" y2="160"/>
+          <text class="t-edge" x="279" y="138">problem</text>
+          <text class="t-edge" x="469" y="138">problem</text>
+          <text class="t-edge" x="659" y="138">problem</text>
+          <text class="t-edge" x="849" y="138">problem</text>
+          <rect class="box-bad" x="186" y="162" width="740" height="40" rx="8"/>
+          <text class="t-title" x="556" y="187" text-anchor="middle">Every problem listed together, with its file and field. CI fails, nothing merges.</text>
+        </svg>
+      </div>
+      <figcaption><code>netc validate-data</code> now runs in CI on every pull request. Later, when the discovery bot proposes new events every day, this is the check its changes have to pass before they can merge on their own.</figcaption>
+    </figure>
+    <div class="two">
+      <div style="display:grid;gap:8px;min-width:0">
+        <h3>Where the data lives</h3>
+        <div class="table-wrap">
+          <table class="mini">
+            <tr><td>events/2026/2026-10.json</td><td>Events, one file per month</td></tr>
+            <tr><td>sources/src_*.yaml</td><td>One file per event source, easy to edit by hand</td></tr>
+            <tr><td>candidates.json</td><td>Possible new sources and why they were kept or rejected</td></tr>
+            <tr><td>review/queue.json</td><td>Items waiting for my review</td></tr>
+            <tr><td>state/source_status.json</td><td>Health of each source: last success, last error</td></tr>
+            <tr><td>categories.yaml</td><td>Topics like AI, security and cloud</td></tr>
+          </table>
+        </div>
+      </div>
+      <div style="display:grid;gap:12px;min-width:0">
+        <h3>Small details that matter</h3>
+        <div class="card"><h3>Filed by the month you'd look for it</h3><p>An event at 10:00 PM on Oct 31 in Omaha is already Nov 1 in UTC, the time zone the data is stored in. It's still filed under October, because the files are split by Central Time.</p></div>
+        <div class="card"><h3>Private notes stay private</h3><p>When someone suggests a group, their note is cleaned of e-mail addresses and phone numbers and used in memory only. The data model has no way to write it to a file.</p></div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>A check that hid a second problem</h3><p>One test fed the validator a record with two mistakes: an insecure link and HTML in the title. Only the link was reported, because a schema error stopped the deeper checks. Now both checks always run and every problem shows up in one pass, so nobody has to fix, push and wait just to find the next error.</p></div></div>
+      <div class="note"><div><h3>Windows doesn't ship time zones</h3><p>Python's time zone support reads the operating system's time zone database, and Windows doesn't have one. A small package (<code>tzdata</code>) fixes that, so Central Time works the same on my PC as on GitHub's servers.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
       <p class="eyebrow">Coming next in Phase 2</p>
-      <h2>Models, storage and the runner</h2>
+      <h2>Time, places, the runner and the research checks</h2>
     </div>
     <div class="cards">
-      <div class="card"><span class="tag">T026&ndash;T032</span><h3>What an event is</h3><p>Exact rules for every field, saved as tidy files so each daily change is a readable diff, plus a <code>netc validate-data</code> check in CI.</p></div>
       <div class="card"><span class="tag">T033&ndash;T036</span><h3>Time and place</h3><p>Central Time across daylight saving changes, and which towns count as Omaha, Lincoln or elsewhere in Nebraska.</p></div>
       <div class="card"><span class="tag">T037&ndash;T038</span><h3>One bad source can't stop the run</h3><p>Failures are recorded and the rest of the sources carry on.</p></div>
+      <div class="card"><span class="tag">T039&ndash;T045</span><h3>Research checks</h3><p>Reading the terms and limits of Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare before relying on them.</p></div>
     </div>
   </section>
 
@@ -913,18 +1004,17 @@ Next up: teaching the bot to browse the web safely.
     <div class="share">
       <div class="share-head"><h3>Share Phase 2 so far</h3><button class="btn" type="button" data-copy="post-phase-2">Copy post</button></div>
       <label class="eyebrow" for="post-phase-2">Suggested post (edit freely)</label>
-      <textarea id="post-phase-2">NETechConnect build log, Phase 2 (part 1): teaching a bot to read the web safely.
+      <textarea id="post-phase-2">NETechConnect build log, Phase 2: 14 of 27 foundation tasks done.
 
-Every page the discovery bot visits now goes through one gate:
-- https only, and never an internal or private address, checked again on every redirect
-- robots.txt respected, 5 seconds between requests to the same site
-- hard limits on time, size and file type
-
-Then everything it collects is cleaned to plain text before it's stored, so nothing a source writes can run in your browser.
+What's in so far:
+- one gate for every web request the bot makes: https only, never an internal address, robots.txt respected, hard limits on time and size
+- everything it collects is cleaned to plain text before it's stored, so nothing a source writes can run in your browser
+- exact rules for every kind of record, with the data kept as plain files in the repo and written the same way byte for byte, so each day's changes are a small, readable diff
+- a data check on every pull request that lists every problem at once
 
 Favorite moment: after all the planned tests passed, I threw junk at my own code. One input took 127 seconds to clean. One fix later: 0.015 s, and it's a permanent test now.
 
-261 tests and counting.
+411 tests and counting.
 
 #BuildInPublic #AppSec #Nebraska #OmahaTech</textarea>
       <span class="count" data-count-for="post-phase-2"></span>

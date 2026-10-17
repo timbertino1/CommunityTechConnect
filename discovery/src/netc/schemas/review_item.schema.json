@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/review_item.schema.json",
+  "title": "ReviewItem",
+  "description": "An item held for administrator review, stored as an item of data/review/queue.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "kind", "ref", "reason", "created", "decision", "decided_in_pr"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^rev_[a-f0-9]{12}$" },
+    "kind": { "enum": ["event", "source", "suggestion", "mention"] },
+    "ref": { "type": "string", "minLength": 1, "maxLength": 2048 },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 280 },
+    "created": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "decision": { "enum": ["pending", "approved", "rejected"] },
+    "decided_in_pr": { "type": ["integer", "null"], "minimum": 1 }
+  }
+}

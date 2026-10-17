@@ -72,6 +72,18 @@ def contains_markup(text: str) -> bool:
     return _MARKUP.search(text) is not None
 
 
+def is_plain_text(text: str, *, allow_newlines: bool = False) -> bool:
+    """True if ``text`` is already what to_plain_text produces: no markup, no control, format,
+    surrogate, or private-use characters. ``allow_newlines`` permits line breaks and tabs in
+    human-written notes."""
+    if contains_markup(text):
+        return False
+    allowed = "\n\t" if allow_newlines else ""
+    return not any(
+        unicodedata.category(ch) in _DROP_CATEGORIES and ch not in allowed for ch in text
+    )
+
+
 def to_plain_text(value: str | None, max_len: int) -> str:
     """Convert untrusted HTML or text to safe, normalized plain text of at most ``max_len``.
 

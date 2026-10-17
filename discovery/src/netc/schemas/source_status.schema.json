@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/source_status.schema.json",
+  "title": "SourceStatus",
+  "description": "Run health for one source: a value in data/state/source_status.json, keyed by source id.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["last_attempt", "last_success", "last_error", "consecutive_failures", "events_found_last_run"],
+  "$defs": {
+    "utcOrNull": { "anyOf": [{ "type": "string", "format": "date-time", "pattern": "Z$" }, { "type": "null" }] }
+  },
+  "properties": {
+    "last_attempt": { "$ref": "#/$defs/utcOrNull" },
+    "last_success": { "$ref": "#/$defs/utcOrNull" },
+    "last_error": { "type": ["string", "null"], "maxLength": 500 },
+    "consecutive_failures": { "type": "integer", "minimum": 0 },
+    "events_found_last_run": { "type": ["integer", "null"], "minimum": 0 }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/candidate.schema.json",
+  "title": "CandidateSource",
+  "description": "A possible event source found by a finder, stored as an item of data/candidates.json. Visitor suggestion notes are never stored (FR-020).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["url", "found_via", "evidence", "result", "reason", "last_evaluated"],
+  "$defs": {
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://[^/\\s]+\\.[^/\\s]+(/.*)?$", "maxLength": 2048 },
+    "utc": { "type": "string", "format": "date-time", "pattern": "Z$" }
+  },
+  "properties": {
+    "url": { "$ref": "#/$defs/httpsUrl" },
+    "found_via": { "enum": ["web_search", "link_graph", "newsletter", "news", "platform", "gap", "suggestion"] },
+    "evidence": { "type": "array", "maxItems": 50, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+    "result": { "enum": ["pending", "added", "rejected", "needs_review", "blocked_by_terms"] },
+    "reason": { "type": "string", "maxLength": 280 },
+    "last_evaluated": { "$ref": "#/$defs/utc" }
+  }
+}
