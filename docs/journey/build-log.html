@@ -304,15 +304,15 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Now in <strong>Phase 2 of 10</strong></span>
+    <span><strong>Phase 2 of 10 done</strong>, Phase 3 next</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
   <nav class="rail" aria-label="Roadmap progress">
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
-      <li class="now"><div class="bar"><span style="width:74%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
+      <li class="now"><div class="bar"><span style="width:0%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,14 +321,14 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 20 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>Up next (Phase 3: the first live site)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
 <div class="tabs" role="tablist" aria-label="Build log chapters">
   <button class="tab" role="tab" id="tab-project" aria-controls="project" aria-selected="true">The project</button>
   <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
-  <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill now">in progress</span></button>
+  <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill ok">done</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -523,7 +523,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
         <thead><tr><th>Phase</th><th>What it delivers</th><th>Status</th></tr></thead>
         <tbody>
           <tr><td class="num">01</td><td><b>Setup.</b> Repo, three projects, automatic checks, branch protection.</td><td><span class="status done">Done</span></td></tr>
-          <tr><td class="num">02</td><td><b>Foundation.</b> Safe fetching, cleaning, data models and storage, time zones, the per-source runner, research checks.</td><td><span class="status now">In progress</span></td></tr>
+          <tr><td class="num">02</td><td><b>Foundation.</b> Safe fetching, cleaning, data models and storage, time zones, the per-source runner, research checks.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status next">Next</span></td></tr>
           <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status next">Planned</span></td></tr>
@@ -703,7 +703,7 @@ Next up: teaching the bot to browse the web safely.
     </div>
     <p class="lede">Before the site can show a single event, the discovery bot needs to read the web without being tricked, clean what it reads, and store it reliably. Phase 2 builds those pieces. Nothing visible yet; everything after depends on it.</p>
     <div class="stats">
-      <div class="stat"><span class="n">20<small> of 27</small></span><p>Tasks done so far in this phase. All the Phase 2 code is written.</p></div>
+      <div class="stat"><span class="n">27<small> of 27</small></span><p>Phase 2 is complete: code, tests and research.</p></div>
       <div class="stat"><span class="n">531</span><p>Automated tests, all passing, running in about 3 seconds.</p></div>
       <div class="stat"><span class="n">~8,000&times;</span><p>Speed-up from fixing one slow pattern found by attacking my own code.</p></div>
     </div>
@@ -712,8 +712,8 @@ Next up: teaching the bot to browse the web safely.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Cleaning untrusted text</b><small>Plain text, safe links, no personal contact details. Merged in PR #8.</small></div><span class="ids">T024&ndash;T025</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Data models, schemas and storage</b><small>Exact rules for every record, tidy files, a data check in CI. Merged in PR #10.</small></div><span class="ids">T026&ndash;T032</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Time zones and categories</b><small>Central Time done right, 11 topics, the Nebraska town list. Merged in PR #11.</small></div><span class="ids">T033&ndash;T036</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Per-source runner</b><small>One broken source never stops the rest. Built, PR pending.</small></div><span class="ids">T037&ndash;T038</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>Research checks</b><small>Terms, prices and limits for Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare.</small></div><span class="ids">T039&ndash;T045</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Per-source runner</b><small>One broken source never stops the rest. Merged in PR #12.</small></div><span class="ids">T037&ndash;T038</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Research checks</b><small>Seeds, Meetup, Luma, Eventbrite, AI model, search API and Cloudflare all decided. PR pending.</small></div><span class="ids">T039&ndash;T045</span></li>
     </ul>
   </section>
 
@@ -1160,12 +1160,52 @@ Next up: teaching the bot to browse the web safely.
 
   <section>
     <div class="section-head">
-      <p class="eyebrow">Coming next in Phase 2</p>
-      <h2>The research checks</h2>
-      <p class="muted prose">The last seven tasks are reading, not code: confirming terms, prices and limits before the project depends on them. Some of them need a decision from me.</p>
+      <p class="eyebrow">Part 6 &middot; Research checks</p>
+      <h2>Where Nebraska's tech events actually live</h2>
+      <p class="muted prose">Before trusting any source, each lead was checked the way the real pipeline will read it: through the project's own safe fetcher, obeying robots.txt and rate limits, then reading the feed itself and the site's terms.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>First trusted sources</th><th>Area</th><th>How it's read</th></tr></thead>
+        <tbody>
+          <tr><td>UNL School of Computing</td><td>Lincoln</td><td>Official calendar feed (iCal)</td></tr>
+          <tr><td>Nebraska Innovation Campus</td><td>Lincoln</td><td>Official calendar feed (iCal)</td></tr>
+          <tr><td>Drupal Nebraska</td><td>Omaha</td><td>Calendar feed; the site asks for 10 seconds between requests, and gets it</td></tr>
+          <tr><td>(NE)NUG, Nebraska Networking User Group</td><td>Omaha</td><td>Event pages on usnua.com, Nebraska events only</td></tr>
+          <tr><td>UNO events</td><td>Omaha</td><td>Whole-campus feed, every event reviewed first (probationary)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Meetup's calendar feeds are empty now</h3><p>Most local tech groups are on Meetup. Its per-group calendar feeds still answer, but they come back empty for anyone not logged in, even for very busy groups in San Francisco and New York. The event pages themselves do carry standard event data. Meetup's terms (updated Oct 1, 2026) forbid commercial scraping and overloading the site; NETechConnect is free and slow, so the decision is to read public event pages, one every 10 seconds at most, store no member data, and send people to Meetup to RSVP.</p></div></div>
+      <div class="note"><div><h3>A group without a website</h3><p>(NE)NUG, the Nebraska Networking User Group, posts its events through the national (US)NUA site. Its homepage links every chapter's upcoming event, so the pipeline will follow only the Nebraska ones. The next one: Nov 12, 2026, at Smash Park in La Vista.</p></div></div>
+      <div class="note"><div><h3>Rules that said yes, a server that said no</h3><p>UNO's robots.txt explicitly allows filtered calendar feeds, but its server answers those requests with "403 Forbidden". Only the whole-campus feed works, so UNO events go through review instead of being trusted outright.</p></div></div>
+      <div class="note"><div><h3>Groups with no feed</h3><p>AIM, ISACA Omaha, OWASP Omaha, Kernelcon, Nebraska.Code() and INTERFACE don't publish calendar feeds. They go on the known-groups list, so later phases can watch for their events in other ways.</p></div></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Check</th><th>What the fine print said</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td>AI model</td><td>OpenAI's cheapest model with structured output is gpt-5-nano: $0.05 per million tokens in, $0.40 out. A newer model is four times the price.</td><td>gpt-5-nano, a few cents a month</td></tr>
+          <tr><td>Web search</td><td>Brave's terms (Sept 2026) now forbid storing search results and its free credit needs a card. Tavily: 1,000 free searches a month, no card.</td><td>Tavily, and no cached results at all</td></tr>
+          <tr><td>Cloudflare</td><td>Free plan: 100,000 requests and 1,000 storage writes a day. Email handlers get the same 10 ms of CPU.</td><td>Fits; keep the email worker tiny</td></tr>
+          <tr><td>Luma</td><td>No Omaha or Lincoln city page, and only its official interfaces may be used.</td><td>Organizer calendar feeds only, no scraping</td></tr>
+          <tr><td>Eventbrite</td><td>The API terms forbid keeping past events and require a direct link back to Eventbrite.</td><td>Allowed, but Eventbrite-only events are deleted after they happen</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Coming next</p>
+      <h2>Phase 3: the first live site</h2>
+      <p class="muted prose">Everything so far has been foundation. Phase 3 turns it into a real website: read the five starting sources, turn their listings into events, and publish a list of upcoming Nebraska tech events, each linking to the organizer's page.</p>
     </div>
     <div class="cards">
-      <div class="card"><span class="tag">T039&ndash;T045</span><h3>Research checks</h3><p>Reading the terms and limits of Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare before relying on them.</p></div>
+      <div class="card"><span class="tag">Readers</span><h3>Calendar feeds and event pages</h3><p>Connectors for iCal feeds and for event data built into web pages, tested against real and deliberately hostile samples.</p></div>
+      <div class="card"><span class="tag">Pipeline</span><h3>From listings to events</h3><p>Times, places, topics, merging duplicates, and noticing cancellations.</p></div>
+      <div class="card"><span class="tag">Launch</span><h3>A live list of events</h3><p>A fast, accessible site on Cloudflare Pages, updated twice a day by a bot whose changes go through the same checks as mine.</p></div>
     </div>
   </section>
 
@@ -1173,7 +1213,9 @@ Next up: teaching the bot to browse the web safely.
     <div class="share">
       <div class="share-head"><h3>Share Phase 2 so far</h3><button class="btn" type="button" data-copy="post-phase-2">Copy post</button></div>
       <label class="eyebrow" for="post-phase-2">Suggested post (edit freely)</label>
-      <textarea id="post-phase-2">NETechConnect build log, Phase 2: 20 of 27 foundation tasks done, and all the Phase 2 code is written.
+      <textarea id="post-phase-2">NETechConnect build log: Phase 2 is done. All 27 foundation tasks, 531 tests, and a week of reading fine print.
+
+The first five trusted sources are picked: UNL School of Computing, Nebraska Innovation Campus, Drupal Nebraska, the Nebraska Networking User Group and UNO.
 
 What's in so far:
 - one gate for every web request the bot makes: https only, never an internal address, robots.txt respected, hard limits on time and size
@@ -1186,7 +1228,9 @@ What's in so far:
 
 Favorite moment: after all the planned tests passed, I threw junk at my own code. One input took 127 seconds to clean. One fix later: 0.015 s, and it's a permanent test now.
 
-531 tests and counting. Next: reading the fine print of Meetup, Luma, Eventbrite and friends.
+Surprise of the week: Meetup's calendar feeds now come back empty unless you're logged in, even for huge groups. The event pages still carry the data, so that's what NETechConnect will read, slowly and politely.
+
+531 tests and counting.
 
 #BuildInPublic #AppSec #Nebraska #OmahaTech</textarea>
       <span class="count" data-count-for="post-phase-2"></span>

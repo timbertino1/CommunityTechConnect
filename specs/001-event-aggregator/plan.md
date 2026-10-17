@@ -116,7 +116,7 @@ discovery/                          # Python package "netc" (uv project)
 │   ├── fetch/                      # safe_fetch, robots, rate limiting (CODEOWNERS-protected)
 │   ├── connectors/                 # ical.py, rss.py, jsonld.py, eventbrite_org.py, html_rules.py, detect.py
 │   ├── finders/                    # web_search.py, link_graph.py, newsletter.py, news.py, platform.py, gaps.py, config.yaml
-│   ├── search/                     # SearchProvider implementations (brave.py, ...)
+│   ├── search/                     # SearchProvider implementations (tavily.py, ...)
 │   ├── pipeline/                   # normalize.py, sanitize.py, classify.py, ai.py, dedupe.py, trust.py, evaluate.py, review.py, overrides.py
 │   ├── inbox/                      # KV client for suggestions and newsletters
 │   ├── github/                     # App-token PR creation, health issue

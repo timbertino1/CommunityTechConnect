@@ -204,10 +204,12 @@ found, adds that page's host as a candidate source.
 about $5/month in credits (~1,000 queries) at about $5 per 1,000 requests; sources conflict and
 one lists a free 2,000-query tier — [costbench][brave-cost], [apicostcalc][brave-calc]. **VERIFY**.
 
-**Decision**: Use a pluggable `SearchProvider` interface; default to **Brave Search API**,
-whose monthly credit is expected to cover ~175 queries/month (gate V4). Results are cached by
-query for 7 days. If the free credit disappears or Brave's terms forbid storing results, switch
-providers via configuration only.
+**Decision** (revised by gate V4, 2026-10-17): Use a pluggable `SearchProvider` interface;
+default to **Tavily** (1,000 free searches/month, no card); Brave Search API stays as an
+alternative implementation. Search results are used transiently: they are **not cached or
+stored**. Only candidate sites that the evaluator has fetched and checked itself are written to
+`data/candidates.json`. A per-query "last run" date (not the results) keeps the ~175
+queries/month schedule. Switching providers is configuration only.
 
 **Alternatives considered**: Google Programmable Search JSON API, Bing Web Search API, other
 search APIs — availability and terms for new customers to be checked in gate V4; scraping search
@@ -306,7 +308,8 @@ history at no cost; nothing custom to secure.
 2. **AI only for ambiguous cases and extraction**: OpenAI API with **Structured Outputs** (JSON
    schema with enums for categories, location area, and a relevance label + confidence). AI is
    also used to extract event mentions from newsletters and news posts.
-3. **Model**: the cheapest current OpenAI "nano"-tier model, set in config. Secondary sources
+3. **Model**: the cheapest current OpenAI "nano"-tier model, set in config (gate V6:
+   `gpt-5-nano-2025-08-07`). Secondary sources
    list GPT-5 nano at about $0.05/$0.40 per million input/output tokens and GPT-5.4 nano at about
    $0.20/$1.25 — [anotherwrapper][oa-nano], [morphllm][oa-pricing]. **VERIFY** (gate V6).
 4. **Cost controls**: results cached by content hash (an unchanged event is never re-sent);
@@ -359,7 +362,7 @@ kept so changes and cancellations can be tracked per source.
 branch protection on `main` (PR required, CI required, no force-push, CODEOWNERS review for
 `/.github/`, `/workers/`, `/discovery/src/netc/fetch/`); default `GITHUB_TOKEN` read-only, with
 per-job `permissions:`; "require approval for all outside collaborators" for fork PR workflows;
-no `pull_request_target`; all actions pinned to full commit SHAs; secrets (OpenAI key, Brave key,
+no `pull_request_target`; all actions pinned to full commit SHAs; secrets (OpenAI key, search API key,
 Cloudflare KV token, GitHub App key) stored in a protected **`discovery` Environment** limited to
 `main` and the scheduled workflows; `SECURITY.md`; MIT license (owner may choose otherwise).
 Pages security headers via `_headers`: strict CSP (`default-src 'self'; script-src 'self';
@@ -408,6 +411,177 @@ active page, a usable feed or structured data, and terms before becoming a trust
 | V6 | Current OpenAI nano model name, price, Structured Outputs support | AI classifier |
 | V7 | Each seed source in R14: active, feed/structured data present, terms allow | Seeding trusted sources |
 
+### Gate V7 result (checked 2026-10-17)
+
+**Method.** Each lead's current page was fetched with the project's own `SafeHttp` (so robots.txt,
+crawl delays, and SSRF rules were applied exactly as in production), then scanned for
+`<link rel="alternate">` calendar/RSS feeds, `.ics`/`webcal:` links, and JSON-LD `Event` data. Every
+feed found was fetched and its contents summarized to confirm it is live and current. Terms of use
+were read where a page linked them.
+
+**Verified seeds** (feed live with upcoming events, robots.txt allows the feed path, nothing in the
+terms forbids automated reading of public feeds):
+
+| Seed | Area | Connector | Feed | Robots | Notes |
+|---|---|---|---|---|---|
+| UNL School of Computing | lincoln | `ical` | `https://events.unl.edu/cse/upcoming/?format=ics&limit=-1` | allowed, crawl-delay 5 | 61 upcoming entries (e.g. "Industry in Residence: Nelnet", "School of Computing Showcase"); also carries academic-calendar items ("Fall Semester Break") that the classifier must reject. Feeds offered under "Subscribe to this calendar". |
+| Nebraska Innovation Campus (UNL) | lincoln | `ical` | `https://events.unl.edu/nic/upcoming/?format=ics&limit=-1` | allowed, crawl-delay 5 | 247 entries, mixed (maker showcase, Part 107 drone training, but also social hours): relies on the classifier. |
+| Drupal Nebraska | omaha | `ical` | `https://groups.drupal.org/ical/4145` | allowed, **crawl-delay 10** (set `rate_limit_seconds: 10`) | Next meeting 2026-10-21 (quarterly US Central hybrid). Drupal.org terms forbid only overloading/disrupting the site; content is **CC BY-SA 2.0**, so attribute (we link the original) and keep stored summaries short. |
+| UNO events (whole campus) | omaha | `ical` | `https://events.unomaha.edu/calendar/1.ics` | robots **explicitly allows** `/calendar/ics`, `/calendar/xml`; crawl-delay 1 | Localist. 585 entries, 780 KB, mostly non-tech; topic-filtered feeds (`/search/events.ics?event_types[]=...`, allowed by robots) return **403** from the server, so only the full feed is usable. Usable only with classifier filtering; consider `probationary` instead of `trusted`. |
+
+**Not usable as feed seeds now** (no feed or structured data found, or not reachable):
+
+| Lead | What was found | Use instead |
+|---|---|---|
+| AIM Institute (HDC, Infotec) | `aiminstitute.org/events/` is 404; homepage has no feed or JSON-LD. HDC 2025 was Sept 30-Oct 1 in Council Bluffs; no 2026 dates found. | Known group; revisit with `html_rules` or JSON-LD on event pages |
+| INTERFACE Omaha | 2026-11-05, CHI Health Center (F2F Events); found only on third-party listings. | Known group / annual event |
+| ISACA Omaha | `engage.isaca.org/omahachapter/events/calendar` (Higher Logic): no feed, no JSON-LD. Meets 2nd Tuesday at Scott Conference Center. | Known group; `html_rules` candidate |
+| OWASP Omaha | `owasp.org/www-chapter-omaha/` redirects to `owasp.org/chapters/omaha`; no feed. Old wiki archived. A search result reported OWASP retiring Meetup for chapters on 2026-01-31 (not verified). | Known group |
+| NEbraskaCERT, InfraGard Nebraska | No feed; no public 2026 event listings found. | Known groups (INTERFACE sponsors) |
+| BSides Omaha, WiCyS Nebraska | No current Omaha-specific pages found. | Gap-detection list |
+| Kernelcon (Omaha) | `kernelcon.org` shows "Kernelcon 2027"; no feed or JSON-LD. | Known group / annual event |
+| Nebraska.Code() (Lincoln) | `nebraskacode.amegala.com` (2027 edition); no feed. 2026 ran July 22-24. | Known group / annual event |
+| AI Tinkerers Lincoln/Omaha | Own site, robots allow, JSON-LD `Event` present, but it lists only the Jan 2025 inaugural meetup; locations shared with approved attendees only. Activity unconfirmed. | `jsonld` candidate (probationary) once activity is confirmed |
+| Women in Technology of the Heartland | Events found only via Meetup/SPN listings (2025). | Depends on gate V1 |
+| Omaha Maker Group, Bellevue U. cyber center | WordPress blog RSS only (news posts, not events). | News finder |
+| Silicon Prairie News | RSS `siliconprairienews.com/feed/` live, but the editor stepped down 2026-05-27; events guide may be unmaintained. | News finder, not a seed |
+| Chambers (Lincoln, Greater Omaha; Startup Collaborative now redirects to the chamber) | No event feeds. | Not seeds |
+| Tech Nebraska | `technebraska.com/robots.txt` timed out, so the host was skipped (as `SafeHttp` requires). | Retry later |
+| dev.events (aggregator) | RSS + per-event iCal, but mostly worldwide online events, and it is an aggregator. | Not a seed (link organizers, not aggregators) |
+
+**Decision.** Four sources pass V7. That is below the 5-10 target because most Omaha/Lincoln
+community groups publish on Meetup or Luma, which gates V1 and V3 decide. Final seed selection
+for T060: the four above (UNO as `probationary`), plus any Meetup/Luma groups once V1/V3 allow.
+
+**Added 2026-10-17 at the owner's request: Nebraska Networking User Group, (NE)NUG.** (NE)NUG has
+no site of its own; its events are hosted by the (US) Networking User Association at
+`usnua.com` (HubSpot). robots.txt allows everything except HubSpot preview/preference paths; no
+terms of use are published. The homepage links every upcoming affiliated-group event as
+`/live/<state>nug-<city>-<season>-event-<year>`; Nebraska events start with `/live/nenug-`. Each
+event page has complete `schema.org/Event` JSON-LD (verified: "(NE)NUG Omaha Fall Event 2026",
+2026-11-12 5-9 PM, Smash Park, La Vista). The sitemap does not list event pages and the groups page
+is built by JavaScript, so the homepage is the listing to follow. **Seed:** `src_nenug`, area
+`omaha`, connector `jsonld`, `url: https://www.usnua.com/`, following only links that contain
+`/live/nenug-`. This needs one optional source field for "follow links matching a pattern" in the
+`jsonld` connector (T048/T057); usnua.com is the organizer's own platform, so it is a valid
+`original_url`. With it, V7 has **five** seeds.
+
+### Gate V1 result: Meetup (checked 2026-10-17)
+
+| Check | Finding |
+|---|---|
+| robots.txt (`www.meetup.com`) | Allows group pages, `/events/` lists, event pages, and `/events/ical/`; disallows the old RSS/Atom/XML feeds, `/api/` and `/meetup_api/`, and search filter parameters. No crawl-delay. |
+| Terms of Service (last updated 2026-10-01), section 5.4 | Users must not "(a) extract data from the Platform for a commercial purpose not permitted by these Terms, whether through use of an automated system or software ... or (b) engage in any activity that ... imposes undue burdens on the Platform". Personal data from the Platform may be used only to administer and participate in Meetup groups and events. |
+| API | GraphQL API requires an active **Meetup Pro** subscription and Meetup's approval ([help center][meetup-api-access]). Not an option for a ~$0 project. |
+| iCal, logged out | `/events/ical/` answers 200 `text/calendar` but contains **no events**, even for very active groups (tested Omaha Azure User Group, Omaha Red Hat User Group, SF Python, NYC Python). Not usable. |
+| Event pages, logged out | Each event page has complete `schema.org/Event` JSON-LD (name, start/end with offset, `eventStatus`, `eventAttendanceMode`, location, description). The group `/events/` page links its event pages. |
+
+**Reading.** NETechConnect is non-commercial (free, no ads, no accounts), reads public pages
+slowly, follows robots.txt, stores no personal data (titles, times, places and the group's name
+only), and sends visitors to the Meetup page to RSVP. That use does not appear to fall under 5.4(a)
+or (b). This is an interpretation of a contract, not legal advice; the owner decides.
+
+**Recommended decision:** *JSON-LD on event pages allowed*, limited to public groups, at most one
+page per 10 seconds on meetup.com, a small per-run budget, no member or attendee data, and stop
+immediately if Meetup objects or its terms change (set the sources to `blocked_by_terms`).
+
+**Decision (owner, 2026-10-17): JSON-LD on event pages allowed**, with the limits above. T102 is unblocked.
+
+### Gate V6 result: OpenAI model (checked 2026-10-17)
+
+From OpenAI's pricing page and model pages ([pricing][oa-pricing-official],
+[gpt-5-nano][oa-gpt5nano]): the cheapest text model is **`gpt-5-nano`**, snapshot
+**`gpt-5-nano-2025-08-07`**, Standard tier **$0.05 input / $0.005 cached input / $0.40 output per
+1M tokens**; supports `structured_outputs` and function calling; 400K context, 128K max output;
+no deprecation notice. No model is cheaper for text input. The model page recommends the newer
+GPT-5.6 Luna (`gpt-5.6-luna`, also Structured Outputs) for new cost-sensitive work, but it costs
+$0.20 / $0.02 / $1.20, four times more for input. **Decision: `gpt-5-nano-2025-08-07`** in config.
+Rough cost: 300 undecided items/month at ~1,500 input and ~200 output tokens is about $0.05/month,
+far under the ~$1 AI budget. T081-T083 are unblocked.
+
+### Gate V4 result: web search API (checked 2026-10-17)
+
+| | Brave Search API | Tavily |
+|---|---|---|
+| Free allowance | $5 credit/month, about 1,000 searches at $5 per 1,000 ([brave.com][brave-api]); the old free tier ended in 2026 | 1,000 credits/month; basic search = 1 credit ([docs][tavily-credits]) |
+| Card required | Yes ("to prevent abuse") | No |
+| Rate limit | 50 queries/second (Search plan) | Not stated |
+| Storing results | **Forbidden**: may not "store, cache, or create a database of Search Results, in whole or in part", only "transient storage required for operation" ([terms, updated 2026-09-01][brave-terms]) | No clause forbids it; use "solely for Customer's internal business purposes"; "reasonable use of Tavily APIs" is not prohibited data gathering ([terms, updated 2026-05-04][tavily-terms]) |
+| Other | Optional "POWERED BY BRAVE" attribution | Tavily may retain and use queries and outputs |
+
+Google's Custom Search JSON API is closed to new sign-ups and ends 2027-01-01; Bing's search API
+was retired in 2025.
+
+**Decision (owner, 2026-10-17): Tavily** as the default `SearchProvider`; Brave kept as an
+alternative implementation. Either way the design no longer caches results: they are used
+transiently, and only candidate sites the evaluator fetched and checked itself are stored. Our
+queries are generic ("Omaha tech meetup") and contain no personal data, so Tavily's retention of
+queries is acceptable. T085, T086, T089, T091 are unblocked (T078/T085 updated).
+
+### Gate V5 result: Cloudflare free limits (checked 2026-10-17)
+
+| Limit (Free plan) | Value | Source |
+|---|---|---|
+| Workers requests | 100,000/day (resets 00:00 UTC; Error 1027 above it) | [Workers limits][cf-workers-limits], updated 2026-10-12 |
+| Workers CPU | 10 ms per HTTP request; memory 128 MB; 50 subrequests | same |
+| KV reads / writes | 100,000 reads/day; **1,000 writes/day** to different keys; 1 write/second to the same key | [KV limits][cf-kv-limits], updated 2026-10-08 |
+| KV storage / sizes | 1 GB per account; value up to 25 MiB; key up to 512 bytes | same |
+| Email Routing | Inbound message up to 25 MiB; 200 rules per domain; 200 destination addresses | [Email Routing limits][cf-email-limits], updated 2026-09-25 |
+| Email Workers | Email handlers "count toward the standard Workers CPU and memory limits"; on Free, "complex handlers may exceed these limits and fail to process a message" (`EXCEEDED_CPU`) | same |
+
+**Result:** the free plan fits. Suggestions and newsletters together are far below 1,000 KV
+writes/day; the daily workflow's reads are far below 100,000. **Design consequence:** the inbox
+Worker must stay minimal (check the sender, store the raw message, forward to the owner) and do
+**no MIME parsing**; parsing happens later in Python. Hashing a very large message for the KV key
+could approach the 10 ms limit, so key by a random id plus the message's own `Message-ID` instead
+of a full-body SHA-256 if tests show CPU trouble. T075 and T096-T100 are unblocked.
+
+### Gate V3 result: Luma (checked 2026-10-17)
+
+- **No Omaha or Lincoln Discover page:** `luma.com/omaha` redirects to the generic Discover page;
+  `luma.com/lincoln` is an unrelated individual event.
+- **Feeds:** Luma offers iCal syncing for a personal feed, a **calendar feed** ("all published
+  events on that calendar"), and a **city feed** ("all upcoming approved events in that city")
+  ([help][luma-ical]).
+- **robots.txt** only restricts `Googlebot`.
+- **Terms** ([luma.com/terms][luma-terms]): "you must not access the Service by any means other
+  than our publicly supported interfaces", and site content may not be reproduced or
+  republished.
+
+**Result:** collect from Luma **only through a specific organizer's published calendar iCal feed**
+(a publicly supported interface), never by scraping Luma pages. Store only event facts (title,
+time, place, organizer) and link to the Luma event page. Verify that the calendar feed URL works
+without login when the first Nebraska Luma calendar is added (T101).
+
+### Gate V2 result: Eventbrite (checked 2026-10-17)
+
+[API Terms of Use][eb-api-terms], last updated 2025-05-30:
+
+- **Allowed, non-commercially:** a limited, revocable license to use the APIs for an
+  application; no "direct commercial or monetary gain".
+- **3.1 Storage:** "you may store Site Content relating to future events, but you may not store
+  any Site Content relating to events that have occurred in the past" (without the user's
+  permission).
+- **3.2 Required information:** show the event title and "a direct link to the Eventbrite webpage
+  associated with that event"; the link "may not include a 'nofollow' attribute".
+- **3.3 Branding:** no Eventbrite logos or names as our own; make clear the site is not Eventbrite's.
+- **3.5 Rate limit:** 1,000 calls per hour per OAuth token.
+- **2.2 Termination:** on termination, delete all stored Eventbrite content within 30 days.
+
+**Technical access:** public event search was removed in 2019-2020; the documented replacement is
+`GET /v3/organizations/{organization_id}/events/`. The docs (JavaScript-rendered) did not confirm
+whether a personal token can list **another** organization's public events. **Open item:** test
+with a real private token before building T103.
+
+**Result:** Eventbrite organizations may be collected through the API, with these rules built in:
+(1) when an event's only listings come from Eventbrite and it has ended, **delete it** instead of
+keeping it for the past-events archive (US5); (2) whenever an event has an Eventbrite listing,
+show a direct, crawlable link to that Eventbrite page (no `nofollow`), even if the main link goes
+to the organizer's own page; (3) stay under 1,000 calls/hour. T103-T104 must include these.
+
+**Engineering note.** selectolax 1.0 removed the `selectolax.parser` (Modest) backend; HTML code must
+use `selectolax.lexbor.LexborHTMLParser`.
+
 ---
 
 [gh-billing]: https://docs.github.com/en/billing/concepts/product-billing/github-actions
@@ -434,3 +608,14 @@ active page, a usable feed or structured data, and terms before becoming a trust
 [infosec]: https://infosec-conferences.com/us-state/nebraska
 [sfdg]: https://trailblazercommunitygroups.com/salesforce-developer-group-omaha-united-states
 [drupal]: https://groups.drupal.org/nebraska
+[meetup-api-access]: https://help.meetup.com/hc/en-us/articles/41453576628749-How-can-I-get-access-to-Meetup-s-API
+[meetup-tos]: https://help.meetup.com/hc/en-us/articles/360027447252-Terms-of-Service
+[oa-pricing-official]: https://developers.openai.com/api/docs/pricing
+[oa-gpt5nano]: https://developers.openai.com/api/docs/models/gpt-5-nano
+[brave-api]: https://brave.com/search/api/
+[brave-terms]: https://api-dashboard.search.brave.com/terms-of-service
+[tavily-credits]: https://docs.tavily.com/documentation/api-credits
+[tavily-terms]: https://tavily.com/terms
+[cf-kv-limits]: https://developers.cloudflare.com/kv/platform/limits/
+[luma-terms]: https://luma.com/terms
+[eb-api-terms]: https://support.eventbrite.com/hc/en-us/articles/34860283116434-API-Terms-of-Use
