@@ -41,7 +41,7 @@ python -m http.server -d ../dist 8000
 | 3 | US3 calendar | Open `/calendar/<YYYY>/<MM>/` and a week page | Events on correct CT days; a 2-day fixture spans both days; prev/next links work; keyboard-only navigation works |
 | 4 | US4 filters | Open `/?area=lincoln&cat=security,ai-ml`, switch to calendar | Only matching events; filters kept in URL across views; reload restores the same view |
 | 5 | US5 past | Advance clock (`--now 2027-01-01`) and rebuild | Ended events move to `/past/`, most recent first; filters work |
-| 6 | US6 review | Offline `discover-sources --emit-review-pr-body` | Checklist body matches [contracts/workflows-and-review.md](./contracts/workflows-and-review.md); applying a fixture decision set approves ticked, rejects unticked, promotes a source at 3 approvals/0 rejections, pauses a mostly-rejected source |
+| 6 | US6 review | Offline `discover-sources --emit-review-pr-body` | Checklist body matches [contracts/workflows-and-review.md](./contracts/workflows-and-review.md); applying a fixture decision set approves items with "approve" ticked, rejects items with "reject" ticked, leaves undecided items pending, promotes a source at 3 approvals/0 rejections, pauses a mostly-rejected source; an override in `data/overrides.yaml` hides an event and survives a re-run |
 | 7 | US7 suggest | `cd workers && npx wrangler dev`, POST to `/suggest` | Valid HTTPS URL → `202`; `http://`, IP literal, `localhost`, `.internal` → `400`; 6th request in an hour → `429`; missing Turnstile → `400` |
 
 ## Security validation (Constitution I)

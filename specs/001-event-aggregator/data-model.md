@@ -15,6 +15,7 @@ data/
 ├── categories.yaml              # Category list (admin-extendable, FR-028)
 ├── areas.yaml                   # Location areas + Nebraska gazetteer (cities, ZIPs, venues)
 ├── known_groups.yaml            # Known groups/organizations, with or without a working source
+├── overrides.yaml               # Admin corrections (visibility, categories, area) applied last
 ├── organizers.yaml              # Organizer records
 ├── sources/<source_id>.yaml     # One file per Event Source (human-editable)
 ├── events/<YYYY>/<YYYY-MM>.json # Events grouped by start month (machine-written)
@@ -57,6 +58,7 @@ One event occurrence, possibly merged from several Source Listings.
 | `series_key` | string \| null | Groups recurring/annual occurrences (R7) |
 | `first_seen` | datetime (UTC) | |
 | `last_verified` | datetime (UTC) | Updated whenever any listing is re-read successfully (FR-030) |
+| `original_unavailable` | bool | Default `false`; set by the monthly link check when the original page returns 404/410 |
 
 **Derived (not stored)**: `is_upcoming` = now < (`end` or `start`) (FR-035); display times in
 `America/Chicago` (FR-027). An event is publicly visible only when `review_state = published`
@@ -130,7 +132,6 @@ status:  active ──rejected > approved (≥ 3 reviewed)──▶ paused   (au
 | `result` | enum | `pending` \| `added` \| `rejected` \| `needs_review` \| `blocked_by_terms` |
 | `reason` | string | Short reason for the result |
 | `last_evaluated` | datetime | Re-evaluation not before `last_evaluated + 30 days` when rejected (FR-015) |
-| `note` | string \| null | Visitor note for suggestions only: ≤ 280 chars, e-mail/phone patterns removed |
 
 ### Event Mention
 
@@ -142,7 +143,7 @@ directly (FR-014).
 | `id` | string | Hash of channel + title + date |
 | `channel` | enum | `newsletter` \| `news` \| `web_search` |
 | `title`, `date_hint`, `place_hint`, `organizer_hint` | string | Extracted (inferred) |
-| `links` | list[string] | Candidate URLs found with the mention |
+| `links` | list[string] | Candidate URLs found with the mention; query strings and fragments removed; unsubscribe, preference, "view in browser", and tracking/redirect links dropped |
 | `resolution` | enum | `unresolved` \| `resolved` \| `held` \| `discarded` |
 | `event_id` | string \| null | Set when resolved to an Event |
 | `attempts` | int | Resolution attempts; discarded after 4 weekly attempts or after the date passes |
@@ -158,6 +159,27 @@ directly (FR-014).
 | `created` | datetime | |
 | `decision` | enum | `pending` \| `approved` \| `rejected` |
 | `decided_in_pr` | int \| null | PR number (audit trail, FR-046) |
+
+### Candidate Source privacy note
+
+Visitor suggestion notes are **never** stored in `data/` or shown in PRs or issues. They stay
+only in the private KV inbox (30-day TTL) and are passed in memory to evaluation (FR-020).
+
+### Override
+
+Admin corrections that must survive pipeline re-runs (FR-019, FR-045). Stored in
+`data/overrides.yaml`, applied after every pipeline run and before site build.
+
+| Field | Type | Rules |
+|---|---|---|
+| `event_id` | string | Must match an existing Event `id` (validation fails otherwise) |
+| `visibility` | enum \| absent | `shown` \| `hidden` |
+| `categories` | list[enum] \| absent | ≥ 1, values from `categories.yaml` |
+| `area` | enum \| absent | `omaha` \| `lincoln` \| `other_ne` \| `online` |
+| `reason` | string | Short admin note (public; no personal data) |
+
+Overrides MUST NOT change `original_url`, `review_state`, or trust, and MUST NOT publish an event
+from a probationary source. Overridden fields are removed from the event's `inferred` list.
 
 ### Organizer
 

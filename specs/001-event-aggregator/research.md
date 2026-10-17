@@ -252,6 +252,10 @@ forwarding to verified destination addresses is free — [Email Routing limits][
   API with a token scoped to that one KV namespace.
 - In Python, emails are converted to plain text, links extracted, and the AI extracts event
   mentions (R10). Each email is processed once (cached by message hash).
+- Before any link is stored (all of it public), query strings and fragments are removed and
+  unsubscribe, preference, "view in browser", and tracking/redirect links are dropped (matched
+  against the `List-Unsubscribe` header and known link patterns), so nothing in the repo can be
+  used to manage the inbox's subscriptions. Only the message hash is stored, never content.
 
 **Alternatives considered**: a Gmail account with IMAP (requires storing a mailbox credential and
 login; rejected); paid newsletter-to-RSS services (cost).
@@ -268,19 +272,21 @@ Email Workers parse within free CPU limits when storing raw messages only.
 - **Daily data PR**: the `discover-events` workflow commits updated data on a bot branch and
   opens a PR using a **GitHub App** installation token (PRs created with the default
   `GITHUB_TOKEN` do not trigger CI). Changes that need no review (trusted sources, updates,
-  cancellations) are in this PR, which is set to **auto-merge** once CI passes.
-- **Weekly review PR**: held events, new probationary sources, and suggestions that need review
-  go into a separate PR whose description is a **checklist** (one checkbox per item, with the
-  reason it is held, the source, and a link). The owner ticks items to approve; at merge, an
-  `apply-review` workflow (triggered on PR close, running trusted code from `main`) approves
-  ticked items, rejects unticked ones, and updates source approve/reject counts (FR-018
-  promotion/pausing). Closing without merging leaves items pending.
+  cancellations) are in this PR, which is set to **auto-merge** once CI passes — permitted by the
+  constitution v1.1.0 exception for bot PRs that change only `data/`.
+- **Review PR**: held events, new probationary sources, and suggestions that need review go
+  into a separate PR (branch `review/open`, updated at most daily while items are pending) whose
+  description has an **approve** and a **reject** checkbox per item, with the reason it is held,
+  the source, and a link. At merge, an `apply-review` workflow (triggered on `push` to `main`, so
+  it can use the `main`-only Environment) applies ticked decisions, leaves undecided items
+  pending, and updates source approve/reject counts (FR-018 promotion/pausing).
 - **Audit log**: git history plus PR records (who ticked, who merged) satisfies FR-046.
 - **MFA**: required on the owner's GitHub account; repository admin is the only role allowed to
   merge review PRs (branch protection + CODEOWNERS).
 - **Summary (FR-044)**: GitHub notifications for the review PR; a single pinned "Discovery
-  health" issue is updated by the weekly run with failing sources, quiet groups, AI spend, and
-  coverage stats, and the owner is mentioned only when something needs attention.
+  health" issue whose body shows current status (all sources, failing sources, quiet groups, AI
+  spend, coverage). When something needs attention, the workflow posts a **new comment**
+  mentioning the owner (issue edits do not send notifications), at most once per day.
 - **Manual source edits (FR-042)**: sources are YAML files under `data/sources/`; adding, pausing,
   or removing a source is a normal PR.
 

@@ -41,15 +41,28 @@ events are shown and a notice explains filters need JavaScript.
 | `/data/meta.json` | Categories, areas, `generated_at` |
 
 Public event fields: `id, slug, title, start, end, all_day, area, location, organizer,
-summary, categories, original_url, status, last_verified, inferred`. Internal fields
+summary, categories, original_url, status, last_verified, inferred, original_unavailable`. Internal fields
 (`listings`, `review_state`, hashes) are not published in these files.
 
-## Security headers (all paths, via Cloudflare Pages `_headers`)
+## Security headers (via Cloudflare Pages `_headers`)
 
-`Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com;
-frame-src https://challenges.cloudflare.com; connect-src 'self' https://<worker-host>;
-img-src 'self' data:; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'
-https://<worker-host>; frame-ancestors 'none'` (Turnstile hosts only matter on `/suggest/`),
+All paths:
+
+`Content-Security-Policy: default-src 'self'; script-src 'self'; connect-src 'self';
+img-src 'self' data:; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self';
+frame-ancestors 'none'`,
 `Strict-Transport-Security: max-age=63072000; includeSubDomains`,
 `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`,
 `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
+
+`/suggest/*` only (overrides the CSP above):
+
+`Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com;
+frame-src https://challenges.cloudflare.com; connect-src 'self' https://<worker-host>;
+img-src 'self' data:; style-src 'self'; object-src 'none'; base-uri 'none';
+form-action https://<worker-host>; frame-ancestors 'none'`
+
+## Privacy
+
+Public pages set no cookies, ask for no personal information, and make no requests to other
+hosts. The only exception is Turnstile on `/suggest/` (FR-039).

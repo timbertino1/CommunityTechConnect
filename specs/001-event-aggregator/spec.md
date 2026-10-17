@@ -333,6 +333,8 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   trusted sources, and to demote a trusted source to probationary.
 - **FR-020**: Visitors MUST be able to suggest a new event source by submitting a public web
   address and an optional note, without creating an account or providing personal information.
+  The optional note is used only for automatic evaluation and is never published or stored in
+  the public repository.
 - **FR-021**: Suggested sources MUST be evaluated automatically like any other candidate; those
   passing evaluation become probationary sources, and those that cannot be evaluated
   automatically go to the administrator review queue.
@@ -449,8 +451,8 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
 - **SC-002**: In a quarterly coverage check, at least 85% of Nebraska community tech events in an
   independently compiled sample (found by hand from sources not given to the system) already
   appear on NETechConnect, and at least 95% for Omaha and Lincoln groups the system monitors.
-- **SC-003**: New or changed events on monitored sources are reflected on NETechConnect within 24
-  hours.
+- **SC-003**: New or changed events from trusted sources are reflected on NETechConnect within
+  24 hours; events held for review appear in the review queue within 24 hours.
 - **SC-004**: Fewer than 2% of displayed events are duplicates, and fewer than 5% are
   misclassified or out of scope, measured by monthly spot check.
 - **SC-005**: 100% of displayed events include a working link to their original event page at

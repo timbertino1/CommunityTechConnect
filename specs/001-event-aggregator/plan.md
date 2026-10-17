@@ -17,7 +17,7 @@ link-following, a newsletter inbox, local news RSS, platform calendars and gap d
 Events are classified with rules first and an OpenAI nano-tier model only for unclear cases.
 The jobs store everything as versioned data files and build a static site deployed to
 Cloudflare Pages. Two tiny Cloudflare Workers accept source suggestions and newsletter
-email. Administration happens in GitHub: a daily data PR auto-merges, and a weekly review PR
+email. Administration happens in GitHub: a daily data PR auto-merges, and a review PR (updated at most daily when items are held)
 is a checklist the owner ticks. GitHub 2FA provides MFA, and git history is the audit log.
 See [research.md](./research.md).
 
@@ -65,7 +65,7 @@ search queries/week; ~20–40 newsletters/month; low thousands of visitors/month
 | **VI. Test-First Quality** | Tests before code; fixture tests incl. malicious payloads; security-control tests; discovery→storage→views integration tests; CI gates | ✅ Planned | ✅ Test layout below; security suite in quickstart; CI required for merge |
 | **VII. Accessible, Simple Presentation** | List + calendar; filters (date, area, past/upcoming); WCAG 2.2 AA; mobile; links out; YAGNI | ✅ Planned | ✅ Static semantic calendar tables instead of a JS widget (R3); axe-core checks; no server, DB, or framework |
 | **Security Requirements** | Threat analysis for new sources/inputs; admin MFA + audit log; public input rate limited and moderated; backups tested | ✅ Planned | ✅ Threat summary below; GitHub 2FA + PR history; Turnstile + rate limits + review; git is the backup (restore = checkout; tested in quickstart) |
-| **Workflow & Quality Gates** | PR-only to `main`; security review for auth/input/fetch/secrets; CI gates | ✅ Planned | ✅ Branch protection + CODEOWNERS on sensitive paths; bot data PRs pass the same CI |
+| **Workflow & Quality Gates** | PR-only to `main`; human review except bot data-only PRs (v1.1.0); security review for auth/input/fetch/secrets; CI gates | ✅ Planned | ✅ Branch ruleset requires PRs + CI; the owner reviews and merges every code PR; bot PRs auto-merge only when CI confirms they change nothing outside `data/` |
 
 **Result**: PASS — no violations, Complexity Tracking not required.
 
@@ -77,7 +77,8 @@ search queries/week; ~20–40 newsletters/month; low thousands of visitors/month
 | Outbound fetches from runners | SSRF to cloud metadata/internal hosts | `safe_fetch` IP vetting on every hop, HTTPS/443 only, size/time limits |
 | AI calls | Prompt injection changing decisions; cost blow-up | Delimited data, no tools, schema output, AI cannot publish probationary items or change trust; caching + hard monthly budget |
 | Suggestion endpoint | Spam, abuse, SSRF via submitted URL, stored PII | Turnstile, Origin check, IP-hash rate limit, syntactic URL validation, Worker never fetches, note scrubbed and limited, public-data notice |
-| Newsletter inbox | Junk/hostile mail, oversized mail | Sender allow-list, 1 MiB cap, raw-only storage, parsing in Python with same untrusted-data rules |
+| Newsletter inbox | Junk/hostile mail, oversized mail; public links that can manage the subscription | Sender allow-list, 1 MiB cap, raw-only storage, parsing in Python with same untrusted-data rules; query strings and unsubscribe/tracking links stripped before storage |
+| Suggestion notes | Personal data published in the public repo | Notes stay in private KV (30-day TTL) and are used only in memory; never written to `data/`, PRs, or issues |
 | GitHub repo & Actions (public) | Malicious fork PRs, compromised actions, secret leaks | No `pull_request_target`, approval for outside contributors, SHA-pinned actions, read-only default token, protected Environment, secret scanning + push protection |
 | Admin actions | Account takeover; unauthorized approvals | Required 2FA, admin-only merge on review branches, `apply-review` verifies author/merger, full history |
 | Deployed site | Defacement via bad data | Data PRs gated by schema + CI; deploy only from `main` |
@@ -114,9 +115,9 @@ discovery/                          # Python package "netc" (uv project)
 │   ├── storage.py                  # deterministic read/write of data/
 │   ├── fetch/                      # safe_fetch, robots, rate limiting (CODEOWNERS-protected)
 │   ├── connectors/                 # ical.py, rss.py, jsonld.py, eventbrite_org.py, html_rules.py, detect.py
-│   ├── finders/                    # web_search.py, link_graph.py, newsletter.py, news.py, platform.py, gaps.py
+│   ├── finders/                    # web_search.py, link_graph.py, newsletter.py, news.py, platform.py, gaps.py, config.yaml
 │   ├── search/                     # SearchProvider implementations (brave.py, ...)
-│   ├── pipeline/                   # normalize.py, sanitize.py, classify.py, ai.py, dedupe.py, trust.py, evaluate.py, review.py
+│   ├── pipeline/                   # normalize.py, sanitize.py, classify.py, ai.py, dedupe.py, trust.py, evaluate.py, review.py, overrides.py
 │   ├── inbox/                      # KV client for suggestions and newsletters
 │   ├── github/                     # App-token PR creation, health issue
 │   └── site/                       # build.py, templates/ (Jinja), calendar.py
@@ -140,10 +141,16 @@ workers/                            # Cloudflare Workers (TypeScript)
 ├── wrangler.toml
 └── test/
 
-data/                               # versioned data (see data-model.md)
-docs/coverage/                      # quarterly coverage checks (SC-002)
+data/                               # versioned data (see data-model.md), incl. overrides.yaml
+docs/
+├── admin-guide.md                  # how to review, hide/correct events, manage sources
+├── operations.md                   # runbook, secrets inventory, restore steps
+├── operations/                     # cost.md, metrics.md
+├── checkpoints/                    # per-story validation records
+├── reviews/                        # accessibility, performance, security reviews
+└── coverage/                       # quarterly coverage checks (SC-002)
 .github/
-├── workflows/                      # ci, discover-events, discover-sources, apply-review, deploy
+├── workflows/                      # ci, discover-events, discover-sources, apply-review, deploy, deploy-workers
 ├── CODEOWNERS
 └── dependabot.yml
 SECURITY.md

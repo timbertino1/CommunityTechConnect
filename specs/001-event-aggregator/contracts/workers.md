@@ -11,7 +11,7 @@ and deletes items from KV using a token scoped to those namespaces.
 | Field | Rules |
 |---|---|
 | `url` | Required. ≤ 2,048 chars. Must parse as `https://` URL with a public-looking hostname: no IP literals, no `localhost`, no single-label hosts, no `.local`/`.internal`/`.lan`, no user-info, port absent or 443 |
-| `note` | Optional. ≤ 280 chars; stored after removing e-mail addresses and phone numbers |
+| `note` | Optional. ≤ 280 chars; e-mail addresses and phone numbers removed. **Private**: kept only in KV and never copied to the repository, PRs, or issues |
 | `cf-turnstile-response` | Required. Verified server-side with Turnstile before anything else |
 
 **Behavior**:
@@ -24,8 +24,9 @@ and deletes items from KV using a token scoped to those namespaces.
 5. Store `{url, note, received_at}` in KV `SUGGESTIONS` under a random key, TTL 30 days.
 6. Respond `202` with `{"status":"received"}`.
 
-**Responses** never echo submitted content. CORS allows only the site origin. The form states
-that suggestions are public and should not include personal information.
+**Responses** never echo submitted content. CORS allows only the site origin. The form states:
+"The address you suggest may become public. Notes are private, used only to evaluate your
+suggestion, and deleted after 30 days. Please don't include personal information."
 
 ## 2. Newsletter inbox — Email Worker on `events@<domain>`
 
