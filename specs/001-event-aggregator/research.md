@@ -408,6 +408,51 @@ active page, a usable feed or structured data, and terms before becoming a trust
 | V6 | Current OpenAI nano model name, price, Structured Outputs support | AI classifier |
 | V7 | Each seed source in R14: active, feed/structured data present, terms allow | Seeding trusted sources |
 
+### Gate V7 result (checked 2026-10-17)
+
+**Method.** Each lead's current page was fetched with the project's own `SafeHttp` (so robots.txt,
+crawl delays, and SSRF rules were applied exactly as in production), then scanned for
+`<link rel="alternate">` calendar/RSS feeds, `.ics`/`webcal:` links, and JSON-LD `Event` data. Every
+feed found was fetched and its contents summarized to confirm it is live and current. Terms of use
+were read where a page linked them.
+
+**Verified seeds** (feed live with upcoming events, robots.txt allows the feed path, nothing in the
+terms forbids automated reading of public feeds):
+
+| Seed | Area | Connector | Feed | Robots | Notes |
+|---|---|---|---|---|---|
+| UNL School of Computing | lincoln | `ical` | `https://events.unl.edu/cse/upcoming/?format=ics&limit=-1` | allowed, crawl-delay 5 | 61 upcoming entries (e.g. "Industry in Residence: Nelnet", "School of Computing Showcase"); also carries academic-calendar items ("Fall Semester Break") that the classifier must reject. Feeds offered under "Subscribe to this calendar". |
+| Nebraska Innovation Campus (UNL) | lincoln | `ical` | `https://events.unl.edu/nic/upcoming/?format=ics&limit=-1` | allowed, crawl-delay 5 | 247 entries, mixed (maker showcase, Part 107 drone training, but also social hours): relies on the classifier. |
+| Drupal Nebraska | omaha | `ical` | `https://groups.drupal.org/ical/4145` | allowed, **crawl-delay 10** (set `rate_limit_seconds: 10`) | Next meeting 2026-10-21 (quarterly US Central hybrid). Drupal.org terms forbid only overloading/disrupting the site; content is **CC BY-SA 2.0**, so attribute (we link the original) and keep stored summaries short. |
+| UNO events (whole campus) | omaha | `ical` | `https://events.unomaha.edu/calendar/1.ics` | robots **explicitly allows** `/calendar/ics`, `/calendar/xml`; crawl-delay 1 | Localist. 585 entries, 780 KB, mostly non-tech; topic-filtered feeds (`/search/events.ics?event_types[]=...`, allowed by robots) return **403** from the server, so only the full feed is usable. Usable only with classifier filtering; consider `probationary` instead of `trusted`. |
+
+**Not usable as feed seeds now** (no feed or structured data found, or not reachable):
+
+| Lead | What was found | Use instead |
+|---|---|---|
+| AIM Institute (HDC, Infotec) | `aiminstitute.org/events/` is 404; homepage has no feed or JSON-LD. HDC 2025 was Sept 30-Oct 1 in Council Bluffs; no 2026 dates found. | Known group; revisit with `html_rules` or JSON-LD on event pages |
+| INTERFACE Omaha | 2026-11-05, CHI Health Center (F2F Events); found only on third-party listings. | Known group / annual event |
+| ISACA Omaha | `engage.isaca.org/omahachapter/events/calendar` (Higher Logic): no feed, no JSON-LD. Meets 2nd Tuesday at Scott Conference Center. | Known group; `html_rules` candidate |
+| OWASP Omaha | `owasp.org/www-chapter-omaha/` redirects to `owasp.org/chapters/omaha`; no feed. Old wiki archived. A search result reported OWASP retiring Meetup for chapters on 2026-01-31 (not verified). | Known group |
+| NEbraskaCERT, InfraGard Nebraska | No feed; no public 2026 event listings found. | Known groups (INTERFACE sponsors) |
+| BSides Omaha, WiCyS Nebraska | No current Omaha-specific pages found. | Gap-detection list |
+| Kernelcon (Omaha) | `kernelcon.org` shows "Kernelcon 2027"; no feed or JSON-LD. | Known group / annual event |
+| Nebraska.Code() (Lincoln) | `nebraskacode.amegala.com` (2027 edition); no feed. 2026 ran July 22-24. | Known group / annual event |
+| AI Tinkerers Lincoln/Omaha | Own site, robots allow, JSON-LD `Event` present, but it lists only the Jan 2025 inaugural meetup; locations shared with approved attendees only. Activity unconfirmed. | `jsonld` candidate (probationary) once activity is confirmed |
+| Women in Technology of the Heartland | Events found only via Meetup/SPN listings (2025). | Depends on gate V1 |
+| Omaha Maker Group, Bellevue U. cyber center | WordPress blog RSS only (news posts, not events). | News finder |
+| Silicon Prairie News | RSS `siliconprairienews.com/feed/` live, but the editor stepped down 2026-05-27; events guide may be unmaintained. | News finder, not a seed |
+| Chambers (Lincoln, Greater Omaha; Startup Collaborative now redirects to the chamber) | No event feeds. | Not seeds |
+| Tech Nebraska | `technebraska.com/robots.txt` timed out, so the host was skipped (as `SafeHttp` requires). | Retry later |
+| dev.events (aggregator) | RSS + per-event iCal, but mostly worldwide online events, and it is an aggregator. | Not a seed (link organizers, not aggregators) |
+
+**Decision.** Four sources pass V7. That is below the 5-10 target because most Omaha/Lincoln
+community groups publish on Meetup or Luma, which gates V1 and V3 decide. Final seed selection
+for T060: the four above (UNO as `probationary`), plus any Meetup/Luma groups once V1/V3 allow.
+
+**Engineering note.** selectolax 1.0 removed the `selectolax.parser` (Modest) backend; HTML code must
+use `selectolax.lexbor.LexborHTMLParser`.
+
 ---
 
 [gh-billing]: https://docs.github.com/en/billing/concepts/product-billing/github-actions
