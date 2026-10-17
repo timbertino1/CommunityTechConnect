@@ -2,42 +2,47 @@
    visible keyboard focus, no external fonts or images. */
 
 :root {
-  --bg: #f7f8f5;
-  --surface: #ffffff;
-  --ink: #18221e;
-  --muted: #4a5751;
-  --line: #d4dbd6;
-  --link: #165a8a;
-  --accent: #8a5a0f;
-  --accent-bg: #f5e9d2;
-  --button: #165a8a;
+  /* Husker-inspired: scarlet, black, and cream. */
+  --bg: #f7f3ea;
+  --surface: #fffdf8;
+  --ink: #141414;
+  --muted: #4d4a45;
+  --line: #ddd5c6;
+  --brand-red: #d00000;
+  --brand-black: #141414;
+  --link: #a30000;
+  --accent: #b00000;
+  --accent-bg: #f6e3df;
+  --button: #d00000;
   --button-ink: #ffffff;
-  --bad: #9b2c22;
+  --bad: #8f1d1d;
   --bad-bg: #f8e1de;
-  --warn: #7a5200;
+  --warn: #6e4b00;
   --warn-bg: #fbefd2;
-  --focus: #c47c10;
+  --focus: #141414;
   --radius: 8px;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f1513;
-    --surface: #17201d;
-    --ink: #e5ece8;
-    --muted: #a5b3ac;
-    --line: #2e3b36;
-    --link: #8cc3ea;
-    --accent: #f0c374;
-    --accent-bg: #3a2e17;
-    --button: #8cc3ea;
-    --button-ink: #0f1513;
+    --bg: #121110;
+    --surface: #1c1a18;
+    --ink: #f2eee6;
+    --muted: #b5ada1;
+    --line: #36322d;
+    --brand-red: #ff5c5c;
+    --brand-black: #f2eee6;
+    --link: #ff8a8a;
+    --accent: #ff7a7a;
+    --accent-bg: #3a1d1b;
+    --button: #ff5c5c;
+    --button-ink: #121110;
     --bad: #f1a299;
     --bad-bg: #3b1d19;
     --warn: #f0c374;
     --warn-bg: #3a2e17;
-    --focus: #f0c374;
+    --focus: #f2eee6;
     color-scheme: dark;
   }
 }
@@ -92,8 +97,9 @@ a:hover { text-decoration-thickness: 2px; }
   gap: 0.5rem 1.5rem;
   padding-block: 0.75rem;
 }
-.brand { font-weight: 800; font-size: 1.25rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
-.brand-ne { color: var(--accent); }
+.brand { font-weight: 800; font-size: 1.35rem; color: var(--brand-black); text-decoration: none; letter-spacing: -0.01em; }
+.brand-ne { color: var(--brand-red); }
+.site-header { border-top: 4px solid var(--brand-red); }
 .nav { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; }
 .nav a { font-weight: 600; text-decoration: none; padding-block: 0.25rem; }
 .nav a[aria-current="page"] { color: var(--ink); border-bottom: 3px solid var(--accent); }
