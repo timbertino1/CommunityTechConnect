@@ -1,0 +1,38 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+*.log
+
+# Build output
+dist/
+build/
+.out/
+coverage/
+playwright-report/
+test-results/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Secrets and local environment
+.env*
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db

@@ -1,0 +1,9 @@
+# Review requests for security-sensitive paths.
+# data/ is intentionally not code-owned: bot data-only PRs auto-merge under
+# constitution v1.1.0 once every CI gate passes.
+
+/.github/                    @timbertino1
+/workers/                    @timbertino1
+/discovery/src/netc/fetch/   @timbertino1
+/discovery/src/netc/github/  @timbertino1
+/web/_headers                @timbertino1
