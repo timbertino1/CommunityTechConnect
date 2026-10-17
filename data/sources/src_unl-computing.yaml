@@ -9,13 +9,14 @@ found_via: null
 html_rules: null
 id: src_unl-computing
 name: UNL School of Computing
-notes: Gate V7. Official UNL Events calendar feed; robots crawl-delay 5. Also carries academic dates,
-  which the classifier rejects.
+notes: 'Gate V7. Official UNL Events calendar feed; robots crawl-delay 5. Also carries academic dates,
+  which the classifier rejects. Probationary by owner decision (2026-10-17): many events are aimed at
+  UNL students, so each new event is reviewed before it is published.'
 organizer_id: org_unl-computing
 origin: preconfigured
 rate_limit_seconds: 5
 rejected_count: 0
 status: active
-trust: trusted
+trust: probationary
 updated_at: null
 url: https://events.unl.edu/cse/upcoming/
