@@ -312,7 +312,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li class="now"><div class="bar"><span style="width:19%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="now"><div class="bar"><span style="width:41%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 5 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 11 of 27 tasks)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -1249,13 +1249,13 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
     </div>
     <p class="lede">Phase 3 is the MVP: read the five starting sources every day, turn what they publish into clean events, and put a fast, accessible list of upcoming Nebraska tech events on the web, each one linking to the organizer's own page.</p>
     <div class="stats">
-      <div class="stat"><span class="n">5<small> of 27</small></span><p>Tasks done in this phase.</p></div>
-      <div class="stat"><span class="n">574</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">11<small> of 27</small></span><p>Tasks done in this phase.</p></div>
+      <div class="stat"><span class="n">691</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">3<small> of 4</small></span><p>Live sources read end to end on the first try (the fourth had no upcoming events).</p></div>
     </div>
     <ul class="checklist">
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Reading sources</b><small>Calendar feeds and event data built into web pages. Built, PR pending.</small></div><span class="ids">T046&ndash;T048, T056&ndash;T057</span></li>
-      <li><span class="mark" aria-hidden="true"></span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Reading sources</b><small>Calendar feeds and event data built into web pages. Merged in PR #14.</small></div><span class="ids">T046&ndash;T048, T056&ndash;T057</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed. Built, PR pending.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>The daily run</b><small>The five sources added and <code>netc discover-events</code> wired up.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
       <li><span class="mark" aria-hidden="true"></span><div><b>Going live</b><small>A bot for data updates, deploys to Cloudflare Pages, a final security check.</small></div><span class="ids">T065&ndash;T072</span></li>
@@ -1333,6 +1333,75 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 2 &middot; From listings to events</p>
+      <h2>Every listing gets cleaned, placed, judged and matched</h2>
+      <p class="muted prose">Four small steps, each tested on its own. Rules decide the clear cases; anything they can't decide waits for a person instead of going straight onto the site.</p>
+    </div>
+    <figure>
+      <div class="diagram xwide">
+        <svg viewBox="0 0 1040 236" role="img" aria-label="A raw listing is normalized (plain text, safe https link, UTC time, area), then classified by rules into keep, review or reject. Kept and review items are merged with duplicates and then tracked across runs: trusted sources publish, probationary sources and undecided items wait for review.">
+          <defs>
+            <marker id="ah7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+          </defs>
+          <rect class="box" x="16" y="76" width="130" height="64" rx="8"/>
+          <text class="t-title" x="30" y="102">Raw listing</text>
+          <text class="t-sub" x="30" y="122">from a reader</text>
+          <rect class="box" x="176" y="60" width="190" height="96" rx="8"/>
+          <text class="t-title" x="190" y="84">1. Normalize</text>
+          <text class="t-sub" x="190" y="104">plain text, 200/500 chars</text>
+          <text class="t-sub" x="190" y="120">https link only</text>
+          <text class="t-sub" x="190" y="136">UTC time, Nebraska area</text>
+          <rect class="box" x="396" y="60" width="190" height="96" rx="8"/>
+          <text class="t-title" x="410" y="84">2. Classify (rules)</text>
+          <text class="t-sub" x="410" y="104">sales pitch or calendar date?</text>
+          <text class="t-sub" x="410" y="120">tech keywords, topics</text>
+          <text class="t-sub" x="410" y="136">Nebraska connection?</text>
+          <rect class="box-bad" x="426" y="184" width="130" height="40" rx="7"/>
+          <text class="t-title" x="491" y="209" text-anchor="middle">Rejected</text>
+          <rect class="box" x="616" y="60" width="190" height="96" rx="8"/>
+          <text class="t-title" x="630" y="84">3. Merge duplicates</text>
+          <text class="t-sub" x="630" y="104">same link, or same time,</text>
+          <text class="t-sub" x="630" y="120">similar title, same place</text>
+          <text class="t-sub" x="630" y="136">organizer's page preferred</text>
+          <rect class="box" x="836" y="60" width="190" height="96" rx="8"/>
+          <text class="t-title" x="850" y="84">4. Track changes</text>
+          <text class="t-sub" x="850" y="104">updates, cancellations</text>
+          <text class="t-sub" x="850" y="120">missing twice: unverified</text>
+          <text class="t-sub" x="850" y="136">trusted: publish</text>
+          <rect class="box-accent" x="866" y="184" width="130" height="40" rx="7"/>
+          <text class="t-title" x="931" y="209" text-anchor="middle">Review queue</text>
+          <line class="edge" x1="146" y1="108" x2="174" y2="108" marker-end="url(#ah7)"/>
+          <line class="edge" x1="366" y1="108" x2="394" y2="108" marker-end="url(#ah7)"/>
+          <line class="edge" x1="586" y1="108" x2="614" y2="108" marker-end="url(#ah7)"/>
+          <line class="edge" x1="806" y1="108" x2="834" y2="108" marker-end="url(#ah7)"/>
+          <line class="edge" x1="491" y1="156" x2="491" y2="182" marker-end="url(#ah7)"/>
+          <line class="edge" x1="931" y1="156" x2="931" y2="182" marker-end="url(#ah7)"/>
+          <text class="t-edge" x="499" y="174">no</text>
+          <text class="t-edge" x="939" y="174">probationary or undecided</text>
+          <text class="t-edge" x="600" y="52" text-anchor="middle">keep or undecided</text>
+        </svg>
+      </div>
+      <figcaption>Nothing reaches the site without passing all four steps. Undecided items will later get a second opinion from a small AI model (Phase 4); for now they wait for review.</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Live test: UNL School of Computing calendar</th><th>Count</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><span class="status done">Kept</span></td><td class="num">9</td><td>Industry in Residence: Nelnet, FNBO, Sandhills Global; School of Computing Showcase</td></tr>
+          <tr><td><span class="status now">Review</span></td><td class="num">12</td><td>Food for Thought; Run with the School of Computing (no tech keywords, so a person decides)</td></tr>
+          <tr><td><span class="status next">Rejected</span></td><td class="num">40</td><td>Fall Semester Break, Thanksgiving Vacation, Commencement, Final Exams</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>All 61 UNL events were dropped on the first try</h3><p>UNL's calendar is served over https, but it writes every event link as plain http. The rule says links must be https, so everything was thrown out. Now an http link is upgraded only when it's on the same site we just read over https; links anywhere else still have to be https already.</p></div></div>
+      <div class="note"><div><h3>York, Nebraska and New York</h3><p>Nebraska has a York, and a Lincoln, and plenty of names other states share. A location that names another state ("New York, NY", "Lincoln, CA") is now recognized as out of state before any town name is matched.</p></div></div>
+      <div class="note"><div><h3>University calendars are mostly not events</h3><p>Two-thirds of a department calendar is breaks, exams and deadlines. A short list of academic phrases filters those out, and anything uncertain goes to review rather than onto the site.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share Phase 3 so far</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
       <label class="eyebrow" for="post-phase-3">Suggested post (edit freely)</label>
@@ -1344,7 +1413,9 @@ The Nebraska Networking User Group doesn't have its own website, so the reader s
 
 Lesson of the day: Meetup builds its event links with JavaScript, so a normal link-follower sees nothing. Found it, fixed it, wrote a test for it.
 
-574 tests and counting.
+Step two turns listings into events: clean text, Central Time, the right part of Nebraska, topics, and duplicates merged. On the UNL computing calendar the rules kept 9 real events, threw out 40 holidays and exam dates, and sent 12 unclear ones to a human.
+
+691 tests and counting.
 
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-3"></span>
