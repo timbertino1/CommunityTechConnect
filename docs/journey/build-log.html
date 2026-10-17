@@ -1082,6 +1082,7 @@ Next up: teaching the bot to browse the web safely.
     <div class="notes">
       <div class="note hi"><div><h3>Calendars that don't speak the standard</h3><p>Calendars exported from Outlook name time zones the Windows way, like "Central Standard Time", instead of "America/Chicago". Those names are now recognized, so those events aren't flagged as having a guessed time zone.</p></div></div>
       <div class="note"><div><h3>"10 PM to 1 AM"</h3><p>Some sources give a late-night event an end time that looks earlier than its start on the same date. Instead of throwing the end away, it's read as the next morning, which is what the organizer meant.</p></div></div>
+      <div class="note"><div><h3>The secret scanner caught... a test</h3><p>The PR's secret scan failed. A test checks that a hostile time zone name like <code>../../etc/passwd</code> is rejected, and the scanner read "passwd" followed by a string as a leaked password. It wasn't one, so the test now uses a different file name and that one finding is recorded as reviewed. Every other match still fails the check, so the scanner stays strict.</p></div></div>
     </div>
   </section>
 
