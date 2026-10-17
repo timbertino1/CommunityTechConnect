@@ -24,16 +24,17 @@ def _bash() -> str | None:
 
 
 BASH = _bash()
+GIT = shutil.which("git")
 pytestmark = [
     pytest.mark.integration,
-    pytest.mark.skipif(BASH is None or not shutil.which("git"), reason="needs bash and git"),
+    pytest.mark.skipif(BASH is None or GIT is None, reason="needs bash and git"),
 ]
 
 SCRIPT = Path(__file__).resolve().parents[3] / ".github" / "scripts" / "data-pr.sh"
 
 
 def git(repo: Path, *args: str) -> None:
-    subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True)
+    subprocess.run([GIT or "git", *args], cwd=repo, check=True, capture_output=True)  # noqa: S603 - fixed test arguments
 
 
 @pytest.fixture
@@ -50,7 +51,7 @@ def repo(tmp_path: Path) -> Path:
 
 
 def check(repo: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
+    return subprocess.run(  # noqa: S603 - runs the repo's own script on a temp repo
         [BASH or "bash", SCRIPT.as_posix()],
         cwd=repo,
         env={**os.environ, "CHECK_ONLY": "1"},
