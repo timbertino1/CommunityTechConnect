@@ -9,7 +9,7 @@ anything unreadable are skipped, with a warning.
 from __future__ import annotations
 
 import re
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from datetime import UTC, date, datetime, time, timedelta
 from typing import Any, ClassVar, Final
 from zoneinfo import ZoneInfo
@@ -18,7 +18,7 @@ import icalendar
 import recurring_ical_events
 
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
-from netc.fetch import FetchError, SafeHttp
+from netc.fetch import FetchError, HttpClient
 from netc.models import RawListing, Source
 
 MAX_TITLE_CHARS: Final = 2_000
@@ -40,10 +40,17 @@ _ONLINE: Final = re.compile(
 )
 
 
+def _utc_now() -> datetime:
+    return datetime.now(UTC)
+
+
 class IcalConnector:
     kind: ClassVar[str] = "ical"
 
-    def fetch(self, source: Source, http: SafeHttp) -> RawPayload:
+    def __init__(self, clock: Callable[[], datetime] = _utc_now) -> None:
+        self._clock = clock
+
+    def fetch(self, source: Source, http: HttpClient) -> RawPayload:
         url = source.feed_url or source.url
         response = http.get(
             url,
@@ -53,7 +60,7 @@ class IcalConnector:
         )
         if response.status >= 400:
             raise FetchError(f"{url} returned HTTP {response.status}")
-        return RawPayload.from_response(response, fetched_at=datetime.now(UTC))
+        return RawPayload.from_response(response, fetched_at=self._clock())
 
     def parse(self, source: Source, payload: RawPayload) -> ParseResult:
         warnings: list[str] = []

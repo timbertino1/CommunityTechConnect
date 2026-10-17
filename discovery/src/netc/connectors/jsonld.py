@@ -15,7 +15,7 @@ import dataclasses
 import fnmatch
 import json
 import re
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from datetime import UTC, date, datetime, time
 from typing import Any, ClassVar, Final
 from urllib.parse import urljoin, urlsplit, urlunsplit
@@ -23,7 +23,7 @@ from urllib.parse import urljoin, urlsplit, urlunsplit
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
-from netc.fetch import FetchError, SafeHttp
+from netc.fetch import FetchError, HttpClient
 from netc.models import FollowLinks, RawListing, Source
 
 MAX_TITLE_CHARS: Final = 2_000
@@ -36,11 +36,18 @@ MAX_WARNINGS: Final = 50
 _DATE_ONLY: Final = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
+def _utc_now() -> datetime:
+    return datetime.now(UTC)
+
+
 class JsonLdConnector:
     kind: ClassVar[str] = "jsonld"
 
-    def fetch(self, source: Source, http: SafeHttp) -> RawPayload:
-        fetched_at = datetime.now(UTC)
+    def __init__(self, clock: Callable[[], datetime] = _utc_now) -> None:
+        self._clock = clock
+
+    def fetch(self, source: Source, http: HttpClient) -> RawPayload:
+        fetched_at = self._clock()
         response = http.get(source.url, kind="page", delay_seconds=source.rate_limit_seconds)
         if response.status >= 400:
             raise FetchError(f"{source.url} returned HTTP {response.status}")

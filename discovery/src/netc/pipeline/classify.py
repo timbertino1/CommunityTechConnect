@@ -23,7 +23,9 @@ GENERAL: Final = "general-tech"
 # Phrases that mark an event as out of scope even when tech words appear.
 EXCLUSIONS: Final = (
     "real estate", "mortgage", "insurance seminar", "webinar demo", "product demo", "book a demo",
-    "free demo", "sales pitch", "investment opportunity", "get rich", "mlm",
+    "free demo", "sales pitch", "investment opportunity", "get rich", "mlm", "realtor",
+    # Socials and services with no tech content (venue calendars)
+    "happy hour", "trivia night", "blood drive", "massage",
     # Academic calendars (university feeds)
     "semester break", "student holiday", "priority registration", "last day to", "last day of",
     "final exam", "finals", "commencement",

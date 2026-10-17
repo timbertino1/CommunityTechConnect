@@ -1,0 +1,21 @@
+added_at: '2026-10-17'
+approved_count: 0
+check_interval_hours: 24
+connector: ical
+default_area: lincoln
+feed_url: https://events.unl.edu/cse/upcoming/?format=ics&limit=-1
+follow_links: null
+found_via: null
+html_rules: null
+id: src_unl-computing
+name: UNL School of Computing
+notes: Gate V7. Official UNL Events calendar feed; robots crawl-delay 5. Also carries academic dates,
+  which the classifier rejects.
+organizer_id: org_unl-computing
+origin: preconfigured
+rate_limit_seconds: 5
+rejected_count: 0
+status: active
+trust: trusted
+updated_at: null
+url: https://events.unl.edu/cse/upcoming/

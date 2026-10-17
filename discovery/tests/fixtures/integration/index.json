@@ -1,0 +1,5 @@
+{
+  "https://events.example.edu/cse/upcoming/?format=ics": {"file": "../sources/ical/valid.ics", "content_type": "text/calendar"},
+  "https://drupal.example.org/ical/1": {"file": "../sources/ical/missing_tz.ics", "content_type": "text/calendar"},
+  "https://partner.example.org/events": {"file": "partner_events.html", "content_type": "text/html; charset=utf-8"}
+}

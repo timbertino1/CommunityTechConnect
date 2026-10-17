@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import ClassVar, Final, Protocol
 
-from netc.fetch import FetchResponse, SafeHttp
+from netc.fetch import FetchResponse, HttpClient
 from netc.models import RawListing, Source
 
 # Every connector reports events from one day before the fetch to 180 days after it.
@@ -56,6 +56,6 @@ class Connector(Protocol):
     kind: ClassVar[str]
     """"ical" | "rss" | "jsonld" | "eventbrite_org" | "html_rules"."""
 
-    def fetch(self, source: Source, http: SafeHttp) -> RawPayload: ...
+    def fetch(self, source: Source, http: HttpClient) -> RawPayload: ...
 
     def parse(self, source: Source, payload: RawPayload) -> ParseResult: ...
