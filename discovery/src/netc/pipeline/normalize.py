@@ -97,7 +97,8 @@ def normalize(
         inferred.append("area")
     elif area is None and raw.online and place.how == "none":
         area = "online"
-    elif area is None and source.default_area is not None:
+    elif source.default_area is not None and (area is None or place.how == "state"):
+        # A bare "Nebraska" (e.g. in "Nebraska Union") says less than the group's own area.
         area = source.default_area
         inferred.append("area")
 

@@ -251,3 +251,14 @@ def test_http_links_to_other_hosts_are_still_dropped() -> None:
 @pytest.mark.parametrize("placeholder", ["unknown", "Unknown", "N/A", "TBD", ""])
 def test_placeholder_organizer_names_are_ignored(placeholder: str) -> None:
     assert norm(raw(organizer_text=placeholder)).organizer is None
+
+
+def test_a_venue_named_nebraska_does_not_override_the_groups_area() -> None:
+    # "Nebraska Union" is a building in Lincoln, not a statewide location.
+    n = norm(raw(location_text="Nebraska Union Room"), make_source(default_area="lincoln"))
+    assert n.area == "lincoln"
+    assert "area" in n.inferred
+
+
+def test_bare_nebraska_without_a_group_area_is_other_nebraska() -> None:
+    assert norm(raw(location_text="Nebraska Union Room")).area == "other_ne"
