@@ -129,9 +129,9 @@ original pages, with duplicates shown once.
 
 ### Tests for User Story 1 (write first, confirm they fail)
 
-- [ ] T046 [P] [US1] Create connector fixtures in `discovery/tests/fixtures/sources/`: `ical/valid.ics`, `ical/recurring_monthly.ics`, `ical/missing_tz.ics`, `ical/cancelled.ics`, `ical/malicious.ics` (script tags, `javascript:` URLs, 3 MB description), `ical/invalid_dates.ics`, `jsonld/event_page.html`, `jsonld/graph_multiple.html`, `jsonld/microdata.html`, `jsonld/malicious.html`, `jsonld/broken_json.html`.
-- [ ] T047 [P] [US1] Write failing contract tests in `discovery/tests/contract/test_connector_ical.py`: parses valid events to `RawListing`; expands recurrences up to 180 days ahead; keeps the source time zone; maps `STATUS:CANCELLED` to `cancelled`; malicious and invalid inputs yield sanitized or skipped listings plus warnings and never raise.
-- [ ] T048 [P] [US1] Write failing contract tests in `discovery/tests/contract/test_connector_jsonld.py`: extracts `Event` from JSON-LD (including `@graph` and arrays) and microdata; reads `eventStatus` cancelled/postponed and `eventAttendanceMode` online; skips broken JSON blocks without raising.
+- [X] T046 [P] [US1] Create connector fixtures in `discovery/tests/fixtures/sources/`: `ical/valid.ics`, `ical/recurring_monthly.ics`, `ical/missing_tz.ics`, `ical/cancelled.ics`, `ical/malicious.ics` (script tags, `javascript:` URLs, 3 MB description), `ical/invalid_dates.ics`, `jsonld/event_page.html`, `jsonld/graph_multiple.html`, `jsonld/microdata.html`, `jsonld/malicious.html`, `jsonld/broken_json.html`.
+- [X] T047 [P] [US1] Write failing contract tests in `discovery/tests/contract/test_connector_ical.py`: parses valid events to `RawListing`; expands recurrences up to 180 days ahead; keeps the source time zone; maps `STATUS:CANCELLED` to `cancelled`; malicious and invalid inputs yield sanitized or skipped listings plus warnings and never raise.
+- [X] T048 [P] [US1] Write failing contract tests in `discovery/tests/contract/test_connector_jsonld.py`: extracts `Event` from JSON-LD (including `@graph` and arrays) and microdata; reads `eventStatus` cancelled/postponed and `eventAttendanceMode` online; skips broken JSON blocks without raising.
 - [ ] T049 [P] [US1] Write failing tests in `discovery/tests/unit/test_normalize.py`: `RawListing` → `Event` sets the UTC times, `area` from the gazetteer (online → `online`; Council Bluffs, IA excluded unless the organizer is Nebraska-based), `summary` "≤ 500 chars", `title` "1–200 chars", `original_url` via `safe_url()` (listing dropped if none), the `inferred` list, and the stable `id`/`slug`.
 - [ ] T050 [P] [US1] Write failing tests in `discovery/tests/unit/test_classify_rules.py`: keyword rules accept clear tech events, reject non-tech and sales pitches ("webinar demo", "real estate", etc.), assign ≥ 1 category from `data/categories.yaml`, require a Nebraska connection (FR-003), and return `decided_by: "none"` when undecided.
 - [ ] T051 [P] [US1] Write failing tests in `discovery/tests/unit/test_dedupe.py` for research R11: the same canonical URL merges; otherwise "same start time within ±30 minutes, same day, and title similarity ≥ 85 (rapidfuzz token-set ratio) with compatible location" merges; the organizer's own page is preferred as `original_url` over aggregators; every listing is kept.
@@ -142,8 +142,8 @@ original pages, with duplicates shown once.
 
 ### Implementation for User Story 1
 
-- [ ] T056 [P] [US1] Implement `discovery/src/netc/connectors/ical.py` so T047 passes.
-- [ ] T057 [P] [US1] Implement `discovery/src/netc/connectors/jsonld.py` so T048 passes.
+- [X] T056 [P] [US1] Implement `discovery/src/netc/connectors/ical.py` so T047 passes.
+- [X] T057 [P] [US1] Implement `discovery/src/netc/connectors/jsonld.py` so T048 passes.
 - [ ] T058 [US1] Implement `discovery/src/netc/pipeline/normalize.py` and `discovery/src/netc/pipeline/classify.py` (rules only for now) so T049–T050 pass.
 - [ ] T059 [US1] Implement `discovery/src/netc/pipeline/dedupe.py` and `discovery/src/netc/pipeline/lifecycle.py` so T051–T052 pass.
 - [ ] T060 [US1] Add the verified seed sources from gate V7 as `data/sources/src_<slug>.yaml` (`trust: trusted`, `origin: preconfigured`, the connector and feed recorded), add matching `data/organizers.yaml` and `data/known_groups.yaml` entries, and confirm `netc validate-data` passes.

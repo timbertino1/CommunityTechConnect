@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NETechConnect tests//floating//EN
+BEGIN:VEVENT
+UID:floating@example.org
+DTSTAMP:20261017T000000Z
+SUMMARY:Drupal Nebraska meetup
+DTSTART:20261021T183000
+DTEND:20261021T200000
+URL:https://groups.drupal.example/node/1
+LOCATION:Online
+END:VEVENT
+END:VCALENDAR

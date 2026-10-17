@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><title>Evil</title>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Event",
+ "name":"<script>alert('xss')<\/script>Totally normal meetup <img src=x onerror=alert(1)>",
+ "url":"javascript:alert(document.cookie)",
+ "startDate":"2026-11-01T18:00:00-05:00",
+ "description":"<iframe src=https://evil.example/></iframe>Come <b>early</b>",
+ "location":{"@type":"Place","name":"<svg onload=alert(1)>Omaha","address":{"@type":"PostalAddress","addressLocality":"Omaha<script>x<\/script>","addressRegion":"NE"}},
+ "organizer":{"@type":"Person","name":"Jane Private-Person"}}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":{"nested":"object, not text"},"startDate":12345}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Deep","location":{"a":{"b":{"c":{"d":{"e":{"f":{"g":{"h":{"i":{"j":{"k":{"l":"m"}}}}}}}}}}}},"startDate":"2026-11-02T18:00:00Z"}</script>
+</head><body></body></html>

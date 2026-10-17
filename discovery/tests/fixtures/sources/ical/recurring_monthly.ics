@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NETechConnect tests//recurring//EN
+BEGIN:VEVENT
+UID:isaca-omaha-monthly@example.org
+DTSTAMP:20260901T000000Z
+SUMMARY:ISACA Omaha chapter meeting
+DTSTART;TZID=America/Chicago:20260908T180000
+DTEND;TZID=America/Chicago:20260908T193000
+RRULE:FREQ=MONTHLY;BYDAY=2TU
+EXDATE;TZID=America/Chicago:20261208T180000
+LOCATION:Scott Conference Center, Omaha, NE
+URL:https://engage.isaca.example/omahachapter/events
+END:VEVENT
+BEGIN:VEVENT
+UID:weekly-forever@example.org
+DTSTAMP:20260901T000000Z
+SUMMARY:Weekly hack night
+DTSTART;TZID=America/Chicago:20261020T190000
+RRULE:FREQ=WEEKLY
+URL:https://hacknight.example.org/
+END:VEVENT
+END:VCALENDAR

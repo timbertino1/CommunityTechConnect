@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NETechConnect tests//malicious//EN
+X-COMMENT:Tests replace __HUGE__ with a 3 MB string at run time.
+BEGIN:VEVENT
+UID:evil@example.org
+DTSTAMP:20261017T000000Z
+SUMMARY:<script>alert('xss')</script>Totally normal meetup
+DTSTART:20261025T000000Z
+URL:javascript:alert(document.cookie)
+LOCATION:<img src=x onerror=alert(1)>Omaha
+ORGANIZER;CN="<b>Evil</b> Corp":mailto:organizer.person@example.org
+DESCRIPTION:__HUGE__
+END:VEVENT
+END:VCALENDAR
