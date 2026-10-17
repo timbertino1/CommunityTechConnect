@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/event.schema.json",
+  "title": "Event",
+  "description": "One event occurrence as stored in data/events/<YYYY>/<YYYY-MM>.json and published in the public events data files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "slug", "title", "start", "source_tz", "all_day", "location", "area", "summary",
+               "categories", "original_url", "status", "review_state", "visibility", "inferred",
+               "listings", "first_seen", "last_verified"],
+  "$defs": {
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://[^/\\s]+\\.[^/\\s]+(/.*)?$", "maxLength": 2048 },
+    "utc": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "listing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "url", "content_hash", "last_seen", "missing_runs"],
+      "properties": {
+        "source_id": { "type": "string", "pattern": "^src_[a-z0-9-]+$" },
+        "url": { "$ref": "#/$defs/httpsUrl" },
+        "external_id": { "type": ["string", "null"], "maxLength": 512 },
+        "content_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "last_seen": { "$ref": "#/$defs/utc" },
+        "missing_runs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "properties": {
+    "id": { "type": "string", "pattern": "^evt_[a-f0-9]{12}$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]{1,120}$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "start": { "$ref": "#/$defs/utc" },
+    "end": { "anyOf": [{ "$ref": "#/$defs/utc" }, { "type": "null" }] },
+    "source_tz": { "type": "string", "minLength": 1 },
+    "tz_assumed": { "type": "boolean" },
+    "all_day": { "type": "boolean" },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["online"],
+      "properties": {
+        "venue": { "type": ["string", "null"], "maxLength": 200 },
+        "address": { "type": ["string", "null"], "maxLength": 300 },
+        "city": { "type": ["string", "null"], "maxLength": 100 },
+        "state": { "type": ["string", "null"], "maxLength": 2 },
+        "online": { "type": "boolean" }
+      }
+    },
+    "area": { "enum": ["omaha", "lincoln", "other_ne", "online"] },
+    "organizer_id": { "type": ["string", "null"] },
+    "summary": { "type": "string", "maxLength": 500 },
+    "categories": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+    "original_url": { "$ref": "#/$defs/httpsUrl" },
+    "status": { "enum": ["scheduled", "cancelled", "unverified"] },
+    "review_state": { "enum": ["published", "pending_review", "rejected"] },
+    "visibility": { "enum": ["shown", "hidden"] },
+    "inferred": { "type": "array", "uniqueItems": true, "items": { "enum": ["categories", "area", "location", "organizer_id", "end", "source_tz", "summary"] } },
+    "listings": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/listing" } },
+    "series_key": { "type": ["string", "null"] },
+    "first_seen": { "$ref": "#/$defs/utc" },
+    "last_verified": { "$ref": "#/$defs/utc" }
+  }
+}
