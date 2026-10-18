@@ -1,0 +1,56 @@
+name: Discover events
+
+# Twice daily, so a delayed or skipped run still reads every source within 24 hours (FR-002).
+on:
+  schedule:
+    - cron: "0 11 * * *"
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+# The default token is read-only; the data PR is written with the GitHub App's own token.
+permissions:
+  contents: read
+
+concurrency:
+  group: discover
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Discover events and open the data PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: discovery
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: discovery/uv.lock
+      - name: Install
+        working-directory: discovery
+        run: uv sync --locked
+      - name: Discover events
+        working-directory: discovery
+        env:
+          NETC_SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'netechconnect.pages.dev' }}
+        run: uv run netc discover-events --data-dir ../data
+      - name: Validate data
+        working-directory: discovery
+        run: uv run netc validate-data --data-dir ../data
+      - name: Create the bot's token
+        id: bot
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Open or update the data PR
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
+        run: bash .github/scripts/data-pr.sh
