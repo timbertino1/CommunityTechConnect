@@ -53,6 +53,18 @@ jobs:
       - name: Install wrangler
         working-directory: workers
         run: npm ci
+      - name: Create the Pages project if it does not exist yet
+        working-directory: workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: "false"
+        run: |
+          if npx wrangler pages project list | grep -qw netechconnect; then
+            echo "Pages project netechconnect exists."
+          else
+            npx wrangler pages project create netechconnect --production-branch main
+          fi
       - name: Deploy
         working-directory: workers
         env:
