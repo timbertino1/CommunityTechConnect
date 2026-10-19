@@ -21,9 +21,9 @@ RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:industry-residence-nelnet@events.unl.edu
+UID:nelnet-tech-talk@events.unl.edu
 DTSTAMP:20261017T120000Z
-SUMMARY:Industry in Residence: Nelnet
+SUMMARY:Nelnet Engineering Tech Talk
 DTSTART;TZID=America/Chicago:20261022T110000
 DTEND;TZID=America/Chicago:20261022T120000
 LOCATION:Avery Hall 115, 1144 T St, Lincoln, NE 68588
@@ -34,7 +34,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:showcase@events.unl.edu
 DTSTAMP:20261017T120000Z
-SUMMARY:School of Computing Showcase
+SUMMARY:Computing Research Showcase
 DTSTART;TZID=America/Chicago:20261022T153000
 DURATION:PT2H
 LOCATION:Nebraska Union Ballroom, Lincoln, NE

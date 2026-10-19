@@ -33,17 +33,17 @@ def test_valid_feed_parses_events_to_raw_listings() -> None:
     result = parse("ical/valid.ics")
     events = by_title(result.listings)
     assert set(events) == {
-        "Industry in Residence: Nelnet",
-        "School of Computing Showcase",
+        "Nelnet Engineering Tech Talk",
+        "Computing Research Showcase",
         "Fall Semester Break",
     }
-    nelnet = events["Industry in Residence: Nelnet"]
+    nelnet = events["Nelnet Engineering Tech Talk"]
     assert nelnet.start == datetime(2026, 10, 22, 11, 0, tzinfo=CHICAGO)
     assert nelnet.end == datetime(2026, 10, 22, 12, 0, tzinfo=CHICAGO)
     assert nelnet.tz == "America/Chicago"
     assert nelnet.all_day is False
     assert nelnet.url == "https://events.unl.edu/cse/2026/10/22/123456/"
-    assert nelnet.external_id == "industry-residence-nelnet@events.unl.edu"
+    assert nelnet.external_id == "nelnet-tech-talk@events.unl.edu"
     assert nelnet.location_text == "Avery Hall 115, 1144 T St, Lincoln, NE 68588"
     assert nelnet.organizer_text == "School of Computing"
     assert nelnet.description_text is not None and "Pizza provided." in nelnet.description_text
@@ -52,7 +52,7 @@ def test_valid_feed_parses_events_to_raw_listings() -> None:
 
 
 def test_duration_sets_the_end() -> None:
-    showcase = by_title(parse("ical/valid.ics").listings)["School of Computing Showcase"]
+    showcase = by_title(parse("ical/valid.ics").listings)["Computing Research Showcase"]
     assert showcase.end is not None
     assert showcase.end - showcase.start == timedelta(hours=2)
 

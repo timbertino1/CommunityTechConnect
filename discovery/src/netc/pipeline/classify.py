@@ -1,9 +1,9 @@
 """Rules-first relevance classification (T058; FR-003, FR-028, research R10).
 
 Rules decide the clear cases: exclusion phrases (sales pitches, real estate, academic calendar
-dates) reject; category keywords from data/categories.yaml accept; a Nebraska connection is
-required. Anything the rules cannot decide comes back with ``decided_by="none"`` so it can go to
-AI (Phase 4) or to review, never straight onto the site.
+dates, student-only events) reject; category keywords from data/categories.yaml accept; a Nebraska
+connection is required. Anything the rules cannot decide comes back with ``decided_by="none"`` so
+it can go to AI (Phase 4) or to review, never straight onto the site.
 """
 
 from __future__ import annotations
@@ -31,6 +31,10 @@ EXCLUSIONS: Final = (
     "final exam", "finals", "commencement",
     "finals week", "tuition due", "residence hall", "move-in day", "spring break", "fall break",
     "no classes", "university closed", "offices closed",
+    # Student-only events (university feeds): recruiting, admissions, student life
+    "students only", "student-only", "industry in residence", "graduate programs",
+    "graduate information", "nvolvement fair", "student advisory board",
+    "run with the school of computing", "school of computing showcase",
 )  # fmt: skip
 
 
