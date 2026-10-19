@@ -23,6 +23,7 @@ from netc.pipeline.classify import ClassifyInput, classify
 from netc.pipeline.dedupe import deduplicate
 from netc.pipeline.lifecycle import Incoming, apply_run
 from netc.pipeline.normalize import Dropped, Normalized, normalize, to_event
+from netc.pipeline.overrides import apply_overrides
 from netc.pipeline.runner import LogSink, SourceOutcome, run_sources, stderr_sink
 from netc.pipeline.sanitize import to_plain_text
 from netc.storage import DataStore
@@ -166,7 +167,8 @@ def discover_events(
         queue=store.read_review_queue(),
         now=now,
     )
-    events = unique_slugs(result.events)
+    # Overrides last, so this run's fresh details don't undo the owner's corrections.
+    events = apply_overrides(unique_slugs(result.events), store.read_overrides())
     report.events_total = len(events)
     report.new_reviews = len(result.new_reviews)
     report.changes = _changes(stored, events, {r.ref: r.reason for r in result.new_reviews})

@@ -20,6 +20,7 @@ from jinja2 import Environment, PackageLoader, StrictUndefined
 
 from netc.fetch.robots import ROBOTS_USER_AGENT
 from netc.models import Event
+from netc.pipeline.overrides import apply_overrides
 from netc.pipeline.timeutil import format_central
 from netc.storage import DataStore, atomic_write, dump_json
 
@@ -52,7 +53,9 @@ def build_site(
     organizers = {o.id: o.name for o in store.read_organizers()}
     source_names = {s.id: s.name for s in store.read_sources()}
 
-    public = [e for e in store.read_events() if e.is_public]
+    # Applied here too, so a merged override shows up at the next deploy.
+    events = apply_overrides(store.read_events(), store.read_overrides())
+    public = [e for e in events if e.is_public]
     upcoming = sorted(
         (e for e in public if (e.end or e.start) > now), key=lambda e: (e.start, e.id)
     )

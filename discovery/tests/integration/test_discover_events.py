@@ -9,7 +9,7 @@ import pytest
 
 from netc.cli import main
 from netc.storage import DataStore
-from tests.data_samples import make_source
+from tests.data_samples import make_override, make_source
 
 pytestmark = pytest.mark.integration
 
@@ -168,3 +168,19 @@ def test_dry_run_writes_nothing(data: Path, capsys: pytest.CaptureFixture[str]) 
 
 def test_offline_needs_fixtures(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["discover-events", "--data-dir", str(data), "--offline"]) == 2
+
+
+def test_an_override_survives_a_re_run(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    discover(data, capsys)
+    store = DataStore(data)
+    talk = next(e for e in store.read_events() if e.title == "Nelnet Engineering Tech Talk")
+    store.write_overrides(
+        [make_override(talk.id, categories=["ai-ml"], area="omaha", reason="wrong topic")]
+    )
+    discover(data, capsys, "--force")
+    after = next(e for e in DataStore(data).read_events() if e.id == talk.id)
+    assert after.visibility == "hidden"
+    assert after.categories == ["ai-ml"]
+    assert after.area == "omaha"
+    assert "categories" not in after.inferred and "area" not in after.inferred
+    assert main(["validate-data", "--data-dir", str(data)]) == 0, capsys.readouterr().err

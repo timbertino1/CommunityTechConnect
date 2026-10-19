@@ -320,7 +320,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
       <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
-      <li class="now"><div class="bar"><span style="width:56%"></span></div><div class="lbl"><b>08</b>Admin tools</div></li>
+      <li class="now"><div class="bar"><span style="width:89%"></span></div><div class="lbl"><b>08</b>Admin tools</div></li>
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
@@ -1552,8 +1552,8 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <p class="lede">Phase 8 is the owner's toolkit. Part of it couldn't wait: the UNL computing calendar is on probation, so each of its events needs a person to approve it, and until now those events just sat in a file. So the review tools came first, along with a report that says what every run did.</p>
     <div class="stats">
-      <div class="stat"><span class="n">5<small> of 9</small></span><p>Phase 8 tasks done (the review PR and the health issue), plus two extras.</p></div>
-      <div class="stat"><span class="n">875</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">8<small> of 9</small></span><p>Phase 8 tasks done. The last one waits for the first real review PR.</p></div>
+      <div class="stat"><span class="n">891</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">20<small> of 20</small></span><p>Event titles on the live UNL computing calendar now filtered out automatically. None of them are public events.</p></div>
     </div>
     <ul class="checklist">
@@ -1561,7 +1561,9 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The review PR</b><small>Approve and reject boxes for each held event; merging applies them, after strict checks. Merged in PR #23.</small></div><span class="ids">T120&ndash;T123</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>No student-only events</b><small>Recruiting visits, grad info sessions and student-life events are filtered out before review. Merged in PR #24.</small></div><span class="ids">extra</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Health issue</b><small>One pinned issue that shows every source's health, and pings me only when something needs me.</small></div><span class="ids">T124</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Overrides, admin guide, checkpoint</b><small>Hide or fix one event by hand, write it all down, then do a real review end to end.</small></div><span class="ids">T125&ndash;T128</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Overrides</b><small>Hide an event or fix its topics or area with one line in a file; every later run keeps it.</small></div><span class="ids">T125&ndash;T126</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Admin guide</b><small>Reviewing, overrides, sources, the health issue, and who has access, in one page.</small></div><span class="ids">T127</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Checkpoint</b><small>The offline run-through passed. A real review PR end to end waits for the first held event.</small></div><span class="ids">T128</span></li>
     </ul>
   </section>
 
@@ -1664,6 +1666,23 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 5 &middot; Overrides</p>
+      <h2>Fixing one event without fighting the bot</h2>
+      <p class="muted prose">The bot rewrites every event from its source at each run, so a hand edit to the data would be gone by the next morning. Corrections go in <code>data/overrides.yaml</code> instead: hide an event, or set its topics or area, with a short public reason. The bot applies them after every run, and the site build applies them too, so a merged fix is live at the next deploy.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Undo by deleting</h3><p>Only overrides hide events, so an event without one is shown. Deleting a "hidden" line brings the event back. There's no second switch to remember.</p></div>
+      <div class="card"><h3>No back door</h3><p>An override can't change an event's link, publish an event waiting for review, or make a source trusted. Approving still happens only in the review PR.</p></div>
+      <div class="card"><h3>Typos fail the PR</h3><p>An override that names an event that doesn't exist, uses an unknown topic, or changes nothing at all fails the data check, so a mistake can't merge quietly.</p></div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Deleting a source would have broken the archive</h3><p>The first draft of the admin guide said "to remove a source, delete its file". Checking that against the code showed past events still point at their source, and the data check fails if that file is gone. The guide now says to pause a source and keep the file.</p></div></div>
+      <div class="note"><div><h3>A checkpoint that has to wait</h3><p>The offline run-through passed: three approvals promoted a source to trusted, two rejections paused another, and a merge by a non-admin was refused. The live run waits for something to review. Every UNL event is now filtered out and every other source is trusted, so the review queue is empty.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share the review tools</h3><button class="btn" type="button" data-copy="post-phase-8">Copy post</button></div>
       <label class="eyebrow" for="post-phase-8">Suggested post (edit freely)</label>
@@ -1673,7 +1692,8 @@ Event titles come from other websites, so they're shown as code: a title can't p
 Each run also posts a report: every source, what it found, and what changed on the site.
 Then I checked the live UNL computing calendar. All 20 titles were either academic dates or student-only events: recruiting visits, grad info sessions, a club fair. Rejecting them one by one would have gotten UNL paused, so they're now filtered out before review.
 Last piece: a pinned health issue the bot rewrites after every run. It pings me only when something needs me: at most once a day, and only once a week about the same problem.
-875 tests. Next: Phase 4, finding new groups automatically.
+And when something on the site is wrong, one line in a file hides it or fixes its topics, and every later run keeps the fix.
+891 tests. Next: Phase 4, finding new groups automatically.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-8"></span>
     </div>

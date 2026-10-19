@@ -274,6 +274,15 @@ class _Checker:
         for override in overrides:
             if override.event_id not in event_ids:
                 self.error("overrides.yaml", f"override for unknown event {override.event_id}")
+            if (
+                override.visibility is None
+                and override.categories is None
+                and override.area is None
+            ):
+                self.error(
+                    "overrides.yaml",
+                    f"override for {override.event_id} sets none of visibility, categories, area",
+                )
             if category_ids and override.categories:
                 for category in override.categories:
                     if category not in category_ids:
