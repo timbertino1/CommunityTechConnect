@@ -5,24 +5,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a build log. Masthead + 10-phase rail on top, one tab per chapter below,
+/* Layout: a build log. Masthead + 10-phase rail on top, one tab per chapter below (only the
+   selected chapter is shown),
    each chapter = summary, mechanism diagrams, what happened, a post to share. */
 :root {
-  --bg: #F3F5F2;
-  --surface: #FFFFFF;
-  --surface-2: #E8EEEA;
-  --ink: #15211C;
-  --muted: #56655E;
-  --line: #D3DBD6;
-  --gold: #B7791F;
-  --gold-ink: #835509;
-  --gold-soft: #F6E8CC;
-  --sky: #2C6A96;
-  --sky-soft: #DCEAF4;
-  --ok: #2F7D4F;
-  --ok-soft: #DDF0E3;
-  --bad: #B4372F;
-  --bad-soft: #F7DEDB;
+  /* NETechConnect site colors (web/css/site.css): cream, Husker scarlet, black. */
+  --bg: #F7F3EA;
+  --surface: #FFFDF8;
+  --surface-2: #EFE9DD;
+  --ink: #141414;
+  --muted: #4D4A45;
+  --line: #DDD5C6;
+  --gold: #D00000;
+  --gold-ink: #A30000;
+  --gold-soft: #F6E3DF;
+  --sky: #A30000;
+  --sky-soft: #F6E3DF;
+  --ok: #141414;
+  --ok-soft: #EBE5D8;
+  --bad: #8F1D1D;
+  --bad-soft: #F8E1DE;
   --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -30,16 +32,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
-    --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
-    --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+    --bg: #121110; --surface: #1C1A18; --surface-2: #24211E; --ink: #F2EEE6; --muted: #B5ADA1;
+    --line: #36322D; --gold: #FF5C5C; --gold-ink: #FF8A8A; --gold-soft: #3A1D1B; --sky: #FF8A8A;
+    --sky-soft: #3A1D1B; --ok: #F2EEE6; --ok-soft: #2A2723; --bad: #F1A299; --bad-soft: #3B1D19;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
-  --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
-  --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+  --bg: #121110; --surface: #1C1A18; --surface-2: #24211E; --ink: #F2EEE6; --muted: #B5ADA1;
+  --line: #36322D; --gold: #FF5C5C; --gold-ink: #FF8A8A; --gold-soft: #3A1D1B; --sky: #FF8A8A;
+  --sky-soft: #3A1D1B; --ok: #F2EEE6; --ok-soft: #2A2723; --bad: #F1A299; --bad-soft: #3B1D19;
   color-scheme: dark;
 }
 
@@ -119,6 +121,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tab .pill.now { background: var(--gold-soft); color: var(--gold-ink); }
 
 .panel { padding-top: 36px; display: grid; gap: 48px; }
+.panel[hidden] { display: none; }
 .panel > section { display: grid; gap: 18px; min-width: 0; }
 .section-head { display: grid; gap: 6px; }
 
@@ -1690,7 +1693,7 @@ Last piece: a pinned health issue the bot rewrites after every run. It pings me 
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
   const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
 
-  function select(id, focus) {
+  function select(id, focus, scroll) {
     tabs.forEach((t, i) => {
       const on = t.getAttribute('aria-controls') === id;
       t.setAttribute('aria-selected', String(on));
@@ -1698,17 +1701,21 @@ Last piece: a pinned health issue the bot rewrites after every run. It pings me 
       panels[i].hidden = !on;
       if (on && focus) t.focus();
     });
+    if (scroll) {
+      const bar = document.querySelector('.tabs');
+      if (bar.getBoundingClientRect().top <= 0) bar.scrollIntoView({ block: 'start' });
+    }
     try { history.replaceState(null, '', '#' + id); } catch (e) { /* sandboxed */ }
   }
   tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(t.getAttribute('aria-controls'), false));
+    t.addEventListener('click', () => select(t.getAttribute('aria-controls'), false, true));
     t.addEventListener('keydown', e => {
       let j = null;
       if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
       if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
       if (e.key === 'Home') j = 0;
       if (e.key === 'End') j = tabs.length - 1;
-      if (j !== null) { e.preventDefault(); select(tabs[j].getAttribute('aria-controls'), true); }
+      if (j !== null) { e.preventDefault(); select(tabs[j].getAttribute('aria-controls'), true, true); }
     });
   });
   const start = (location.hash || '').slice(1);
