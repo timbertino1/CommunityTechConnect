@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta, timezone
 
 import pytest
 
@@ -255,6 +255,33 @@ def test_events_outside_the_window_are_left_out() -> None:
     )
     result = CONNECTOR.parse(jsonld_source(), payload(past + far + soon, content_type="text/html"))
     assert [x.title for x in result.listings] == ["Next week"]
+
+
+def test_past_events_are_counted_with_the_latest_start() -> None:
+    # A group with nothing scheduled still shows its past meetings; the run report uses these
+    # to tell a quiet group from a broken reader.
+    def event(name: str, start: str) -> str:
+        return (
+            f'<script type="application/ld+json">{{"@type":"Event","name":"{name}",'
+            f'"startDate":"{start}"}}</script>'
+        )
+
+    page = (
+        event("August", "2026-08-11T17:30:00-05:00")
+        + event("October", "2026-10-13T17:30:00-05:00")
+        + event("October", "2026-10-13T17:30:00-05:00")  # same event on a linked page
+        + event("Next decade", "2036-01-01T18:00:00-06:00")  # ahead of the window: not past
+    )
+    result = CONNECTOR.parse(jsonld_source(), payload(page, content_type="text/html"))
+    assert result.listings == []
+    assert result.past == 2
+    assert result.latest_past == datetime(2026, 10, 13, 22, 30, tzinfo=UTC)
+
+
+def test_no_past_events_means_no_latest_past() -> None:
+    result = parse("jsonld/event_page.html")
+    assert result.past == 0
+    assert result.latest_past is None
 
 
 def test_address_parts_already_in_the_street_line_are_not_repeated() -> None:

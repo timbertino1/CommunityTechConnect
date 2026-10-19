@@ -52,6 +52,9 @@ class SourceOutcome:
     error: str | None = None
     skipped_reason: str | None = None
     duration_ms: int = 0
+    past: int = 0
+    """Events the source still shows that already ended (see ParseResult.past)."""
+    latest_past: datetime | None = None
 
 
 @dataclass
@@ -113,6 +116,7 @@ def run_sources(
                 source_timeout_seconds,
             )
             listings, warnings = _check_output(result, max_listings_per_source)
+            past, latest_past = _past_events(result)
         except Exception as exc:
             duration = _ms(clock() - started)
             error = safe_error_message(exc)
@@ -144,7 +148,13 @@ def run_sources(
         )
         outcomes.append(
             SourceOutcome(
-                source.id, "ok", listings=listings, warnings=warnings, duration_ms=duration
+                source.id,
+                "ok",
+                listings=listings,
+                warnings=warnings,
+                duration_ms=duration,
+                past=past,
+                latest_past=latest_past,
             )
         )
         logger.write(
@@ -190,6 +200,17 @@ def _skip_reason(source: Source, status: SourceStatus, now: datetime, force: boo
 def _fetch_and_parse(connector: Connector, source: Source, http: HttpClient) -> object:
     payload = connector.fetch(source, http)
     return connector.parse(source, payload)
+
+
+def _past_events(result: object) -> tuple[int, datetime | None]:
+    """The past-event summary, ignored unless well formed (connector output is untrusted)."""
+    past = getattr(result, "past", 0)
+    latest = getattr(result, "latest_past", None)
+    if not isinstance(past, int) or isinstance(past, bool) or past < 0:
+        return 0, None
+    if not isinstance(latest, datetime) or latest.tzinfo is None:
+        latest = None
+    return past, latest
 
 
 def _check_output(result: object, cap: int) -> tuple[list[RawListing], list[str]]:

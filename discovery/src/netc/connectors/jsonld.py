@@ -73,17 +73,23 @@ class JsonLdConnector:
         warnings = list(payload.warnings)
         listings: list[RawListing] = []
         seen: set[tuple[str | None, str]] = set()
+        past: set[tuple[str | None, str]] = set()
+        latest_past: datetime | None = None
         earliest = payload.fetched_at - WINDOW_BEHIND
         latest = payload.fetched_at + WINDOW_AHEAD
         for document in (payload, *payload.linked):
             for listing in _page_listings(document, warnings):
-                if not _in_window(listing, earliest, latest):
-                    continue
                 key = (listing.external_id or listing.url, listing.start.isoformat())
+                if not _in_window(listing, earliest, latest):
+                    start = _aware(listing.start)
+                    if start < earliest and key not in past:
+                        past.add(key)
+                        latest_past = start if latest_past is None else max(latest_past, start)
+                    continue
                 if key not in seen:
                     seen.add(key)
                     listings.append(listing)
-        return ParseResult(listings, warnings[:MAX_WARNINGS])
+        return ParseResult(listings, warnings[:MAX_WARNINGS], len(past), latest_past)
 
 
 # ---------------------------------------------------------------- following links
@@ -160,12 +166,12 @@ def _page_listings(document: RawPayload, warnings: list[str]) -> Iterator[RawLis
 def _in_window(listing: RawListing, earliest: datetime, latest: datetime) -> bool:
     """Same window as the iCal connector. Naive times are compared as if UTC (a few hours'
     difference at the edges does not matter)."""
+    finish = _aware(listing.end or listing.start)
+    return finish >= earliest and _aware(listing.start) <= latest
 
-    def aware(value: datetime) -> datetime:
-        return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
-    finish = aware(listing.end or listing.start)
-    return finish >= earliest and aware(listing.start) <= latest
+def _aware(value: datetime) -> datetime:
+    return value if value.tzinfo is not None else value.replace(tzinfo=UTC)
 
 
 def _nodes(data: Any) -> list[dict[str, Any]]:

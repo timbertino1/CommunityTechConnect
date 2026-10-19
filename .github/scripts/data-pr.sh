@@ -3,7 +3,8 @@
 #
 # Run from the repository root after `netc discover-events`. Commits only files under data/,
 # refuses to continue if anything else changed, pushes branch bot/data-<UTC date> with the
-# GitHub App token in GH_TOKEN, opens the PR if needed, and turns on auto-merge.
+# GitHub App token in GH_TOKEN, opens the PR if needed, and turns on auto-merge. If REPORT_FILE
+# names the run report from `netc discover-events --report`, it becomes the PR description.
 #
 #   CHECK_ONLY=1 .github/scripts/data-pr.sh   # only run the data/-only check
 set -euo pipefail
@@ -46,11 +47,19 @@ git add -- data
 git commit --quiet -m "data: discovery run ${stamp}"
 git push --force --quiet "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${branch}"
 
+body="$(mktemp)"
+{
+  echo "Automatic update from the scheduled discovery run (${stamp}). Changes only files under \`data/\`; it merges by itself once every check passes."
+  if [ -n "${REPORT_FILE:-}" ] && [ -s "$REPORT_FILE" ]; then
+    echo
+    cat "$REPORT_FILE"
+  fi
+} > "$body"
+
 if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+  gh pr edit "$branch" --body-file "$body"
   echo "Updated the open data PR on ${branch}."
 else
-  gh pr create --base main --head "$branch" \
-    --title "Data update ${today}" \
-    --body "Automatic update from the scheduled discovery run (${stamp}). Changes only files under \`data/\`; it merges by itself once every check passes."
+  gh pr create --base main --head "$branch" --title "Data update ${today}" --body-file "$body"
 fi
 gh pr merge "$branch" --auto --squash

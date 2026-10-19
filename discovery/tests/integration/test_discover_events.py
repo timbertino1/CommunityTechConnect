@@ -129,6 +129,35 @@ def test_a_second_run_at_the_same_time_changes_nothing(
     assert after == before
 
 
+def test_the_run_report_describes_the_run(
+    data: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path = tmp_path / "report.md"
+    code, out = discover(data, capsys, "--report", str(path))
+    assert code == 0, out
+    text = path.read_text(encoding="utf-8")
+    assert text.startswith("## Discovery run · ")
+    assert "**Sources:** 3 read, 1 failed, 0 skipped." in text
+    for name in ("UNL School of Computing", "Drupal Nebraska", "Partner calendar"):
+        assert f"| {name} | ✅ ok" in text
+    assert "| Broken source | ❌ failed (first failure) |" in text
+    assert "### Added to the site" in text
+    assert "`Industry in Residence: Nelnet`" in text
+    assert "from UNL School of Computing, Partner calendar" in text
+    assert "dropped: `Fall Semester Break` (`no safe https link" in text
+
+
+def test_the_report_explains_a_run_where_nothing_was_due(
+    data: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    discover(data, capsys)
+    path = tmp_path / "report.md"
+    discover(data, capsys, "--report", str(path))
+    text = path.read_text(encoding="utf-8")
+    assert "| UNL School of Computing | ⏭️ not due yet |" in text
+    assert "0 added to the site, 0 held for review, 0 updated." in text
+
+
 def test_dry_run_writes_nothing(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
     code, out = discover(data, capsys, "--dry-run")
     assert code == 0

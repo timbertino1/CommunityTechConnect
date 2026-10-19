@@ -12,6 +12,7 @@ from pathlib import Path
 from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp, SafeHttp
 from netc.pipeline.discover_events import discover_events
+from netc.pipeline.run_report import render_markdown
 from netc.pipeline.validate import validate_data
 from netc.site.build import BuildError, build_site
 from netc.storage import DataStore, StorageError
@@ -41,6 +42,9 @@ def _parser() -> argparse.ArgumentParser:
     discover.add_argument("--fixtures", type=Path, help="directory with index.json (offline)")
     discover.add_argument("--dry-run", action="store_true", help="report without writing data/")
     discover.add_argument("--force", action="store_true", help="read sources even if not due")
+    discover.add_argument(
+        "--report", type=Path, help="also write a Markdown run report to this file"
+    )
     discover.add_argument(
         "--now", type=_utc_datetime, help="run as if it were this UTC time (ISO 8601)"
     )
@@ -111,6 +115,8 @@ def _discover(args: argparse.Namespace) -> int:
         f"Events stored: {report.events_total}. New review items: {report.new_reviews}."
         + ("" if report.written else " (dry run: nothing written)")
     )
+    if args.report is not None:
+        args.report.write_bytes(render_markdown(report).encode("utf-8"))
     return 0
 
 
