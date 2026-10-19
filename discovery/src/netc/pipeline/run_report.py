@@ -10,18 +10,17 @@ posted on a public repository, and a code span is where GitHub does not turn tex
 
 from __future__ import annotations
 
-import re
 from collections import Counter
 from datetime import datetime
 from typing import Final
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+from netc.github.markdown import code_span, plain_name
 from netc.pipeline.discover_events import DiscoverReport, EventChange, SourceRow
 from netc.pipeline.timeutil import format_central
 
 CENTRAL: Final = ZoneInfo("America/Chicago")
-MAX_TEXT: Final = 140
 MAX_ITEMS: Final = 50
 """Longest list shown per section; the rest are counted."""
 MAX_REPORT_CHARS: Final = 60_000
@@ -32,12 +31,6 @@ SKIP_LABELS: Final = {
     "paused": "⏸️ paused",
     "blocked_by_terms": "⛔ blocked by terms",
 }
-_SPACE: Final = re.compile(r"\s+")
-_MARKDOWN: Final = re.compile(r"([\\`*_{}\[\]<>()#+!|~])")
-# GitHub finds @mentions, #123 links and bare URLs after rendering, so escaping doesn't stop
-# them; an invisible word joiner after the trigger character does.
-_JOIN: Final = "\N{WORD JOINER}"
-_TRIGGERS: Final = re.compile(r"([@#]|:(?=//))")
 
 
 def render_markdown(report: DiscoverReport) -> str:
@@ -73,8 +66,8 @@ def render_markdown(report: DiscoverReport) -> str:
     if failures:
         lines += ["", "### Failures", ""]
         lines += [
-            f"- **{_name(row.source.name)}** ({_failure_count(row)}): "
-            f"{_code(row.outcome.error or 'unknown error')}"
+            f"- **{plain_name(row.source.name)}** ({_failure_count(row)}): "
+            f"{code_span(row.outcome.error or 'unknown error')}"
             for row in failures
         ]
 
@@ -98,8 +91,8 @@ def render_markdown(report: DiscoverReport) -> str:
         repeats = Counter((s.source_id, s.kind, s.title, s.reason) for s in report.set_aside)
         lines += _capped(
             [
-                f"- {_name(names.get(sid, sid))}, {kind}: {_code(title)}"
-                + (f" ({_code(reason)})" if reason else "")
+                f"- {plain_name(names.get(sid, sid))}, {kind}: {code_span(title)}"
+                + (f" ({code_span(reason)})" if reason else "")
                 + (f", {n} times" if n > 1 else "")
                 for (sid, kind, title, reason), n in repeats.items()
             ]
@@ -116,11 +109,11 @@ def _source_row(row: SourceRow) -> str:
     outcome = row.outcome
     if outcome.status == "skipped":
         reason = outcome.skipped_reason or ""
-        result = SKIP_LABELS.get(reason, f"⏭️ skipped ({_name(reason)})")
-        return f"| {_name(row.source.name)} | {result} | | | | | | |"
+        result = SKIP_LABELS.get(reason, f"⏭️ skipped ({plain_name(reason)})")
+        return f"| {plain_name(row.source.name)} | {result} | | | | | | |"
     if outcome.status == "failed":
         result = f"❌ failed ({_failure_count(row)})"
-        return f"| {_name(row.source.name)} | {result} | | | | | | |"
+        return f"| {plain_name(row.source.name)} | {result} | | | | | | |"
     c = row.listings
     result = "✅ ok" + (f", {len(outcome.warnings)} warnings" if outcome.warnings else "")
     if row.source.trust == "probationary":
@@ -129,7 +122,7 @@ def _source_row(row: SourceRow) -> str:
     if latest and outcome.past > 1:
         latest += f" ({outcome.past} past shown)"
     return (
-        f"| {_name(row.source.name)} | {result} | {len(outcome.listings)} | {c['kept']} "
+        f"| {plain_name(row.source.name)} | {result} | {len(outcome.listings)} | {c['kept']} "
         f"| {c['held']} | {c['rejected']} | {c['dropped']} | {latest} |"
     )
 
@@ -138,12 +131,12 @@ def _change(change: EventChange, names: dict[str, str]) -> str:
     event = change.event
     when = format_central(event.start, event.end, all_day=event.all_day)
     host = urlsplit(event.original_url).hostname or ""
-    sources = ", ".join(dict.fromkeys(_name(names.get(x.source_id, x.source_id))
+    sources = ", ".join(dict.fromkeys(plain_name(names.get(x.source_id, x.source_id))
                                       for x in event.listings))  # fmt: skip
-    line = f"- {_code(event.title)} · {when} · {_code(host)} · from {sources}"
+    line = f"- {code_span(event.title)} · {when} · {code_span(host)} · from {sources}"
     if change.detail:
         label = "why" if change.kind == "held" else "changed"
-        line += f" · {label}: {_code(change.detail)}"
+        line += f" · {label}: {code_span(change.detail)}"
     return line
 
 
@@ -161,21 +154,3 @@ def _capped(items: list[str]) -> list[str]:
 def _day(value: datetime) -> str:
     local = value.astimezone(CENTRAL)
     return f"{local:%b} {local.day}, {local.year}"
-
-
-def _one_line(text: str) -> str:
-    text = _SPACE.sub(" ", text).strip()
-    return text if len(text) <= MAX_TEXT else text[: MAX_TEXT - 1].rstrip() + "…"
-
-
-def _code(text: str) -> str:
-    """Untrusted text as an inline code span. Backticks can't be escaped inside one, so they
-    become apostrophes; pipes would still split a table cell, so they become slashes."""
-    body = _one_line(text).replace("`", "'").replace("|", "/")
-    return f"`{body}`" if body else "`-`"
-
-
-def _name(text: str) -> str:
-    """A source name (reviewed data) as plain text: Markdown escaped, mentions and links broken."""
-    escaped = _MARKDOWN.sub(r"\\\1", _one_line(text))
-    return _TRIGGERS.sub(lambda m: m.group(1) + _JOIN, escaped) or "-"

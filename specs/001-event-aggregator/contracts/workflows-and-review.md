@@ -35,23 +35,27 @@ job has a timeout (discovery ≤ 60 min).
 - Body has one block per item, each with an approve and a reject checkbox:
 
 ```markdown
-**Event** · Omaha AI Night — Thu Nov 12, 6:00 PM CT · Omaha · AI & ML · `rev_ab12cd`
-Held: probationary source "Example Coworking" · [original page](https://…)
+**Event** · `Omaha AI Night` — Thu, Nov 12, 2026, 6:00 PM CT · Omaha · AI & ML · `rev_ab12cd34ef56`
+Held: `new event from a probationary source` · from Example Coworking · [original page](<https://…>)
 - [ ] approve
 - [ ] reject
 
-**Source** · Lincoln Rust Users (https://…) · found via web search · detected: iCal · `rev_ef34gh`
+**Source** · `Lincoln Rust Users (https://…)` · found via web search · detected: iCal · `rev_0a1b2c3d4e5f`
 Held: new source · sample events: 3
 - [ ] approve
 - [ ] reject
 ```
 
+- Text from other sites (titles, reasons) is shown in code spans, which can't contain a
+  backtick: it can't fake an item header, a `rev_` id or a checkbox, and GitHub doesn't turn
+  it into mentions, links or images. The PR is never rewritten once any box is ticked.
 - At merge: **approve** ticked → approved; **reject** ticked → rejected; neither or both ticked →
   stays pending and reappears in the next review PR. Closing without merge leaves everything
   pending.
 - `apply-review.yml` (on `push` to `main`, so it can use the `main`-only Environment) finds the
   merged PR for the commit and validates: PR head branch is `review/open`, PR author is the App,
-  merger has admin role, each `rev_` id exists and is pending. It then updates `review/queue.json`, event `review_state`, source
+  merger has admin role, the description was not edited after the merge, each `rev_` id is in
+  the PR's `open.json` snapshot and still pending. It then updates `review/queue.json`, event `review_state`, source
   counts, and applies promotion/pausing rules (FR-018), committing via a follow-up data PR on
   branch `bot/apply-review-<short-sha>` that auto-merges under the same data-only rule.
 

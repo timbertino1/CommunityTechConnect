@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 from collections.abc import Sequence
@@ -11,7 +12,10 @@ from pathlib import Path
 
 from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp, SafeHttp
+from netc.github.markdown import code_span, plain_name
+from netc.github.review_pr import build_review_pr, has_ticks, read_decisions
 from netc.pipeline.discover_events import discover_events
+from netc.pipeline.review import ApplyResult, apply_decisions, check_review_merge
 from netc.pipeline.run_report import render_markdown
 from netc.pipeline.validate import validate_data
 from netc.site.build import BuildError, build_site
@@ -19,7 +23,6 @@ from netc.storage import DataStore, StorageError
 
 PLANNED_COMMANDS = {
     "discover-sources": "Find and evaluate new event sources.",
-    "apply-review": "Apply decisions from a merged review pull request.",
 }
 
 
@@ -57,6 +60,39 @@ def _parser() -> argparse.ArgumentParser:
     site.add_argument("--out", type=Path, default=Path("dist"), help="output directory")
     site.add_argument("--web", type=Path, default=Path("web"), help="web assets directory")
     site.add_argument("--now", type=_utc_datetime, help="build as if it were this UTC time")
+    review = commands.add_parser(
+        "review-pr",
+        help="Write the review PR's title, description and data/review/open.json.",
+        description=(
+            "Write the review PR for every pending item: OUT/title.txt, OUT/body.md and "
+            "data/review/open.json. OUT/status says ready, none (nothing pending) or kept "
+            "(the open PR already has ticked boxes, so it is left alone)."
+        ),
+    )
+    review.add_argument("--data-dir", type=Path, default=Path("data"), help="data directory")
+    review.add_argument("--out", type=Path, required=True, help="directory for the PR files")
+    review.add_argument("--current-body", type=Path, help="description of the open review PR")
+    review.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
+    apply = commands.add_parser(
+        "apply-review",
+        help="Apply decisions from a merged review pull request.",
+        description=(
+            "Apply the ticks in a merged review PR, after checking the GitHub API responses "
+            "show it is the bot's review PR merged by an admin as exactly --commit."
+        ),
+    )
+    apply.add_argument("--data-dir", type=Path, default=Path("data"), help="data directory")
+    apply.add_argument("--commit", required=True, help="the pushed commit (github.sha)")
+    apply.add_argument("--pr", type=Path, required=True, help="GET /pulls/{number} response")
+    apply.add_argument(
+        "--permission", type=Path, required=True, help="collaborator permission response"
+    )
+    apply.add_argument(
+        "--edits", type=Path, required=True, help="GraphQL response with lastEditedAt"
+    )
+    apply.add_argument("--bot-login", required=True, help="the App's login, e.g. name[bot]")
+    apply.add_argument("--report", type=Path, help="write a Markdown summary to this file")
+    apply.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
     validate = commands.add_parser(
         "validate-data",
         help="Check every file in data/ against its schema and the data rules.",
@@ -76,6 +112,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _discover(args)
     if args.command == "build-site":
         return _build_site(args)
+    if args.command == "review-pr":
+        return _review_pr(args)
+    if args.command == "apply-review":
+        return _apply_review(args)
     print(f"netc {args.command}: not implemented yet", file=sys.stderr)
     return 2
 
@@ -133,6 +173,108 @@ def _build_site(args: argparse.Namespace) -> int:
         f"{report.events_listed} upcoming events listed."
     )
     return 0
+
+
+def _review_pr(args: argparse.Namespace) -> int:
+    now: datetime = args.now or datetime.now(UTC)
+    args.out.mkdir(parents=True, exist_ok=True)
+    status = args.out / "status"
+    if args.current_body is not None and has_ticks(args.current_body.read_text(encoding="utf-8")):
+        status.write_bytes(b"kept\n")
+        print("The open review PR already has ticked boxes; leaving it as it is.")
+        return 0
+    store = DataStore(args.data_dir)
+    try:
+        areas = store.read_areas()
+        pr = build_review_pr(
+            store.read_review_queue(),
+            store.read_events(),
+            store.read_sources(),
+            categories={c.id: c.label for c in store.read_categories()},
+            areas={a.id: a.label for a in areas.areas} if areas else {},
+            now=now,
+        )
+    except StorageError as exc:
+        print(f"netc review-pr: {exc}", file=sys.stderr)
+        return 1
+    if pr is None:
+        status.write_bytes(b"none\n")
+        print("Nothing is waiting for review.")
+        return 0
+    store.write_review_open(pr.review_ids)
+    (args.out / "title.txt").write_bytes(pr.title.encode("utf-8") + b"\n")
+    (args.out / "body.md").write_bytes(pr.body.encode("utf-8"))
+    status.write_bytes(b"ready\n")
+    more = f"; {pr.waiting} more wait for the next PR" if pr.waiting else ""
+    print(f"{pr.title}{more}.")
+    return 0
+
+
+def _apply_review(args: argparse.Namespace) -> int:
+    now: datetime = args.now or datetime.now(UTC)
+    try:
+        pr = json.loads(args.pr.read_text(encoding="utf-8"))
+        permission = json.loads(args.permission.read_text(encoding="utf-8"))
+        edits = json.loads(args.edits.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        print(f"netc apply-review: unreadable input: {exc}", file=sys.stderr)
+        return 1
+    if not all(isinstance(x, dict) for x in (pr, permission, edits)):
+        print("netc apply-review: the GitHub responses must be JSON objects", file=sys.stderr)
+        return 1
+    check = check_review_merge(pr, permission, edits, commit=args.commit, bot_login=args.bot_login)
+    if not check.ok or check.number is None:
+        print(f"netc apply-review: not applied: {check.reason}", file=sys.stderr)
+        return 1
+    body = pr.get("body")
+    store = DataStore(args.data_dir)
+    try:
+        result = apply_decisions(
+            store,
+            pr_number=check.number,
+            decisions=read_decisions(body if isinstance(body, str) else ""),
+            open_ids=store.read_review_open(),
+            now=now,
+        )
+    except StorageError as exc:
+        print(f"netc apply-review: {exc}", file=sys.stderr)
+        return 1
+    summary = _apply_summary(result)
+    print(summary.splitlines()[2])
+    if args.report is not None:
+        args.report.write_bytes(summary.encode("utf-8"))
+    return 0
+
+
+def _apply_summary(result: ApplyResult) -> str:
+    lines = [
+        f"## Decisions from review PR #{result.pr_number}",
+        "",
+        f"{len(result.approved)} approved, {len(result.rejected)} rejected, "
+        f"{result.still_pending} left waiting for the next review PR.",
+    ]
+    decided = (("Approved (published)", result.approved),
+               ("Rejected (kept off the site)", result.rejected))  # fmt: skip
+    for heading, items in decided:
+        if items:
+            lines += ["", f"### {heading}", ""]
+            lines += [f"- {code_span(result.titles.get(i.id, i.ref))} `{i.id}`" for i in items]
+    changed = (("Promoted to trusted", result.promoted),
+               ("Paused (more rejected than approved)", result.paused))  # fmt: skip
+    for heading, sources in changed:
+        if sources:
+            lines += ["", f"### {heading}", ""]
+            lines += [
+                f"- {plain_name(s.name)} ({s.approved_count} approved, {s.rejected_count} rejected)"
+                for s in sources
+            ]
+    if result.ignored:
+        lines += [
+            "",
+            f"Ignored {len(result.ignored)} ticked item(s) that were not in this PR's "
+            "snapshot or were already decided.",
+        ]
+    return "\n".join(lines) + "\n"
 
 
 def _validate(data_dir: Path) -> int:
