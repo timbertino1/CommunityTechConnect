@@ -1,0 +1,48 @@
+[
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "ai-ml",
+      "web-mobile"
+    ],
+    "end": "2026-10-22T01:30:00Z",
+    "first_seen": "2026-10-19T00:33:52Z",
+    "id": "evt_22ea791e1566",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-19T00:33:52Z",
+    "listings": [
+      {
+        "content_hash": "4543604f6844566e7612051f8881eebb0d476d86747d7de861b16f4763e49c15",
+        "external_id": "calendar.537358.field_start7.0.0",
+        "last_seen": "2026-10-19T00:33:52Z",
+        "missing_runs": 1,
+        "source_id": "src_drupal-nebraska",
+        "url": "https://groups.drupal.org/node/537358"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": "org_drupal-nebraska",
+    "original_unavailable": false,
+    "original_url": "https://groups.drupal.org/node/537358",
+    "review_state": "published",
+    "series_key": null,
+    "slug": "drupal-nebraska-oct-2026-us-central-timezone-quarterly-meeting-ai-2026-10-21",
+    "source_tz": "UTC",
+    "start": "2026-10-21T23:30:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Drupal Nebraska Oct 2026/US Central Timezone Quarterly Meeting: AI Framework for Drupal Development",
+    "tz_assumed": false,
+    "visibility": "shown"
+  }
+]
