@@ -1550,7 +1550,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     <p class="lede">Phase 8 is the owner's toolkit. Part of it couldn't wait: the UNL computing calendar is on probation, so each of its events needs a person to approve it, and until now those events just sat in a file. So the review tools came first, along with a report that says what every run did.</p>
     <div class="stats">
       <div class="stat"><span class="n">5<small> of 9</small></span><p>Phase 8 tasks done (the review PR and the health issue), plus two extras.</p></div>
-      <div class="stat"><span class="n">873</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">875</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">20<small> of 20</small></span><p>Event titles on the live UNL computing calendar now filtered out automatically. None of them are public events.</p></div>
     </div>
     <ul class="checklist">
@@ -1654,6 +1654,8 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <div class="notes">
       <div class="note hi"><div><h3>The first draft already found two problems</h3><p>Rendered against the real data, the health page showed UNL failing because its robots.txt timed out from GitHub, and main's data 21 hours old when a run should have landed in between. Those are exactly the two things it was built to catch.</p></div></div>
+      <div class="note hi"><div><h3>A run that read nothing</h3><p>The stale data turned out to be my bug. A source checked once a day became due 23 hours after its last read, but runs are 12 hours apart and GitHub often starts them late. After a run that started at 00:33 UTC, the next one found nothing due, did nothing in 24 seconds, and the one after would have skipped too: about 34 hours between reads. Now a source is read whenever waiting for the next run would make it late. The next manual run read every source, its data PR merged itself, and the health issue opened.</p></div></div>
+      <div class="note"><div><h3>An email the bot missed</h3><p>AI Omaha emailed about its Nov 5 talk, "From Auto-Complete to Dark Factories", and the site didn't have it: the group was only on the list of groups to look for later. A dry run with the existing Meetup reader found the event, so AI Omaha is now a source, and the talk is on the site.</p></div></div>
       <div class="note"><div><h3>Only the bot's own words count</h3><p>Anyone can open an issue called "Discovery health" or paste the bot's hidden marker into a comment. The script reads only the issue the bot opened and the comments the bot wrote.</p></div></div>
     </div>
   </section>
@@ -1668,7 +1670,7 @@ Event titles come from other websites, so they're shown as code: a title can't p
 Each run also posts a report: every source, what it found, and what changed on the site.
 Then I checked the live UNL computing calendar. All 20 titles were either academic dates or student-only events: recruiting visits, grad info sessions, a club fair. Rejecting them one by one would have gotten UNL paused, so they're now filtered out before review.
 Last piece: a pinned health issue the bot rewrites after every run. It pings me only when something needs me: at most once a day, and only once a week about the same problem.
-873 tests. Next: Phase 4, finding new groups automatically.
+875 tests. Next: Phase 4, finding new groups automatically.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-8"></span>
     </div>
