@@ -3,6 +3,51 @@
     "all_day": false,
     "area": "omaha",
     "categories": [
+      "ai-ml"
+    ],
+    "end": "2026-11-06T01:00:00Z",
+    "first_seen": "2026-10-19T22:47:07Z",
+    "id": "evt_cdc0a7432421",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-19T22:47:07Z",
+    "listings": [
+      {
+        "content_hash": "d8756740266c405f186cd2808de0da51f1bfc4002f769667495e6f2e93f6ae76",
+        "external_id": "https://www.meetup.com/ai_omaha/events/317053693/",
+        "last_seen": "2026-10-19T22:47:07Z",
+        "missing_runs": 1,
+        "source_id": "src_ai-omaha",
+        "url": "https://www.meetup.com/ai_omaha/events/317053693/"
+      }
+    ],
+    "location": {
+      "address": "14507 Frontier Rd, 14507 Frontier Rd, Omaha, NE 68138, USA, Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "14507 Frontier Rd"
+    },
+    "organizer_id": "org_ai-omaha",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/ai_omaha/events/317053693/",
+    "review_state": "published",
+    "series_key": null,
+    "slug": "from-auto-complete-to-dark-factories-accelerating-engineering-2026-11-05",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-05T23:30:00Z",
+    "status": "scheduled",
+    "summary": "What happens when AI helps your teams move faster than your processes were designed to handle? Join us at **[Werner Enterprises](https://werner.com/)** for",
+    "title": "From Auto-Complete to Dark Factories: Accelerating Engineering Practices",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
       "ai-ml",
       "networking-infra"
     ],
@@ -13,12 +58,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-19T00:33:52Z",
+    "last_verified": "2026-10-19T22:47:07Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-10-19T00:33:52Z",
+        "last_seen": "2026-10-19T22:47:07Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
