@@ -1,9 +1,10 @@
 """`netc build-site`: render the static site from data/ (T064; contracts/site-urls.md).
 
-Pages: ``/`` (upcoming, soonest first), ``/events/<slug>/`` (one per public event), and
-``/about/``. Only events that are published, shown, and not over are listed. Templates escape
-everything (Jinja autoescape) and contain no inline scripts or styles. ``web/`` assets (CSS, JS,
-``_headers``) are copied; tooling files are not. Public data files hold public fields only.
+Pages: ``/`` (upcoming, soonest first), ``/events/<slug>/`` (one per public event),
+``/about/``, and ``/404.html`` for unknown paths. Only events that are published, shown, and
+not over are listed. Templates escape everything (Jinja autoescape) and contain no inline
+scripts or styles. ``web/`` assets (CSS, JS, ``_headers``) are copied; tooling files are not.
+Public data files hold public fields only.
 """
 
 from __future__ import annotations
@@ -93,6 +94,9 @@ def build_site(
             **common,
         ),
     )
+    pages += 1
+    # Without 404.html, Cloudflare Pages serves index.html with a 200 for every unknown path.
+    _write(out_dir / "404.html", env.get_template("404.html").render(nav="", **common))
     pages += 1
 
     _copy_web(web_dir, out_dir)
