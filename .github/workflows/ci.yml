@@ -112,11 +112,28 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          outside="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | grep -v '^data/' || true)"
+          # Three dots: what the PR changed since it branched, not what main changed since.
+          changed="$(git diff --name-only "$BASE_SHA...$HEAD_SHA")"
+          if [ "$HEAD_REF" = "review/open" ]; then
+            other="$(printf '%s\n' "$changed" | grep -vx 'data/review/open.json' | grep . || true)"
+            if [ -n "$other" ]; then
+              echo "::error::The review PR may change only data/review/open.json. It also changes:"
+              echo "$other"
+              exit 1
+            fi
+            echo "The review PR changes only data/review/open.json."
+            exit 0
+          fi
+          outside="$(printf '%s\n' "$changed" | grep -v '^data/' | grep . || true)"
           if [ -n "$outside" ]; then
             echo "::error::A bot PR may change only data/. These files are outside it:"
             echo "$outside"
+            exit 1
+          fi
+          if printf '%s\n' "$changed" | grep -qx 'data/review/open.json'; then
+            echo "::error::Only the review PR may change data/review/open.json."
             exit 1
           fi
           echo "All changed files are under data/."

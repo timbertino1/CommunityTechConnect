@@ -87,3 +87,13 @@ def test_any_change_outside_data_is_refused(repo: Path, path: str) -> None:
     assert result.returncode == 1
     assert "Refusing" in result.stdout
     assert path.split("/")[0] in result.stdout
+
+
+def test_the_review_snapshot_is_refused(repo: Path) -> None:
+    # data/review/open.json belongs to the review PR; a data PR must never change it.
+    (repo / "data" / "events" / "2026-10.json").write_text('[{"x": 1}]\n', encoding="utf-8")
+    (repo / "data" / "review").mkdir()
+    (repo / "data" / "review" / "open.json").write_text('["rev_0123456789ab"]\n', encoding="utf-8")
+    result = check(repo)
+    assert result.returncode == 1
+    assert "data/review/open.json changed" in result.stdout

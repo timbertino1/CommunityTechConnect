@@ -1,0 +1,83 @@
+name: Apply review
+
+# When the owner merges the review PR, apply the ticked decisions (contracts/
+# workflows-and-review.md, "Review PR"). Runs on push to main, never pull_request_target, so it
+# can use the main-only `discovery` environment; for any other push it stops after one lookup.
+on:
+  push:
+    branches: [main]
+
+# The default token is read-only; the follow-up data PR is written with the GitHub App's token.
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    name: Apply decisions from a merged review PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: discovery
+    steps:
+      - name: Create the bot's token
+        id: bot
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Find the merged review PR
+        id: find
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          COMMIT_SHA: ${{ github.sha }}
+          OUT: ${{ runner.temp }}/review-merge
+        run: bash .github/scripts/find-review-merge.sh
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        if: steps.find.outputs.number != ''
+        with:
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: discovery/uv.lock
+      - name: Install
+        if: steps.find.outputs.number != ''
+        working-directory: discovery
+        run: uv sync --locked
+      - name: Apply the decisions
+        if: steps.find.outputs.number != ''
+        working-directory: discovery
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+          IN: ${{ runner.temp }}/review-merge
+          BOT_LOGIN: ${{ steps.bot.outputs.app-slug }}[bot]
+        run: >-
+          uv run netc apply-review --data-dir ../data --commit "$COMMIT_SHA"
+          --pr "$IN/pr.json" --permission "$IN/permission.json" --edits "$IN/edits.json"
+          --bot-login "$BOT_LOGIN" --report "$RUNNER_TEMP/apply-report.md"
+      - name: Validate data
+        if: steps.find.outputs.number != ''
+        working-directory: discovery
+        run: uv run netc validate-data --data-dir ../data
+      - name: Show the decisions
+        if: always() && steps.find.outputs.number != ''
+        run: |
+          if [ -f "$RUNNER_TEMP/apply-report.md" ]; then
+            cat "$RUNNER_TEMP/apply-report.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Open the follow-up data PR
+        if: steps.find.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
+          NUMBER: ${{ steps.find.outputs.number }}
+          SHA: ${{ github.sha }}
+          REPORT_FILE: ${{ runner.temp }}/apply-report.md
+        run: |
+          export BRANCH="bot/apply-review-${SHA:0:7}"
+          export TITLE="Apply review #${NUMBER}"
+          export INTRO="Applies the decisions from review PR #${NUMBER}. Changes only files under \`data/\`; it merges by itself once every check passes."
+          export COMMIT_MESSAGE="data: apply review #${NUMBER}"
+          bash .github/scripts/data-pr.sh
