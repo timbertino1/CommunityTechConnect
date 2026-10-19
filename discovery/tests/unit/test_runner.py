@@ -134,6 +134,34 @@ def test_successful_sources_return_their_listings_and_fresh_status() -> None:
     assert status.events_found_last_run == 3
 
 
+class PastEvents(FakeConnector):
+    def __init__(self, past: object, latest: object) -> None:
+        super().__init__(listings=0)
+        self.past, self.latest = past, latest
+
+    def parse(self, source: Source, payload: RawPayload) -> ParseResult:
+        return ParseResult([], [], self.past, self.latest)  # type: ignore[arg-type]
+
+
+def test_the_past_event_summary_is_passed_through() -> None:
+    latest = datetime(2026, 10, 13, 22, 30, tzinfo=UTC)
+    result, _ = run(sources("src_a"), PastEvents(4, latest))
+    (outcome,) = result.outcomes
+    assert (outcome.past, outcome.latest_past) == (4, latest)
+
+
+@pytest.mark.parametrize(
+    ("past", "latest"),
+    [(-1, None), (True, None), ("3", None), (2, "2026-10-13"), (2, datetime(2026, 10, 13))],
+)
+def test_a_malformed_past_event_summary_is_ignored(past: object, latest: object) -> None:
+    result, _ = run(sources("src_a"), PastEvents(past, latest))
+    (outcome,) = result.outcomes
+    assert outcome.status == "ok"
+    assert outcome.latest_past is None
+    assert outcome.past in (0, 2)
+
+
 def test_a_raising_connector_is_recorded_and_the_others_still_run() -> None:
     connector = PerSource({"src_bad": RuntimeError("boom")})
     result, _ = run(sources("src_bad", "src_good"), connector)

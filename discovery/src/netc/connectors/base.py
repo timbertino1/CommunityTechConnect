@@ -50,6 +50,10 @@ class RawPayload:
 class ParseResult:
     listings: list[RawListing]
     warnings: list[str] = field(default_factory=list)
+    past: int = 0
+    """Events the source still shows that ended before the window (not listed)."""
+    latest_past: datetime | None = None
+    """Start of the most recent of those (UTC), so a quiet source can be told from a broken one."""
 
 
 class Connector(Protocol):
