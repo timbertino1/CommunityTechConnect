@@ -27,7 +27,11 @@ from netc.pipeline.sanitize import scrub_pii, to_plain_text
 
 DEFAULT_SOURCE_TIMEOUT_SECONDS: Final = 120.0
 DEFAULT_MAX_LISTINGS_PER_SOURCE: Final = 2000
+RUN_GAP: Final = timedelta(hours=12)
+"""Time between scheduled runs (11:00 and 23:00 UTC). A source is read when waiting for the
+next run would leave it unread for longer than its interval (FR-002)."""
 DUE_SLACK: Final = timedelta(hours=1)
+"""Scheduled runs start late by minutes to hours, so the gap between two runs can be shorter."""
 MAX_ERROR_LENGTH: Final = 300
 _MAX_RAW_ERROR: Final = 10_000
 
@@ -193,7 +197,8 @@ def _skip_reason(source: Source, status: SourceStatus, now: datetime, force: boo
         return source.status
     if force or status.last_attempt is None:
         return None
-    due_at = status.last_attempt + timedelta(hours=source.check_interval_hours) - DUE_SLACK
+    interval = timedelta(hours=source.check_interval_hours)
+    due_at = status.last_attempt + interval - RUN_GAP - DUE_SLACK
     return None if now >= due_at else "not_due"
 
 
