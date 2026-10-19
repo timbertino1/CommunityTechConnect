@@ -14,9 +14,11 @@
   area: omaha
   cadence_days: null
   last_searched: null
-  links: []
+  links:
+  - https://www.meetup.com/ai_omaha/
   name: AI Omaha
-  source_ids: []
+  source_ids:
+  - src_ai-omaha
   status: active
 - aliases: []
   area: lincoln
