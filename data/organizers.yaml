@@ -1,5 +1,10 @@
 - aliases: []
   home_city: Omaha
+  id: org_ai-omaha
+  name: AI Omaha
+  url: https://www.meetup.com/ai_omaha/
+- aliases: []
+  home_city: Omaha
   id: org_drupal-nebraska
   name: Drupal Nebraska
   url: https://groups.drupal.org/nebraska

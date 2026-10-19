@@ -1,0 +1,23 @@
+added_at: '2026-10-19'
+approved_count: 0
+check_interval_hours: 24
+connector: jsonld
+default_area: omaha
+feed_url: null
+follow_links:
+  max_pages: 3
+  path_glob: /ai_omaha/events/[0-9]*
+found_via: null
+html_rules: null
+id: src_ai-omaha
+name: AI Omaha
+notes: 'Meetup (gate V1 decision): public event pages only, 10 s apart, no member data. Added by the owner
+  2026-10-19; trusted by owner decision.'
+organizer_id: org_ai-omaha
+origin: admin
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: trusted
+updated_at: null
+url: https://www.meetup.com/ai_omaha/events/
