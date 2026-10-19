@@ -66,6 +66,8 @@ jobs:
       - name: Install
         working-directory: discovery
         run: uv sync --locked
+      - name: Keep main's run status
+        run: cp data/state/source_status.json "$RUNNER_TEMP/previous-status.json" || true
       - name: Discover events
         working-directory: discovery
         env:
@@ -94,3 +96,22 @@ jobs:
           BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
           REPORT_FILE: ${{ runner.temp }}/run-report.md
         run: bash .github/scripts/data-pr.sh
+      # After the data PR, so a problem here never holds up the data. Its own token, so the
+      # data PR's token can't touch issues.
+      - name: Create the bot's issue token
+        id: issues
+        continue-on-error: true
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-issues: write
+      - name: Update the Discovery health issue
+        if: steps.issues.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ steps.issues.outputs.token }}
+          BOT_SLUG: ${{ steps.issues.outputs.app-slug }}
+          OWNER: ${{ github.repository_owner }}
+          PREVIOUS_STATUS: ${{ runner.temp }}/previous-status.json
+        run: bash .github/scripts/health-issue.sh

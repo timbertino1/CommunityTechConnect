@@ -317,7 +317,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
       <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
-      <li class="now"><div class="bar"><span style="width:44%"></span></div><div class="lbl"><b>08</b>Admin tools</div></li>
+      <li class="now"><div class="bar"><span style="width:56%"></span></div><div class="lbl"><b>08</b>Admin tools</div></li>
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
@@ -1549,15 +1549,15 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <p class="lede">Phase 8 is the owner's toolkit. Part of it couldn't wait: the UNL computing calendar is on probation, so each of its events needs a person to approve it, and until now those events just sat in a file. So the review tools came first, along with a report that says what every run did.</p>
     <div class="stats">
-      <div class="stat"><span class="n">4<small> of 9</small></span><p>Phase 8 tasks done (the review PR), plus two extras.</p></div>
-      <div class="stat"><span class="n">822</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">5<small> of 9</small></span><p>Phase 8 tasks done (the review PR and the health issue), plus two extras.</p></div>
+      <div class="stat"><span class="n">873</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">20<small> of 20</small></span><p>Event titles on the live UNL computing calendar now filtered out automatically. None of them are public events.</p></div>
     </div>
     <ul class="checklist">
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Run report</b><small>Every run explains itself in the Actions summary and the bot's data PR. Merged in PR #22.</small></div><span class="ids">extra</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The review PR</b><small>Approve and reject boxes for each held event; merging applies them, after strict checks. Merged in PR #23.</small></div><span class="ids">T120&ndash;T123</span></li>
-      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>No student-only events</b><small>Recruiting visits, grad info sessions and student-life events are filtered out before review.</small></div><span class="ids">extra</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Health issue</b><small>One pinned issue that shows which sources are failing.</small></div><span class="ids">T124</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>No student-only events</b><small>Recruiting visits, grad info sessions and student-life events are filtered out before review. Merged in PR #24.</small></div><span class="ids">extra</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Health issue</b><small>One pinned issue that shows every source's health, and pings me only when something needs me.</small></div><span class="ids">T124</span></li>
       <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Overrides, admin guide, checkpoint</b><small>Hide or fix one event by hand, write it all down, then do a real review end to end.</small></div><span class="ids">T125&ndash;T128</span></li>
     </ul>
   </section>
@@ -1641,6 +1641,24 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 4 &middot; The health issue</p>
+      <h2>One page to check, and a ping only when it matters</h2>
+      <p class="muted prose">After every run the bot rewrites one pinned GitHub issue, <b>Discovery health</b>: a table of every source (status, trust, how it was found, last successful check, events found, failures in a row), then failing sources, items waiting for review, quiet groups, unmatched mentions, new sources, and whether runs are reaching the site.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Edits are silent, comments aren't</h3><p>GitHub doesn't notify anyone when an issue is edited, so rewriting it twice a day costs me nothing. When I need to act, the bot adds a comment that mentions me.</p></div>
+      <div class="card"><h3>No nagging</h3><p>At most one comment a day. A problem it has already told me about comes up again only after a week; a new problem is reported at the next run.</p></div>
+      <div class="card"><h3>One failure isn't news</h3><p>A source has to fail two runs in a row, about a day, before it counts. One timeout is usually just a blip.</p></div>
+      <div class="card"><h3>Is the site keeping up?</h3><p>Each run checks how old the data on main was before it started. Over 36 hours means the bot's data PRs aren't merging, even though the runs themselves look fine.</p></div>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>The first draft already found two problems</h3><p>Rendered against the real data, the health page showed UNL failing because its robots.txt timed out from GitHub, and main's data 21 hours old when a run should have landed in between. Those are exactly the two things it was built to catch.</p></div></div>
+      <div class="note"><div><h3>Only the bot's own words count</h3><p>Anyone can open an issue called "Discovery health" or paste the bot's hidden marker into a comment. The script reads only the issue the bot opened and the comments the bot wrote.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share the review tools</h3><button class="btn" type="button" data-copy="post-phase-8">Copy post</button></div>
       <label class="eyebrow" for="post-phase-8">Suggested post (edit freely)</label>
@@ -1649,7 +1667,8 @@ Some sources are on probation, so a person approves each of their events before 
 Event titles come from other websites, so they're shown as code: a title can't pretend to be a box I already ticked.
 Each run also posts a report: every source, what it found, and what changed on the site.
 Then I checked the live UNL computing calendar. All 20 titles were either academic dates or student-only events: recruiting visits, grad info sessions, a club fair. Rejecting them one by one would have gotten UNL paused, so they're now filtered out before review.
-822 tests. Next: Phase 4, finding new groups automatically.
+Last piece: a pinned health issue the bot rewrites after every run. It pings me only when something needs me: at most once a day, and only once a week about the same problem.
+873 tests. Next: Phase 4, finding new groups automatically.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-8"></span>
     </div>

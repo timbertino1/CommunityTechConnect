@@ -61,10 +61,16 @@ Held: new source · sample events: 3
 
 ## Health issue
 
-- One pinned issue titled `Discovery health`, edited in place weekly (and daily if failures).
+- One pinned issue titled `Discovery health`, opened by the App and edited in place after every
+  discovery run (edits don't notify anyone, so this costs the owner nothing).
 - Sections: failing sources, quiet groups, unresolved mentions, new sources this week by
   channel, AI and search spend vs. budget, schedule status.
 - Includes a **Sources** table listing every source: name, status, trust, how it was found,
   last successful check, events found last run, consecutive failures (FR-042).
 - When something needs action, posts a **new comment** mentioning the owner (comments notify;
   issue edits do not), at most one per day (FR-044, SC-010).
+- Needs action: an active source failing 2 runs in a row, items waiting for review, or main's
+  data more than 36 hours old before the run. A problem already reported is repeated only after
+  7 days; a new one is reported at the next run (still at most one comment a day). Each comment
+  ends with a hidden `<!-- netc-health-alert: … -->` marker listing what it reported. Only the
+  App's own issue and comments are read.
