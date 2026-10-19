@@ -81,25 +81,11 @@ def build_review_pr(
     """
     by_event = {e.id: e for e in events}
     names = {s.id: s.name for s in sources}
-    listed: list[tuple[tuple[int, str, str], ReviewItem]] = []
-    for item in queue:
-        if item.decision != "pending":
-            continue
-        if item.kind == "event":
-            event = by_event.get(item.ref)
-            if event is None or event.review_state != "pending_review":
-                continue
-            if (event.end or event.start) <= now:
-                continue
-            key = (0, event.start.isoformat(), item.id)
-        else:
-            key = (1, item.created.isoformat(), item.id)
-        listed.append((key, item))
+    listed = pending_items(queue, by_event.values(), now=now)
     if not listed:
         return None
 
-    listed.sort(key=lambda pair: pair[0])
-    shown = [item for _, item in listed[:MAX_ITEMS]]
+    shown = listed[:MAX_ITEMS]
     waiting = len(listed) - len(shown)
     blocks = [
         _event_block(item, by_event[item.ref], names, categories, areas)
@@ -122,6 +108,29 @@ def build_review_pr(
     kinds = [KIND_LABELS[k][1] for k in KIND_LABELS if any(i.kind == k for i in shown)]
     title = f"Review: {count} item{'s' if count != 1 else ''} ({', '.join(kinds)})"
     return ReviewPr(title, "\n".join(lines) + "\n", sorted(i.id for i in shown), waiting)
+
+
+def pending_items(
+    queue: Iterable[ReviewItem], events: Iterable[Event], *, now: datetime
+) -> list[ReviewItem]:
+    """The items still waiting for a decision, in review PR order (see build_review_pr)."""
+    by_event = {e.id: e for e in events}
+    listed: list[tuple[tuple[int, str, str], ReviewItem]] = []
+    for item in queue:
+        if item.decision != "pending":
+            continue
+        if item.kind == "event":
+            event = by_event.get(item.ref)
+            if event is None or event.review_state != "pending_review":
+                continue
+            if (event.end or event.start) <= now:
+                continue
+            key = (0, event.start.isoformat(), item.id)
+        else:
+            key = (1, item.created.isoformat(), item.id)
+        listed.append((key, item))
+    listed.sort(key=lambda pair: pair[0])
+    return [item for _, item in listed]
 
 
 def read_decisions(body: str) -> dict[str, Decision]:

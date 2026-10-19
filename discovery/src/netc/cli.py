@@ -12,8 +12,10 @@ from pathlib import Path
 
 from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp, SafeHttp
+from netc.github.health import LastAlert, alert_comment, build_health
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import build_review_pr, has_ticks, read_decisions
+from netc.models import SourceStatus
 from netc.pipeline.discover_events import discover_events
 from netc.pipeline.review import ApplyResult, apply_decisions, check_review_merge
 from netc.pipeline.run_report import render_markdown
@@ -93,6 +95,24 @@ def _parser() -> argparse.ArgumentParser:
     apply.add_argument("--bot-login", required=True, help="the App's login, e.g. name[bot]")
     apply.add_argument("--report", type=Path, help="write a Markdown summary to this file")
     apply.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
+    health = commands.add_parser(
+        "health-issue",
+        help="Write the Discovery health issue's description and any alert comment.",
+        description=(
+            "Write OUT/body.md (the Discovery health issue's description) and, when something "
+            "needs the owner and they haven't been told recently, OUT/comment.md."
+        ),
+    )
+    health.add_argument("--data-dir", type=Path, default=Path("data"), help="data directory")
+    health.add_argument("--out", type=Path, required=True, help="directory for the issue files")
+    health.add_argument("--owner", required=True, help="GitHub login to mention in alerts")
+    health.add_argument(
+        "--previous-status", type=Path, help="main's state/source_status.json from before the run"
+    )
+    health.add_argument(
+        "--last-alert", type=Path, help='the last alert comment as {"created_at", "body"} JSON'
+    )
+    health.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
     validate = commands.add_parser(
         "validate-data",
         help="Check every file in data/ against its schema and the data rules.",
@@ -116,6 +136,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _review_pr(args)
     if args.command == "apply-review":
         return _apply_review(args)
+    if args.command == "health-issue":
+        return _health_issue(args)
     print(f"netc {args.command}: not implemented yet", file=sys.stderr)
     return 2
 
@@ -275,6 +297,64 @@ def _apply_summary(result: ApplyResult) -> str:
             "snapshot or were already decided.",
         ]
     return "\n".join(lines) + "\n"
+
+
+def _health_issue(args: argparse.Namespace) -> int:
+    now: datetime = args.now or datetime.now(UTC)
+    store = DataStore(args.data_dir)
+    try:
+        health = build_health(
+            store.read_sources(),
+            store.read_source_status(),
+            store.read_events(),
+            store.read_review_queue(),
+            store.read_mentions(),
+            now=now,
+            previous_status=_previous_status(args.previous_status),
+        )
+        comment = alert_comment(
+            health, owner=args.owner, last=_last_alert(args.last_alert), now=now
+        )
+    except (StorageError, ValueError) as exc:
+        print(f"netc health-issue: {exc}", file=sys.stderr)
+        return 1
+    args.out.mkdir(parents=True, exist_ok=True)
+    (args.out / "body.md").write_bytes(health.body.encode("utf-8"))
+    alert = args.out / "comment.md"
+    alert.unlink(missing_ok=True)
+    if comment is not None:
+        alert.write_bytes(comment.encode("utf-8"))
+    count = len(health.attention)
+    needs = "1 thing needs" if count == 1 else f"{count} things need"
+    alert_note = "; posting an alert." if comment else "; no alert this time." if count else "."
+    print(f"{needs} attention{alert_note}")
+    return 0
+
+
+def _previous_status(path: Path | None) -> dict[str, SourceStatus] | None:
+    """Main's run status from before this run; unreadable means unknown, not an error."""
+    if path is None or not path.is_file():
+        return None
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        return {str(k): SourceStatus.model_validate(v) for k, v in raw.items()}
+    except (OSError, ValueError, AttributeError) as exc:
+        print(f"netc health-issue: ignoring --previous-status: {exc}", file=sys.stderr)
+        return None
+
+
+def _last_alert(path: Path | None) -> LastAlert | None:
+    """The bot's last alert comment, as the script found it; none (or unreadable) means none."""
+    if path is None or not path.is_file() or not path.read_text(encoding="utf-8").strip():
+        return None
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict) or not isinstance(raw.get("body"), str):
+        raise ValueError("--last-alert must be a JSON object with created_at and body")
+    try:
+        posted = _utc_datetime(str(raw.get("created_at")))
+    except argparse.ArgumentTypeError as exc:
+        raise ValueError(f"--last-alert created_at: {exc}") from exc
+    return LastAlert(posted, raw["body"])
 
 
 def _validate(data_dir: Path) -> int:
