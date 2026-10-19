@@ -10,7 +10,8 @@ import pytest
 from selectolax.lexbor import LexborHTMLParser
 
 from netc.models import Event
-from tests.data_samples import utc
+from netc.storage import DataStore
+from tests.data_samples import make_override, utc
 from tests.site_support import build, html_files, make_data, site_event
 
 pytestmark = pytest.mark.integration
@@ -78,6 +79,10 @@ def events() -> list[Event]:
 @pytest.fixture
 def site(tmp_path: Path) -> Path:
     data = make_data(tmp_path / "data", events())
+    # Events are hidden only by an override (FR-019); the stored "hidden" is what the last run
+    # applied.
+    hidden = next(e for e in events() if e.title == "Hidden by admin")
+    DataStore(data).write_overrides([make_override(hidden.id, reason="spam")])
     out = tmp_path / "dist"
     assert build(data, out) == 0
     return out
@@ -204,3 +209,22 @@ def test_building_twice_gives_identical_output(tmp_path: Path) -> None:
         return {p.relative_to(root): p.read_bytes() for p in root.rglob("*") if p.is_file()}
 
     assert read(first) == read(second)
+
+
+def test_an_override_takes_effect_at_the_next_build(tmp_path: Path) -> None:
+    # An override merged by PR applies at deploy, without waiting for a discovery run.
+    listed = events()
+    shown = next(e for e in listed if e.title == "Prairie Python November")
+    data = make_data(tmp_path / "data", listed)
+    DataStore(data).write_overrides([make_override(shown.id, reason="duplicate listing")])
+    out = tmp_path / "dist"
+    assert build(data, out) == 0
+    assert "Prairie Python November" not in (out / "index.html").read_text(encoding="utf-8")
+    assert not (out / "events" / shown.slug).exists()
+
+
+def test_removing_the_override_shows_the_event_again(tmp_path: Path) -> None:
+    data = make_data(tmp_path / "data", events())
+    out = tmp_path / "dist"
+    assert build(data, out) == 0
+    assert "Hidden by admin" in (out / "index.html").read_text(encoding="utf-8")

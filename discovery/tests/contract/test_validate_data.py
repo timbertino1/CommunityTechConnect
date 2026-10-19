@@ -283,6 +283,23 @@ def test_override_for_unknown_event_fails(data: Path, capsys: pytest.CaptureFixt
     assert "evt_ffffffffffff" in out
 
 
+def test_an_override_that_changes_nothing_fails(
+    data: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    event_id = DataStore(data).read_events()[0].id
+    DataStore(data).write_overrides([make_override(event_id, visibility=None)])
+    code, out = run(data, capsys)
+    assert code == 1
+    assert "sets none of visibility, categories, area" in out
+
+
+def test_a_valid_override_passes(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    event_id = DataStore(data).read_events()[0].id
+    DataStore(data).write_overrides([make_override(event_id, reason="duplicate")])
+    code, out = run(data, capsys)
+    assert code == 0, out
+
+
 def test_open_review_ids_must_exist_in_the_queue(
     data: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

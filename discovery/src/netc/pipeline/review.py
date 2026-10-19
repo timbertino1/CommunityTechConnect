@@ -25,6 +25,7 @@ from typing import Any, Final
 
 from netc.github.review_pr import REVIEW_BRANCH, Decision
 from netc.models import Event, ReviewItem, Source
+from netc.pipeline.overrides import apply_overrides
 from netc.storage import DataStore
 
 PROMOTE_AFTER_APPROVALS: Final = 3
@@ -151,7 +152,8 @@ def apply_decisions(
     if result.approved or result.rejected:
         store.write_review_queue(new_queue)
     if events_changed:
-        store.write_events(sorted(events.values(), key=lambda e: (e.start, e.id)))
+        ordered = sorted(events.values(), key=lambda e: (e.start, e.id))
+        store.write_events(apply_overrides(ordered, store.read_overrides()))
     for source in changed_sources:
         store.write_source(source)
     return result
