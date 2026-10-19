@@ -5,24 +5,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a build log. Masthead + 10-phase rail on top, one tab per chapter below,
+/* Layout: a build log. Masthead + 10-phase rail on top, one tab per chapter below (only the
+   selected chapter is shown),
    each chapter = summary, mechanism diagrams, what happened, a post to share. */
 :root {
-  --bg: #F3F5F2;
-  --surface: #FFFFFF;
-  --surface-2: #E8EEEA;
-  --ink: #15211C;
-  --muted: #56655E;
-  --line: #D3DBD6;
-  --gold: #B7791F;
-  --gold-ink: #835509;
-  --gold-soft: #F6E8CC;
-  --sky: #2C6A96;
-  --sky-soft: #DCEAF4;
-  --ok: #2F7D4F;
-  --ok-soft: #DDF0E3;
-  --bad: #B4372F;
-  --bad-soft: #F7DEDB;
+  /* NETechConnect site colors (web/css/site.css): cream, Husker scarlet, black. */
+  --bg: #F7F3EA;
+  --surface: #FFFDF8;
+  --surface-2: #EFE9DD;
+  --ink: #141414;
+  --muted: #4D4A45;
+  --line: #DDD5C6;
+  --gold: #D00000;
+  --gold-ink: #A30000;
+  --gold-soft: #F6E3DF;
+  --sky: #A30000;
+  --sky-soft: #F6E3DF;
+  --ok: #141414;
+  --ok-soft: #EBE5D8;
+  --bad: #8F1D1D;
+  --bad-soft: #F8E1DE;
   --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -30,16 +32,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
-    --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
-    --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+    --bg: #121110; --surface: #1C1A18; --surface-2: #24211E; --ink: #F2EEE6; --muted: #B5ADA1;
+    --line: #36322D; --gold: #FF5C5C; --gold-ink: #FF8A8A; --gold-soft: #3A1D1B; --sky: #FF8A8A;
+    --sky-soft: #3A1D1B; --ok: #F2EEE6; --ok-soft: #2A2723; --bad: #F1A299; --bad-soft: #3B1D19;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0F1513; --surface: #161E1B; --surface-2: #1D2824; --ink: #E4EBE7; --muted: #97A69F;
-  --line: #2B3833; --gold: #E2A63F; --gold-ink: #F0C374; --gold-soft: #3A2E17; --sky: #6FA9D4;
-  --sky-soft: #17293A; --ok: #5DBE86; --ok-soft: #17301F; --bad: #E87A70; --bad-soft: #3A1C19;
+  --bg: #121110; --surface: #1C1A18; --surface-2: #24211E; --ink: #F2EEE6; --muted: #B5ADA1;
+  --line: #36322D; --gold: #FF5C5C; --gold-ink: #FF8A8A; --gold-soft: #3A1D1B; --sky: #FF8A8A;
+  --sky-soft: #3A1D1B; --ok: #F2EEE6; --ok-soft: #2A2723; --bad: #F1A299; --bad-soft: #3B1D19;
   color-scheme: dark;
 }
 
@@ -119,6 +121,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tab .pill.now { background: var(--gold-soft); color: var(--gold-ink); }
 
 .panel { padding-top: 36px; display: grid; gap: 48px; }
+.panel[hidden] { display: none; }
 .panel > section { display: grid; gap: 18px; min-width: 0; }
 .section-head { display: grid; gap: 6px; }
 
@@ -1550,7 +1553,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     <p class="lede">Phase 8 is the owner's toolkit. Part of it couldn't wait: the UNL computing calendar is on probation, so each of its events needs a person to approve it, and until now those events just sat in a file. So the review tools came first, along with a report that says what every run did.</p>
     <div class="stats">
       <div class="stat"><span class="n">5<small> of 9</small></span><p>Phase 8 tasks done (the review PR and the health issue), plus two extras.</p></div>
-      <div class="stat"><span class="n">873</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">875</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">20<small> of 20</small></span><p>Event titles on the live UNL computing calendar now filtered out automatically. None of them are public events.</p></div>
     </div>
     <ul class="checklist">
@@ -1654,6 +1657,8 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <div class="notes">
       <div class="note hi"><div><h3>The first draft already found two problems</h3><p>Rendered against the real data, the health page showed UNL failing because its robots.txt timed out from GitHub, and main's data 21 hours old when a run should have landed in between. Those are exactly the two things it was built to catch.</p></div></div>
+      <div class="note hi"><div><h3>A run that read nothing</h3><p>The stale data turned out to be my bug. A source checked once a day became due 23 hours after its last read, but runs are 12 hours apart and GitHub often starts them late. After a run that started at 00:33 UTC, the next one found nothing due, did nothing in 24 seconds, and the one after would have skipped too: about 34 hours between reads. Now a source is read whenever waiting for the next run would make it late. The next manual run read every source, its data PR merged itself, and the health issue opened.</p></div></div>
+      <div class="note"><div><h3>An email the bot missed</h3><p>AI Omaha emailed about its Nov 5 talk, "From Auto-Complete to Dark Factories", and the site didn't have it: the group was only on the list of groups to look for later. A dry run with the existing Meetup reader found the event, so AI Omaha is now a source, and the talk is on the site.</p></div></div>
       <div class="note"><div><h3>Only the bot's own words count</h3><p>Anyone can open an issue called "Discovery health" or paste the bot's hidden marker into a comment. The script reads only the issue the bot opened and the comments the bot wrote.</p></div></div>
     </div>
   </section>
@@ -1668,7 +1673,7 @@ Event titles come from other websites, so they're shown as code: a title can't p
 Each run also posts a report: every source, what it found, and what changed on the site.
 Then I checked the live UNL computing calendar. All 20 titles were either academic dates or student-only events: recruiting visits, grad info sessions, a club fair. Rejecting them one by one would have gotten UNL paused, so they're now filtered out before review.
 Last piece: a pinned health issue the bot rewrites after every run. It pings me only when something needs me: at most once a day, and only once a week about the same problem.
-873 tests. Next: Phase 4, finding new groups automatically.
+875 tests. Next: Phase 4, finding new groups automatically.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-8"></span>
     </div>
@@ -1688,7 +1693,7 @@ Last piece: a pinned health issue the bot rewrites after every run. It pings me 
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
   const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
 
-  function select(id, focus) {
+  function select(id, focus, scroll) {
     tabs.forEach((t, i) => {
       const on = t.getAttribute('aria-controls') === id;
       t.setAttribute('aria-selected', String(on));
@@ -1696,17 +1701,21 @@ Last piece: a pinned health issue the bot rewrites after every run. It pings me 
       panels[i].hidden = !on;
       if (on && focus) t.focus();
     });
+    if (scroll) {
+      const bar = document.querySelector('.tabs');
+      if (bar.getBoundingClientRect().top <= 0) bar.scrollIntoView({ block: 'start' });
+    }
     try { history.replaceState(null, '', '#' + id); } catch (e) { /* sandboxed */ }
   }
   tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(t.getAttribute('aria-controls'), false));
+    t.addEventListener('click', () => select(t.getAttribute('aria-controls'), false, true));
     t.addEventListener('keydown', e => {
       let j = null;
       if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
       if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
       if (e.key === 'Home') j = 0;
       if (e.key === 'End') j = tabs.length - 1;
-      if (j !== null) { e.preventDefault(); select(tabs[j].getAttribute('aria-controls'), true); }
+      if (j !== null) { e.preventDefault(); select(tabs[j].getAttribute('aria-controls'), true, true); }
     });
   });
   const start = (location.hash || '').slice(1);
