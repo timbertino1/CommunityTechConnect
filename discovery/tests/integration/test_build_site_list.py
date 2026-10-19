@@ -154,6 +154,18 @@ def test_about_page_exists_and_names_the_bot(site: Path) -> None:
     assert "robots.txt" in about
 
 
+def test_not_found_page_exists_and_links_home(site: Path) -> None:
+    # Cloudflare Pages answers unknown paths with index.html and a 200 unless 404.html exists.
+    page = LexborHTMLParser((site / "404.html").read_text(encoding="utf-8"))
+    heading, stylesheet = page.css_first("h1"), page.css_first('link[rel="stylesheet"]')
+    assert heading is not None
+    assert "not found" in heading.text().lower()
+    assert any(a.attributes.get("href") == "/" for a in page.css("main a"))
+    # Root-relative, because this page is served at whatever path was requested.
+    assert stylesheet is not None
+    assert stylesheet.attributes["href"] == "/css/site.css"
+
+
 def test_empty_data_says_no_events_found(tmp_path: Path) -> None:
     data = make_data(tmp_path / "data", [])
     out = tmp_path / "dist"

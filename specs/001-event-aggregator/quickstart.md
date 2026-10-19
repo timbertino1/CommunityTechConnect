@@ -21,7 +21,9 @@ cd ../workers && npm ci
 
 ```bash
 # Offline: connectors read recorded fixtures, AI and search are stubbed
-uv run netc discover-events --offline --fixtures tests/fixtures/sources
+# discover-events: the fixture index.json maps example.org URLs to files, so --data-dir must hold
+# sources that use those URLs (tests/integration/test_discover_events.py sets one up), not data/.
+uv run netc discover-events --offline --fixtures tests/fixtures/integration --data-dir <dir>
 uv run netc discover-sources --offline --fixtures tests/fixtures/finders
 
 # Live (local, dry run: writes to ./.out/data instead of ./data, opens no PRs)
