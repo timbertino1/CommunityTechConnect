@@ -291,10 +291,11 @@ def test_paused_and_blocked_sources_are_skipped_untouched(status: str) -> None:
 
 
 def test_sources_checked_recently_are_not_due() -> None:
+    # A manual run a few hours after a scheduled one reads nothing again.
     connector = FakeConnector()
     previous = {
         "src_a": SourceStatus(
-            last_attempt=NOW - timedelta(hours=12), last_success=NOW - timedelta(hours=12)
+            last_attempt=NOW - timedelta(hours=6), last_success=NOW - timedelta(hours=6)
         )
     }
     result, _ = run(sources("src_a"), connector, previous)
@@ -302,10 +303,18 @@ def test_sources_checked_recently_are_not_due() -> None:
     assert result.outcomes[0].skipped_reason == "not_due"
 
 
-def test_a_source_is_due_within_an_hour_of_its_interval() -> None:
-    # Twice-daily runs drift by minutes; a 24-hour source attempted 23h30m ago is due.
+@pytest.mark.parametrize(
+    "age",
+    [
+        timedelta(hours=11, minutes=30),  # a late run followed by an on-time one
+        timedelta(hours=16, minutes=44),  # 00:33 to 17:17 UTC, Oct 19, 2026 (was skipped)
+        timedelta(hours=23, minutes=30),
+    ],
+)
+def test_a_source_is_due_if_waiting_for_the_next_run_would_make_it_late(age: timedelta) -> None:
+    # Runs are 12 hours apart: a 24-hour source skipped now would go unread for over a day.
     connector = FakeConnector()
-    previous = {"src_a": SourceStatus(last_attempt=NOW - timedelta(hours=23, minutes=30))}
+    previous = {"src_a": SourceStatus(last_attempt=NOW - age)}
     run(sources("src_a"), connector, previous)
     assert connector.calls == ["src_a"]
 
