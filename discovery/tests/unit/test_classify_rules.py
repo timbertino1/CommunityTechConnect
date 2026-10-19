@@ -58,7 +58,7 @@ def run(i: ClassifyInput):  # type: ignore[no-untyped-def]
         ),
         ("Drupal Nebraska quarterly meeting", "", "web-mobile"),
         (
-            "Industry in Residence: Nelnet",
+            "Omaha tech career fair",
             "Meet engineers and learn about internships.",
             "career-networking",
         ),
@@ -115,6 +115,15 @@ def test_title_matches_outweigh_description_matches() -> None:
         ("Massage Monday", ""),
         ("Last day of Regular Session classes", ""),
         ("Fall 2026 Semester Final Exams", ""),
+        # Student-only events (live UNL School of Computing feed, 2026-10-19)
+        ("Industry in Residence: Nelnet", "Stop by to learn about career opportunities!"),
+        ("COE Graduate Programs: Virtual Information Session", "Learn about an advanced degree."),
+        ("Graduate Information Day", "Learn about graduate programs in computer science."),
+        ("Spring Nvolvement Fair", "Explore Recognized Student Organizations."),
+        ("Food for Thought", "The School of Computing Student Advisory Board is hosting."),
+        ("Run with the School of Computing", "A monthly 5k run around campus."),
+        ("School of Computing Showcase", "Students will tour research labs in robotics and AI."),
+        ("Python workshop (students only)", ""),
     ],
 )
 def test_non_tech_and_sales_events_are_rejected(title: str, summary: str) -> None:

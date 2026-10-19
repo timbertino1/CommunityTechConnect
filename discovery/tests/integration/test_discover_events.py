@@ -94,11 +94,11 @@ def test_events_are_kept_rejected_and_merged(
     discover(data, capsys)
     events = {e.title: e for e in DataStore(data).read_events()}
     assert set(events) == {
-        "Industry in Residence: Nelnet",
-        "School of Computing Showcase",
+        "Nelnet Engineering Tech Talk",
+        "Computing Research Showcase",
         "Drupal Nebraska meetup",
     }  # "Fall Semester Break" rejected; the private event skipped
-    nelnet = events["Industry in Residence: Nelnet"]
+    nelnet = events["Nelnet Engineering Tech Talk"]
     assert {x.source_id for x in nelnet.listings} == {"src_unl-computing", "src_partner"}
     assert nelnet.review_state == "published"
     assert nelnet.area == "lincoln"
@@ -142,7 +142,7 @@ def test_the_run_report_describes_the_run(
         assert f"| {name} | ✅ ok" in text
     assert "| Broken source | ❌ failed (first failure) |" in text
     assert "### Added to the site" in text
-    assert "`Industry in Residence: Nelnet`" in text
+    assert "`Nelnet Engineering Tech Talk`" in text
     assert "from UNL School of Computing, Partner calendar" in text
     assert "dropped: `Fall Semester Break` (`no safe https link" in text
 
