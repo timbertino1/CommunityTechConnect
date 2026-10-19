@@ -312,7 +312,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
     <ol>
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
-      <li class="now"><div class="bar"><span style="width:89%"></span></div><div class="lbl"><b>03</b>Event list</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
       <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
@@ -321,7 +321,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 3: 26 of 27 tasks)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (none; Phase 4 is next)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -329,7 +329,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-project" aria-controls="project" aria-selected="true">The project</button>
   <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill ok">done</span></button>
-  <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill now">in progress</span></button>
+  <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill ok">done</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -1249,8 +1249,8 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
     </div>
     <p class="lede">Phase 3 is the MVP: read the five starting sources every day, turn what they publish into clean events, and put a fast, accessible list of upcoming Nebraska tech events on the web, each one linking to the organizer's own page.</p>
     <div class="stats">
-      <div class="stat"><span class="n">24<small> of 27</small></span><p>Tasks done in this phase.</p></div>
-      <div class="stat"><span class="n">725</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">27<small> of 27</small></span><p>Tasks done in this phase.</p></div>
+      <div class="stat"><span class="n">726</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">3<small> of 4</small></span><p>Live sources read end to end on the first try (the fourth had no upcoming events).</p></div>
     </div>
     <ul class="checklist">
@@ -1258,7 +1258,7 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>From listings to events</b><small>Clean text, Central Time, the right area and topics, duplicates merged, cancellations noticed. Merged in PR #15.</small></div><span class="ids">T049&ndash;T052, T058&ndash;T059</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The daily run</b><small>Eight sources added (six active) and <code>netc discover-events</code> wired up. Merged in PR #16.</small></div><span class="ids">T053, T060&ndash;T061</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The website</b><small>Templates, mobile-first CSS, security headers, <code>netc build-site</code>. Merged in PR #17.</small></div><span class="ids">T054&ndash;T055, T062&ndash;T064</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">7/8</span><div><b>Going live</b><small>Bot App and Cloudflare Pages set up; the site is live at <a href="https://netechconnect.pages.dev">netechconnect.pages.dev</a>, deployed by the workflow. Merged in PR #18. Next: the first bot run, then the launch check.</small></div><span class="ids">T065&ndash;T072</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Going live</b><small>Bot and Cloudflare Pages set up, the first bot data PR merged itself, and the launch check passed. Merged in PRs #18&ndash;#20. Live (unannounced) at <a href="https://netechconnect.pages.dev">netechconnect.pages.dev</a>.</small></div><span class="ids">T065&ndash;T072</span></li>
     </ul>
   </section>
 
@@ -1456,7 +1456,7 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
 
   <section>
     <div class="section-head">
-      <p class="eyebrow">Part 5 &middot; Going live (in progress)</p>
+      <p class="eyebrow">Part 5 &middot; Going live</p>
       <h2>The site keeps itself up to date</h2>
       <p class="muted prose">Twice a day a scheduled job reads the sources and proposes the changes as a pull request from a dedicated bot account. If every check passes, it merges itself and the site redeploys. Nobody has to press a button, and the bot can't change anything but data.</p>
     </div>
@@ -1501,14 +1501,16 @@ Surprise of the week: Meetup's calendar feeds now come back empty unless you're 
     <div class="notes">
       <div class="note hi"><div><h3>Less custom security code</h3><p>The plan was to write our own code to sign the bot's login with its private key. GitHub publishes an official action that does exactly that, so the project uses it instead, pinned to an exact version like every other action. Less code that handles keys means less to get wrong.</p></div></div>
       <div class="note"><div><h3>Two locks on the same door</h3><p>The rule "the bot may only change data" is enforced twice: the bot's own script refuses to continue, and CI fails the PR. Tests run the real script against a scratch repository with a sneaky change in <code>.github/</code> to prove it says no.</p></div></div>
+      <div class="note hi"><div><h3>It ran before we could press the button</h3><p>The scheduled run beat the manual test: the bot opened its first data PR, every check passed, it merged itself, and the site redeployed, all within four minutes and with nobody watching.</p></div></div>
+      <div class="note"><div><h3>The launch check caught a quiet bug</h3><p>Every wrong address showed the home page instead of "not found". Cloudflare does that when a site has no 404 page, so a dead event link looked alive and search engines could index junk addresses. The site now has a real 404 page and a test for it. Security headers, dependency audits, and 247 security tests all passed.</p></div></div>
     </div>
   </section>
 
   <section>
     <div class="share">
-      <div class="share-head"><h3>Share Phase 3 so far</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
+      <div class="share-head"><h3>Share Phase 3</h3><button class="btn" type="button" data-copy="post-phase-3">Copy post</button></div>
       <label class="eyebrow" for="post-phase-3">Suggested post (edit freely)</label>
-      <textarea id="post-phase-3">NETechConnect build log, Phase 3 has started: the first live site.
+      <textarea id="post-phase-3">NETechConnect build log: Phase 3 is done. The first version of the site is live and keeps itself up to date.
 
 Step one is reading the sources. Two readers cover very different websites: calendar feeds (with repeating events expanded six months ahead) and event data built into web pages.
 
@@ -1522,7 +1524,13 @@ Step three is the daily run. First live practice run: 6 sources read, 0 failures
 
 Step four is the website itself: a plain, fast list where every event's main button sends you to the organizer to register. No cookies, no forms, no tracking, nothing loaded from other sites.
 
-719 tests and counting. Next: going live.
+Step five is going live. Twice a day a bot account reads the sources and proposes the changes as a pull request. If every check passes, it merges itself and the site redeploys. The bot can only touch data: its own script refuses anything else, and a required CI check fails the PR if it tries.
+
+The first scheduled run beat my manual test. Bot PR opened, checks passed, merged, deployed: four minutes, nobody watching.
+
+The launch check caught one quiet bug: wrong addresses showed the home page instead of "not found". Fixed with a real 404 page and a test.
+
+726 tests. Next: Phase 4, finding new groups automatically.
 
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-3"></span>
@@ -1532,7 +1540,7 @@ Step four is the website itself: a plain, fast list where every event's main but
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Oct 17, 2026</span>
+  <span>NETechConnect build log &middot; updated Oct 18, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
