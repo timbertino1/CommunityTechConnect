@@ -424,3 +424,7 @@ everything else on free tiers.
 - Never weaken a security test to make it pass; fix the code instead.
 - If a gate's result changes a design decision, update research.md and the affected contract
   before implementing.
+- **Open security exception (2026-10-20):** `discovery/pyproject.toml` lets certifi skip the
+  14-day rule (`exclude-newer-package`) to pick up the fix for GHSA-6q48-6c7w-9gw2 (2026.10.19).
+  On or after **2026-11-03**, delete that line, run `uv lock`, and confirm certifi stays at
+  2026.10.19 or later.
