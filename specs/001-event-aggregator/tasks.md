@@ -228,6 +228,21 @@ rejects irrelevant or out-of-state ones.
 
 ---
 
+## Design system and home header (owner decision 2026-10-20; research R15)
+
+**Goal**: Every page uses the direction-B design, and the home page gets its decorative three.js
+map, within R15's limits. Do this before Phase 5, so the calendar and filter pages are built in
+the new design instead of being redesigned later.
+
+- [ ] T150 [P] Self-host the fonts: Archivo (600, 700, 800), Inter (400, 500, 600) and JetBrains Mono (500) as Latin-subset woff2 in `web/fonts/` with their OFL license files, `font-display: swap`, preloading only the two used above the fold; total ≤ 120 KB. No requests to Google Fonts (the CSP stays `font-src 'self'`).
+- [ ] T151 Restyle the site to direction B in `web/css/site.css` and the templates in `discovery/src/netc/site/templates/`: the type scale and tokens, the header and footer, the home hero (headline, real counts from the data, "Next up" card on pages without the map), month-grouped event cards with date blocks and topic tags, and the filter bar markup (wired up in Phase 6). Update the site output tests; keep every existing security header and the no-inline-script rule.
+- [ ] T152 [P] Add a city-coordinates table for pins: a `lat`/`lon` per city in `data/areas.yaml` (schema and validation updated), and have `build-site` write `/data/map.json` with each upcoming event's city point and the town points. No geocoding service; an event whose city isn't in the table gets no pin.
+- [ ] T153 Write `web/js/header-map.js` (the only module that imports three.js) from the mockup: loaded with a dynamic `import()` after the event list renders; `aria-hidden` canvas; still under `prefers-reduced-motion`; a static image (`web/img/header-map.webp`, rendered once from the same scene, ≤ 40 KB) under Save-Data, `navigator.deviceMemory` < 4, viewports under 600 px, or no WebGL; paused off screen by an IntersectionObserver. Vendor three.js by adding `three` (an exact release ≥ 14 days old) to `web/package.json`, and have `build-site` copy only the needed build file into `dist/vendor/`. Use a tree-shaken bundle (esbuild as a dev dependency) if the full module breaks the budget.
+- [ ] T154 [P] Tests and budget: Playwright checks in `web/tests/` that the home page and its event links work with JavaScript off, with reduced motion (one still frame, no animation loop), and with WebGL disabled (static image shown); a CI step that fails if `header-map.js` plus its three.js file exceed 150 KB gzipped; axe-core passes on the home page with the map on.
+- [ ] T155 Checkpoint: Lighthouse mobile on `/` shows main content in ≤ 2 s with the map (SC-006), and a manual check on a real phone; record both in `docs/reviews/design-b.md` with before and after screenshots.
+
+---
+
 ## Phase 5: User Story 3 - View events on a calendar (Priority: P3)
 
 **Goal**: Month and week calendar pages show events on the correct Central Time days, with
@@ -338,6 +353,8 @@ automatically.
 - **US1 (Phase 3)**: depends on Phase 2 and gate V7 (T039 → T060).
 - **US2 (Phase 4)**: depends on Phase 2 and the US1 pipeline (T058, T059, T061, T067 are reused).
   Within US2: V6 → T081–T083; V4 → T085, T086, T089, T091; V5 → T075, T096–T100; V3 → T101; V1 → T102; V2 → T103, T104.
+- **Design system and home header (T150–T155)**: depends on US1 site build (T064); independent
+  of US2. Do it before US3 so the calendar and filters are built in the new design.
 - **US3, US4, US5**: depend on US1 site build (T064); independent of US2 and of each other
   (US4 touches the US3 templates, so do US4 after US3 if one person works alone).
 - **US6**: depends on US2 (the review queue is created by discovery) and T067.
