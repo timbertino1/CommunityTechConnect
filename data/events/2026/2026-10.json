@@ -13,12 +13,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-19T22:47:07Z",
+    "last_verified": "2026-10-20T15:31:00Z",
     "listings": [
       {
         "content_hash": "4543604f6844566e7612051f8881eebb0d476d86747d7de861b16f4763e49c15",
         "external_id": "calendar.537358.field_start7.0.0",
-        "last_seen": "2026-10-19T22:47:07Z",
+        "last_seen": "2026-10-20T15:31:00Z",
         "missing_runs": 1,
         "source_id": "src_drupal-nebraska",
         "url": "https://groups.drupal.org/node/537358"
