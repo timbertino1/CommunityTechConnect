@@ -1,0 +1,8 @@
+{
+  "query": "Lincoln cybersecurity meetup",
+  "results": [
+    {"title": "Lincoln Security Collective", "url": "https://lincolnsec.example.org/events", "content": "Monthly cybersecurity talks and CTF nights in Lincoln, Nebraska.", "score": 0.88},
+    {"title": "Cyber Night at The Mill (News)", "url": "https://news.example.com/2026/10/cyber-night-the-mill", "content": "The Lincoln Security Collective hosts Cyber Night on Nov 12 at The Mill downtown.", "score": 0.64}
+  ],
+  "response_time": 0.71
+}

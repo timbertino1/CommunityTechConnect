@@ -6,14 +6,23 @@ from datetime import datetime
 from netc.connectors.base import Connector, ParseResult, RawPayload
 from netc.connectors.ical import IcalConnector
 from netc.connectors.jsonld import JsonLdConnector
+from netc.connectors.rss import RssConnector
 
 
 def default_connectors(clock: Callable[[], datetime] | None = None) -> dict[str, Connector]:
     """The connectors available to the runner, keyed by Source.connector. ``clock`` sets the
     time the date window is measured from (tests and ``--now``)."""
     if clock is None:
-        return {IcalConnector.kind: IcalConnector(), JsonLdConnector.kind: JsonLdConnector()}
-    return {IcalConnector.kind: IcalConnector(clock), JsonLdConnector.kind: JsonLdConnector(clock)}
+        return {
+            IcalConnector.kind: IcalConnector(),
+            JsonLdConnector.kind: JsonLdConnector(),
+            RssConnector.kind: RssConnector(),
+        }
+    return {
+        IcalConnector.kind: IcalConnector(clock),
+        JsonLdConnector.kind: JsonLdConnector(clock),
+        RssConnector.kind: RssConnector(clock),
+    }
 
 
 __all__ = [
@@ -22,5 +31,6 @@ __all__ = [
     "JsonLdConnector",
     "ParseResult",
     "RawPayload",
+    "RssConnector",
     "default_connectors",
 ]

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:ev="http://purl.org/rss/1.0/modules/event/">
+<channel>
+  <title>Prairie Tech News</title>
+  <link>https://news.example.com/</link>
+  <description>Local tech news</description>
+  <item>
+    <title>Lincoln Security Collective plans Cyber Night at The Mill</title>
+    <link>https://news.example.com/2026/10/cyber-night-the-mill</link>
+    <guid>https://news.example.com/?p=101</guid>
+    <pubDate>Mon, 19 Oct 2026 14:00:00 GMT</pubDate>
+    <description>&lt;p&gt;The group hosts Cyber Night on Nov 12 at The Mill downtown. &lt;a href="https://lincolnsec.example.org/events"&gt;Details&lt;/a&gt;&lt;/p&gt;</description>
+  </item>
+  <item>
+    <title>Startup raises seed round</title>
+    <link>https://news.example.com/2026/10/seed-round</link>
+    <pubDate>Fri, 16 Oct 2026 12:00:00 GMT</pubDate>
+    <description>An Omaha startup announced funding.</description>
+  </item>
+  <item>
+    <title>Omaha Data Engineers: Streaming Night</title>
+    <link>https://news.example.com/events/streaming-night</link>
+    <guid isPermaLink="false">evt-streaming-night</guid>
+    <ev:startdate>2026-11-10T18:00:00-06:00</ev:startdate>
+    <ev:enddate>2026-11-10T20:00:00-06:00</ev:enddate>
+    <ev:location>Kiewit Luminarium, Omaha, NE</ev:location>
+    <ev:organizer>Omaha Data Engineers</ev:organizer>
+    <description>Talks on Kafka and Flink.</description>
+  </item>
+  <item>
+    <title>Old event that already happened</title>
+    <link>https://news.example.com/events/old</link>
+    <ev:startdate>2026-01-10T18:00:00-06:00</ev:startdate>
+  </item>
+  <item>
+    <title>Item with an unsafe link</title>
+    <link>javascript:alert(1)</link>
+  </item>
+</channel>
+</rss>
