@@ -1,7 +1,9 @@
-"""A client for the few third-party APIs the pipeline calls with a key (T085; research R12).
+"""A client for the few third-party APIs the pipeline calls with a key (T085, T099; research
+R8, R12).
 
-SafeHttp is for untrusted pages: GET only, robots.txt, per-host pacing. A search API is the
-opposite: one fixed, trusted host that we POST a query to with a secret. This client allows
+SafeHttp is for untrusted pages: GET only, robots.txt, per-host pacing. A keyed API (web search,
+the newsletter inbox in Cloudflare KV) is the opposite: one fixed, trusted host that we send a
+secret to. This client allows
 only the hosts in API_HOSTS, over https on port 443, never follows a redirect (a redirect could
 carry the key elsewhere), caps the response size and time, and keeps request headers out of
 every error message so the key can't end up in a log.
@@ -21,7 +23,7 @@ from netc.fetch.errors import FetchError, FetchTimeoutError, ResponseTooLargeErr
 from netc.fetch.robots import ROBOTS_USER_AGENT
 from netc.fetch.safe_fetch import _ssl_context
 
-API_HOSTS: Final = frozenset({"api.tavily.com"})
+API_HOSTS: Final = frozenset({"api.tavily.com", "api.cloudflare.com"})
 MAX_API_BYTES: Final = 1_000_000
 API_TIMEOUT: Final = httpx.Timeout(20.0, connect=10.0)
 
@@ -31,6 +33,12 @@ class ApiResponse:
     status: int
     data: Any
     """Parsed JSON (error statuses included, so callers can say what went wrong)."""
+
+
+@dataclass(frozen=True)
+class RawApiResponse:
+    status: int
+    content: bytes
 
 
 class ApiClient(Protocol):
@@ -60,16 +68,41 @@ class SafeApi:
     def post_json(
         self, url: str, payload: Mapping[str, Any], *, headers: Mapping[str, str]
     ) -> ApiResponse:
+        raw = self._send("POST", url, headers, payload=payload, max_bytes=MAX_API_BYTES)
+        try:
+            data = json.loads(raw.content)
+        except ValueError:
+            raise FetchError(f"{_host(url)} did not return JSON") from None
+        return ApiResponse(raw.status, data)
+
+    def get(
+        self, url: str, *, headers: Mapping[str, str], max_bytes: int = MAX_API_BYTES
+    ) -> RawApiResponse:
+        return self._send("GET", url, headers, max_bytes=max_bytes)
+
+    def delete(self, url: str, *, headers: Mapping[str, str]) -> RawApiResponse:
+        return self._send("DELETE", url, headers, max_bytes=MAX_API_BYTES)
+
+    def _send(
+        self,
+        method: str,
+        url: str,
+        headers: Mapping[str, str],
+        *,
+        payload: Mapping[str, Any] | None = None,
+        max_bytes: int,
+    ) -> RawApiResponse:
         self._check(url)
         sent = {**headers, "user-agent": self._user_agent, "accept": "application/json"}
+        body_json = dict(payload) if payload is not None else None
         try:
-            with self._client.stream("POST", url, json=dict(payload), headers=sent) as response:
+            with self._client.stream(method, url, json=body_json, headers=sent) as response:
                 if response.is_redirect:
                     raise FetchError(f"{_host(url)} answered with a redirect; refused")
                 body = bytearray()
                 for chunk in response.iter_bytes():
                     body.extend(chunk)
-                    if len(body) > MAX_API_BYTES:
+                    if len(body) > max_bytes:
                         raise ResponseTooLargeError(f"{_host(url)} response too large")
                 status = response.status_code
         except httpx.TimeoutException as exc:
@@ -77,11 +110,7 @@ class SafeApi:
         except httpx.HTTPError as exc:
             # The exception text can quote the request, headers included: keep only its type.
             raise FetchError(f"{_host(url)} could not be reached ({type(exc).__name__})") from None
-        try:
-            data = json.loads(bytes(body))
-        except ValueError:
-            raise FetchError(f"{_host(url)} did not return JSON") from None
-        return ApiResponse(status, data)
+        return RawApiResponse(status, bytes(body))
 
     def close(self) -> None:
         self._client.close()

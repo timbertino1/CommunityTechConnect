@@ -1,0 +1,49 @@
+From: Prairie Tech Weekly <weekly@news.example.com>
+To: events@netechconnect.example
+Subject: Prairie Tech Weekly: November events
+Date: Mon, 26 Oct 2026 13:00:00 +0000
+Message-ID: <weekly-2026-10-26@news.example.com>
+List-Unsubscribe: <https://news.example.com/u/7f3a9c?list=prairie&sub=reader-4821>, <mailto:unsub-4821@news.example.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b1_prairie"
+
+--b1_prairie
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+View in browser: https://news.example.com/archive/2026-10-26?sub=reader-4821
+
+Coming up in November:
+
+- Omaha Data Engineers: Streaming Night, Tue Nov 10, 6 PM.
+  https://omahadata.example.org/events/streaming-night?utm_source=newsletter&utm_medium=email#rsvp
+- Lincoln Security Collective: Cyber Night, Thu Nov 12.
+  https://click.news.example.com/ls/click?upn=abc123&url=https%3A%2F%2Flincolnsec.example.org%2Fevents
+
+Thanks for reading! Reply to this email or call 402-555-0142.
+
+Manage your preferences: https://news.example.com/preferences?sub=reader-4821
+Unsubscribe: https://news.example.com/u/7f3a9c?list=prairie&sub=reader-4821
+
+--b1_prairie
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html><head><style>p { color: #333 }</style></head><body>
+<p><a href="https://news.example.com/archive/2026-10-26?sub=reader-4821">View in browser</a></p>
+<h1>Coming up in November</h1>
+<ul>
+<li><a href="https://omahadata.example.org/events/streaming-night?utm_source=newsletter&amp;utm_medium=email#rsvp">Omaha Data Engineers: Streaming Night</a>, Tue Nov 10, 6 PM.</li>
+<li><a href="https://click.news.example.com/ls/click?upn=abc123&amp;url=https%3A%2F%2Flincolnsec.example.org%2Fevents">Lincoln Security Collective: Cyber Night</a>, Thu Nov 12.</li>
+<li><a href="https://heartlandrust.example.org/events/rust-night-nov?mc_cid=9f2&amp;mc_eid=4821">Heartland Rust Users: Rust Night</a>, Wed Nov 18.</li>
+<li><a href="https://prairie.us21.list-manage.com/track/click?u=1&amp;id=2&amp;e=3">Register here</a></li>
+</ul>
+<p>Thanks for reading! Reply to this email or call 402-555-0142.</p>
+<img src="https://news.example.com/open.gif?sub=reader-4821" width="1" height="1">
+<p><a href="https://news.example.com/preferences?sub=reader-4821">Manage your preferences</a> |
+<a href="https://news.example.com/u/7f3a9c?list=prairie&amp;sub=reader-4821">Unsubscribe</a></p>
+<script>alert("x")</script>
+</body></html>
+
+--b1_prairie--

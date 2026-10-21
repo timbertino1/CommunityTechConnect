@@ -333,12 +333,31 @@ class Ai:
         data = text[:MAX_EVENT_CHARS]
         return self._ask("classify", CLASSIFY_PROMPT, data, "classification", schema, check)
 
-    def extract(self, text: str) -> list[AiMention] | None:
+    def extract(
+        self, text: str, keep_link: Callable[[str], str | None] | None = None
+    ) -> list[AiMention] | None:
+        """The mentions in ``text``. ``keep_link`` maps each link in the answer to the form to
+        keep, or None to drop it; it runs before caching, so the cache (which is committed)
+        never holds a link the caller wouldn't keep."""
+
         def check(answer: Any) -> list[AiMention]:
-            return list(AiMentions.model_validate(answer).mentions)
+            mentions = list(AiMentions.model_validate(answer).mentions)
+            if keep_link is None:
+                return mentions
+            return [
+                m.model_copy(
+                    update={"links": [k for k in (keep_link(u) for u in m.links) if k is not None]}
+                )
+                for m in mentions
+            ]
+
+        def stored(mentions: list[AiMention]) -> Any:
+            return {"mentions": [m.model_dump() for m in mentions]}
 
         data = text[:MAX_EMAIL_CHARS]
-        return self._ask("extract", EXTRACT_PROMPT, data, "mentions", MENTIONS_SCHEMA, check)
+        return self._ask(
+            "extract", EXTRACT_PROMPT, data, "mentions", MENTIONS_SCHEMA, check, stored
+        )
 
     def _ask[T](
         self,
@@ -348,9 +367,11 @@ class Ai:
         schema_name: str,
         schema: dict[str, Any],
         check: Callable[[Any], T | None],
+        stored: Callable[[T], Any] | None = None,
     ) -> T | None:
         """The checked answer, from the cache or one call; None when there is none to give.
-        Only answers that pass ``check`` are cached; every call's tokens count toward spend."""
+        Only answers that pass ``check`` are cached (as ``stored`` renders them, or as the
+        model sent them); every call's tokens count toward spend."""
         model = self.client.model if self.client else MODEL
         key = hashlib.sha256(
             json.dumps([PROMPT_VERSION, kind, model, schema, data], sort_keys=True).encode()
@@ -370,10 +391,13 @@ class Ai:
             self.last_problem = reply.error or (
                 "refused" if reply.refusal else "outside the schema"
             )
+            kept = None
+        else:
+            kept = stored(result) if stored is not None else reply.data
         self.cache.record(
             AiCacheEntry(
                 key=key, kind=kind, model=model, at=self.now,
-                result=reply.data if result is not None else None,
+                result=kept,
                 input_tokens=reply.input_tokens, cached_tokens=reply.cached_tokens,
                 output_tokens=reply.output_tokens,
             )

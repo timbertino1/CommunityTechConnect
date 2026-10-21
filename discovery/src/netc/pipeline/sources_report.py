@@ -91,4 +91,15 @@ def render_sources_markdown(report: DiscoverSourcesReport) -> str:
         budgets.append(f"AI: {report.ai_calls} calls, {spent} this month")
     if budgets:
         lines += ["", "**Budgets:** " + "; ".join(budgets) + "."]
+    if report.inbox_deleted or report.inbox_delete_errors:
+        lines += [
+            "",
+            f"**Newsletter inbox:** {report.inbox_deleted} read and cleared"
+            + (
+                f", {report.inbox_delete_errors} could not be cleared (read again next run)"
+                if report.inbox_delete_errors
+                else ""
+            )
+            + ".",
+        ]
     return "\n".join(lines) + "\n"

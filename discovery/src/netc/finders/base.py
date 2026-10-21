@@ -126,6 +126,9 @@ class FinderResult:
     stats: Counter[str] = field(default_factory=Counter)
     searched_groups: dict[str, datetime] = field(default_factory=dict)
     """Known groups (by name) searched for in this run, to update their last_searched."""
+    processed_messages: list[str] = field(default_factory=list)
+    """Inbox messages (by hash) this finder is done with; deleted once the run's data is
+    written."""
 
 
 class Finder(Protocol):
