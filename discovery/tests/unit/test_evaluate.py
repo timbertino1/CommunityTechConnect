@@ -31,6 +31,7 @@ REPO = DataStore(Path(__file__).resolve().parents[3] / "data")
 AREAS: AreaConfig = REPO.read_areas()  # type: ignore[assignment]
 CATEGORIES: list[Category] = REPO.read_categories()
 FINDERS = Path(__file__).resolve().parents[1] / "fixtures" / "finders"
+LUMA_FEED = "https://api.lu.ma/ics/get?entity=calendar&id=cal-AbC123xyz"
 
 PAGES = {
     "https://heartlandrust.example.org/": ("pages/jsonld_events.html", "text/html"),
@@ -40,6 +41,7 @@ PAGES = {
     "https://cowork.example.org/events": ("pages/coworking_calendar.html", "text/html"),
     "https://cowork.example.org/events.ics": ("feeds/cowork_events.ics", "text/calendar"),
     "https://www.meetup.com/omaha-data-engineers/events/": ("pages/meetup_group.html", "text/html"),
+    LUMA_FEED: ("feeds/luma_calendar.ics", "text/calendar"),
 }
 
 
@@ -112,6 +114,17 @@ def test_a_meetup_group_is_set_up_like_the_other_meetup_sources(tmp_path: Path) 
     assert source.name == "Omaha Data Engineers"
 
 
+def test_a_luma_calendar_is_read_through_its_ical_feed(tmp_path: Path) -> None:
+    candidate, result = one(tmp_path, LUMA_FEED)
+    assert candidate.result == "added"
+    [source] = result.added
+    assert source.connector == "ical"
+    assert source.url == LUMA_FEED and source.feed_url == LUMA_FEED
+    assert source.id == "src_luma-cal-abc123xyz"
+    assert source.name == "Omaha Builders Club"
+    assert source.default_area == "omaha"
+
+
 def test_new_source_ids_never_clash(tmp_path: Path) -> None:
     taken = make_source("src_heartlandrust-example-org", url="https://other.example.org/")
     _, result = one(tmp_path, "https://heartlandrust.example.org/", sources=[taken])
@@ -165,6 +178,26 @@ def test_robots_refusal_is_blocked_by_terms(tmp_path: Path) -> None:
         "blocked_by_terms",
         "robots.txt disallows reading it",
     )
+
+
+class NeverFetch:
+    def get(
+        self,
+        url: str,
+        *,
+        kind: FetchKind = "page",
+        allowed_types: Collection[str] | None = None,
+        delay_seconds: float | None = None,
+    ) -> FetchResponse:
+        raise AssertionError(f"fetched {url}")
+
+
+@pytest.mark.parametrize("url", ["https://luma.com/nfx6erbc/", "https://lu.ma/omaha-builders"])
+def test_luma_pages_are_never_fetched(tmp_path: Path, url: str) -> None:
+    raw = pending("https://heartlandrust.example.org/").model_copy(update={"url": url})
+    candidate = evaluate(tmp_path, [raw], client=NeverFetch()).candidates[0]
+    assert candidate.result == "needs_review"
+    assert "iCal" in candidate.reason and "gate V3" in candidate.reason
 
 
 def test_social_networks_are_blocked_by_terms(tmp_path: Path) -> None:

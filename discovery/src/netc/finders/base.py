@@ -17,7 +17,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import ClassVar, Final, Literal, Protocol
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 from netc.fetch import HttpClient
 from netc.models import (
@@ -70,8 +70,18 @@ PLATFORM_RESERVED: Final = frozenset(
         "b",
         "cc",
         "help-center",
+        # Never read on Meetup (gate V1): its search, GraphQL and API endpoints.
+        "gql",
+        "gql2",
+        "api",
+        "meetup_api",
+        "account",
+        "members",
     }
 )
+# Luma calendar iCal feeds: https://api.lu.ma/ics/get?entity=calendar&id=cal-... (gate V3).
+LUMA_FEED_HOSTS: Final = frozenset({"api.lu.ma", "api.luma.com"})
+_LUMA_CALENDAR_ID: Final = re.compile(r"cal-[A-Za-z0-9]{4,40}")
 # Sites that are never event sources: social networks, encyclopedias, job boards.
 SKIP_HOSTS: Final = frozenset(
     {
@@ -137,8 +147,44 @@ class Finder(Protocol):
     def run(self, ctx: FinderContext) -> FinderResult: ...
 
 
+def luma_calendar_feed(url: str) -> str | None:
+    """The https feed URL if ``url`` is a Luma calendar's iCal feed (``webcal://`` too), the
+    only way Luma is read (gate V3); otherwise None."""
+    found = _luma_calendar(url)
+    return None if found is None else f"https://{found[0]}/ics/get?entity=calendar&id={found[1]}"
+
+
+def _luma_calendar(url: str) -> tuple[str, str] | None:
+    value = url.strip()
+    if value[:9].lower() == "webcal://":
+        value = "https://" + value[9:]
+    try:
+        parts = urlsplit(value)
+        port = parts.port
+    except ValueError:
+        return None
+    host = (parts.hostname or "").lower()
+    if (
+        parts.scheme.lower() != "https"
+        or host not in LUMA_FEED_HOSTS
+        or port not in (None, 443)
+        or parts.username is not None
+        or parts.path.rstrip("/") != "/ics/get"
+    ):
+        return None
+    query = dict(parse_qsl(parts.query))
+    calendar = query.get("id", "")
+    if query.get("entity") != "calendar" or not _LUMA_CALENDAR_ID.fullmatch(calendar):
+        return None
+    return host, calendar
+
+
 def site_key(url: str) -> str | None:
-    """The host (without www.), or host/group for event platforms; None for unusable URLs."""
+    """The host (without www.), or host/group for event platforms; None for unusable URLs.
+    A Luma calendar feed's key is luma.com/<calendar id>, whichever Luma host serves it."""
+    luma = _luma_calendar(url)
+    if luma is not None:
+        return f"luma.com/{luma[1].lower()}"
     try:
         parts = urlsplit(url)
     except ValueError:
@@ -162,7 +208,11 @@ def _skip_host(host: str) -> bool:
 
 
 def candidate_url(url: str) -> str | None:
-    """The URL to evaluate for a site: the group page on a platform, the page itself elsewhere."""
+    """The URL to evaluate for a site: the group page on a platform, the feed for a Luma
+    calendar, the page itself elsewhere."""
+    feed = luma_calendar_feed(url)
+    if feed is not None:
+        return feed
     safe = safe_url(url)
     if safe is None:
         return None

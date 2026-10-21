@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Luma//Calendar//EN
+X-WR-CALNAME:Omaha Builders Club
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VEVENT
+UID:evt-omaha-builders-ai-demo@lu.ma
+DTSTAMP:20261019T120000Z
+SUMMARY:AI demo night: shipping LLM apps
+DTSTART:20261112T000000Z
+DTEND:20261112T020000Z
+LOCATION:Kiewit Luminarium, 345 Riverfront Dr, Omaha, NE 68102
+DESCRIPTION:Local developers demo what they built with LLMs this month.
+URL:https://luma.com/omaha-ai-demo-nov
+END:VEVENT
+BEGIN:VEVENT
+UID:evt-omaha-builders-cloud@lu.ma
+DTSTAMP:20261019T120000Z
+SUMMARY:Cloud cost teardown workshop
+DTSTART:20261203T000000Z
+DTEND:20261203T020000Z
+LOCATION:Mammel Hall, 6708 Pine St, Omaha, NE 68182
+DESCRIPTION:Hands-on cloud infrastructure workshop for software developers.
+URL:https://luma.com/omaha-cloud-dec
+END:VEVENT
+END:VCALENDAR

@@ -1,8 +1,8 @@
 """`netc discover-sources`: the weekly hunt for groups and events nobody told us about (T094;
 research R6, R7; FR-010-FR-015).
 
-1. Each finder runs in turn (web search, links on known pages, news feeds, newsletters,
-   coverage gaps). A
+1. Each finder runs in turn (web search, links on known pages, event platforms, news feeds,
+   newsletters, coverage gaps). A
    finder that crashes is recorded and skipped; the others still run. Each one sees what the
    ones before it found, so nothing is found twice.
 2. Mentions, new and old, are resolved to organizers' pages where possible (FR-014).
@@ -30,6 +30,7 @@ from netc.finders.gaps import GapFinder
 from netc.finders.link_graph import LinkGraphFinder
 from netc.finders.news import NewsFinder
 from netc.finders.newsletter import NewsletterFinder
+from netc.finders.platform import PlatformFinder
 from netc.finders.web_search import WebSearchFinder
 from netc.inbox.kv import Inbox, InboxError
 from netc.models import CandidateSource, KnownGroup, Source
@@ -45,6 +46,7 @@ def default_finders(inbox: Inbox | None = None) -> list[Finder]:
     return [
         WebSearchFinder(),
         LinkGraphFinder(),
+        PlatformFinder(),
         NewsFinder(),
         NewsletterFinder(inbox),
         GapFinder(),

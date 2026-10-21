@@ -22,6 +22,7 @@ from netc.finders.base import (
     FinderContext,
     FinderResult,
     candidate_url,
+    luma_calendar_feed,
     make_candidate,
     merge_leads,
     site_key,
@@ -98,13 +99,17 @@ def _links(base: str, html: str) -> list[tuple[str, str]]:
         return []
     found: list[tuple[str, str]] = []
     for node in tree.css("a[href]")[:MAX_LINKS_PER_PAGE]:
-        url = safe_url(urljoin(base, (node.attributes.get("href") or "").strip()))
+        href = (node.attributes.get("href") or "").strip()
+        # A "Subscribe" link to a Luma calendar is often webcal://, which safe_url refuses.
+        url = luma_calendar_feed(href) or safe_url(urljoin(base, href))
         if url is not None:
             found.append((url, to_plain_text(node.text(), 200)))
     return found
 
 
 def _looks_like_group(url: str, text: str) -> bool:
+    if luma_calendar_feed(url) is not None:
+        return True
     if _host(url) in PLATFORMS:
         return site_key(url) is not None
     return bool(_PATH_WORDS.search(urlsplit(url).path) or _TEXT_WORDS.search(text))
