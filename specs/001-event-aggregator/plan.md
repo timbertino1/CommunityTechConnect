@@ -24,10 +24,12 @@ See [research.md](./research.md).
 ## Technical Context
 
 **Language/Version**: Python 3.13 (discovery, site generator); TypeScript 5.x (Cloudflare
-Workers); framework-free ES2022 JavaScript and CSS (front end)
+Workers); framework-free ES2022 JavaScript and CSS (front end), plus three.js for one
+decorative home-page header only (R15)
 
 **Primary Dependencies**: httpx, icalendar, recurring-ical-events, feedparser, selectolax, nh3,
-pydantic v2, jinja2, protego, rapidfuzz, openai (Python); wrangler, postal-mime (Workers)
+pydantic v2, jinja2, protego, rapidfuzz, openai (Python); wrangler, postal-mime (Workers); three
+(front end, self-hosted and pinned, home header only)
 
 **Storage**: Versioned JSON/YAML files in the repo under `data/` ([data-model.md](./data-model.md));
 Cloudflare Workers KV only as a short-lived inbox (TTL 30 days) for suggestions and newsletters
@@ -63,11 +65,12 @@ search queries/week; ~20–40 newsletters/month; low thousands of visitors/month
 | **IV. Accurate, Attributed Event Data** | Source recorded and linked; UTC + source TZ, Central display; de-dup; last-verified; cancelled/unverified flagged; inferred data distinguishable | ✅ Planned | ✅ `listings[]`, `source_tz`, `last_verified`, `status`, `inferred[]` in schema; de-dup rules (R11) |
 | **V. Responsible & Resilient Discovery** | APIs/feeds before scraping; robots.txt/terms; honest UA; rate limits; isolated adapters; observability; source content never treated as instructions | ✅ Planned | ✅ Connector priority ical→jsonld→rss, `html_rules` last resort (R5); `protego` + per-host delays; terms gates V1–V7; per-source error isolation and `source_status.json`; health issue; AI has no tools and schema-only output (R10) |
 | **VI. Test-First Quality** | Tests before code; fixture tests incl. malicious payloads; security-control tests; discovery→storage→views integration tests; CI gates | ✅ Planned | ✅ Test layout below; security suite in quickstart; CI required for merge |
-| **VII. Accessible, Simple Presentation** | List + calendar; filters (date, area, past/upcoming); WCAG 2.2 AA; mobile; links out; YAGNI | ✅ Planned | ✅ Static semantic calendar tables instead of a JS widget (R3); axe-core checks; no server, DB, or framework |
+| **VII. Accessible, Simple Presentation** | List + calendar; filters (date, area, past/upcoming); WCAG 2.2 AA; mobile; links out; YAGNI | ✅ Planned | ✅ Static semantic calendar tables instead of a JS widget (R3); axe-core checks; no server, DB, or framework; one justified dependency, three.js for a decorative home header within fixed limits (R15, Complexity Tracking) |
 | **Security Requirements** | Threat analysis for new sources/inputs; admin MFA + audit log; public input rate limited and moderated; backups tested | ✅ Planned | ✅ Threat summary below; GitHub 2FA + PR history; Turnstile + rate limits + review; git is the backup (restore = checkout; tested in quickstart) |
 | **Workflow & Quality Gates** | PR-only to `main`; human review except bot data-only PRs (v1.1.0); security review for auth/input/fetch/secrets; CI gates | ✅ Planned | ✅ Branch ruleset requires PRs + CI; the owner reviews and merges every code PR; bot PRs auto-merge only when CI confirms they change nothing outside `data/` |
 
-**Result**: PASS — no violations, Complexity Tracking not required.
+**Result**: PASS. One added dependency (three.js, owner decision 2026-10-20) is justified under
+Complexity Tracking, as Principle VII requires.
 
 ### Threat summary (Security Requirements: threat analysis)
 
@@ -129,7 +132,10 @@ discovery/                          # Python package "netc" (uv project)
     └── fixtures/                   # recorded feeds, pages, emails, search results (incl. malicious)
 
 web/                                # static assets copied into the build
-├── js/                             # filters.js, search.js, suggest.js (ES modules, no deps)
+├── js/                             # filters.js, search.js, suggest.js (ES modules, no deps);
+│                                   #   header-map.js (the one module that imports three.js, R15)
+├── vendor/                         # three.js, copied from the pinned npm package at build time
+├── fonts/                          # Archivo, Inter, JetBrains Mono (self-hosted woff2, OFL)
 ├── css/
 ├── _headers                        # Cloudflare Pages security headers
 ├── package.json                    # Playwright + axe-core dev deps only
@@ -164,7 +170,9 @@ TypeScript, and front-end assets are kept separate so they can be tested and lin
 
 ## Complexity Tracking
 
-No constitution violations to justify.
+| Added complexity | Why it's needed | Simpler alternative and why it isn't enough | Limits that keep it in bounds |
+|---|---|---|---|
+| three.js (front end), for one decorative 3D map in the home-page header (R15) | Owner decision (2026-10-20): the site should look modern and professional, and the home page should be memorable | Direction A, the same design with no 3D. Kept as the fallback; the owner preferred B | Home header only; loads after the event list; ≤ 150 KB compressed (CI check); still under reduced motion; static image on Save-Data, low-power or small screens and without WebGL; paused off screen; `aria-hidden`; self-hosted and pinned; never needed to find an event |
 
 ## Open items carried into tasks
 

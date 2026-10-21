@@ -399,6 +399,40 @@ active page, a usable feed or structured data, and terms before becoming a trust
 
 ---
 
+## R15. Visual design direction (owner decision, 2026-10-20)
+
+**Decision**: Direction **B** from the design mockup (canvas "NETechConnect design directions",
+artboard "B · Refined + three.js header"):
+
+- **One visual system for every page**: Archivo (display), Inter (text) and JetBrains Mono
+  (labels and dates), self-hosted; the existing cream, scarlet and black tokens from
+  `web/css/site.css`; event cards with a black date block, topic tags, and a scarlet "View and
+  register" button; an area and topic filter bar; a dark header band.
+- **One decorative three.js element**, on the home page only: a tilted outline of Nebraska
+  with a faint dot grid, small points for towns, and pulsing scarlet pins at upcoming events'
+  cities. It is decoration: `aria-hidden`, and the page works fully without it.
+
+**Limits** (these make it acceptable under Principle VII; see plan.md Complexity Tracking):
+
+1. Loads after the event list (no effect on main-content time, SC-006).
+2. At most **150 KB** compressed for the header's script, three.js included. CI checks it.
+3. Still under `prefers-reduced-motion`; a static image under Save-Data, on low-power or
+   small screens, and when WebGL is unavailable; paused when scrolled out of view.
+4. Self-hosted, pinned to an exact release at least 14 days old, updated by Dependabot. No
+   CDN: the CSP stays `script-src 'self'`.
+5. No 3D anywhere else, and never needed to find or open an event.
+
+**Rationale**: The owner wants the site to look modern and professional. Most of that comes from
+type, spacing and a consistent card system, which cost almost nothing. The 3D header gives a
+memorable first impression for a bounded cost: one library to keep current and one extra
+check on old phones.
+
+**Alternatives considered**: Direction A (the same system without 3D; lighter, kept as the
+fallback if the budget can't be met); 3D across more pages (rejected: weight, battery and
+accessibility cost on the pages people use to find events).
+
+---
+
 ## Validation gates (must pass before the dependent tasks)
 
 | Gate | Check | Blocks |

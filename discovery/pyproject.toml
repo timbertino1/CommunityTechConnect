@@ -71,7 +71,7 @@ mypy_path = "src"
 
 [[tool.mypy.overrides]]
 # Ships without type information (no py.typed).
-module = ["recurring_ical_events", "recurring_ical_events.*"]
+module = ["recurring_ical_events", "recurring_ical_events.*", "feedparser", "feedparser.*"]
 ignore_missing_imports = true
 
 # ---------------------------------------------------------------- pytest
@@ -90,3 +90,7 @@ markers = [
 [tool.uv]
 # Supply-chain hygiene: only resolve package versions published at least 14 days ago.
 exclude-newer = "14 days"
+# Security exception (GHSA-6q48-6c7w-9gw2, 2026-10-20): certifi 2026.7.22 trusts emSign roots
+# whose intermediate keys were compromised; the fix, 2026.10.19 (uploaded 2026-10-20 02:24 UTC),
+# is younger than 14 days. This admits only certifi releases up to then. Remove on 2026-11-03.
+exclude-newer-package = { certifi = "2026-10-20T03:00:00Z" }

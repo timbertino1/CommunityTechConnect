@@ -126,6 +126,11 @@ def _matching_links(page_url: str, html: str, rule: FollowLinks) -> list[str]:
 # ---------------------------------------------------------------- page parsing
 
 
+def page_listings(document: RawPayload) -> list[RawListing]:
+    """Every event on one page, in or out of the date window (used by feed detection)."""
+    return list(_page_listings(document, []))
+
+
 def _page_listings(document: RawPayload, warnings: list[str]) -> Iterator[RawListing]:
     if not document.text.strip():
         return
