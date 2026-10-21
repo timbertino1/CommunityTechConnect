@@ -12,12 +12,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-20T15:31:00Z",
+    "last_verified": "2026-10-21T15:47:36Z",
     "listings": [
       {
         "content_hash": "d8756740266c405f186cd2808de0da51f1bfc4002f769667495e6f2e93f6ae76",
         "external_id": "https://www.meetup.com/ai_omaha/events/317053693/",
-        "last_seen": "2026-10-20T15:31:00Z",
+        "last_seen": "2026-10-21T15:47:36Z",
         "missing_runs": 1,
         "source_id": "src_ai-omaha",
         "url": "https://www.meetup.com/ai_omaha/events/317053693/"
@@ -46,6 +46,51 @@
   },
   {
     "all_day": false,
+    "area": "online",
+    "categories": [
+      "web-mobile"
+    ],
+    "end": "2026-11-11T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_08cbdd98e541",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "cb14e070753cc59b8f9c0e32667f8ffe809d9ade44b6f9cd084a0e55b0a67307",
+        "external_id": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcpbnb",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcpbnb"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcpbnb",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "angular-community-meetup-en-espanol-2026-11-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-11T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech meetup Online",
+    "title": "Angular Community Meetup - En Español",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "omaha",
     "categories": [
       "ai-ml",
@@ -58,12 +103,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-20T15:31:00Z",
+    "last_verified": "2026-10-21T15:47:36Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-10-20T15:31:00Z",
+        "last_seen": "2026-10-21T15:47:36Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
@@ -87,6 +132,51 @@
     "status": "scheduled",
     "summary": "Free evening meetup for network engineers in the Omaha area. Lightning talks: Human vs AI by Paresh Patel and Follow the Annoyance: Level 1 of a Network Engineer's Automation Journey by Sean Mahoney, then a panel on emerging networking ideas and trends and time to talk.",
     "title": "(NE)NUG Omaha Fall Event 2026",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "general-tech"
+    ],
+    "end": "2026-12-01T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_e9919b25de48",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "be2f696219c8a1828979849a507d24fe65d60430b250d924e753302d779c7588",
+        "external_id": "https://dev.events/conferences/bitcoin-shipshow-expedition-03-slsbezb8",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/bitcoin-shipshow-expedition-03-slsbezb8"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/bitcoin-shipshow-expedition-03-slsbezb8",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "bitcoin-shipshow-expedition-03-2026-11-30",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-01T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech meetup Online",
+    "title": "Bitcoin Shipshow - Expedition 03",
     "tz_assumed": true,
     "visibility": "shown"
   }

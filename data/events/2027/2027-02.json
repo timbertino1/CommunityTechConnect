@@ -1,0 +1,47 @@
+[
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "web-mobile"
+    ],
+    "end": "2027-02-10T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_368de0296a29",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "4d46c23421c79970bc6846342ab72a013ad4d163f1d14c3e6b06819cc0c675a0",
+        "external_id": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcdbmb",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcdbmb"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcdbmb",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "angular-community-meetup-en-espanol-2027-02-09",
+    "source_tz": "America/Chicago",
+    "start": "2027-02-10T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech meetup Online",
+    "title": "Angular Community Meetup - En Español",
+    "tz_assumed": true,
+    "visibility": "shown"
+  }
+]
