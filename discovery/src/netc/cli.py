@@ -17,6 +17,7 @@ from netc.finders.config import load_config
 from netc.github.health import LastAlert, alert_comment, build_health
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import build_review_pr, has_ticks, read_decisions
+from netc.inbox.kv import InboxError, KvInbox
 from netc.models import SourceStatus
 from netc.pipeline.ai import Ai, AiCache, OpenAiClient
 from netc.pipeline.discover_events import discover_events
@@ -194,11 +195,15 @@ def _discover_sources(args: argparse.Namespace) -> int:
             except SearchError:
                 tavily = None
             search = BudgetedSearch(tavily, usage, now=now) if tavily else None
+            try:
+                inbox: KvInbox | None = KvInbox.from_env(api)
+            except InboxError:
+                inbox = None
             with SafeHttp(site_domain=domain) as http:
                 report = discover_sources(
                     store, http, connectors, now=now, search=search,
                     ai=ai if client is not None else None, news_feeds=config.news_feeds,
-                    dry_run=args.dry_run,
+                    inbox=inbox, dry_run=args.dry_run,
                 )  # fmt: skip
             api.close()
     except (StorageError, RuntimeError) as exc:

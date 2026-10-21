@@ -27,10 +27,15 @@ def extract_mentions(
     text: str, links: Iterable[str], *, ai: Ai, channel: Channel
 ) -> list[EventMention] | None:
     """The mentions in ``text``; None when the AI gave no usable answer (try again later)."""
-    drafts = ai.extract(text)
+    allowed = {c for c in (_clean(link) for link in links) if c is not None}
+
+    def keep_link(url: str) -> str | None:
+        clean = _clean(url)
+        return clean if clean in allowed else None
+
+    drafts = ai.extract(text, keep_link)
     if drafts is None:
         return None
-    allowed = {c for c in (_clean(link) for link in links) if c is not None}
     mentions: dict[str, EventMention] = {}
     for draft in drafts:
         title = to_plain_text(draft.title, 200)

@@ -1,7 +1,8 @@
 """`netc discover-sources`: the weekly hunt for groups and events nobody told us about (T094;
 research R6, R7; FR-010-FR-015).
 
-1. Each finder runs in turn (web search, links on known pages, news feeds, coverage gaps). A
+1. Each finder runs in turn (web search, links on known pages, news feeds, newsletters,
+   coverage gaps). A
    finder that crashes is recorded and skipped; the others still run. Each one sees what the
    ones before it found, so nothing is found twice.
 2. Mentions, new and old, are resolved to organizers' pages where possible (FR-014).
@@ -10,7 +11,8 @@ research R6, R7; FR-010-FR-015).
 4. Known groups record when they were last searched and gain the new sources.
 
 Writes candidates.json, mentions.json, new source files, known_groups.yaml, the search usage and
-the AI cache; nothing else. In a dry run nothing is written.
+the AI cache; nothing else. Newsletters the run is done with are then deleted from the inbox,
+so an email is never lost to a crash. In a dry run nothing is written or deleted.
 """
 
 from __future__ import annotations
@@ -27,7 +29,9 @@ from netc.finders.base import Finder, FinderContext, site_key
 from netc.finders.gaps import GapFinder
 from netc.finders.link_graph import LinkGraphFinder
 from netc.finders.news import NewsFinder
+from netc.finders.newsletter import NewsletterFinder
 from netc.finders.web_search import WebSearchFinder
+from netc.inbox.kv import Inbox, InboxError
 from netc.models import CandidateSource, KnownGroup, Source
 from netc.pipeline.ai import Ai
 from netc.pipeline.evaluate import evaluate_candidates
@@ -37,8 +41,14 @@ from netc.search.base import BudgetedSearch
 from netc.storage import DataStore
 
 
-def default_finders() -> list[Finder]:
-    return [WebSearchFinder(), LinkGraphFinder(), NewsFinder(), GapFinder()]
+def default_finders(inbox: Inbox | None = None) -> list[Finder]:
+    return [
+        WebSearchFinder(),
+        LinkGraphFinder(),
+        NewsFinder(),
+        NewsletterFinder(inbox),
+        GapFinder(),
+    ]
 
 
 @dataclass
@@ -58,6 +68,8 @@ class DiscoverSourcesReport:
     searches_left: int | None = None
     ai_calls: int | None = None
     ai_spent_usd: float = 0.0
+    inbox_deleted: int = 0
+    inbox_delete_errors: int = 0
     written: bool = False
 
 
@@ -71,6 +83,7 @@ def discover_sources(
     ai: Ai | None = None,
     news_feeds: Sequence[str] = (),
     finders: Sequence[Finder] | None = None,
+    inbox: Inbox | None = None,
     dry_run: bool = False,
     log: LogSink = stderr_sink,
 ) -> DiscoverSourcesReport:
@@ -100,7 +113,8 @@ def discover_sources(
     )
     searched: dict[str, datetime] = {}
     found: Counter[str] = Counter()
-    for finder in finders if finders is not None else default_finders():
+    processed: list[str] = []
+    for finder in finders if finders is not None else default_finders(inbox):
         try:
             result = finder.run(ctx)
         except Exception as exc:  # one broken finder must not stop the hunt
@@ -118,6 +132,7 @@ def discover_sources(
                 mentions[mention.id] = mention
                 report.new_mentions += 1
         searched.update(result.searched_groups)
+        processed += result.processed_messages
 
     resolved = resolve_mentions(
         list(mentions.values()), http=http, now=now, search=search, events=events
@@ -163,6 +178,13 @@ def discover_sources(
         if ai is not None:
             ai.cache.save()
         report.written = True
+        if inbox is not None:
+            for key in processed:
+                try:
+                    inbox.delete(key)
+                    report.inbox_deleted += 1
+                except InboxError:
+                    report.inbox_delete_errors += 1  # read again next run; the AI cache answers
     if ai is not None and ai.client is not None:
         report.ai_spent_usd = ai.cache.spent_usd()
     return report
