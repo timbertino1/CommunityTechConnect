@@ -30,7 +30,7 @@ from selectolax.lexbor import LexborHTMLParser
 from netc.connectors.base import Connector, RawPayload
 from netc.connectors.detect import Detection, detect
 from netc.fetch import FetchError, HttpClient
-from netc.finders.base import SKIP_HOSTS, site_key
+from netc.finders.base import SKIP_HOSTS, luma_calendar_feed, site_key
 from netc.models import AreaConfig, CandidateSource, Category, FollowLinks, Source
 from netc.pipeline.ai import Ai
 from netc.pipeline.classify import ClassifyInput, classify
@@ -149,6 +149,14 @@ def _evaluate(
         "id": _new_id(key, taken),
     }
 
+    luma_feed = luma_calendar_feed(candidate.url)
+    if host in ("lu.ma", "luma.com"):
+        # Gate V3: Luma is read only through a calendar's iCal feed, never its pages.
+        return _Verdict(
+            "needs_review",
+            "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the "
+            "calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
+        )
     if host == "meetup.com":
         group = key.split("/", 1)[1]
         source = Source.model_validate(
@@ -171,10 +179,10 @@ def _evaluate(
             if "RobotsDisallowedError" in found.reason:
                 return _Verdict("blocked_by_terms", "robots.txt disallows reading it")
             return _Verdict("needs_review", found.reason)
-        if host in ("lu.ma", "luma.com") and found.kind != "ical":
-            return _Verdict(
-                "needs_review", "Luma calendars are read only through their iCal feed (gate V3)"
-            )
+        if luma_feed is not None and found.kind != "ical":
+            return _Verdict("needs_review", "the Luma feed did not return a calendar")
+        if luma_feed is not None:
+            base["id"] = _new_id(f"luma/luma-{key.split('/', 1)[1]}", taken)
         source = Source.model_validate(
             {
                 **base,
@@ -197,6 +205,8 @@ def _evaluate(
         return _Verdict("needs_review", f"sample events could not be read: {type(exc).__name__}")
     if host == "meetup.com":
         source = source.model_copy(update={"name": _name(_page_title(payload), "") or source.name})
+    elif source.connector == "ical" and source.name == host:
+        source = source.model_copy(update={"name": _calendar_name(payload) or source.name})
     listings = connector.parse(source, payload).listings[:MAX_SAMPLE]
     return _judge(source, listings, categories, areas, now, ai)
 
@@ -257,6 +267,12 @@ def _new_id(key: str, taken: set[str]) -> str:
 def _name(title: str | None, host: str) -> str:
     name = _TITLE_SUFFIX.sub("", to_plain_text(title or "", 200)).strip()
     return name or host or "New source"
+
+
+def _calendar_name(payload: RawPayload) -> str | None:
+    """A feed's own name (X-WR-CALNAME), for an iCal source that has no page to name it."""
+    match = re.search(r"^X-WR-CALNAME:(.+)$", payload.text, re.MULTILINE)
+    return to_plain_text(match.group(1), 200) or None if match else None
 
 
 def _page_title(payload: RawPayload) -> str | None:

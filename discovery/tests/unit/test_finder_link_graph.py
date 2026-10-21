@@ -109,3 +109,14 @@ def test_unreadable_pages_are_counted_and_skipped(tmp_path: Path) -> None:
     ctx = FinderContext(now=NOW, areas=AREAS, http=http(tmp_path, {}), organizers=[org()])
     result = LinkGraphFinder().run(ctx)
     assert result.candidates == [] and result.stats["errors"] == 1
+
+
+def test_a_webcal_luma_calendar_link_becomes_its_feed(tmp_path: Path) -> None:
+    ctx = FinderContext(
+        now=NOW,
+        areas=AREAS,
+        http=http(tmp_path, {ORG_URL: "org_with_luma_calendar.html"}),
+        organizers=[org()],
+    )
+    urls = [c.url for c in LinkGraphFinder().run(ctx).candidates]
+    assert "https://api.lu.ma/ics/get?entity=calendar&id=cal-AbC123xyz" in urls
