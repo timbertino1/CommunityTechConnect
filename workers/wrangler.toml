@@ -1,8 +1,10 @@
 # Two Workers share this config through environments:
 #   wrangler deploy --env suggest   -> POST /suggest (see specs/001-event-aggregator/contracts/workers.md)
 #   wrangler deploy --env inbox     -> Email Worker for newsletters
-# Secrets (TURNSTILE_SECRET, IP_HASH_SALT) are set with `wrangler secret put`, never in this file.
-# KV namespace ids below are placeholders until the namespaces are created.
+# Secrets (TURNSTILE_SECRET, IP_HASH_SALT, OWNER_FORWARD_ADDRESS) are set with `wrangler secret put`,
+# never in this file.
+# KV namespace ids are not secrets (useless without a token). SUGGESTIONS is still a placeholder
+# until the suggest Worker is deployed.
 
 name = "netc"
 compatibility_date = "2026-10-01"
@@ -22,9 +24,11 @@ SITE_ORIGIN = "https://REPLACE_WITH_SITE_DOMAIN"
 name = "netc-inbox"
 main = "inbox/index.ts"
 kv_namespaces = [
-  { binding = "NEWSLETTERS", id = "REPLACE_WITH_NEWSLETTERS_KV_ID" },
+  { binding = "NEWSLETTERS", id = "f5207f41749442168fb4041273a55ea1" },
 ]
 
+# OWNER_FORWARD_ADDRESS is a personal address and this repository is public, so it is a secret:
+#   npx wrangler secret put OWNER_FORWARD_ADDRESS --env inbox
 [env.inbox.vars]
+# Newsletter senders: full addresses, or domains (subdomains included), comma-separated.
 ALLOWED_SENDERS = ""
-OWNER_FORWARD_ADDRESS = ""

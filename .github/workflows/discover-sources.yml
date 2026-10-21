@@ -76,7 +76,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           # Newsletter inbox (T100); the finder is skipped until these are set.
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          NEWSLETTERS_KV_ID: ${{ vars.NEWSLETTERS_KV_ID }}
+          NEWSLETTERS_KV_ID: ${{ secrets.KV_NEWSLETTERS_ID }} # set at T075
           CLOUDFLARE_KV_TOKEN: ${{ secrets.CLOUDFLARE_KV_TOKEN }}
         run: uv run netc discover-sources --data-dir ../data --report "$RUNNER_TEMP/sources-report.md"
       - name: Show the run report
