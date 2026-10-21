@@ -1,0 +1,7 @@
+# Finder settings (T093). Changes go through a normal PR.
+
+# Local tech news and blog feeds read by the news finder (research R6). Each must be a public
+# RSS or Atom feed. Silicon Prairie News: feed live at gate V7 (2026-10-17), though its editor
+# stepped down in May 2026, so it may go quiet.
+news_feeds:
+  - https://siliconprairienews.com/feed/

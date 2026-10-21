@@ -39,7 +39,8 @@ Things to know:
   review in more than one sitting.
 - Your decisions also count for the source. A probationary source becomes **trusted** after 3
   approved events and no rejected ones; after that, its events publish without review. A
-  probationary source with more rejected than approved events is **paused**.
+  probationary source is **paused** once at least 3 of its events have been reviewed and most were
+  rejected (so one early rejection doesn't pause a new source).
 - Event titles are shown in `code`, because they come from other websites. A title that looks
   like a checkbox or an id is just text.
 
@@ -107,6 +108,27 @@ AI Omaha on Oct 19, 2026):
 cd discovery
 uv run netc discover-events --data-dir <copy of data with only the new source> --dry-run --force --report report.md
 ```
+
+## The weekly hunt for new groups
+
+Every Monday at 12:00 UTC, **Discover sources** looks for groups nobody told the site about:
+about 40 web searches, the links on known organizers' pages, local news feeds
+(`discovery/src/netc/finders/config.yaml`), and targeted searches for groups that went quiet,
+annual events not yet listed, and known groups with no working source. It opens its own data
+PR, `New sources <date>`, which merges by itself; the description lists what was added and what
+was looked at and turned down.
+
+- A relevant site is added as a **probationary** source. Its events reach you in the review PR
+  from the next daily run, and three approvals make it trusted.
+- A site whose events are outside Nebraska, or not about tech, is rejected and looked at again
+  after a month.
+- A site it can't read automatically (no calendar feed or event data) is listed under
+  **Candidates needing a look** in the health issue. If it's worth having, add it by hand.
+- A newsletter or news mention is never published itself. Once the bot finds the organizer's
+  page, that site becomes a candidate like any other.
+
+Web search uses at most 400 of Tavily's 1,000 free monthly searches; the AI shares the $1.00
+monthly budget with the daily runs. Both totals are in the health issue.
 
 ## Reading the health issue
 

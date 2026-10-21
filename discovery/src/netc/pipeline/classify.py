@@ -12,11 +12,14 @@ from __future__ import annotations
 import re
 from collections.abc import Sequence
 from dataclasses import dataclass, field
-from typing import Final, Literal
+from typing import TYPE_CHECKING, Final, Literal
 
 from netc.models import Area, AreaConfig, Category
 from netc.pipeline.ai import MIN_CONFIDENCE, Ai
 from netc.pipeline.places import match_place
+
+if TYPE_CHECKING:
+    from netc.pipeline.normalize import Normalized
 
 MAX_CATEGORIES: Final = 3
 TITLE_WEIGHT: Final = 2
@@ -50,6 +53,18 @@ class ClassifyInput:
     online: bool
     source_area: Area | None
     """The source's default area: set for Nebraska groups."""
+
+    @classmethod
+    def of(cls, item: Normalized, source_area: Area | None) -> ClassifyInput:
+        """The classifier's view of a normalized listing."""
+        return cls(
+            title=item.title,
+            summary=item.summary,
+            organizer=item.organizer,
+            area=item.area,
+            online=item.location.online,
+            source_area=source_area,
+        )
 
 
 @dataclass(frozen=True)

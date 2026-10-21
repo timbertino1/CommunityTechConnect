@@ -343,12 +343,16 @@ def test_huge_values_do_not_flood_the_report(
 # --- Other subcommands are registered
 
 
-@pytest.mark.parametrize("command", ["discover-sources"])
-def test_planned_subcommands_exist_but_are_not_implemented_yet(
-    command: str, capsys: pytest.CaptureFixture[str]
-) -> None:
-    assert main([command]) == 2
-    assert "not implemented" in capsys.readouterr().err
+@pytest.mark.parametrize(
+    "command",
+    ["discover-events", "discover-sources", "build-site", "review-pr", "apply-review",
+     "health-issue", "validate-data"],
+)  # fmt: skip
+def test_every_subcommand_is_registered(command: str, capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit) as done:
+        main([command, "--help"])
+    assert done.value.code == 0
+    assert command in capsys.readouterr().out
 
 
 AI_LINE = (

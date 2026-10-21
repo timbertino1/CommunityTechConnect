@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Prairie Cowork//EN
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VEVENT
+UID:lunch-python@cowork.example.org
+DTSTAMP:20261019T120000Z
+SUMMARY:Lunch and learn: Python for spreadsheets
+DTSTART;TZID=America/Chicago:20261105T120000
+DTEND;TZID=America/Chicago:20261105T130000
+LOCATION:Prairie Cowork, 1033 O St, Lincoln, NE 68508
+URL:https://cowork.example.org/events/lunch-python
+END:VEVENT
+END:VCALENDAR

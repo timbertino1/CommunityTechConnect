@@ -12,21 +12,24 @@ from pathlib import Path
 
 from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp, SafeHttp
+from netc.fetch.api import SafeApi
+from netc.finders.config import load_config
 from netc.github.health import LastAlert, alert_comment, build_health
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import build_review_pr, has_ticks, read_decisions
 from netc.models import SourceStatus
 from netc.pipeline.ai import Ai, AiCache, OpenAiClient
 from netc.pipeline.discover_events import discover_events
+from netc.pipeline.discover_sources import discover_sources
 from netc.pipeline.review import ApplyResult, apply_decisions, check_review_merge
 from netc.pipeline.run_report import render_markdown
+from netc.pipeline.sources_report import render_sources_markdown
 from netc.pipeline.validate import validate_data
+from netc.search.base import BudgetedSearch, SearchError
+from netc.search.offline import FixtureSearch
+from netc.search.tavily import TavilyProvider
 from netc.site.build import BuildError, build_site
 from netc.storage import DataStore, StorageError
-
-PLANNED_COMMANDS = {
-    "discover-sources": "Find and evaluate new event sources.",
-}
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -34,8 +37,27 @@ def _parser() -> argparse.ArgumentParser:
         prog="netc", description="NETechConnect discovery pipeline and site generator."
     )
     commands = parser.add_subparsers(dest="command", required=True, metavar="COMMAND")
-    for name, help_text in PLANNED_COMMANDS.items():
-        commands.add_parser(name, help=help_text, description=help_text)
+    sources = commands.add_parser(
+        "discover-sources",
+        help="Find and evaluate new groups and event sources (weekly).",
+        description=(
+            "Run the finders (web search, links on known pages, news feeds, gap checks), "
+            "resolve mentions, evaluate candidates, and add relevant ones as probationary "
+            "sources. Search needs SEARCH_API_KEY and the AI needs OPENAI_API_KEY; without "
+            "them those steps are skipped."
+        ),
+    )
+    sources.add_argument("--data-dir", type=Path, default=Path("data"), help="data directory")
+    sources.add_argument(
+        "--offline", action="store_true", help="read pages from --fixtures instead of the web"
+    )
+    sources.add_argument("--fixtures", type=Path, help="directory with index.json (offline)")
+    sources.add_argument(
+        "--search-fixtures", type=Path, help="offline: index of recorded search results"
+    )
+    sources.add_argument("--dry-run", action="store_true", help="report without writing data/")
+    sources.add_argument("--report", type=Path, help="also write a Markdown report here")
+    sources.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
     discover = commands.add_parser(
         "discover-events",
         help="Collect events from known sources and update data/.",
@@ -139,8 +161,58 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _apply_review(args)
     if args.command == "health-issue":
         return _health_issue(args)
+    if args.command == "discover-sources":
+        return _discover_sources(args)
     print(f"netc {args.command}: not implemented yet", file=sys.stderr)
     return 2
+
+
+def _discover_sources(args: argparse.Namespace) -> int:
+    now: datetime = args.now or datetime.now(UTC)
+    store = DataStore(args.data_dir)
+    connectors = default_connectors(lambda: now)
+    config = load_config()
+    try:
+        usage = store.read_search_usage(now=now)
+        if args.offline:
+            if args.fixtures is None:
+                print("netc discover-sources: --offline needs --fixtures DIR", file=sys.stderr)
+                return 2
+            provider = FixtureSearch(args.search_fixtures) if args.search_fixtures else None
+            search = BudgetedSearch(provider, usage, now=now) if provider else None
+            report = discover_sources(
+                store, FixtureHttp(args.fixtures), connectors, now=now, search=search,
+                news_feeds=config.news_feeds, dry_run=args.dry_run,
+            )  # fmt: skip
+        else:
+            domain = os.environ.get("NETC_SITE_DOMAIN", "netechconnect.example")
+            client = OpenAiClient.from_env()
+            ai = Ai(client, AiCache(args.data_dir / "cache" / "ai", now=now), now=now)
+            api = SafeApi(site_domain=domain)
+            try:
+                tavily: TavilyProvider | None = TavilyProvider.from_env(api)
+            except SearchError:
+                tavily = None
+            search = BudgetedSearch(tavily, usage, now=now) if tavily else None
+            with SafeHttp(site_domain=domain) as http:
+                report = discover_sources(
+                    store, http, connectors, now=now, search=search,
+                    ai=ai if client is not None else None, news_feeds=config.news_feeds,
+                    dry_run=args.dry_run,
+                )  # fmt: skip
+            api.close()
+    except (StorageError, RuntimeError) as exc:
+        print(f"netc discover-sources: {exc}", file=sys.stderr)
+        return 1
+    found = sum(report.found.values())
+    print(
+        f"New candidates: {found}. Added on probation: {len(report.added)}. "
+        f"New mentions: {report.new_mentions}."
+        + ("" if report.written else " (dry run: nothing written)")
+    )
+    if args.report is not None:
+        args.report.write_bytes(render_sources_markdown(report).encode("utf-8"))
+    return 0
 
 
 def _utc_datetime(value: str) -> datetime:
@@ -317,6 +389,7 @@ def _health_issue(args: argparse.Namespace) -> int:
             now=now,
             previous_status=_previous_status(args.previous_status),
             ai_spent_usd=_ai_spent(args.data_dir, now),
+            candidates=store.read_candidates(),
         )
         comment = alert_comment(
             health, owner=args.owner, last=_last_alert(args.last_alert), now=now

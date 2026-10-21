@@ -343,3 +343,20 @@ def test_the_body_fits_in_an_issue() -> None:
     sources = [make_source(f"src_group-{i}", name=f"Group {i} " + "x" * 150) for i in range(400)]
     statuses = {s.id: failing(5, "e" * 400) for s in sources}
     assert len(health(sources, statuses).body) <= 65_536
+
+
+def test_candidates_needing_a_look_are_listed() -> None:
+    from netc.finders.base import make_candidate
+
+    waiting = make_candidate("https://acme-hosting.example.com/", found_via="link_graph",
+                             evidence=["x"], now=NOW).model_copy(
+        update={"result": "needs_review", "reason": "no calendar feed found"}
+    )  # fmt: skip
+    added = waiting.model_copy(update={"url": "https://ok.example.org/", "result": "added"})
+    body = build_health([make_source()], {}, [], [], [], now=NOW, candidates=[waiting, added]).body
+    text = section(body, "Candidates needing a look")
+    assert text == (
+        "1 site discovery couldn't add automatically:\n\n"
+        "- `https://acme-hosting.example.com/`: `no calendar feed found`"
+    )
+    assert section(health().body, "Candidates needing a look") == "None."

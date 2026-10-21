@@ -18,12 +18,12 @@ from datetime import datetime
 
 from netc.connectors.base import Connector
 from netc.fetch import HttpClient
-from netc.models import Area, Event, Source
+from netc.models import Event, Source
 from netc.pipeline.ai import Ai
 from netc.pipeline.classify import ClassifyInput, classify
 from netc.pipeline.dedupe import deduplicate
 from netc.pipeline.lifecycle import Incoming, apply_run
-from netc.pipeline.normalize import Dropped, Normalized, normalize, to_event
+from netc.pipeline.normalize import Dropped, normalize, to_event
 from netc.pipeline.overrides import apply_overrides
 from netc.pipeline.runner import LogSink, SourceOutcome, run_sources, stderr_sink
 from netc.pipeline.sanitize import to_plain_text
@@ -140,7 +140,9 @@ def discover_events(
             if isinstance(item, Dropped):
                 tally("dropped", raw.title, item.reason)
                 continue
-            verdict = classify(_classify_input(item, source.default_area), categories, areas, ai=ai)
+            verdict = classify(
+                ClassifyInput.of(item, source.default_area), categories, areas, ai=ai
+            )
             if verdict.relevant is False:
                 tally("rejected", item.title, verdict.reason)
                 continue
@@ -245,17 +247,6 @@ def _changes(before: list[Event], after: list[Event], reasons: dict[str, str]) -
                 detail = detail.replace("status", f"status: {was.status} to {event.status}")
             changes.append(EventChange("updated", event, detail))
     return changes
-
-
-def _classify_input(item: Normalized, source_area: Area | None) -> ClassifyInput:
-    return ClassifyInput(
-        title=item.title,
-        summary=item.summary,
-        organizer=item.organizer,
-        area=item.area,
-        online=item.location.online,
-        source_area=source_area,
-    )
 
 
 def _hold_for(event: Event, holds: dict[tuple[str, str], str]) -> str | None:

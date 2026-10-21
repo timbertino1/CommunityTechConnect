@@ -20,15 +20,14 @@ from collections import Counter
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from itertools import pairwise
-from statistics import median
 from typing import Final
 from zoneinfo import ZoneInfo
 
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import pending_items
-from netc.models import Event, EventMention, ReviewItem, Source, SourceStatus
+from netc.models import CandidateSource, Event, EventMention, ReviewItem, Source, SourceStatus
 from netc.pipeline.ai import MONTHLY_BUDGET_USD
+from netc.pipeline.coverage import quiet_sources
 from netc.pipeline.timeutil import format_central
 
 HEALTH_TITLE: Final = "Discovery health"
@@ -38,8 +37,6 @@ STALE_AFTER: Final = timedelta(hours=36)
 """Main's data older than this means the data PRs aren't merging (or runs aren't happening)."""
 MIN_ALERT_GAP: Final = timedelta(hours=20)
 REMIND_AFTER: Final = timedelta(days=7)
-QUIET_LOOKBACK: Final = timedelta(days=183)
-QUIET_MIN_EVENTS: Final = 3
 MAX_LISTED: Final = 25
 MAX_BODY_CHARS: Final = 60_000
 """GitHub caps an issue description at 65,536 characters."""
@@ -99,6 +96,7 @@ def build_health(
     now: datetime,
     previous_status: Mapping[str, SourceStatus] | None = None,
     ai_spent_usd: float | None = None,
+    candidates: Iterable[CandidateSource] = (),
 ) -> Health:
     """The issue description after a run. ``previous_status`` is main's source status from
     before the run, used to tell whether earlier runs' data reached main. ``ai_spent_usd`` is
@@ -167,6 +165,7 @@ def build_health(
     lines += ["", "### Quiet groups", "", *(_capped(_quiet(ordered, events, now)) or ["None."])]
     lines += ["", "### Unresolved mentions", "", _mentions(mentions)]
     lines += ["", "### New sources this week", "", _new_sources(ordered, now)]
+    lines += ["", "### Candidates needing a look", "", _needs_look(candidates)]
     lines += ["", "### AI and search spend", "", *_spend(ai_spent_usd)]
     lines += ["", "### Schedule", "", *schedule_lines]
 
@@ -241,30 +240,12 @@ def _last_worked(status: SourceStatus) -> str:
 
 
 def _quiet(sources: list[Source], events: list[Event], now: datetime) -> list[str]:
-    """Active sources whose events stopped: nothing upcoming, and the time since the last
-    event is more than twice the usual gap (research R11)."""
-    starts: dict[str, list[datetime]] = {}
-    upcoming: set[str] = set()
-    for event in events:
-        if event.status == "cancelled" or event.review_state == "rejected":
-            continue
-        for source_id in {x.source_id for x in event.listings}:
-            if event.start > now:
-                upcoming.add(source_id)
-            elif event.start >= now - QUIET_LOOKBACK:
-                starts.setdefault(source_id, []).append(event.start)
-    lines = []
-    for source in sources:
-        past = sorted(set(starts.get(source.id, [])))
-        if source.status != "active" or source.id in upcoming or len(past) < QUIET_MIN_EVENTS:
-            continue
-        gap = timedelta(seconds=median((b - a).total_seconds() for a, b in pairwise(past)))
-        if now - past[-1] > 2 * gap:
-            lines.append(
-                f"- **{plain_name(source.name)}**: last event {_day(past[-1])}; "
-                f"usually every {_days(gap)}."
-            )
-    return lines
+    """Groups that went quiet (pipeline.coverage); the gap finder searches for them weekly."""
+    return [
+        f"- **{plain_name(q.source.name)}**: last event {_day(q.last_event)}; "
+        f"usually every {_days(q.usual_gap)}."
+        for q in quiet_sources(sources, events, now)
+    ]
 
 
 def _mentions(mentions: Iterable[EventMention]) -> str:
@@ -306,6 +287,18 @@ def _schedule(
         f"Main's data was {hours} hours old before this run: check that the bot's data PRs "
         "are merging."
     )
+
+
+def _needs_look(candidates: Iterable[CandidateSource]) -> str:
+    """Sites discovery found but couldn't read or judge automatically (no feed or event data,
+    no upcoming events, or events only a person can judge). Add one by hand if it's worth it."""
+    waiting = [c for c in candidates if c.result == "needs_review"]
+    if not waiting:
+        return "None."
+    items = [f"- {code_span(c.url)}: {code_span(c.reason)}" for c in waiting]
+    noun = "1 site" if len(waiting) == 1 else f"{len(waiting)} sites"
+    listed = "\n".join(_capped(items))
+    return f"{noun} discovery couldn't add automatically:\n\n{listed}"
 
 
 def _spend(ai_spent_usd: float | None) -> list[str]:

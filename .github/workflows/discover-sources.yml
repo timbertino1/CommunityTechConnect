@@ -1,0 +1,124 @@
+name: Discover sources
+
+# Weekly: find groups and event sources nobody told us about (T095; research R6, R7; FR-010).
+# New sources start on probation; the next "Discover events" run collects their events and holds
+# them for review.
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+  workflow_dispatch:
+
+# The default token is read-only; the data PR is written with the GitHub App's own token.
+permissions:
+  contents: read
+
+# Shared with "Discover events", so the two never run at the same time.
+concurrency:
+  group: discover
+  cancel-in-progress: false
+
+jobs:
+  review:
+    name: Open or update the review PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: discovery
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: discovery/uv.lock
+      - name: Install
+        working-directory: discovery
+        run: uv sync --locked
+      - name: Create the bot's token
+        id: bot
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Open, update or close the review PR
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
+        run: bash .github/scripts/review-pr.sh
+
+  discover:
+    name: Discover sources and open the data PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: discovery
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: discovery/uv.lock
+      - name: Install
+        working-directory: discovery
+        run: uv sync --locked
+      - name: Keep main's run status
+        run: cp data/state/source_status.json "$RUNNER_TEMP/previous-status.json" || true
+      - name: Discover sources
+        working-directory: discovery
+        env:
+          NETC_SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'netechconnect.pages.dev' }}
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: uv run netc discover-sources --data-dir ../data --report "$RUNNER_TEMP/sources-report.md"
+      - name: Show the run report
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/sources-report.md" ]; then
+            cat "$RUNNER_TEMP/sources-report.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Validate data
+        working-directory: discovery
+        run: uv run netc validate-data --data-dir ../data
+      - name: Create the bot's token
+        id: bot
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+      # Its own branch, so it never replaces (or is replaced by) the daily events PR.
+      - name: Open or update the data PR
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token }}
+          BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
+          REPORT_FILE: ${{ runner.temp }}/sources-report.md
+        run: |
+          today="$(date -u +%Y-%m-%d)"
+          export BRANCH="bot/sources-${today}"
+          export TITLE="New sources ${today}"
+          export INTRO="Automatic update from the weekly source discovery run. New sources are on probation, so their events wait for review. Changes only files under \`data/\`; it merges by itself once every check passes."
+          export COMMIT_MESSAGE="data: source discovery ${today}"
+          bash .github/scripts/data-pr.sh
+      - name: Create the bot's issue token
+        id: issues
+        continue-on-error: true
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+          permission-issues: write
+      - name: Update the Discovery health issue
+        if: steps.issues.outcome == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ steps.issues.outputs.token }}
+          BOT_SLUG: ${{ steps.issues.outputs.app-slug }}
+          OWNER: ${{ github.repository_owner }}
+          PREVIOUS_STATUS: ${{ runner.temp }}/previous-status.json
+        run: bash .github/scripts/health-issue.sh

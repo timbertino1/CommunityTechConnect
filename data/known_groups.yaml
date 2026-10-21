@@ -41,6 +41,30 @@
   name: AIM Institute
   source_ids: []
   status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Bellevue University Cybersecurity
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: BSides Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Creighton University
+  source_ids: []
+  status: active
 - aliases:
   - Omaha Drupal Meetup
   area: omaha
@@ -51,6 +75,39 @@
   name: Drupal Nebraska
   source_ids:
   - src_drupal-nebraska
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: FUSE Coworking
+  source_ids: []
+  status: active
+- aliases:
+  - Google Cloud Omaha
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: GCP Meetup - Omaha
+  source_ids: []
+  status: active
+- aliases: []
+  area: null
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Great Plains Cybersecurity Conference
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Greater Omaha Chamber
+  source_ids: []
   status: active
 - aliases: []
   area: omaha
@@ -96,6 +153,30 @@
   source_ids: []
   status: active
 - aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Lincoln Chamber of Commerce
+  source_ids: []
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Nebraska Code Camp
+  source_ids: []
+  status: active
+- aliases: []
+  area: null
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Nebraska Cybersecurity Conference
+  source_ids: []
+  status: active
+- aliases: []
   area: omaha
   cadence_days: null
   last_searched: null
@@ -112,6 +193,14 @@
   name: Nebraska Innovation Campus
   source_ids:
   - src_unl-nic
+  status: active
+- aliases: []
+  area: null
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Nebraska Women of Color in Tech
+  source_ids: []
   status: active
 - aliases:
   - Nebraska Code
@@ -162,6 +251,15 @@
   source_ids:
   - src_omaha-rhug
   status: active
+- aliases:
+  - Omaha Web Developers
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: OMWEB
+  source_ids: []
+  status: active
 - aliases: []
   area: omaha
   cadence_days: null
@@ -180,6 +278,15 @@
   name: Prairie Python
   source_ids:
   - src_prairie-python
+  status: active
+- aliases:
+  - Omaha Salesforce Developers
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Salesforce Developer Group, Omaha
+  source_ids: []
   status: active
 - aliases:
   - UNO
@@ -201,6 +308,15 @@
   name: UNL School of Computing
   source_ids:
   - src_unl-computing
+  status: active
+- aliases:
+  - Women in CyberSecurity Nebraska
+  area: null
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: WiCyS Nebraska
+  source_ids: []
   status: active
 - aliases:
   - WiTH
