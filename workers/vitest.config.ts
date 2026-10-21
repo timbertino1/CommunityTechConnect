@@ -1,7 +1,7 @@
 import { defineConfig } from "vitest/config";
 
-// The Workers runtime pool (cloudflareTest from @cloudflare/vitest-pool-workers) is wired in
-// once suggest/ and inbox/ have entry points; until then this runs plain vitest.
+// Plain vitest: the tests hand each Worker fake messages and a fake KV namespace. Switch to the
+// Workers runtime pool (@cloudflare/vitest-pool-workers) if a test ever needs the real runtime.
 export default defineConfig({
   test: {
     include: ["test/**/*.test.ts"],
