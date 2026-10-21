@@ -5,6 +5,7 @@ cross-file rules in data-model.md. All problems are collected and reported toget
 from __future__ import annotations
 
 import functools
+import json
 import re
 from collections import Counter
 from dataclasses import dataclass, field
@@ -15,6 +16,7 @@ from jsonschema import Draft202012Validator
 from pydantic import BaseModel, ValidationError
 
 from netc.models import (
+    AiCacheEntry,
     AreaConfig,
     CandidateSource,
     Category,
@@ -34,6 +36,7 @@ from netc.storage import EVENT_FILE, StorageError, event_month_path, read_raw
 MAX_MESSAGE: Final = 300
 _SOURCE_KEY: Final = re.compile(r"^src_[a-z0-9-]{1,80}$")
 _REVIEW_ID: Final = re.compile(r"^rev_[a-f0-9]{12}$")
+_AI_CACHE_FILE: Final = re.compile(r"^\d{4}-(0[1-9]|1[0-2])\.jsonl$")
 
 # List files: (path under data/, schema name, model).
 LIST_FILES: Final[tuple[tuple[str, str, type[BaseModel]], ...]] = (
@@ -205,6 +208,28 @@ class _Checker:
                 self.error(where, "keys must be source ids (src_...)")
             self.check_item(value, "source_status", SourceStatus, where)
 
+    def check_ai_cache(self) -> None:
+        cache_dir = self.root / "cache" / "ai"
+        if not cache_dir.is_dir():
+            return
+        for path in sorted(cache_dir.iterdir()):
+            if path.name == ".gitkeep":
+                continue
+            relative = self.rel(path)
+            if not _AI_CACHE_FILE.match(path.name):
+                self.error(relative, "only YYYY-MM.jsonl files belong in cache/ai/")
+                continue
+            self.report.files_checked += 1
+            for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+                if not line.strip():
+                    continue
+                try:
+                    raw = json.loads(line)
+                except ValueError:
+                    self.error(f"{relative} line {n}", "not valid JSON")
+                    continue
+                self.check_item(raw, "ai_cache_entry", AiCacheEntry, f"{relative} line {n}")
+
     def check_search_usage(self) -> None:
         path = self.root / "state" / "search_usage.json"
         if not path.exists():
@@ -321,6 +346,7 @@ def validate_data(root: Path) -> ValidationReport:
     checker.check_sources()
     checker.check_source_status()
     checker.check_search_usage()
+    checker.check_ai_cache()
     checker.check_review_open()
     checker.check_areas()
     checker.check_cross_file()

@@ -28,6 +28,7 @@ from zoneinfo import ZoneInfo
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import pending_items
 from netc.models import Event, EventMention, ReviewItem, Source, SourceStatus
+from netc.pipeline.ai import MONTHLY_BUDGET_USD
 from netc.pipeline.timeutil import format_central
 
 HEALTH_TITLE: Final = "Discovery health"
@@ -46,7 +47,7 @@ MAX_BODY_CHARS: Final = 60_000
 CENTRAL: Final = ZoneInfo("America/Chicago")
 _LOGIN: Final = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$")
 _MARKER: Final = re.compile(r"<!-- netc-health-alert: ([a-z0-9:_ -]*) -->")
-_KEY: Final = re.compile(r"^(?:review|schedule|failing:src_[a-z0-9-]+)$")
+_KEY: Final = re.compile(r"^(?:review|schedule|ai-budget|failing:src_[a-z0-9-]+)$")
 
 ORIGIN_LABELS: Final = {
     "preconfigured": "pre-configured",
@@ -97,9 +98,11 @@ def build_health(
     *,
     now: datetime,
     previous_status: Mapping[str, SourceStatus] | None = None,
+    ai_spent_usd: float | None = None,
 ) -> Health:
     """The issue description after a run. ``previous_status`` is main's source status from
-    before the run, used to tell whether earlier runs' data reached main."""
+    before the run, used to tell whether earlier runs' data reached main. ``ai_spent_usd`` is
+    this month's AI spend, or None when the AI hasn't been used yet."""
     ordered = sorted(sources, key=lambda s: (s.name.casefold(), s.id))
     events = list(events)
     attention: list[Attention] = []
@@ -133,6 +136,14 @@ def build_health(
     schedule_lines, stale = _schedule(statuses, previous_status, now)
     if stale is not None:
         attention.append(Attention("schedule", stale))
+    if ai_spent_usd is not None and ai_spent_usd >= MONTHLY_BUDGET_USD:
+        attention.append(
+            Attention(
+                "ai-budget",
+                f"This month's AI budget (${MONTHLY_BUDGET_USD:.2f}) is spent, so undecided "
+                "events go to review until next month.",
+            )
+        )
 
     lines = [f"## {HEALTH_TITLE} · {_when(now)}", ""]
     if attention:
@@ -156,13 +167,7 @@ def build_health(
     lines += ["", "### Quiet groups", "", *(_capped(_quiet(ordered, events, now)) or ["None."])]
     lines += ["", "### Unresolved mentions", "", _mentions(mentions)]
     lines += ["", "### New sources this week", "", _new_sources(ordered, now)]
-    lines += [
-        "",
-        "### AI and search spend",
-        "",
-        "Not in use yet: AI classification and web search arrive with automatic discovery "
-        "(Phase 4).",
-    ]
+    lines += ["", "### AI and search spend", "", *_spend(ai_spent_usd)]
     lines += ["", "### Schedule", "", *schedule_lines]
 
     body = "\n".join(lines) + "\n"
@@ -301,6 +306,18 @@ def _schedule(
         f"Main's data was {hours} hours old before this run: check that the bot's data PRs "
         "are merging."
     )
+
+
+def _spend(ai_spent_usd: float | None) -> list[str]:
+    search = "Web search: not in use yet (the weekly discovery run comes later in Phase 4)."
+    if ai_spent_usd is None:
+        return ["AI second opinion: not used yet.", "", search]
+    return [
+        f"AI second opinion: ${ai_spent_usd:.2f} of ${MONTHLY_BUDGET_USD:.2f} this month "
+        "(the OpenAI account also has its own $5 cap).",
+        "",
+        search,
+    ]
 
 
 def _capped(items: list[str]) -> list[str]:

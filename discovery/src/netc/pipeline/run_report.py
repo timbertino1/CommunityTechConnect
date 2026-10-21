@@ -17,6 +17,7 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from netc.github.markdown import code_span, plain_name
+from netc.pipeline.ai import MONTHLY_BUDGET_USD
 from netc.pipeline.discover_events import DiscoverReport, EventChange, SourceRow
 from netc.pipeline.timeutil import format_central
 
@@ -48,6 +49,7 @@ def render_markdown(report: DiscoverReport) -> str:
         f" {kinds['updated']} updated."
         + ("" if report.written else " *(Dry run: nothing was saved.)*"),
         "",
+        *_ai_line(report),
         "### Sources",
         "",
         "| Source | Result | Upcoming | Added or kept | Held | Rejected | Dropped "
@@ -103,6 +105,23 @@ def render_markdown(report: DiscoverReport) -> str:
     if len(text) > MAX_REPORT_CHARS:
         text = text[: MAX_REPORT_CHARS - 40].rsplit("\n", 1)[0] + "\n\n*(Report shortened.)*\n"
     return text
+
+
+def _ai_line(report: DiscoverReport) -> list[str]:
+    if report.ai_calls is None:
+        return []
+    calls = "1 call" if report.ai_calls == 1 else f"{report.ai_calls} calls"
+    problems = ""
+    if report.ai_unusable:
+        why = code_span(report.ai_last_problem or "unknown")
+        problems = (
+            f" {report.ai_unusable} gave no usable answer (last: {why}); those wait for review."
+        )
+    return [
+        f"**AI second opinion:** {calls} this run; ${report.ai_spent_usd:.2f} of "
+        f"${MONTHLY_BUDGET_USD:.2f} spent this month.{problems}",
+        "",
+    ]
 
 
 def _source_row(row: SourceRow) -> str:

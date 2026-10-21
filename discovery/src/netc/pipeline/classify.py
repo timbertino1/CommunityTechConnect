@@ -2,8 +2,9 @@
 
 Rules decide the clear cases: exclusion phrases (sales pitches, real estate, academic calendar
 dates, student-only events) reject; category keywords from data/categories.yaml accept; a Nebraska
-connection is required. Anything the rules cannot decide comes back with ``decided_by="none"`` so
-it can go to AI (Phase 4) or to review, never straight onto the site.
+connection is required. When the rules can't decide, the AI is asked (T082), if one is given and
+its budget remains; a confident, valid answer decides (``decided_by="ai"``). Otherwise the item
+comes back with ``decided_by="none"`` and goes to review, never straight onto the site.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ from dataclasses import dataclass, field
 from typing import Final, Literal
 
 from netc.models import Area, AreaConfig, Category
+from netc.pipeline.ai import MIN_CONFIDENCE, Ai
 from netc.pipeline.places import match_place
 
 MAX_CATEGORIES: Final = 3
@@ -62,7 +64,11 @@ class Classification:
 
 
 def classify(
-    item: ClassifyInput, categories: Sequence[Category], areas: AreaConfig
+    item: ClassifyInput,
+    categories: Sequence[Category],
+    areas: AreaConfig,
+    *,
+    ai: Ai | None = None,
 ) -> Classification:
     title = item.title.casefold()
     body = f"{item.summary} {item.organizer or ''}".casefold()
@@ -78,13 +84,48 @@ def classify(
     if nebraska is False:
         return Classification(False, False, None, [], 0.9, "rules", "not in Nebraska")
     if not chosen:
-        return Classification(None, nebraska, area, [], 0.0, "none", "no tech keywords")
+        undecided = Classification(None, nebraska, area, [], 0.0, "none", "no tech keywords")
+        return _second_opinion(item, undecided, categories, ai)
     confidence = 0.9 if max(scores.values()) >= TITLE_WEIGHT else 0.7
     if nebraska is None:
-        return Classification(
+        undecided = Classification(
             None, None, area, chosen, confidence, "none", "Nebraska connection unclear"
         )
+        return _second_opinion(item, undecided, categories, ai)
     return Classification(True, True, area, chosen, confidence, "rules", "tech keywords")
+
+
+def _second_opinion(
+    item: ClassifyInput, undecided: Classification, categories: Sequence[Category], ai: Ai | None
+) -> Classification:
+    """The AI's answer when it is confident and usable; otherwise the rules' undecided result."""
+    if ai is None:
+        return undecided
+    answer = ai.classify(_ai_text(item), [c.id for c in categories])
+    if answer is None or answer.confidence < MIN_CONFIDENCE:
+        return undecided
+    reason = f"AI: {answer.reason}"[:200]
+    if not answer.nebraska:
+        return Classification(False, False, None, [], answer.confidence, "ai", reason)
+    if not answer.relevant:
+        return Classification(False, True, undecided.area, [], answer.confidence, "ai", reason)
+    area = undecided.area or (None if answer.area == "unknown" else answer.area)
+    if area is None:
+        return undecided  # relevant, but nowhere to file it: a person decides
+    chosen = list(dict.fromkeys(answer.categories))[:MAX_CATEGORIES] or [GENERAL]
+    return Classification(True, True, area, chosen, answer.confidence, "ai", reason)
+
+
+def _ai_text(item: ClassifyInput) -> str:
+    place = item.area or item.source_area or "unknown"
+    lines = [
+        f"Title: {item.title}",
+        f"Organizer: {item.organizer or 'unknown'}",
+        f"Online: {'yes' if item.online else 'no'}",
+        f"Known area: {place}",
+        f"Description: {item.summary}",
+    ]
+    return "\n".join(lines)
 
 
 def _score(title: str, body: str, categories: Sequence[Category]) -> dict[str, int]:

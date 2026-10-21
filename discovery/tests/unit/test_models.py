@@ -13,6 +13,7 @@ from jsonschema import Draft202012Validator
 from pydantic import BaseModel, ValidationError
 
 from netc.models import (
+    AiCacheEntry,
     CandidateSource,
     Category,
     Event,
@@ -558,6 +559,20 @@ SAMPLES: list[tuple[type[BaseModel], str, dict[str, Any]]] = [
         "search_usage",
         {"month": "2026-10", "used": 3, "last_run": {"Omaha tech meetup": "2026-10-20"}},
     ),
+    (
+        AiCacheEntry,
+        "ai_cache_entry",
+        {
+            "key": "b" * 64,
+            "kind": "extract",
+            "model": "gpt-5-nano-2025-08-07",
+            "at": "2026-10-20T12:00:00Z",
+            "result": {"mentions": []},
+            "input_tokens": 10,
+            "cached_tokens": 0,
+            "output_tokens": 2,
+        },
+    ),
 ]
 
 
@@ -589,6 +604,7 @@ def test_packaged_contract_schemas_match_the_spec(name: str) -> None:
         "override",
         "source_status",
         "search_usage",
+        "ai_cache_entry",
     ],
 )
 def test_every_schema_is_a_valid_draft_2020_12_schema(name: str) -> None:

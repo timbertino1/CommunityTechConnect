@@ -64,7 +64,7 @@ redirects, size and time limits).
 ## Classifier
 
 ```python
-def classify(item: ClassifyInput) -> Classification
+def classify(item: ClassifyInput, categories, areas, *, ai: Ai | None = None) -> Classification
 ```
 
 - Output: `relevant: bool`, `nebraska: bool`, `area`, `categories`, `confidence: float`,
@@ -73,11 +73,18 @@ def classify(item: ClassifyInput) -> Classification
 - AI call: Structured Outputs with a fixed JSON schema; source text passed as delimited data;
   no tools; output validated. Results cached by content hash.
 - If AI is unavailable or over budget → `decided_by: "none"` → item goes to review.
+- An AI answer decides only when it validates and its confidence is at least 0.7; anything else
+  leaves the rules' undecided result, so the item goes to review.
+- The cache (`data/cache/ai/<YYYY-MM>.jsonl`) stores the input's hash, the checked answer and
+  token counts, never the text sent. Spend is computed from the tokens at gate V6 prices.
 
 ## Extractor (newsletters and news)
 
 ```python
-def extract_mentions(text: str, links: list[str]) -> list[EventMention]
+def extract_mentions(text: str, links: list[str], *, ai: Ai, channel) -> list[EventMention] | None
 ```
+
+Returns None when the AI gave no usable answer (try again later). A mention keeps only links
+that were in `links`.
 
 Same AI safety rules as the classifier. Mentions are never published directly (FR-014).

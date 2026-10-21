@@ -339,6 +339,20 @@ class SearchUsage(_Model):
     last_run: dict[Hint, date] = {}
 
 
+class AiCacheEntry(_Model):
+    """One AI call in data/cache/ai/<YYYY-MM>.jsonl: the checked answer (None when the call
+    gave no usable answer) and its token counts. Never the text that was sent."""
+
+    key: Annotated[str, StringConstraints(pattern=r"^[a-f0-9]{64}$")]
+    kind: Literal["classify", "extract"]
+    model: Annotated[str, StringConstraints(min_length=1, max_length=100)]
+    at: UtcDatetime
+    result: dict[str, Any] | list[Any] | None = None
+    input_tokens: NonNegativeInt = 0
+    cached_tokens: NonNegativeInt = 0
+    output_tokens: NonNegativeInt = 0
+
+
 # ---------------------------------------------------------------- discovery and review
 
 

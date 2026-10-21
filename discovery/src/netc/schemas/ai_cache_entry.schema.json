@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/ai_cache_entry.schema.json",
+  "title": "AiCacheEntry",
+  "description": "One AI call, a line of data/cache/ai/<YYYY-MM>.jsonl: a hash of the input, the checked answer (null when the call gave no usable answer) and its token counts. Never the text that was sent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["key", "kind", "model", "at", "result", "input_tokens", "cached_tokens", "output_tokens"],
+  "properties": {
+    "key": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "kind": { "enum": ["classify", "extract"] },
+    "model": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "at": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "result": { "type": ["object", "array", "null"] },
+    "input_tokens": { "type": "integer", "minimum": 0 },
+    "cached_tokens": { "type": "integer", "minimum": 0 },
+    "output_tokens": { "type": "integer", "minimum": 0 }
+  }
+}
