@@ -11,7 +11,9 @@ Given the stored events and the events built from this run's listings:
   that failed or were skipped never count as missing, and past events are left alone;
 - a new event is ``published`` when any of its sources is trusted, otherwise it waits for
   review (``pending_review`` plus a Review Item); a held event (e.g. undecided relevance) also
-  waits for review.
+  waits for review;
+- an event whose only listings come from Eventbrite is deleted once it has ended (Eventbrite's
+  API terms, gate V2), rather than kept for the past-events archive.
 """
 
 from __future__ import annotations
@@ -40,6 +42,8 @@ class Incoming:
 class LifecycleResult:
     events: list[Event]
     new_reviews: list[ReviewItem] = field(default_factory=list)
+    removed: list[str] = field(default_factory=list)
+    """Ids of events deleted this run (ended, and known only from Eventbrite)."""
 
 
 def review_id_for(event_id: str) -> str:
@@ -87,9 +91,26 @@ def apply_run(
                 )
             )
 
-    updated = [_count_missing(e, refreshed_sources, now) for e in events.values()]
+    updated: list[Event] = []
+    removed: list[str] = []
+    for event in events.values():
+        if _ended_eventbrite_only(event, sources, now):
+            removed.append(event.id)
+        else:
+            updated.append(_count_missing(event, refreshed_sources, now))
     updated.sort(key=lambda e: (e.start, e.id))
-    return LifecycleResult(updated, new_reviews)
+    return LifecycleResult(updated, new_reviews, removed)
+
+
+def _ended_eventbrite_only(event: Event, sources: Mapping[str, Source], now: datetime) -> bool:
+    """Eventbrite's API terms (3.1, gate V2) forbid storing anything about past events, so an
+    event known only from Eventbrite is deleted once it has ended instead of being archived."""
+    if (event.end or event.start) >= now:
+        return False
+    return all(
+        (s := sources.get(listing.source_id)) is not None and s.connector == "eventbrite_org"
+        for listing in event.listings
+    )
 
 
 def _update(stored: Event, fresh: Event, now: datetime) -> Event:

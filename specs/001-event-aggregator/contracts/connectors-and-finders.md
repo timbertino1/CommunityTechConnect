@@ -20,6 +20,8 @@ class ParseResult:
 
 - `fetch` MUST use only the provided `SafeHttp` (SSRF protection, robots.txt, rate limits,
   size and time limits — research R12). Direct use of `httpx` elsewhere fails a lint rule.
+  The one exception is `eventbrite_org`, which calls a fixed, keyed API and so goes through
+  `netc.fetch.api.SafeApi` instead (allow-listed host, no redirects, token only in a header).
 - `parse` is pure (no I/O) and MUST tolerate malformed input by returning the listings it could
   parse plus recorded warnings; it MUST NOT raise for bad data.
 - `RawListing` fields: `external_id, url, title, start, end, tz, all_day, location_text,
