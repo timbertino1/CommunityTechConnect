@@ -22,6 +22,7 @@ from netc.models import (
     Override,
     RawListing,
     ReviewItem,
+    SearchUsage,
     Source,
     SourceListing,
     SourceStatus,
@@ -552,6 +553,11 @@ SAMPLES: list[tuple[type[BaseModel], str, dict[str, Any]]] = [
             "events_found_last_run": None,
         },
     ),
+    (
+        SearchUsage,
+        "search_usage",
+        {"month": "2026-10", "used": 3, "last_run": {"Omaha tech meetup": "2026-10-20"}},
+    ),
 ]
 
 
@@ -582,6 +588,7 @@ def test_packaged_contract_schemas_match_the_spec(name: str) -> None:
         "organizer",
         "override",
         "source_status",
+        "search_usage",
     ],
 )
 def test_every_schema_is_a_valid_draft_2020_12_schema(name: str) -> None:

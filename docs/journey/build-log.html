@@ -307,7 +307,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Phase 3 done &middot; now: <strong>review tools from Phase 8</strong></span>
+    <span>Now in <strong>Phase 4 of 10</strong> (Phase 8 tools 8 of 9, pulled forward)</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -316,7 +316,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
+      <li class="now"><div class="bar"><span style="width:18%"></span></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
       <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
@@ -324,7 +324,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 8 review tools, pulled forward; Phase 4 next)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4, and Phase 8 pulled forward)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -333,6 +333,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-4" aria-controls="phase-4" aria-selected="false" tabindex="-1">Phase 4 &middot; Find new groups <span class="pill now">now</span></button>
   <button class="tab" role="tab" id="tab-phase-8" aria-controls="phase-8" aria-selected="false" tabindex="-1">Phase 8 &middot; Review tools <span class="pill now">early</span></button>
 </div>
 
@@ -1542,6 +1543,72 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
   </section>
 </div>
 
+<!-- ======================================================= PHASE 4 -->
+<div class="panel" role="tabpanel" id="phase-4" aria-labelledby="tab-phase-4" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 4 &middot; Find new groups &middot; started Oct 19, 2026</p>
+      <h2>Finding the groups nobody told us about</h2>
+    </div>
+    <p class="lede">So far the site only knows the groups I gave it. Phase 4 teaches it to find new ones every week: web searches, links from groups we already know, local news feeds, newsletters, and the event platforms. New finds start on probation, so nothing reaches the site until a person approves it.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">6<small> of 33</small></span><p>Phase 4 tasks done: the setup, the test fixtures, and two new readers.</p></div>
+      <div class="stat"><span class="n">913</span><p>Automated tests across the project, all passing.</p></div>
+      <div class="stat"><span class="n">5</span><p>New secrets in the discovery environment: AI, search, and three for the newsletter inbox.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Owner setup</b><small>An OpenAI key with a $5 monthly cap, a free Tavily search key, and netechconnect.com with email routing and two small Cloudflare storage areas.</small></div><span class="ids">T073&ndash;T075</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Two new readers</b><small>RSS and Atom feeds, and a detector that works out how to read a newly found site. Merged in PR #33.</small></div><span class="ids">T076&ndash;T077, T084</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Search</b><small>About 40 topic-and-place searches a week, with a hard monthly limit.</small></div><span class="ids">T078, T085</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>A second opinion from AI</b><small>Only for events the rules can't decide, and for reading newsletters. It can't publish anything.</small></div><span class="ids">T079&ndash;T083</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Finders and evaluation</b><small>Turn searches, links and news into candidate groups, check each one, and add the good ones on probation.</small></div><span class="ids">T086&ndash;T095</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Newsletter inbox and platforms</b><small>events@netechconnect.com, Luma calendars, Meetup and Eventbrite.</small></div><span class="ids">T096&ndash;T104</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Part 1 &middot; Two new readers</p>
+      <h2>Knowing how to read a site before reading it</h2>
+      <p class="muted prose">When discovery finds a new website, it fetches the page once and looks for something it already knows how to read, in order: a calendar feed (an <code>.ics</code> or <code>webcal://</code> link), event data built into the page, then a news feed. A site with none of these goes to a person instead of getting custom code.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Posts aren't events</h3><p>Most items in a news feed are articles. The RSS reader keeps an item as an event only when it carries event dates. Every other item becomes an article for the news finder to read for event mentions later.</p></div>
+      <div class="card"><h3>Hostile feeds stay harmless</h3><p>The tests include a feed that tries to read a file off the server through a trick in the XML. The reader never resolves it.</p></div>
+      <div class="card"><h3>Only secure links</h3><p>A calendar or feed linked over plain http, or through a <code>javascript:</code> link, is ignored. <code>webcal://</code> is read as the same feed over https.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>The email that showed why this phase matters</h3><p>AI Omaha emailed about its Nov 5 talk, and the site didn't have it: the group was only on the list of groups to look for later. Adding it by hand took a few minutes. Phase 4 is so the next group like it gets found without anyone noticing it was missing.</p></div></div>
+      <div class="note hi"><div><h3>A security fix newer than our own safety rule</h3><p>The project only installs package versions at least 14 days old, so a hijacked release has time to get caught. Then the certificate bundle the bot uses got a security notice: it trusted certificates whose keys had been stolen. The fix was one day old. Our own rule blocked it, so certifi got a narrow exception that admits exactly that release, with a date to remove it (Nov 3).</p></div></div>
+      <div class="note"><div><h3>Checking an audit from a locked-down PC</h3><p>The audit tool can't run on my PC because of how its network inspects secure connections. So I asked the same vulnerability database directly: one request listing all 78 locked packages. It found certifi and nothing else.</p></div></div>
+      <div class="note"><div><h3>A new look, decided before it's built</h3><p>I mocked up two directions for the site: a refined version, and the same with a slowly turning 3D map of Nebraska in the home page header, with pins at upcoming events. I picked the map. It has firm limits: home page only, loaded after the events, at most 150 KB, still for anyone who turns off motion, and a picture instead on phones. It gets built before the calendar, so every new page starts in the new design.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 4 so far</h3><button class="btn" type="button" data-copy="post-phase-4">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-4">Suggested post (edit freely)</label>
+      <textarea id="post-phase-4">NETechConnect build log: Phase 4 has started, finding Nebraska tech groups nobody told the site about.
+Why it matters: AI Omaha emailed about its Nov 5 talk and the site didn't have it. The group was on my "look for later" list. Phase 4 is so the next one gets found automatically.
+First pieces: a reader for news and RSS feeds, and a detector that works out how to read a newly found site before trying.
+Plot twist: a security notice landed on the certificate bundle the bot uses. The fix was one day old, and my own rule says to wait 14 days before installing anything new. So: one narrow, dated exception, and a reminder to remove it.
+Also picked the new look: a slowly turning 3D map of Nebraska on the home page, with pins at upcoming events. Fast, motion-safe, and a still image on phones.
+913 tests. Next: search, then a carefully fenced-in AI.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-4"></span>
+    </div>
+  </section>
+</div>
+
 <!-- ======================================================= PHASE 8 (early) -->
 <div class="panel" role="tabpanel" id="phase-8" aria-labelledby="tab-phase-8" hidden>
 
@@ -1702,7 +1769,7 @@ And when something on the site is wrong, one line in a file hides it or fixes it
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Oct 19, 2026</span>
+  <span>NETechConnect build log &middot; updated Oct 20, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
