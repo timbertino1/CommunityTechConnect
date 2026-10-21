@@ -72,6 +72,8 @@ jobs:
         working-directory: discovery
         env:
           NETC_SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'netechconnect.pages.dev' }}
+          # The AI second opinion for listings the rules can't decide (R10); off without it.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: uv run netc discover-events --data-dir ../data --report "$RUNNER_TEMP/run-report.md"
       - name: Show the run report
         if: always()

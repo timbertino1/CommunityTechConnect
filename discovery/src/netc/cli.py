@@ -16,6 +16,7 @@ from netc.github.health import LastAlert, alert_comment, build_health
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import build_review_pr, has_ticks, read_decisions
 from netc.models import SourceStatus
+from netc.pipeline.ai import Ai, AiCache, OpenAiClient
 from netc.pipeline.discover_events import discover_events
 from netc.pipeline.review import ApplyResult, apply_decisions, check_review_merge
 from netc.pipeline.run_report import render_markdown
@@ -164,10 +165,14 @@ def _discover(args: argparse.Namespace) -> int:
             )  # fmt: skip
         else:
             domain = os.environ.get("NETC_SITE_DOMAIN", "netechconnect.example")
+            # The AI is on only for live runs with a key; offline replays never call it.
+            client = OpenAiClient.from_env()
+            ai = Ai(client, AiCache(args.data_dir / "cache" / "ai", now=now), now=now)
             with SafeHttp(site_domain=domain) as http:
                 report = discover_events(
-                    store, http, connectors, now=now, dry_run=args.dry_run, force=args.force
-                )
+                    store, http, connectors, now=now, dry_run=args.dry_run, force=args.force,
+                    ai=ai if client is not None else None,
+                )  # fmt: skip
     except (StorageError, RuntimeError) as exc:
         print(f"netc discover-events: {exc}", file=sys.stderr)
         return 1
@@ -311,6 +316,7 @@ def _health_issue(args: argparse.Namespace) -> int:
             store.read_mentions(),
             now=now,
             previous_status=_previous_status(args.previous_status),
+            ai_spent_usd=_ai_spent(args.data_dir, now),
         )
         comment = alert_comment(
             health, owner=args.owner, last=_last_alert(args.last_alert), now=now
@@ -329,6 +335,14 @@ def _health_issue(args: argparse.Namespace) -> int:
     alert_note = "; posting an alert." if comment else "; no alert this time." if count else "."
     print(f"{needs} attention{alert_note}")
     return 0
+
+
+def _ai_spent(data_dir: Path, now: datetime) -> float | None:
+    """This month's AI spend, or None if the AI has never been used."""
+    cache_dir = data_dir / "cache" / "ai"
+    if not any(cache_dir.glob("*.jsonl")):
+        return None
+    return AiCache(cache_dir, now=now).spent_usd()
 
 
 def _previous_status(path: Path | None) -> dict[str, SourceStatus] | None:

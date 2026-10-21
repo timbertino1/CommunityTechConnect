@@ -19,6 +19,7 @@ from datetime import datetime
 from netc.connectors.base import Connector
 from netc.fetch import HttpClient
 from netc.models import Area, Event, Source
+from netc.pipeline.ai import Ai
 from netc.pipeline.classify import ClassifyInput, classify
 from netc.pipeline.dedupe import deduplicate
 from netc.pipeline.lifecycle import Incoming, apply_run
@@ -75,6 +76,12 @@ class DiscoverReport:
     rows: list[SourceRow] = field(default_factory=list)
     changes: list[EventChange] = field(default_factory=list)
     set_aside: list[SetAside] = field(default_factory=list)
+    ai_calls: int | None = None
+    """AI calls made this run; None when the AI was off (no key, or an offline run)."""
+    ai_spent_usd: float = 0.0
+    """AI spend so far this month, this run included."""
+    ai_unusable: int = 0
+    ai_last_problem: str | None = None
 
 
 def discover_events(
@@ -88,6 +95,7 @@ def discover_events(
     log: LogSink = stderr_sink,
     source_timeout_seconds: float = 120.0,
     clock: Callable[[], float] | None = None,
+    ai: Ai | None = None,
 ) -> DiscoverReport:
     sources = store.read_sources()
     by_id = {s.id: s for s in sources}
@@ -132,7 +140,7 @@ def discover_events(
             if isinstance(item, Dropped):
                 tally("dropped", raw.title, item.reason)
                 continue
-            verdict = classify(_classify_input(item, source.default_area), categories, areas)
+            verdict = classify(_classify_input(item, source.default_area), categories, areas, ai=ai)
             if verdict.relevant is False:
                 tally("rejected", item.title, verdict.reason)
                 continue
@@ -178,7 +186,14 @@ def discover_events(
         store.write_source_status(run.statuses)
         if result.new_reviews:
             store.write_review_queue([*store.read_review_queue(), *result.new_reviews])
+        if ai is not None:
+            ai.cache.save()
         report.written = True
+    if ai is not None and ai.client is not None:
+        report.ai_calls = ai.calls
+        report.ai_spent_usd = ai.cache.spent_usd()
+        report.ai_unusable = ai.unusable
+        report.ai_last_problem = ai.last_problem
     return report
 
 

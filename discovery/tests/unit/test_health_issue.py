@@ -33,6 +33,7 @@ def health(
     mentions: list[EventMention] | None = None,
     previous: dict[str, SourceStatus] | None = None,
     now: datetime = NOW,
+    ai_spent: float | None = None,
 ) -> Health:
     return build_health(
         sources if sources is not None else [make_source()],
@@ -42,6 +43,7 @@ def health(
         mentions or [],
         now=now,
         previous_status=previous,
+        ai_spent_usd=ai_spent,
     )
 
 
@@ -234,8 +236,23 @@ def test_new_sources_this_week_are_grouped_by_how_they_were_found() -> None:
     assert text == "- discovered (web search): 2\n- pre-configured: 1"
 
 
-def test_ai_and_search_spend_is_not_in_use_yet() -> None:
-    assert section(health().body, "AI and search spend").startswith("Not in use yet")
+def test_ai_spend_says_not_used_until_the_first_call() -> None:
+    text = section(health().body, "AI and search spend")
+    assert text.startswith("AI second opinion: not used yet.")
+    assert "Web search: not in use yet" in text
+
+
+def test_ai_spend_shows_this_months_total() -> None:
+    h = health(ai_spent=0.0412)
+    assert "AI second opinion: $0.04 of $1.00 this month" in section(h.body, "AI and search spend")
+    assert h.attention == []
+
+
+def test_a_spent_ai_budget_needs_attention() -> None:
+    h = health(ai_spent=1.0)
+    assert keys(h) == {"ai-budget"}
+    last = LastAlert(NOW - timedelta(days=2), "<!-- netc-health-alert: ai-budget -->")
+    assert alert_comment(h, owner=OWNER, last=last, now=NOW) is None  # already told
 
 
 def test_stale_data_on_main_needs_attention() -> None:

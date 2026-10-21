@@ -349,3 +349,45 @@ def test_planned_subcommands_exist_but_are_not_implemented_yet(
 ) -> None:
     assert main([command]) == 2
     assert "not implemented" in capsys.readouterr().err
+
+
+AI_LINE = (
+    '{"key": "' + "a" * 64 + '", "kind": "classify", "model": "gpt-5-nano-2025-08-07", '
+    '"at": "2026-10-20T12:00:00Z", "result": {"relevant": true}, "input_tokens": 900, '
+    '"cached_tokens": 0, "output_tokens": 60}'
+)
+
+
+def ai_cache(data: Path, name: str, text: str) -> None:
+    folder = data / "cache" / "ai"
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / name).write_text(text, encoding="utf-8")
+
+
+def test_a_valid_ai_cache_passes(data: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    ai_cache(data, "2026-10.jsonl", AI_LINE + "\n")
+    code, out = run(data, capsys)
+    assert code == 0, out
+
+
+@pytest.mark.parametrize(
+    ("name", "text", "message"),
+    [
+        ("2026-10.jsonl", "{not json\n", "not valid JSON"),
+        ("2026-10.jsonl", AI_LINE.replace('"classify"', '"publish"') + "\n", "kind"),
+        (
+            "2026-10.jsonl",
+            AI_LINE.replace('"output_tokens": 60', '"output_tokens": 60, "trust": "trusted"')
+            + "\n",
+            "trust",
+        ),
+        ("notes.txt", "hello", "only YYYY-MM.jsonl files"),
+    ],
+)
+def test_bad_ai_cache_files_fail(
+    data: Path, capsys: pytest.CaptureFixture[str], name: str, text: str, message: str
+) -> None:
+    ai_cache(data, name, text)
+    code, out = run(data, capsys)
+    assert code == 1
+    assert message in out
