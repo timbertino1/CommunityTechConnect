@@ -23,7 +23,7 @@ from netc.fetch.errors import FetchError, FetchTimeoutError, ResponseTooLargeErr
 from netc.fetch.robots import ROBOTS_USER_AGENT
 from netc.fetch.safe_fetch import _ssl_context
 
-API_HOSTS: Final = frozenset({"api.tavily.com", "api.cloudflare.com"})
+API_HOSTS: Final = frozenset({"api.tavily.com", "api.cloudflare.com", "www.eventbriteapi.com"})
 MAX_API_BYTES: Final = 1_000_000
 API_TIMEOUT: Final = httpx.Timeout(20.0, connect=10.0)
 

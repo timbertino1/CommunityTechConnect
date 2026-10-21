@@ -2,7 +2,8 @@
 
 For each candidate due a look: social networks are blocked by their terms; robots.txt is
 respected (SafeHttp refuses, and the candidate is marked blocked); Meetup groups are set up the
-way the existing Meetup sources are (gate V1); anything else goes through feed detection. A
+way the existing Meetup sources are (gate V1), Eventbrite organizers are read through the API
+(gate V2), Luma pages are never fetched (gate V3); anything else goes through feed detection. A
 sample of the site's upcoming events is then read with the matching reader and judged by the
 same rules (and AI) as everyday events:
 
@@ -29,6 +30,7 @@ from selectolax.lexbor import LexborHTMLParser
 
 from netc.connectors.base import Connector, RawPayload
 from netc.connectors.detect import Detection, detect
+from netc.connectors.eventbrite_org import organizer_id
 from netc.fetch import FetchError, HttpClient
 from netc.finders.base import SKIP_HOSTS, luma_calendar_feed, site_key
 from netc.models import AreaConfig, CandidateSource, Category, FollowLinks, Source
@@ -170,6 +172,23 @@ def _evaluate(
                 "notes": (
                     "Discovered. Meetup (gate V1): public event pages only, 10 s apart, "
                     "no member data."
+                ),
+            }
+        )
+    elif organizer_id(candidate.url) is not None:
+        # Gate V2: Eventbrite organizers are read through the API (token confirmed at T103),
+        # not their pages. The name comes from the page address: /o/<name>-<organizer id>.
+        slug = re.sub(r"-?\d+/?$", "", urlsplit(candidate.url).path.removeprefix("/o/"))
+        base["id"] = _new_id(f"eventbrite/{slug or key}", taken)
+        source = Source.model_validate(
+            {
+                **base,
+                "name": slug.replace("-", " ").title() or "Eventbrite organizer",
+                "connector": "eventbrite_org",
+                "url": candidate.url,
+                "notes": (
+                    f"Discovered via {candidate.found_via.replace('_', ' ')}. Eventbrite (gate "
+                    "V2): read through the API; ended Eventbrite-only events are deleted."
                 ),
             }
         )

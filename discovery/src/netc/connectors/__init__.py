@@ -4,6 +4,7 @@ from collections.abc import Callable
 from datetime import datetime
 
 from netc.connectors.base import Connector, ParseResult, RawPayload
+from netc.connectors.eventbrite_org import EventbriteOrgConnector
 from netc.connectors.ical import IcalConnector
 from netc.connectors.jsonld import JsonLdConnector
 from netc.connectors.rss import RssConnector
@@ -17,16 +18,19 @@ def default_connectors(clock: Callable[[], datetime] | None = None) -> dict[str,
             IcalConnector.kind: IcalConnector(),
             JsonLdConnector.kind: JsonLdConnector(),
             RssConnector.kind: RssConnector(),
+            EventbriteOrgConnector.kind: EventbriteOrgConnector(),
         }
     return {
         IcalConnector.kind: IcalConnector(clock),
         JsonLdConnector.kind: JsonLdConnector(clock),
         RssConnector.kind: RssConnector(clock),
+        EventbriteOrgConnector.kind: EventbriteOrgConnector(clock),
     }
 
 
 __all__ = [
     "Connector",
+    "EventbriteOrgConnector",
     "IcalConnector",
     "JsonLdConnector",
     "ParseResult",

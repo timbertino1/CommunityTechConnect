@@ -12,7 +12,9 @@ from typing import Any
 import pytest
 
 from netc.connectors import default_connectors
+from netc.connectors.eventbrite_org import EventbriteOrgConnector
 from netc.fetch import FetchKind, FetchResponse, FixtureHttp, RobotsDisallowedError
+from netc.fetch.api import RawApiResponse
 from netc.finders.base import make_candidate
 from netc.models import AreaConfig, CandidateSource, Category
 from netc.pipeline.evaluate import (
@@ -59,7 +61,7 @@ def evaluate(tmp_path: Path, candidates: list[CandidateSource], **kw: Any) -> Ev
     return evaluate_candidates(
         candidates,
         http=kw.pop("client", None) or http(tmp_path),
-        connectors=default_connectors(lambda: NOW),
+        connectors=kw.pop("connectors", None) or default_connectors(lambda: NOW),
         sources=kw.pop("sources", []),
         categories=CATEGORIES,
         areas=AREAS,
@@ -259,3 +261,50 @@ def test_the_ai_judges_sample_events_the_rules_cannot(tmp_path: Path) -> None:
     candidate, _ = one(tmp_path, "https://yoga.example.org/", ai=ai(tmp_path, client))
     assert candidate.result == "rejected"
     assert len(client.calls) == 2
+
+
+# --- Eventbrite organizers (gate V2; token confirmed at T103)
+
+
+class FakeEventbriteApi:
+    def __init__(self) -> None:
+        self.calls: list[str] = []
+
+    def get(self, url: str, *, headers: Any, max_bytes: int = 1_000_000) -> RawApiResponse:
+        self.calls.append(url)
+        body = (FINDERS.parent / "sources" / "eventbrite" / "organizer_events.json").read_bytes()
+        return RawApiResponse(200, body)
+
+
+def eventbrite_connectors(api: FakeEventbriteApi, *, with_token: bool = True) -> dict[str, Any]:
+    connectors: dict[str, Any] = dict(default_connectors(lambda: NOW))
+    env = {"EVENTBRITE_TOKEN": "test-token-not-real"} if with_token else {}
+    connectors["eventbrite_org"] = EventbriteOrgConnector(lambda: NOW, api=api, env=env)
+    return connectors
+
+
+def test_an_eventbrite_organizer_is_read_through_the_api(tmp_path: Path) -> None:
+    api = FakeEventbriteApi()
+    url = "https://www.eventbrite.com/o/nebraska-cloud-community-12345678901/"
+    candidate, result = one(
+        tmp_path, url, client=NeverFetch(), connectors=eventbrite_connectors(api)
+    )
+    assert candidate.result == "added"
+    [source] = result.added
+    assert source.connector == "eventbrite_org"
+    assert source.url == url and source.feed_url is None
+    assert source.name == "Nebraska Cloud Community"
+    assert source.id == "src_nebraska-cloud-community"
+    assert source.default_area == "omaha"
+    assert len(api.calls) == 1
+
+
+def test_without_the_token_an_eventbrite_organizer_needs_review(tmp_path: Path) -> None:
+    url = "https://www.eventbrite.com/o/nebraska-cloud-community-12345678901/"
+    candidate, _ = one(
+        tmp_path,
+        url,
+        client=NeverFetch(),
+        connectors=eventbrite_connectors(FakeEventbriteApi(), with_token=False),
+    )
+    assert candidate.result == "needs_review"
