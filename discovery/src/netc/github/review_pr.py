@@ -40,8 +40,8 @@ applies your decisions a minute later in a small data PR that merges itself.
 - **Approve** publishes the event on the site. **Reject** keeps it off the site for good.
 - An item with neither box ticked (or both) stays waiting and comes back in the next review PR.
 - A probationary source becomes trusted after 3 approved events and no rejected ones; its \
-later events then publish without review. A source with more rejected than approved events \
-is paused.
+later events then publish without review. Once at least 3 of a source's events are reviewed, \
+it is paused if most were rejected.
 - Closing this PR without merging changes nothing. The bot won't rewrite it once you've \
 ticked a box.
 - Only the ticks are read, so there's no need to edit anything else.

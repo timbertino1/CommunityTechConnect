@@ -25,7 +25,7 @@ from zoneinfo import ZoneInfo
 
 from netc.github.markdown import code_span, plain_name
 from netc.github.review_pr import pending_items
-from netc.models import Event, EventMention, ReviewItem, Source, SourceStatus
+from netc.models import CandidateSource, Event, EventMention, ReviewItem, Source, SourceStatus
 from netc.pipeline.ai import MONTHLY_BUDGET_USD
 from netc.pipeline.coverage import quiet_sources
 from netc.pipeline.timeutil import format_central
@@ -96,6 +96,7 @@ def build_health(
     now: datetime,
     previous_status: Mapping[str, SourceStatus] | None = None,
     ai_spent_usd: float | None = None,
+    candidates: Iterable[CandidateSource] = (),
 ) -> Health:
     """The issue description after a run. ``previous_status`` is main's source status from
     before the run, used to tell whether earlier runs' data reached main. ``ai_spent_usd`` is
@@ -164,6 +165,7 @@ def build_health(
     lines += ["", "### Quiet groups", "", *(_capped(_quiet(ordered, events, now)) or ["None."])]
     lines += ["", "### Unresolved mentions", "", _mentions(mentions)]
     lines += ["", "### New sources this week", "", _new_sources(ordered, now)]
+    lines += ["", "### Candidates needing a look", "", _needs_look(candidates)]
     lines += ["", "### AI and search spend", "", *_spend(ai_spent_usd)]
     lines += ["", "### Schedule", "", *schedule_lines]
 
@@ -285,6 +287,18 @@ def _schedule(
         f"Main's data was {hours} hours old before this run: check that the bot's data PRs "
         "are merging."
     )
+
+
+def _needs_look(candidates: Iterable[CandidateSource]) -> str:
+    """Sites discovery found but couldn't read or judge automatically (no feed or event data,
+    no upcoming events, or events only a person can judge). Add one by hand if it's worth it."""
+    waiting = [c for c in candidates if c.result == "needs_review"]
+    if not waiting:
+        return "None."
+    items = [f"- {code_span(c.url)}: {code_span(c.reason)}" for c in waiting]
+    noun = "1 site" if len(waiting) == 1 else f"{len(waiting)} sites"
+    listed = "\n".join(_capped(items))
+    return f"{noun} discovery couldn't add automatically:\n\n{listed}"
 
 
 def _spend(ai_spent_usd: float | None) -> list[str]:

@@ -23,7 +23,7 @@ from selectolax.lexbor import LexborHTMLParser
 from netc.connectors.base import RawPayload
 from netc.connectors.jsonld import page_listings
 from netc.fetch import DEFAULT_CONTENT_TYPES, FetchError, HttpClient
-from netc.pipeline.sanitize import safe_url
+from netc.pipeline.sanitize import safe_url, to_plain_text
 
 type DetectedKind = Literal["ical", "jsonld", "rss", "none"]
 
@@ -40,6 +40,8 @@ class Detection:
     feed_url: str | None
     """The feed to read; None when the page itself is read (jsonld) or nothing was found."""
     reason: str
+    title: str | None = None
+    """The page's name (its <title>), plain text, for naming a new source."""
 
 
 def detect(url: str, http: HttpClient, *, delay_seconds: float | None = None) -> Detection:
@@ -71,15 +73,17 @@ def detect_in(page: RawPayload) -> Detection:
     except Exception:
         return Detection("none", None, "the page could not be parsed")
 
+    title_node = tree.css_first("title")
+    title = to_plain_text(title_node.text() if title_node else "", 200) or None
     calendar = _calendar_link(tree, page.url)
     if calendar is not None:
-        return Detection("ical", calendar, "the page links an iCal feed")
+        return Detection("ical", calendar, "the page links an iCal feed", title)
     if page_listings(page):
-        return Detection("jsonld", None, "the page has schema.org Event data")
+        return Detection("jsonld", None, "the page has schema.org Event data", title)
     feed = _alternate(tree, page.url, ("application/rss+xml", "application/atom+xml"))
     if feed is not None:
-        return Detection("rss", feed, "the page links an RSS or Atom feed")
-    return Detection("none", None, "no calendar feed, event data or RSS/Atom feed found")
+        return Detection("rss", feed, "the page links an RSS or Atom feed", title)
+    return Detection("none", None, "no calendar feed, event data or RSS/Atom feed found", title)
 
 
 # ---------------------------------------------------------------- helpers

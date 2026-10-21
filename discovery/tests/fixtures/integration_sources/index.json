@@ -1,0 +1,11 @@
+{
+  "https://spbuilders.example.org/": {"file": "../finders/pages/org_with_cohost.html", "content_type": "text/html"},
+  "https://www.meetup.com/omaha-data-engineers/events/": {"file": "../finders/pages/meetup_group.html", "content_type": "text/html"},
+  "https://heartlandrust.example.org/": {"file": "../finders/pages/jsonld_events.html", "content_type": "text/html"},
+  "https://lincolnsec.example.org/events": {"file": "lincolnsec.html", "content_type": "text/html"},
+  "https://kccloud.example.org/": {"file": "../finders/candidates/out_of_state.html", "content_type": "text/html"},
+  "https://yoga.example.org/": {"file": "../finders/candidates/non_tech.html", "content_type": "text/html"},
+  "https://news.example.com/feed/": {"file": "../finders/rss/local_news.xml", "content_type": "application/rss+xml"},
+  "https://news.example.com/events/streaming-night": {"file": "streaming.html", "content_type": "text/html"},
+  "https://news.example.com/": {"file": "news_home.html", "content_type": "text/html"}
+}

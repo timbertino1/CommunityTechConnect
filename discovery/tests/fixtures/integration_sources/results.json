@@ -1,0 +1,11 @@
+{
+  "query": "(any)",
+  "results": [
+    {"title": "Omaha Data Engineers | Meetup", "url": "https://www.meetup.com/omaha-data-engineers/", "content": "Monthly talks on pipelines and streaming in Omaha.", "score": 0.9},
+    {"title": "Heartland Rust Users", "url": "https://heartlandrust.example.org/", "content": "Rust meetups in Omaha and Lincoln.", "score": 0.8},
+    {"title": "KC Cloud Group", "url": "https://kccloud.example.org/", "content": "Cloud meetups.", "score": 0.6},
+    {"title": "Omaha Yoga Collective", "url": "https://yoga.example.org/", "content": "Classes and community.", "score": 0.5},
+    {"title": "Big Sky Devs", "url": "https://bigskydevs.example.org/", "content": "Developers in Denver, Colorado.", "score": 0.5},
+    {"title": "Cyber Night coming to The Mill", "url": "https://news.example.com/2026/10/cyber-night-the-mill", "content": "Lincoln Security Collective hosts Cyber Night on Nov 12.", "score": 0.4}
+  ]
+}
