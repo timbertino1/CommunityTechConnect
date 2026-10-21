@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netechconnect.example/schemas/search_usage.schema.json",
+  "title": "SearchUsage",
+  "description": "Web search bookkeeping in data/state/search_usage.json: this month's query count and the date each query last ran. Search results are never stored (gate V4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["month", "used", "last_run"],
+  "properties": {
+    "month": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+    "used": { "type": "integer", "minimum": 0 },
+    "last_run": {
+      "type": "object",
+      "propertyNames": { "maxLength": 200 },
+      "additionalProperties": { "type": "string", "format": "date" }
+    }
+  }
+}

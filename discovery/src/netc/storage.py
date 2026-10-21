@@ -13,6 +13,7 @@ import os
 import re
 import tempfile
 from collections.abc import Callable, Iterable, Mapping
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Final
 from zoneinfo import ZoneInfo
@@ -31,6 +32,7 @@ from netc.models import (
     Organizer,
     Override,
     ReviewItem,
+    SearchUsage,
     Source,
     SourceStatus,
 )
@@ -256,6 +258,16 @@ class DataStore:
 
     def write_review_open(self, review_ids: Iterable[str]) -> None:
         atomic_write(self.root / "review" / "open.json", dump_json(sorted(set(review_ids))))
+
+    def read_search_usage(self, *, now: datetime) -> SearchUsage:
+        """The stored search usage, or a fresh month when there is none yet."""
+        path = self.root / "state" / "search_usage.json"
+        if not path.exists():
+            return SearchUsage(month=f"{now:%Y-%m}", used=0, last_run={})
+        return _parse(SearchUsage, read_raw(path), path)
+
+    def write_search_usage(self, usage: SearchUsage) -> None:
+        atomic_write(self.root / "state" / "search_usage.json", dump_json(_to_data(usage)))
 
     def read_source_status(self) -> dict[str, SourceStatus]:
         path = self.root / "state" / "source_status.json"

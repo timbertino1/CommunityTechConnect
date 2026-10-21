@@ -54,7 +54,12 @@ class SearchProvider(Protocol):
     def search(self, query: str, *, count: int = 10) -> list[SearchResult]   # title, url, snippet
 ```
 
-Selected by config; results cached 7 days; monthly query budget enforced.
+Selected by config (default Tavily, gate V4). Finders call it only through `BudgetedSearch`,
+which counts every call against a monthly budget (400, under Tavily's 1,000 free) and refuses
+once it's spent. Results are **not cached or stored**: `data/state/search_usage.json` holds
+only the month's count and each query's last-run date. The key travels only in an
+`Authorization` header, through `netc.fetch.api.SafeApi` (allow-listed hosts, https, no
+redirects, size and time limits).
 
 ## Classifier
 

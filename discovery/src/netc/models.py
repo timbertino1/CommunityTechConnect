@@ -330,6 +330,15 @@ class SourceStatus(_Model):
     events_found_last_run: NonNegativeInt | None = None
 
 
+class SearchUsage(_Model):
+    """Web search bookkeeping in data/state/search_usage.json: this month's query count and
+    when each query last ran. Never the results (gate V4)."""
+
+    month: Annotated[str, StringConstraints(pattern=r"^\d{4}-(0[1-9]|1[0-2])$")]
+    used: NonNegativeInt = 0
+    last_run: dict[Hint, date] = {}
+
+
 # ---------------------------------------------------------------- discovery and review
 
 
