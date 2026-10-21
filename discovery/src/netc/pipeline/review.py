@@ -26,9 +26,9 @@ from typing import Any, Final
 from netc.github.review_pr import REVIEW_BRANCH, Decision
 from netc.models import Event, ReviewItem, Source
 from netc.pipeline.overrides import apply_overrides
+from netc.pipeline.trust import apply_trust_rules
 from netc.storage import DataStore
 
-PROMOTE_AFTER_APPROVALS: Final = 3
 BASE_BRANCH: Final = "main"
 
 
@@ -142,7 +142,7 @@ def apply_decisions(
 
     changed_sources: list[Source] = []
     for source_id, source in counted.items():
-        updated = _apply_trust_rules(source)
+        updated = apply_trust_rules(source)
         if updated.trust == "trusted" and sources[source_id].trust == "probationary":
             result.promoted.append(updated)
         if updated.status == "paused" and sources[source_id].status != "paused":
@@ -157,19 +157,6 @@ def apply_decisions(
     for source in changed_sources:
         store.write_source(source)
     return result
-
-
-def _apply_trust_rules(source: Source) -> Source:
-    """FR-018, for probationary sources (a trusted source is demoted only by the owner)."""
-    if source.trust != "probationary":
-        return source
-    if source.rejected_count > source.approved_count:
-        return (
-            source.model_copy(update={"status": "paused"}) if source.status == "active" else source
-        )
-    if source.approved_count >= PROMOTE_AFTER_APPROVALS and source.rejected_count == 0:
-        return source.model_copy(update={"trust": "trusted"})
-    return source
 
 
 def _source_ids(event: Event) -> list[str]:
