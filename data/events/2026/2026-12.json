@@ -1,0 +1,137 @@
+[
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "general-tech"
+    ],
+    "end": "2026-12-04T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_2ae1f434db2e",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "8e97e86e6a253ceefba799657e76b86b3c01138b2d39816c6f060420349bbb12",
+        "external_id": "https://dev.events/conferences/principal-developer-online-5-2022",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/principal-developer-online-5-2022"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/principal-developer-online-5-2022",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "the-principal-dev-masterclass-for-tech-leads-2026-12-02",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-03T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech masterclass Online",
+    "title": "The Principal Dev – Masterclass for Tech Leads",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "web-mobile"
+    ],
+    "end": "2026-12-09T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_e2bca0735977",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "3a8cab357a87324a115eefe9e279baa947a1421d6d654cdf247efdc59af138f2",
+        "external_id": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcqblb",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcqblb"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcqblb",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "angular-community-meetup-en-espanol-2026-12-08",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-09T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech meetup Online",
+    "title": "Angular Community Meetup - En Español",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "general-tech"
+    ],
+    "end": "2026-12-11T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_91be51cd0f16",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "7fcc18b48ec67605805c973728b9c3792804eb2dc8c7118eb057116a0d5d70c2",
+        "external_id": "https://dev.events/conferences/clean-architecture-online-4-2023",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/clean-architecture-online-4-2023"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/clean-architecture-online-4-2023",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "clean-architecture-masterclass-2026-12-09",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-10T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech masterclass Online",
+    "title": "Clean Architecture Masterclass",
+    "tz_assumed": true,
+    "visibility": "shown"
+  }
+]

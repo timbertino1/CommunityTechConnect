@@ -1,0 +1,92 @@
+[
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "end": "2027-03-05T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_02212ade905b",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "c947e54471a1397d82859299420a8d8bc0ac5dfea4ba25e2dac75392ac3ece11",
+        "external_id": "https://dev.events/conferences/kernelcon-2027-jh1avsyx",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/kernelcon-2027-jh1avsyx"
+      }
+    ],
+    "location": {
+      "address": "Omaha, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Omaha"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/kernelcon-2027-jh1avsyx",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "kernelcon-2027-2027-03-01",
+    "source_tz": "America/Chicago",
+    "start": "2027-03-02T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech conference in Omaha, United States",
+    "title": "Kernelcon 2027",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "web-mobile"
+    ],
+    "end": "2027-03-10T00:00:00Z",
+    "first_seen": "2026-10-21T15:47:36Z",
+    "id": "evt_14607d59c4e9",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-21T15:47:36Z",
+    "listings": [
+      {
+        "content_hash": "8ee334f99be2be0e4be4cbae704b724db70e122559be781c2a6c642c15e49250",
+        "external_id": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcfbmb",
+        "last_seen": "2026-10-21T15:47:36Z",
+        "missing_runs": 1,
+        "source_id": "src_dev-events",
+        "url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcfbmb"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcfbmb",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "angular-community-meetup-en-espanol-2027-03-09",
+    "source_tz": "America/Chicago",
+    "start": "2027-03-10T00:00:00Z",
+    "status": "scheduled",
+    "summary": "Tech meetup Online",
+    "title": "Angular Community Meetup - En Español",
+    "tz_assumed": true,
+    "visibility": "shown"
+  }
+]
