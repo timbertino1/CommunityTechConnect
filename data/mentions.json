@@ -1,1 +1,184 @@
-[]
+[
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_01edda584071",
+    "links": [
+      "https://nebraskapublicmedia.org/es/news/news-articles/lincoln-joins-pact-of-42-global-cities-to-set-data-center-standards"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Lincoln joins pact of 42 global cities to set data center standards | Nebraska Public Media"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_06712557827d",
+    "links": [
+      "https://www.lincolntech.edu/news/author/lincoln-team"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Lincoln Team"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2f06f865afe4",
+    "links": [
+      "https://www.rapid7.com/blog/post/2016/07/11/local-cybersecurity-meetups-near-you"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Local Cybersecurity Meetups Near You | Rapid7 Blog"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_3b4096ced2da",
+    "links": [
+      "https://www.nucamp.co/blog/coding-bootcamp-lincoln-ne-top-10-mustattend-tech-meetups-and-conferences-in-lincoln"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Nucamp"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_3cdb5d2c9ac4",
+    "links": [
+      "https://www.digitallincoln.co.uk/events-list/2025/9/10/chat-ai"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "resolved",
+    "title": "Chat AI Meetup – Exploring Generative AI"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_45c78272e436",
+    "links": [
+      "https://www.lincolninternational.com/perspectives/articles/cyber-roadmap-2025-and-beyond"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Cyber Roadmap: 2025 and beyond - Lincoln International LLC"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_4d037b4deb5f",
+    "links": [
+      "https://www.nucamp.co/blog/coding-bootcamp-lincoln-ne-top-10-mustattend-tech-meetups-and-conferences-in-lincoln"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "AI Meetups, Communities, and Networking Events in Lincoln ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_4d3fcce8141c",
+    "links": [
+      "https://www.lcsnc.org/article/3189625"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "October is Cybersecurity Awareness Month | Lincoln County Schools"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_a086454ad58b",
+    "links": [
+      "https://www.lincolninternational.com/perspectives/articles/entering-the-age-of-the-ai-economy"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Entering the Age of the AI Economy - Lincoln International LLC"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_a72ff499538e",
+    "links": [
+      "https://www.goanywhere.com/blog/45-cybersecurity-user-groups-forums-and-communities-to-join"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "45 Cybersecurity Groups to Join: Forums, Communities, & ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_c0ec1de6e182",
+    "links": [
+      "https://jamesstrong.dev/post/2019/2019-03-25-loucncf-4-1"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Kubernetes and Cloud Native Computing April Meetup"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_c6eb24193b67",
+    "links": [
+      "https://www.mitel.com/blog/mitel-user-group-event-lands-in-omaha"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Mitel User Group (MUG) Event Lands in Omaha – A First- ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_f956884c4b15",
+    "links": [
+      "https://www.ketv.com/article/omaha-conference-highlights-hacking-as-tool-for-cybersecurity/70980250"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Omaha conference highlights hacking as a cybersecurity tool"
+  }
+]
