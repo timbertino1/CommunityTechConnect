@@ -5,20 +5,21 @@
       "result: Nebraska User Group Conference (Mar 2026), Lincoln USA"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://10times.com/e1h0-s9f2-f6dk-h"
   },
   {
     "evidence": [
       "web search: Nebraska networking meetup",
-      "result: Networking Opportunities"
+      "result: Networking Opportunities",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://aafnebraska.org/engage/networking-opportunities"
   },
   {
@@ -34,13 +35,24 @@
   },
   {
     "evidence": [
+      "web search: Omaha DevOps meetup",
+      "result: What is DevOps?"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://about.gitlab.com/topics/devops"
+  },
+  {
+    "evidence": [
       "web search: Nebraska networking user group",
       "result: Sign In or Create Your Account Today – Microsoft"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://account.microsoft.com/account"
   },
   {
@@ -49,9 +61,9 @@
       "result: ACTE's National Work-Based Learning Conference 2026: Lincoln Tech High School Share, Career C..."
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://actesnwbls2026.sched.com/event/2JHsf/lincoln-tech-high-school-share-career-connected-early-college-for-the-trades"
   },
   {
@@ -68,13 +80,25 @@
   {
     "evidence": [
       "web search: Nebraska tech user group",
-      "result: NTC - Aksarben Foundation"
+      "result: NTC - Aksarben Foundation",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://aksarben.org/ntc"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln tech meetup",
+      "result: How Lincoln's AI Community Network Powers Local Tech ..."
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
     "reason": "awaiting evaluation",
     "result": "pending",
-    "url": "https://aksarben.org/ntc"
+    "url": "https://alicebot.org/how-lincolns-ai-community-network-powers-local-tech-innovation"
   },
   {
     "evidence": [
@@ -91,12 +115,13 @@
   {
     "evidence": [
       "web search: Nebraska data meetup",
-      "result: All Things Nebraska"
+      "result: All Things Nebraska",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://allthingsnebraska.unl.edu/"
   },
   {
@@ -105,9 +130,9 @@
       "result: Microsoft Store - Download apps, games & more for your Windows PC"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://apps.microsoft.com/home"
   },
   {
@@ -138,9 +163,9 @@
       "result: Nebraska User Group Spring Conference - Communities"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://bentleysystems.service-now.com/community"
   },
   {
@@ -149,9 +174,9 @@
       "result: Nebraska Users Group (NEUG) | Point Cloud Processing ..."
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "sample events could not be read: ContentTypeNotAllowedError",
+    "result": "needs_review",
     "url": "https://blog.topodot.com/event/nebraska-users-group-neug"
   },
   {
@@ -195,10 +220,43 @@
       "result: Omaha Tech Summit"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "robots.txt disallows reading it",
+    "result": "blocked_by_terms",
+    "url": "https://choicesolutions.com/event/omaha-tech-summit"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln AI meetup",
+      "result: Christchurch AI — Artificial Intelligence Community"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
     "reason": "awaiting evaluation",
     "result": "pending",
-    "url": "https://choicesolutions.com/event/omaha-tech-summit"
+    "url": "https://christchurch-ai.com/"
+  },
+  {
+    "evidence": [
+      "linked from https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+      "link text:"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://cms.erepublic.com/common/events/add_event_to_calendar/144627"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln programming meetup",
+      "result: Code4Y'all - Meetup Group"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://code4yall.com/"
   },
   {
     "evidence": [
@@ -224,6 +282,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln cloud meetup",
+      "result: Cloud Native Atlanta"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://community.cncf.io/cloud-native-atlanta"
+  },
+  {
+    "evidence": [
       "web search: Omaha cloud user group",
       "result: Omaha - Fabric User Groups"
     ],
@@ -232,6 +301,17 @@
     "reason": "page returned HTTP 403",
     "result": "needs_review",
     "url": "https://community.fabric.microsoft.com/t5/Microsoft-Fabric-User-Group/gh-p/MicrosoftFabricUserGroup-Omaha"
+  },
+  {
+    "evidence": [
+      "web search: Omaha DevOps meetup",
+      "result: Azure Devops x HubSpot - APIs & Integrations"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://community.hubspot.com/t/azure-devops-x-hubspot/142772"
   },
   {
     "evidence": [
@@ -250,20 +330,32 @@
       "result: Student Organizations | School of Computing | Nebraska"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://computing.unl.edu/student-organizations"
   },
   {
     "evidence": [
-      "web search: Nebraska cybersecurity user group",
-      "result: Cybersecurity Company in Nebraska"
+      "web search: Lincoln programming user group",
+      "result: User Groups/UNIX Groups | Department of Computer Science Computing Guide"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
+    "last_evaluated": "2026-10-22T01:24:40Z",
     "reason": "awaiting evaluation",
     "result": "pending",
+    "url": "https://csguide.cs.princeton.edu/account/groups"
+  },
+  {
+    "evidence": [
+      "web search: Nebraska cybersecurity user group",
+      "result: Cybersecurity Company in Nebraska",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://cybergl.com/nebraska"
   },
   {
@@ -280,12 +372,13 @@
   {
     "evidence": [
       "gap check: known group with no source: \"WiCyS Nebraska\" Nebraska",
-      "result: WiCyS (Women In CyberSecurity)"
+      "result: WiCyS (Women In CyberSecurity)",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "gap",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://cybersecurityventures.com/about-wicys"
   },
   {
@@ -318,9 +411,9 @@
       "result: Nebraska.Code 2027 — Software Development Conference | Lincoln, NE"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://delightful-river-0ae8ce010.1.azurestaticapps.net/"
   },
   {
@@ -352,9 +445,9 @@
       "result: Nurse Licensing"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://dhhs.ne.gov/licensure/pages/nurse-licensing.aspx"
   },
   {
@@ -386,9 +479,9 @@
       "result: Data Center Task Force | DWEE NE"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://dwee.nebraska.gov/data-center-task-force"
   },
   {
@@ -405,23 +498,25 @@
   {
     "evidence": [
       "web search: Nebraska programming user group",
-      "result: Nebraska User Group (NeUG) Conference 2025"
+      "result: Nebraska User Group (NeUG) Conference 2025",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://envisioncad.com/industry-event/nebraska-user-group-neug-conference-2025"
   },
   {
     "evidence": [
       "web search: Nebraska programming user group",
-      "result: Nebraska User Group"
+      "result: Nebraska User Group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://events.fuelusergroup.org/nebraska-user-group"
   },
   {
@@ -435,6 +530,17 @@
     "reason": "relevant Nebraska tech events",
     "result": "added",
     "url": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln programming meetup",
+      "result: CSC 1058 - Computer Programming I"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://events.lincoln.edu/events/LlhHWTdyWey85PWlxL84/s3AIjkOf9sr65t0dYv4e119"
   },
   {
     "evidence": [
@@ -496,12 +602,13 @@
   {
     "evidence": [
       "web search: Omaha tech workshop",
-      "result: Tech & Talent Transformation – Go Big Future – NCF"
+      "result: Tech & Talent Transformation – Go Big Future – NCF",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://gobigfuture.com/events/tech-talent-transformation"
   },
   {
@@ -533,20 +640,21 @@
       "result: Jacobsen, Lanier Pace Huskers at BYU"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://huskers.com/"
   },
   {
     "evidence": [
       "web search: Lincoln tech conference",
-      "result: Lincoln Tech CEO Addresses Education Technology Conference - HVAC Insider"
+      "result: Lincoln Tech CEO Addresses Education Technology Conference - HVAC Insider",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://hvacinsider.com/lincoln-tech-ceo-addresses-education-technology-conference"
   },
   {
@@ -564,12 +672,13 @@
   {
     "evidence": [
       "gap check: known group with no source: \"InfraGard Nebraska\" Omaha",
-      "result: Welcome to InfraGard — site"
+      "result: Welcome to InfraGard — site",
+      "sample: 0 of 0 upcoming events relevant (2026-10-22)"
     ],
     "found_via": "gap",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://infragard.fbi.gov/"
   },
   {
@@ -578,9 +687,9 @@
       "result: InfraGard NCR | Critical Infrastructure Protection — FBI Private Sector Partnership"
     ],
     "found_via": "gap",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://infragardncr.org/"
   },
   {
@@ -589,9 +698,9 @@
       "result: Nebraska InfraGard Chapter"
     ],
     "found_via": "gap",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://infragardnebraska.org/"
   },
   {
@@ -600,9 +709,9 @@
       "result: 27 Nebraska User Group Conference"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T00:34:52Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://innovate.unl.edu/27-nebraska-user-group-conference"
   },
   {
@@ -684,6 +793,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln tech user group",
+      "result: Sign in to Laserfiche - Lincoln Tech"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://lf.lincolntech.edu/laserfiche/browse.aspx"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cloud user group",
       "result: Carolina User Group Meeting"
     ],
@@ -703,6 +823,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://libcal.unomaha.edu/calendar/faculty"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln IT meetup",
+      "result: MentorNJ Online Meetup: Tech!"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://librarylinknj.org/calendar/mentornj-online-meetup-tech"
   },
   {
     "evidence": [
@@ -828,6 +959,28 @@
   },
   {
     "evidence": [
+      "web search: Lincoln programming user group",
+      "result: Home - Lincoln Owners Club"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://loc.clubexpress.com/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln web development user group",
+      "result: Global Commercial Real Estate Services | Lincoln"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://lpc.com/"
+  },
+  {
+    "evidence": [
       "linked from https://groups.drupal.org/nebraska",
       "link text: https://luma.com/nfx6erbc"
     ],
@@ -913,6 +1066,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://myaccount.microsoft.com/"
+  },
+  {
+    "evidence": [
+      "linked from https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+      "link text: Group Reservation Link"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://nam10.safelinks.protection.outlook.com/"
   },
   {
     "evidence": [
@@ -1037,6 +1201,28 @@
   },
   {
     "evidence": [
+      "web search: Lincoln programming meetup",
+      "result: About nyhackr"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://nyhackr.org/about.html"
+  },
+  {
+    "evidence": [
+      "web search: Omaha programming user group",
+      "result: 101 Best Attractions & Things To Do In Omaha, Nebraska (2026) – Oh My! Omaha"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://ohmyomaha.com/things-to-do-omaha"
+  },
+  {
+    "evidence": [
       "web search: Omaha tech meetup",
       "result: Omaha Meetups and User Groups",
       "sample: 0 of 0 upcoming events relevant (2026-10-21)"
@@ -1148,6 +1334,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln data meetup",
+      "result: Dataiku DataConnect Meetups"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://pages.dataiku.com/dataconnect-meetups"
+  },
+  {
+    "evidence": [
       "linked from https://lincoln-omaha.aitinkerers.org/",
       "link text: Paper Club"
     ],
@@ -1156,6 +1353,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://paperclub.aitinkerers.org/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln tech user group",
+      "result: Parent Portal - Lincoln Tech"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://parent.lincolntech.edu/parentportal"
   },
   {
     "evidence": [
@@ -1190,6 +1398,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://poncatribe-ne.gov/events/cybersecurity-training-with-pedco-uno-omaha"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln tech user group",
+      "result: SP+: Home - Lincoln Tech"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://portal.lincolntech.edu/dashboard"
   },
   {
     "evidence": [
@@ -1369,6 +1588,17 @@
   },
   {
     "evidence": [
+      "linked from https://allevents.in/lincoln/meetups",
+      "link text: Event Creation Guidelines"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://support.allevents.in/article/198-event-creation-guidelines"
+  },
+  {
+    "evidence": [
       "web search: Nebraska networking user group",
       "result: Contact Microsoft customer support | Microsoft Support"
     ],
@@ -1388,6 +1618,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://talents.studysmarter.co.uk/companies/tenth-revolution-group/lincoln/azure-devops-engineer-16411543"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln programming meetup",
+      "result: 16 DC meetups where technologists build their network"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://technical.ly/software-development/dc-meetup-groups"
   },
   {
     "evidence": [
@@ -1615,6 +1856,17 @@
   },
   {
     "evidence": [
+      "web search: Omaha DevOps meetup",
+      "result: What is DevOps? | Atlassian"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.atlassian.com/devops"
+  },
+  {
+    "evidence": [
       "gap check: known group with no source: \"Bellevue University Cybersecurity\" Omaha",
       "result: Center for Cybersecurity - Faculty and Board | Bellevue University"
     ],
@@ -1667,6 +1919,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.cioapplications.com/leadership-perspective/adopting-a-devops-culture-as-part-of-a-traditional-company-s-digital-journey-nid-3741.html"
+  },
+  {
+    "evidence": [
+      "web search: Omaha tech user group",
+      "result: The City of Omaha"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.cityofomaha.org/"
   },
   {
     "evidence": [
@@ -1769,6 +2032,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln data meetup",
+      "result: DataScienceWeekly"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.datascienceweekly.org/data-science-resources/data-science-meetups"
+  },
+  {
+    "evidence": [
       "web search: Omaha cloud meetup",
       "result: Datum Events – Meetups, Conferences & Community Gatherings"
     ],
@@ -1777,6 +2051,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.datum.net/events"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln programming user group",
+      "result: Lincoln X Plan FAQ"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.demmerlincoln.net/lincoln-x-plan-faq.htm"
   },
   {
     "evidence": [
@@ -1890,6 +2175,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln AI meetup",
+      "result: Flathead AI Meetup: Meet the 24/7 AI Receptionist - Flathead Valley Community College"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.fvcc.edu/event/flathead-ai-meetup-meet-the-24-7-ai-receptionist"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cybersecurity meetup",
       "result: Glow Events & Webinars | Cybersecurity Meetups"
     ],
@@ -1942,6 +2238,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.ippathways.com/event/tech-nebraska-summit"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Tech meetups in Omaha 2026 / 2027\" Omaha",
+      "result: Jack Henry™ - Events"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.jackhenry.com/events"
   },
   {
     "evidence": [
@@ -2044,6 +2351,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln programming user group",
+      "result: How do I authorize another user in the Lincoln app?"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.lincolncanada.com/support/how-tos/lincoln-app/manage-my-lincoln-app-account/how-do-i-authorize-another-user-in-the-lincoln-app"
+  },
+  {
+    "evidence": [
       "gap check: known group with no source: \"Lincoln Chamber of Commerce\" Lincoln",
       "result: Lincoln Area Chamber of Commerce: LACC Home"
     ],
@@ -2074,6 +2392,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.lincolnfinancial.com/public/general/cybersecurity"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln programming user group",
+      "result: Join the Lincoln Group to Enjoy Our Fall Lineup"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.lincolnian.org/post/lincoln-group-announces-fall-program-lineup"
   },
   {
     "evidence": [
@@ -2129,6 +2458,39 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.ll.mit.edu/r-d/cyber-security-and-information-sciences/artificial-intelligence-technology-and-systems"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln AI user group",
+      "result: Guiding Principles of AI Use in LPS | Computing Services"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.lps.org/o/cs/page/guiding-principles-of-ai-use-in-lps"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln AI user group",
+      "result: SF Bay Area AI User Group | Meetup"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.meetup.com/ai-user-group/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cloud meetup",
+      "result: Atlanta Application Development in the Cloud Meetup"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.meetup.com/application-development-in-the-cloud-meetup/"
   },
   {
     "evidence": [
@@ -2435,6 +2797,17 @@
   },
   {
     "evidence": [
+      "web search: Omaha data user group",
+      "result: Omaha SQL User Group"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.meetup.com/omaha-sql-user-group/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln web development meetup",
       "result: Software and Web Development Mastermind"
     ],
@@ -2589,6 +2962,17 @@
   },
   {
     "evidence": [
+      "web search: Omaha tech user group",
+      "result: Omaha Steaks - Order Online Steak Delivery | Buy Meat, Steaks ..."
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.omahasteaks.com/"
+  },
+  {
+    "evidence": [
       "gap check: known group with no source: \"Creighton University\" Omaha",
       "result: Creighton University (CU) - The Princeton Review College Rankings & Reviews"
     ],
@@ -2608,6 +2992,17 @@
     "reason": "awaiting evaluation",
     "result": "pending",
     "url": "https://www.promatcher.com/networking-groups-ne-c.aspx"
+  },
+  {
+    "evidence": [
+      "web search: Omaha DevOps meetup",
+      "result: Understanding DevOps"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-22T01:24:40Z",
+    "reason": "awaiting evaluation",
+    "result": "pending",
+    "url": "https://www.redhat.com/en/topics/devops"
   },
   {
     "evidence": [

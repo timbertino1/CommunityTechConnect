@@ -1,6 +1,6 @@
 [
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -14,7 +14,7 @@
     "title": "Lincoln joins pact of 42 global cities to set data center standards | Nebraska Public Media"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -28,7 +28,19 @@
     "title": "A Look Back at the Tech Builders Challenge"
   },
   {
-    "attempts": 2,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_03b01e325c22",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "An anti-terrorism chatbot and protective wear for healthcare: The 2026 Innovation Awards winners"
+  },
+  {
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -42,7 +54,7 @@
     "title": "Lincoln Team"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -60,6 +72,20 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_0c79ca927048",
+    "links": [
+      "https://www.digitallincoln.co.uk/events-list/2025/4/2/chataimay2025"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "resolved",
+    "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_0ff7c85a0061",
     "links": [
       "https://securityboulevard.com/2026/10/on-the-silicon-prairie-omahas-cybersecurity-leaders-to-watch"
@@ -70,7 +96,19 @@
     "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1e20914c4053",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -84,7 +122,7 @@
     "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -98,7 +136,7 @@
     "title": "How Nebraska's business ecosystem is learning and ..."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -112,7 +150,7 @@
     "title": "Local Cybersecurity Meetups Near You | Rapid7 Blog"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -140,7 +178,31 @@
     "title": "Chat AI Meetup – Exploring Generative AI"
   },
   {
-    "attempts": 2,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_3d9cd9e59626",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "In ‘rug pull,’ DED delayed new BIA contracts for months and left startups with few answers"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thu, Oct 29",
+    "event_id": null,
+    "id": "men_3e4c8aabb69e",
+    "links": [],
+    "organizer_hint": "MCC Small Business Development Center",
+    "place_hint": "Omaha, NE",
+    "resolution": "unresolved",
+    "title": "MCC Small Business Development Center in Omaha is hosting a free workshop on Thursday, Oct. 29, to help entrepreneurs determine if owning a franchise is right for them"
+  },
+  {
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -154,7 +216,7 @@
     "title": "Cyber Roadmap: 2025 and beyond - Lincoln International LLC"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -168,7 +230,7 @@
     "title": "List of Data Conferences in Nebraska - 2026 | Integrate.io"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -182,7 +244,7 @@
     "title": "AI Meetups, Communities, and Networking Events in Lincoln ..."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -196,7 +258,21 @@
     "title": "October is Cybersecurity Awareness Month | Lincoln County Schools"
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "March 2-3",
+    "event_id": null,
+    "id": "men_600c69c560ba",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Nebraska Cures and NWIS",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "2027 Nebraska Women in STEM Conference"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -210,7 +286,45 @@
     "title": "Nebraska Recurring Startup Events Guide - Updated for 2026 - Silicon Prairie News"
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Oct. 29",
+    "event_id": null,
+    "id": "men_6fb5704ed050",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Nebraska Women in STEM Awards / Nebraska Women in STEM Conference",
+    "place_hint": "Durham Museum, Omaha",
+    "resolution": "unresolved",
+    "title": "Nebraska Women in STEM Awards luncheon"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_6fc13ca9f7d2",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Early-bird registration ends Nov. 30 for 2027 Nebraska Women in STEM Conference"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov 16-21",
+    "event_id": null,
+    "id": "men_70314f46a9ad",
+    "links": [],
+    "organizer_hint": "Open Range",
+    "place_hint": "Omaha, Lincoln, Ashland",
+    "resolution": "unresolved",
+    "title": "Startup Week festivities across Omaha, Lincoln and Ashland during Startup Week"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -228,6 +342,32 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_81137431bf0d",
+    "links": [
+      "https://www.1011now.com/2026/09/30/more-questions-than-answers-about-lincolns-google-data-center-water-electricity-usage"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "UPDATE: Improper redaction reveals Lincoln’s Google Data Center water and electricity usage"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "October 16",
+    "event_id": null,
+    "id": "men_817c72585399",
+    "links": [],
+    "organizer_hint": "LaunchLNK",
+    "place_hint": "Lincoln startups",
+    "resolution": "discarded",
+    "title": "LaunchLNK applications open until Oct. 16 for $20,000 non-dilutive grants for Lincoln startups"
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_85de45933c38",
     "links": [
       "https://news.unl.edu/article/nutech-workshop-helps-build-up-business-ideas"
@@ -238,7 +378,19 @@
     "title": "NUtech workshop helps build up business ideas"
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "October 14",
+    "event_id": null,
+    "id": "men_8f5d1b9b5a64",
+    "links": [],
+    "organizer_hint": "Silicon Prairie News",
+    "place_hint": "Prairie Portrait Five Things",
+    "resolution": "discarded",
+    "title": "Hustle Conference 2026"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -256,6 +408,32 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_98cc9916d000",
+    "links": [
+      "https://jamesstrong.dev/post/2019/2019-03-25-loucncf-4-1"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Kubernetes and Cloud Native Computing April Meetup · James Strong"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov 17-18",
+    "event_id": null,
+    "id": "men_9906c5c7a419",
+    "links": [],
+    "organizer_hint": "Spur",
+    "place_hint": "Grand Island, NE",
+    "resolution": "unresolved",
+    "title": "Spur AgConverge 2026"
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_9d228d29419d",
     "links": [
       "https://nebraskaexaminer.com/2024/11/07/university-of-nebraska-launches-ai-focused-task-force-seeks-community-input"
@@ -266,7 +444,7 @@
     "title": "University of Nebraska launches AI-focused task force ..."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -280,7 +458,7 @@
     "title": "Entering the Age of the AI Economy - Lincoln International LLC"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -294,7 +472,31 @@
     "title": "45 Cybersecurity Groups to Join: Forums, Communities, & ..."
   },
   {
-    "attempts": 2,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thu, Oct 29",
+    "event_id": null,
+    "id": "men_ab268c1703a3",
+    "links": [],
+    "organizer_hint": "Big Idea Buffalo County",
+    "place_hint": "Kearney, NE",
+    "resolution": "unresolved",
+    "title": "pitch competition for local entrepreneurs and builders on Thursday, Oct. 29, in Kearney"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Sat, Nov 7",
+    "event_id": null,
+    "id": "men_ac6de35e7e20",
+    "links": [],
+    "organizer_hint": "PowerPath Collective",
+    "place_hint": "Catalyst Omaha",
+    "resolution": "unresolved",
+    "title": "PowerPath Collective free event to meet with local business support resources and learn basic AI skills"
+  },
+  {
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -308,7 +510,7 @@
     "title": "Kubernetes and Cloud Native Computing April Meetup"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -322,7 +524,7 @@
     "title": "Mitel User Group (MUG) Event Lands in Omaha – A First- ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -336,7 +538,19 @@
     "title": "Tech Nebraska to spin out from Nebraska Chamber and go ..."
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Sat, Oct 31",
+    "event_id": null,
+    "id": "men_ccf5a665ab25",
+    "links": [],
+    "organizer_hint": "University/Students (details not given)",
+    "place_hint": "Lincoln, NE",
+    "resolution": "unresolved",
+    "title": "University students wanting to showcase their research have until Saturday, Oct. 31, to register"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -350,7 +564,7 @@
     "title": "From hackathon idea to govtech startup serving Nebraska ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -364,7 +578,7 @@
     "title": "Workshop Named the No. 1 Fastest-Growing Company in Nebraska | Workshop"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -378,7 +592,57 @@
     "title": "Morning meetup | Nebraska Today"
   },
   {
-    "attempts": 2,
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "October 21",
+    "event_id": null,
+    "id": "men_eab9540ad13d",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Silicon Prairie News (SPN)",
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Newsletter, October 21 – SPN Innovation Champion"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_eafa8da0c895",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Meet Breanna Hetland, Co-founder and CEO at Family Room, LLC and Associate Professor at UNMC College of Nursing, in the latest Prairie Portrait"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thu, Oct 29",
+    "event_id": null,
+    "id": "men_eea96dace314",
+    "links": [],
+    "organizer_hint": "Nebraska Chamber of Commerce and Industry",
+    "place_hint": "La Vista, NE",
+    "resolution": "unresolved",
+    "title": "Manufacturing Summit on Thursday, Oct. 29, in La Vista"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thu, Oct 29",
+    "event_id": null,
+    "id": "men_f699bb97d32b",
+    "links": [],
+    "organizer_hint": "Greater Omaha Chamber",
+    "place_hint": "Omaha (location not specified)",
+    "resolution": "unresolved",
+    "title": "workshop on Thursday, Oct. 29, aimed at helping small businesses discover uses for artificial intelligence"
+  },
+  {
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
