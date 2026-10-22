@@ -62,7 +62,7 @@ event; built pages carry the headers in [contracts/site-urls.md](./contracts/sit
 ## Accessibility and performance validation
 
 ```bash
-cd web && npm ci && npx playwright test       # axe-core on /, /past/, calendar month/week, event page
+cd web && npm ci && npx playwright test       # builds and serves the site; axe-core and the home header map (more pages as they are built)
 ```
 
 Expected: no WCAG 2.2 AA violations (SC-009); pages usable at 360 px width; Lighthouse
