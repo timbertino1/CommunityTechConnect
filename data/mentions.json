@@ -1,6 +1,6 @@
 [
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -18,6 +18,20 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_02dea083c1b7",
+    "links": [
+      "https://ruralinnovation.us/blog/building-innovation-in-rural-nebraska-a-look-back-at-the-tech-builders-challenge"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "A Look Back at the Tech Builders Challenge"
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_06712557827d",
     "links": [
       "https://www.lincolntech.edu/news/author/lincoln-team"
@@ -32,6 +46,62 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_097e17439592",
+    "links": [
+      "https://news.unl.edu/article/new-website-connects-communities-with-data-tools-to-thrive"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "New website connects communities with data, tools to thrive"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_0ff7c85a0061",
+    "links": [
+      "https://securityboulevard.com/2026/10/on-the-silicon-prairie-omahas-cybersecurity-leaders-to-watch"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2d22e9584e96",
+    "links": [
+      "https://siliconprairienews.com/2026/10/registration-still-open-for-the-tech-nebraska-summit-on-oct-21"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2ddb7f8808e4",
+    "links": [
+      "https://siliconprairienews.com/2025/05/how-nebraskas-business-ecosystem-is-learning-and-leveraging-ai"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "How Nebraska's business ecosystem is learning and ..."
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_2f06f865afe4",
     "links": [
       "https://www.rapid7.com/blog/post/2016/07/11/local-cybersecurity-meetups-near-you"
@@ -42,7 +112,7 @@
     "title": "Local Cybersecurity Meetups Near You | Rapid7 Blog"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -70,7 +140,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -88,6 +158,20 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_4cdb0ea9d4b1",
+    "links": [
+      "https://www.integrate.io/blog/data-conferences-nebraska"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "List of Data Conferences in Nebraska - 2026 | Integrate.io"
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_4d037b4deb5f",
     "links": [
       "https://www.nucamp.co/blog/coding-bootcamp-lincoln-ne-top-10-mustattend-tech-meetups-and-conferences-in-lincoln"
@@ -98,7 +182,7 @@
     "title": "AI Meetups, Communities, and Networking Events in Lincoln ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -116,6 +200,76 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_6920ef943e5c",
+    "links": [
+      "https://siliconprairienews.com/2026/07/nebraska-recurring-startup-events-guide-updated-for-2026"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Nebraska Recurring Startup Events Guide - Updated for 2026 - Silicon Prairie News"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_7b1224bc2a1f",
+    "links": [
+      "https://siliconprairienews.com/2026/02/the-nebraska-women-in-tech-summit-is-back-for-its-second-year-to-celebrate-and-support-women-in-technology-roles"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "The Nebraska Women in Tech Summit is back for its second year to celebrate and support women in technology roles - Silicon Prairie News"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_85de45933c38",
+    "links": [
+      "https://news.unl.edu/article/nutech-workshop-helps-build-up-business-ideas"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "NUtech workshop helps build up business ideas"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_96eaada8f8bb",
+    "links": [
+      "https://siliconprairienews.com/2026/05/more-than-a-hackathon-open-range-and-techstars-bring-startup-weekend-to-omaha-june-5-7"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "More than a hackathon: Open Range and Techstars bring Startup Weekend to Omaha June 5-7 - Silicon Prairie News"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_9d228d29419d",
+    "links": [
+      "https://nebraskaexaminer.com/2024/11/07/university-of-nebraska-launches-ai-focused-task-force-seeks-community-input"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "University of Nebraska launches AI-focused task force ..."
+  },
+  {
+    "attempts": 2,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_a086454ad58b",
     "links": [
       "https://www.lincolninternational.com/perspectives/articles/entering-the-age-of-the-ai-economy"
@@ -126,7 +280,7 @@
     "title": "Entering the Age of the AI Economy - Lincoln International LLC"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -140,7 +294,7 @@
     "title": "45 Cybersecurity Groups to Join: Forums, Communities, & ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -154,7 +308,7 @@
     "title": "Kubernetes and Cloud Native Computing April Meetup"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -169,6 +323,62 @@
   },
   {
     "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_c828d84a4816",
+    "links": [
+      "https://siliconprairienews.com/2026/08/tech-nebraska-to-spin-out-from-nebraska-chamber-and-go-independent-on-sept-1"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Tech Nebraska to spin out from Nebraska Chamber and go ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_d79fe9d8c42a",
+    "links": [
+      "https://siliconprairienews.com/2026/03/from-hackathon-idea-to-govtech-startup-serving-nebraska-cities"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "From hackathon idea to govtech startup serving Nebraska ..."
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_da18902457d3",
+    "links": [
+      "https://useworkshop.com/press/workshop-named-the-no-1-fastest-growing-company-in-nebraska"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Workshop Named the No. 1 Fastest-Growing Company in Nebraska | Workshop"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_dba3ab1f6cda",
+    "links": [
+      "https://news.unl.edu/article/morning-meetup"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Morning meetup | Nebraska Today"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
