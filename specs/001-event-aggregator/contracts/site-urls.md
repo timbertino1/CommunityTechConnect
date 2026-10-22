@@ -39,6 +39,7 @@ events are shown and a notice explains filters need JavaScript.
 | `/data/upcoming.json` | All publicly visible upcoming events (public fields only) |
 | `/data/past/<YYYY>.json` | Publicly visible past events for a year |
 | `/data/meta.json` | Categories, areas, `generated_at` |
+| `/data/map.json` | For the home page header map: `towns` (every `{name, lat, lon}` in `data/areas.yaml` `points`) and `pins` (`{city, lat, lon, events}` for each city with upcoming in-person, not cancelled events; a city not in `points` gets no pin) |
 
 Public event fields: `id, slug, title, start, end, all_day, area, location, organizer,
 summary, categories, original_url, status, last_verified, inferred, original_unavailable`. Internal fields

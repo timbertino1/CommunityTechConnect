@@ -13,7 +13,7 @@ or secret is stored. JSON Schemas for the two central entities are in
 ```text
 data/
 ├── categories.yaml              # Category list (admin-extendable, FR-028)
-├── areas.yaml                   # Location areas + Nebraska gazetteer (cities, ZIPs, venues)
+├── areas.yaml                   # Location areas + Nebraska gazetteer (cities, ZIPs, venues, map points)
 ├── known_groups.yaml            # Known groups/organizations, with or without a working source
 ├── overrides.yaml               # Admin corrections (visibility, categories, area) applied last
 ├── organizers.yaml              # Organizer records

@@ -137,3 +137,41 @@ def test_out_of_state_place_cannot_also_be_a_nebraska_city() -> None:
     data["out_of_state"].append({"name": "Omaha", "state": "IA", "zips": []})
     with pytest.raises(ValidationError, match="both in Nebraska and out of state"):
         AreaConfig.model_validate(data)
+
+
+# --- Map points (T152)
+
+
+def test_every_nebraska_city_has_a_map_point() -> None:
+    areas = STORE.read_areas()
+    assert areas is not None
+    cities = {c for a in areas.areas for c in a.cities}
+    assert set(areas.points) == cities
+
+
+def test_a_point_must_be_a_listed_city() -> None:
+    data = raw_areas()
+    data["points"]["Atlantis"] = {"lat": 41.0, "lon": -97.0}
+    with pytest.raises(ValidationError, match="Atlantis is not a city"):
+        AreaConfig.model_validate(data)
+
+
+@pytest.mark.parametrize(
+    "point",
+    [
+        {"lat": -95.94, "lon": 41.26},  # swapped
+        {"lat": 41.26, "lon": 95.94},  # wrong sign
+        {"lat": 39.5, "lon": -96.0},  # Kansas
+    ],
+)
+def test_a_point_must_be_inside_nebraska(point: dict[str, float]) -> None:
+    data = raw_areas()
+    data["points"]["Omaha"] = point
+    with pytest.raises(ValidationError, match=r"Omaha: .* is outside Nebraska"):
+        AreaConfig.model_validate(data)
+
+
+def test_points_are_optional() -> None:
+    data = raw_areas()
+    del data["points"]
+    assert AreaConfig.model_validate(data).points == {}

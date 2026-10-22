@@ -9,6 +9,15 @@
   "$defs": {
     "place": { "type": "string", "minLength": 1, "maxLength": 100 },
     "zip": { "type": "string", "pattern": "^[0-9]{5}$" },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lat", "lon"],
+      "properties": {
+        "lat": { "type": "number", "minimum": 39.99, "maximum": 43.01 },
+        "lon": { "type": "number", "minimum": -104.06, "maximum": -95.30 }
+      }
+    },
     "area": {
       "type": "object",
       "additionalProperties": false,
@@ -37,6 +46,12 @@
           "zips": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/zip" } }
         }
       }
+    },
+    "points": {
+      "description": "City (one listed in an area) to map coordinates, for the home page's header map. No geocoding service.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/place" },
+      "additionalProperties": { "$ref": "#/$defs/point" }
     }
   }
 }

@@ -119,3 +119,61 @@ out_of_state:
   - name: Carter Lake
     state: IA
     zips: ["51510"]
+
+# Map coordinates (latitude, longitude; 2 decimals, about 1 km) for the home page's header map
+# (T152, research R15). Every city listed above needs one; an event's pin is placed by its
+# city, so an event whose city isn't here gets no pin. Entered by hand: no geocoding service.
+points:
+  # Omaha area
+  Omaha: { lat: 41.26, lon: -95.94 }
+  Bellevue: { lat: 41.14, lon: -95.91 }
+  Papillion: { lat: 41.15, lon: -96.04 }
+  La Vista: { lat: 41.18, lon: -96.03 }
+  Ralston: { lat: 41.21, lon: -96.04 }
+  Elkhorn: { lat: 41.29, lon: -96.24 }
+  Gretna: { lat: 41.14, lon: -96.24 }
+  Bennington: { lat: 41.36, lon: -96.16 }
+  Offutt AFB: { lat: 41.12, lon: -95.91 }
+  Boys Town: { lat: 41.26, lon: -96.13 }
+  Valley: { lat: 41.31, lon: -96.35 }
+  Waterloo: { lat: 41.29, lon: -96.29 }
+  Springfield: { lat: 41.08, lon: -96.13 }
+  Chalco: { lat: 41.18, lon: -96.15 }
+  # Lincoln area
+  Lincoln: { lat: 40.81, lon: -96.70 }
+  Waverly: { lat: 40.92, lon: -96.53 }
+  Hickman: { lat: 40.62, lon: -96.63 }
+  Bennet: { lat: 40.68, lon: -96.50 }
+  Firth: { lat: 40.53, lon: -96.61 }
+  Malcolm: { lat: 40.91, lon: -96.87 }
+  Raymond: { lat: 40.95, lon: -96.78 }
+  Davey: { lat: 40.98, lon: -96.67 }
+  Panama: { lat: 40.60, lon: -96.51 }
+  Roca: { lat: 40.66, lon: -96.66 }
+  Sprague: { lat: 40.63, lon: -96.74 }
+  Hallam: { lat: 40.54, lon: -96.79 }
+  Denton: { lat: 40.74, lon: -96.85 }
+  # Other Nebraska
+  Grand Island: { lat: 40.93, lon: -98.34 }
+  Kearney: { lat: 40.70, lon: -99.08 }
+  Hastings: { lat: 40.59, lon: -98.39 }
+  Norfolk: { lat: 42.03, lon: -97.42 }
+  North Platte: { lat: 41.12, lon: -100.77 }
+  Columbus: { lat: 41.43, lon: -97.37 }
+  Fremont: { lat: 41.43, lon: -96.50 }
+  Scottsbluff: { lat: 41.87, lon: -103.67 }
+  South Sioux City: { lat: 42.47, lon: -96.41 }
+  Beatrice: { lat: 40.27, lon: -96.75 }
+  York: { lat: 40.87, lon: -97.59 }
+  Lexington: { lat: 40.78, lon: -99.74 }
+  Blair: { lat: 41.54, lon: -96.13 }
+  Seward: { lat: 40.91, lon: -97.10 }
+  Wayne: { lat: 42.23, lon: -97.02 }
+  Chadron: { lat: 42.83, lon: -103.00 }
+  McCook: { lat: 40.20, lon: -100.63 }
+  Nebraska City: { lat: 40.68, lon: -95.86 }
+  Ashland: { lat: 41.04, lon: -96.37 }
+  Wahoo: { lat: 41.21, lon: -96.62 }
+  Crete: { lat: 40.63, lon: -96.96 }
+  Sidney: { lat: 41.14, lon: -102.98 }
+  Alliance: { lat: 42.10, lon: -102.87 }
