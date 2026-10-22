@@ -40,16 +40,24 @@ jobs:
       - name: Validate data
         working-directory: discovery
         run: uv run netc validate-data --data-dir ../data
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            web/package-lock.json
+            workers/package-lock.json
+      # The home header map's three.js, tree-shaken to what it uses (T153); build-site copies it.
+      - name: Bundle three.js
+        working-directory: web
+        run: |
+          npm ci
+          npm run build:vendor
       - name: Build site
         working-directory: discovery
         env:
           NETC_SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'netechconnect.pages.dev' }}
         run: uv run netc build-site --data ../data --out ../dist --web ../web
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: "24"
-          cache: npm
-          cache-dependency-path: workers/package-lock.json
       - name: Install wrangler
         working-directory: workers
         run: npm ci
