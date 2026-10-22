@@ -31,4 +31,4 @@ kv_namespaces = [
 #   npx wrangler secret put OWNER_FORWARD_ADDRESS --env inbox
 [env.inbox.vars]
 # Newsletter senders: full addresses, or domains (subdomains included), comma-separated.
-ALLOWED_SENDERS = ""
+ALLOWED_SENDERS = "mwynn@nebraskajournalismtrust.org"  # Silicon Prairie News
