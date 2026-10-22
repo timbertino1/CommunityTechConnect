@@ -3,6 +3,7 @@ can set trust, publish an event, or add fields (T079; research R10, plan threat 
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import httpx
@@ -129,6 +130,31 @@ def test_answers_outside_the_schema_are_ignored(tmp_path: Path, answer: object) 
     result = classify(unclear(), CATEGORIES, AREAS, ai=ai(tmp_path, ScriptedClient(answer)))
     assert result.decided_by == "none"
     assert result.relevant is None
+
+
+def test_a_wordy_answer_is_shortened_not_thrown_away(tmp_path: Path) -> None:
+    # Strict mode can't bound string lengths; gpt-5-nano's reasons ran past 200 characters.
+    answer = verdict(reason="x" * 450, categories=["ai-ml", "security", "software-dev",
+                                                    "general-tech"])  # fmt: skip
+    gate = ai(tmp_path, ScriptedClient(answer))
+    result = classify(unclear(), CATEGORIES, AREAS, ai=gate)
+    assert result.decided_by == "ai" and gate.unusable == 0
+    gate.cache.save()
+    [row] = [json.loads(x) for x in (tmp_path / "cache" / "ai" / "2026-10.jsonl").open()]
+    assert len(row["result"]["reason"]) == 200
+    assert row["result"]["categories"] == ["ai-ml", "security", "software-dev"]
+
+
+def test_long_mention_fields_are_shortened(tmp_path: Path) -> None:
+    mentions_sent = [
+        {"title": f"{i:02} " + "T" * 300, "date_hint": "D" * 300, "place_hint": None,
+         "organizer_hint": None, "links": [f"https://e.example/{n}" for n in range(8)]}
+        for i in range(25)
+    ]  # fmt: skip
+    client = ScriptedClient({"mentions": mentions_sent})
+    mentions = extract_mentions("text", [], ai=ai(tmp_path, client), channel="newsletter")
+    assert mentions is not None and len(mentions) == 20
+    assert len(mentions[0].title) == 200
 
 
 def test_injected_newsletter_text_only_becomes_unresolved_mentions(tmp_path: Path) -> None:

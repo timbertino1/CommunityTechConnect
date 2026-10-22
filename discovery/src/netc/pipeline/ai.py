@@ -38,7 +38,7 @@ from netc.storage import atomic_write
 
 MODEL: Final = "gpt-5-nano-2025-08-07"
 """Gate V6: the cheapest OpenAI model with Structured Outputs (checked 2026-10-17)."""
-PROMPT_VERSION: Final = "2026-10-20.1"
+PROMPT_VERSION: Final = "2026-10-22.1"
 """Part of every cache key: changing a prompt or schema asks again."""
 MONTHLY_BUDGET_USD: Final = 1.00
 MAX_EVENT_CHARS: Final = 4_000
@@ -193,6 +193,14 @@ class AiMentions(BaseModel):
     mentions: list[AiMention] = Field(max_length=20)
 
 
+MAX_MENTIONS: Final = 20
+CLASSIFICATION_LIMITS: Final = {"categories": 3, "reason": 200}
+MENTION_LIMITS: Final = {
+    "title": 200, "date_hint": 200, "place_hint": 200, "organizer_hint": 200, "links": 5,
+}  # fmt: skip
+"""The max_length of each field above; answers are cut to these before validation."""
+
+
 CLASSIFY_PROMPT: Final = (
     "You help NETechConnect, a free list of community tech events in Nebraska, decide whether "
     "an event belongs on it. Relevant means a technology event open to the public: meetups, "
@@ -200,7 +208,7 @@ CLASSIFY_PROMPT: Final = (
     "pitching a product, real estate or investing, events only for enrolled students, and "
     "events with no technology content. Nebraska means it takes place in Nebraska, or online "
     "and hosted by a Nebraska group. Pick up to 3 categories from the allowed list, the most "
-    "fitting first. Give your confidence from 0 to 1 and a short reason."
+    "fitting first. Give your confidence from 0 to 1 and a reason of one short sentence."
 )
 EXTRACT_PROMPT: Final = (
     "You read a newsletter or news post for NETechConnect, a list of community tech events in "
@@ -326,12 +334,15 @@ class Ai:
 
     def classify(self, text: str, category_ids: Sequence[str]) -> AiClassification | None:
         def check(answer: Any) -> AiClassification | None:
-            result = AiClassification.model_validate(answer)
+            result = AiClassification.model_validate(_trimmed(answer, CLASSIFICATION_LIMITS))
             return None if any(c not in category_ids for c in result.categories) else result
+
+        def stored(result: AiClassification) -> Any:
+            return result.model_dump()
 
         schema = classification_schema(category_ids)
         data = text[:MAX_EVENT_CHARS]
-        return self._ask("classify", CLASSIFY_PROMPT, data, "classification", schema, check)
+        return self._ask("classify", CLASSIFY_PROMPT, data, "classification", schema, check, stored)
 
     def extract(
         self, text: str, keep_link: Callable[[str], str | None] | None = None
@@ -341,6 +352,13 @@ class Ai:
         never holds a link the caller wouldn't keep."""
 
         def check(answer: Any) -> list[AiMention]:
+            if isinstance(answer, dict) and isinstance(answer.get("mentions"), list):
+                answer = {
+                    **answer,
+                    "mentions": [
+                        _trimmed(m, MENTION_LIMITS) for m in answer["mentions"][:MAX_MENTIONS]
+                    ],
+                }
             mentions = list(AiMentions.model_validate(answer).mentions)
             if keep_link is None:
                 return mentions
@@ -403,6 +421,18 @@ class Ai:
             )
         )  # fmt: skip
         return result
+
+
+def _trimmed(answer: Any, limits: Mapping[str, int]) -> Any:
+    """``answer`` with each named string or list field cut to its limit. Strict mode can't
+    bound string lengths, so a wordy but otherwise valid answer is shortened, not thrown
+    away; anything else wrong with it (extra fields, wrong types) still fails validation."""
+    if not isinstance(answer, dict):
+        return answer
+    return {
+        k: v[: limits[k]] if k in limits and isinstance(v, (str, list)) else v
+        for k, v in answer.items()
+    }
 
 
 def _checked[T](check: Callable[[Any], T | None], answer: Any) -> T | None:
