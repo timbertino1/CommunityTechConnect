@@ -1,0 +1,15 @@
+# Gitleaks config: the default rules plus one narrow allowlist. One-off false positives go in
+# .gitleaksignore instead.
+
+[extend]
+useDefault = true
+
+# Each line of data/cache/ai/<YYYY-MM>.jsonl starts with "key":"<sha256 of the AI input>",
+# which generic-api-key reads as a key. Skip a finding only when the whole match is a field
+# named exactly `key` holding a 64-character hex hash, so any other secret on the same line
+# (or anywhere else) is still caught. No `paths` entry: gitleaks 8.24 (pinned by the action)
+# ignores `condition = "AND"` here, so a path would allow everything in the file.
+[allowlist]
+description = "AI cache keys are SHA-256 hashes of the input, not secrets"
+regexTarget = "match"
+regexes = ['''^"?key":"[0-9a-f]{64}"?$''']
