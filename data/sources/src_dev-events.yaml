@@ -1,5 +1,5 @@
 added_at: '2026-10-21'
-approved_count: 0
+approved_count: 1
 check_interval_hours: 24
 connector: jsonld
 default_area: omaha
@@ -13,8 +13,8 @@ notes: 'Discovered via web search: the page has schema.org Event data.'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
-rejected_count: 0
-status: active
+rejected_count: 9
+status: paused
 trust: probationary
-updated_at: null
+updated_at: '2026-10-22'
 url: https://dev.events/meetups/NA/US/NE/Omaha/tech
