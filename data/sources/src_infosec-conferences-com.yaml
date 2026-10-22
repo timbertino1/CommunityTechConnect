@@ -1,5 +1,5 @@
 added_at: '2026-10-22'
-approved_count: 0
+approved_count: 1
 check_interval_hours: 24
 connector: jsonld
 default_area: omaha
@@ -16,5 +16,5 @@ rate_limit_seconds: 5
 rejected_count: 0
 status: active
 trust: probationary
-updated_at: null
+updated_at: '2026-10-22'
 url: https://infosec-conferences.com/event/20261105-interface-omaha-2026
