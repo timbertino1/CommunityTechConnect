@@ -56,6 +56,13 @@ def _parser() -> argparse.ArgumentParser:
     sources.add_argument(
         "--search-fixtures", type=Path, help="offline: index of recorded search results"
     )
+    sources.add_argument(
+        "--news-feed",
+        action="append",
+        dest="news_feeds",
+        metavar="URL",
+        help="offline: read this news feed instead of finders/config.yaml's (repeatable)",
+    )
     sources.add_argument("--dry-run", action="store_true", help="report without writing data/")
     sources.add_argument("--report", type=Path, help="also write a Markdown report here")
     sources.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
@@ -183,7 +190,7 @@ def _discover_sources(args: argparse.Namespace) -> int:
             search = BudgetedSearch(provider, usage, now=now) if provider else None
             report = discover_sources(
                 store, FixtureHttp(args.fixtures), connectors, now=now, search=search,
-                news_feeds=config.news_feeds, dry_run=args.dry_run,
+                news_feeds=args.news_feeds or config.news_feeds, dry_run=args.dry_run,
             )  # fmt: skip
         else:
             domain = os.environ.get("NETC_SITE_DOMAIN", "netechconnect.example")

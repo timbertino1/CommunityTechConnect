@@ -166,6 +166,8 @@ def test_the_command_runs_offline(data: Path, tmp_path: Path) -> None:
             str(FIXTURES),
             "--search-fixtures",
             str(FIXTURES / "search_index.json"),
+            "--news-feed",
+            FEED,
             "--now",
             "2026-10-20T12:00:00Z",
             "--report",
@@ -174,3 +176,6 @@ def test_the_command_runs_offline(data: Path, tmp_path: Path) -> None:
     )
     assert code == 0
     assert report.read_text(encoding="utf-8").startswith("## Finding new groups")
+    # The documented command reaches all three channels, like the in-process run (T105).
+    added = [s for s in DataStore(data).read_sources() if s.origin == "discovered"]
+    assert {s.found_via for s in added} == {"web_search", "link_graph", "news"}
