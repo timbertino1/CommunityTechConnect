@@ -22,7 +22,7 @@ from jinja2 import Environment, PackageLoader, StrictUndefined
 from netc.fetch.robots import ROBOTS_USER_AGENT
 from netc.models import AreaConfig, Event
 from netc.pipeline.overrides import apply_overrides
-from netc.pipeline.timeutil import format_central
+from netc.pipeline.timeutil import format_central, to_central
 from netc.storage import DataStore, atomic_write, dump_json
 
 PUBLIC_FIELDS: Final = (
@@ -52,7 +52,8 @@ def build_site(
     areas = store.read_areas()
     area_labels: dict[str, str] = {a.id: a.label for a in areas.areas} if areas else {}
     organizers = {o.id: o.name for o in store.read_organizers()}
-    source_names = {s.id: s.name for s in store.read_sources()}
+    sources = store.read_sources()
+    source_names = {s.id: s.name for s in sources}
 
     # Applied here too, so a merged override shows up at the next deploy.
     events = apply_overrides(store.read_events(), store.read_overrides())
@@ -70,7 +71,7 @@ def build_site(
         lstrip_blocks=True,
         keep_trailing_newline=True,
     )
-    common = {"updated": format_central(now, None, all_day=False)}
+    common = {"updated": format_central(now, None, all_day=False), "repo_url": REPO_URL}
 
     def organizer_of(event: Event) -> str | None:
         if event.organizer_id and event.organizer_id in organizers:
@@ -79,8 +80,21 @@ def build_site(
 
     views = {e.id: _view(e, organizer_of(e), categories, area_labels) for e in public}
     pages = 0
-    _write(out_dir / "index.html", env.get_template("list.html").render(
-        nav="upcoming", events=[views[e.id] for e in upcoming], **common))  # fmt: skip
+    _write(
+        out_dir / "index.html",
+        env.get_template("list.html").render(
+            nav="upcoming",
+            events=[views[e.id] for e in upcoming],
+            months=_months([views[e.id] for e in upcoming]),
+            counts={
+                "upcoming": len(upcoming),
+                "watched": sum(1 for s in sources if s.status == "active"),
+            },
+            filter_areas=list(area_labels.items()),
+            filter_topics=list(categories.items()),
+            **common,
+        ),
+    )
     pages += 1
     for event in public:
         _write(
@@ -93,7 +107,6 @@ def build_site(
         env.get_template("about.html").render(
             nav="about",
             user_agent=f"{ROBOTS_USER_AGENT}/1.0 (+https://{site_domain}/about)",
-            repo_url=REPO_URL,
             repo_host="github.com/timbertino1/CommunityTechConnect",
             **common,
         ),
@@ -122,6 +135,19 @@ def build_site(
     return BuildReport(pages=pages, events_listed=len(upcoming))
 
 
+def _months(views: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Upcoming event views grouped by their Central Time month, in order."""
+    months: list[dict[str, Any]] = []
+    for view in views:
+        if not months or months[-1]["name"] != view["month"]:
+            months.append({"name": view["month"], "events": []})
+        months[-1]["events"].append(view)
+    for month in months:
+        n = len(month["events"])
+        month["count"] = f"{n} event" if n == 1 else f"{n} events"
+    return months
+
+
 def _map_data(upcoming: list[Event], areas: AreaConfig | None) -> dict[str, Any]:
     """The header map's towns, and a pin per city with upcoming in-person events (T152).
     Cancelled and online events get no pin, nor does a city missing from the points table."""
@@ -145,6 +171,7 @@ def _view(
     event: Event, organizer: str | None, categories: dict[str, str], areas: dict[str, str]
 ) -> dict[str, Any]:
     location = event.location
+    local = to_central(event.start)
     if location.online and not location.venue:
         where = "Online"
     else:
@@ -164,6 +191,12 @@ def _view(
         "title": event.title,
         "status": event.status,
         "when": format_central(event.start, event.end, all_day=event.all_day),
+        "month": f"{local:%B %Y}",
+        "date_block": {
+            "month": f"{local:%b}".upper(),
+            "day": str(local.day),
+            "dow": f"{local:%a}",
+        },
         "start_iso": event.start.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "where": where,
         "where_full": location.address or where,

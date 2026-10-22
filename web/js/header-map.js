@@ -42,9 +42,10 @@ const CREAM = 0xf2eee6;
 const MAP_HALF_WIDTH = 4.3;
 // The static image is mostly map: drawn larger than the live header's.
 const CENTERED_SCALE = 1.3;
-// On wide screens: the map's size, and how far below the band's middle it sits (under the text).
-const WIDE_SCALE = 1.15;
-const WIDE_Y = -1.0;
+// Behind the copy on wide screens (as in the design mockup), and centered in its own row.
+const RIGHT_SCALE = 1.0;
+const RIGHT_Y = 0.1;
+const CENTER_SCALE = 1.15;
 
 // Longitude is scaled by about cos(41.5°) so the state keeps its shape.
 function xy(lon, lat) {
@@ -156,13 +157,14 @@ export function start(canvas, data, { animate = true, centered = false, capture 
       map.scale.setScalar(CENTERED_SCALE);
       return;
     }
-    // On wide canvases the map sits below and right of the title, shifted only as far as keeps
-    // its east edge (and the sway) in view: the visible half-width at its depth, less its own.
+    // The stylesheet says where the map goes (--map-align): "right", behind the copy on wide
+    // screens, shifted only as far as keeps its east edge (and the sway) in view; or "center",
+    // in its own row. The visible half-width at the map's depth sets both.
     const halfView = Math.tan((camera.fov * Math.PI) / 360) * camera.position.z * camera.aspect;
-    const wide = camera.aspect > 1.4;
-    const scale = wide ? Math.min(WIDE_SCALE, halfView / MAP_HALF_WIDTH) : Math.max(0.55, camera.aspect / 1.4);
-    const x = wide ? Math.min(2.0, Math.max(0, halfView - MAP_HALF_WIDTH * scale)) : 0;
-    map.position.set(x, wide ? WIDE_Y : -0.9, 0);
+    const right = getComputedStyle(canvas).getPropertyValue("--map-align").trim() === "right";
+    const scale = Math.min(right ? RIGHT_SCALE : CENTER_SCALE, halfView / MAP_HALF_WIDTH);
+    const x = right ? Math.min(2.0, Math.max(0, halfView - MAP_HALF_WIDTH * scale)) : 0;
+    map.position.set(x, right ? RIGHT_Y : 0, 0);
     map.scale.setScalar(scale);
   }
 

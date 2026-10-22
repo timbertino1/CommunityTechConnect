@@ -7,20 +7,62 @@
     <img class="header-map-still" alt="" width="900" height="520" hidden>
   </div>
   <div class="wrap home-hero-text">
-    <h1 id="home-title">Upcoming tech events in Nebraska</h1>
-    <p class="lede">Meetups, talks and conferences around Omaha, Lincoln and the rest of the state. Every event links to its organizer's page, where you can read more and register.</p>
+    <div class="hero-copy">
+      <p class="eyebrow">Community tech events · Nebraska</p>
+      <h1 id="home-title">Every Nebraska tech event, <span class="accent">in one place.</span></h1>
+      <p class="lede">Meetups, user groups, workshops and conferences in Omaha, Lincoln and across the state. Every event links straight to its organizer, so you register where it's run.</p>
+      <p><a class="hero-cta" href="#events">See upcoming events <span aria-hidden="true">↓</span></a></p>
+    </div>
+    <div class="hero-foot">
+      <ul class="counts">
+        <li class="count"><span class="count-n">{{ counts.upcoming }}</span> <span class="count-label">upcoming events</span></li>
+        <li class="count"><span class="count-n">{{ counts.watched }}</span> <span class="count-label">groups and calendars watched</span></li>
+        <li class="count"><span class="count-n">2×</span> <span class="count-label">updated every day</span></li>
+      </ul>
+      <ul class="legend" data-map-legend aria-hidden="true" hidden>
+        <li><span class="legend-pin"></span>Upcoming events</li>
+        <li><span class="legend-town"></span>Nebraska towns</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{# Filters need JavaScript: filters.js (Phase 6) wires this bar up and removes `hidden`. #}
+<section class="filter-bar" aria-label="Filters" data-filters hidden>
+  <div class="wrap filter-inner">
+    <div class="chips" role="group" aria-label="Area">
+      <button type="button" data-area="" aria-pressed="true">All areas</button>
+      {% for id, label in filter_areas %}
+      <button type="button" data-area="{{ id }}" aria-pressed="false">{{ label }}</button>
+      {% endfor %}
+    </div>
+    <div class="topic">
+      <label for="filter-topic">Topic</label>
+      <select id="filter-topic">
+        <option value="">All topics</option>
+        {% for id, label in filter_topics %}
+        <option value="{{ id }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
   </div>
 </section>
 <script type="module" src="/js/home.js"></script>
 {% endblock %}
 {% block content %}
 {% if events %}
-<ol class="events">
-{% for e in events %}
-  <li>{% include "_card.html" %}</li>
+<div id="events" class="months">
+{% for m in months %}
+  <section class="month" aria-labelledby="month-{{ loop.index }}">
+    <h2 id="month-{{ loop.index }}"><span class="month-name">{{ m.name }}</span> <span class="month-count">{{ m.count }}</span></h2>
+    <ol class="events">
+    {% for e in m.events %}
+      <li>{% include "_card.html" %}</li>
+    {% endfor %}
+    </ol>
+  </section>
 {% endfor %}
-</ol>
+</div>
 {% else %}
-<p class="empty">No events found. New events are added twice a day.</p>
+<p id="events" class="empty">No events found. New events are added twice a day.</p>
 {% endif %}
 {% endblock %}

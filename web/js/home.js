@@ -49,6 +49,7 @@ async function choose() {
   ]);
   const canvas = box.querySelector("canvas");
   canvas.hidden = false;
+  document.querySelector("[data-map-legend]")?.removeAttribute("hidden");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   start(canvas, data, { animate: !reduce });
 }
