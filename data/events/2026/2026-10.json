@@ -44,5 +44,276 @@
     "title": "Drupal Nebraska Oct 2026/US Central Timezone Quarterly Meeting: AI Framework for Drupal Development",
     "tz_assumed": false,
     "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_ef5e77cd1abf",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "be86eef1d0aeca233b9410e01ff51da79217d4ce92d6d7f8d13aa9b759ed0eff",
+        "external_id": "https://allevents.in/lincoln/diventures-travel-night/200030838573817",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 0,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/diventures-travel-night/200030838573817"
+      }
+    ],
+    "location": {
+      "address": "2315 N Cotner Blvd, Lincoln, NE, United States, Nebraska 68507, 2315 N Cotner Blvd, Lincoln, NE 68507-2821, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "2315 N Cotner Blvd"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/diventures-travel-night/200030838573817",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "diventures-travel-night-2026-10-22",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-22T05:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Diventures Travel Night",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "ai-ml",
+      "security"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_09f665033646",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "0ba31000f7cef847aadf0324c016ce45ee319101faf00021f071ea43f42d7d92",
+        "external_id": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 0,
+        "source_id": "src_events-govtech-com",
+        "url": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit"
+      }
+    ],
+    "location": {
+      "address": "DoubleTree by Hilton Omaha Downtown, 1616 Dodge Street, Omaha, NE 68102",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "DoubleTree by Hilton Omaha Downtown"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "nebraska-public-sector-cybersecurity-ai-summit-2026-2026-10-22",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-22T13:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Nebraska Public Sector Cybersecurity & AI Summit 2026",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_798c26645827",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "c14bce1534ebf859fa1841ac6f0da21915ac88a19765d1e34f477c680ca1a953",
+        "external_id": "https://allevents.in/lincoln/divers-and-drip/200030838573513",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/divers-and-drip/200030838573513"
+      }
+    ],
+    "location": {
+      "address": "6900 O St, Lincoln, NE 68510-2457, United States, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "6900 O St"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/divers-and-drip/200030838573513",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "divers-drip-2026-10-25",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-25T05:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Divers & Drip",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_986ed2cee556",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "50fe502d8e66dfde97fa633d1bf2d53d69d45beb515c5fbc2bac96e607c96c23",
+        "external_id": "https://allevents.in/lincoln/monthly-book-club/200030772219858",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/monthly-book-club/200030772219858"
+      }
+    ],
+    "location": {
+      "address": "The Nook at Escape Lincoln, 815 O St, Lincoln, NE 68508-1389, United States, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "The Nook at Escape Lincoln"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/monthly-book-club/200030772219858",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "monthly-book-club-2026-10-25",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-25T05:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Monthly Book Club",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_3e7f4642fc22",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "d8628556c80122da7c1cc46c2a92cba772aacc39f2d5e3c0a211409fa115705a",
+        "external_id": "https://allevents.in/lincoln/veteran-coffee-hour/200030772221807",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/veteran-coffee-hour/200030772221807"
+      }
+    ],
+    "location": {
+      "address": "3340 West A Street, Lincoln, NE, United States, Nebraska 68522, 3340 W A St, Lincoln, NE 68522-9108, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "3340 West A Street"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/veteran-coffee-hour/200030772221807",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "veteran-coffee-hour-2026-10-28",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-28T05:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Veteran Coffee Hour",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "networking-infra"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_89bd2436fb8e",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "a5a9f18c7447ed482327420fd79cbea9ce05d04627274f5d917e0b9693a071c9",
+        "external_id": "https://allevents.in/lincoln/networking/200030770413701",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/networking/200030770413701"
+      }
+    ],
+    "location": {
+      "address": "955 N 27th St, Lincoln, NE, 940 N 27th St, Lincoln, NE 68503-2525, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "955 N 27th St"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/networking/200030770413701",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "networking-2026-10-29",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-29T05:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Networking",
+    "tz_assumed": true,
+    "visibility": "shown"
   }
 ]
