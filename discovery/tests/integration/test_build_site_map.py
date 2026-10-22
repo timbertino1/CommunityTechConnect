@@ -1,15 +1,19 @@
-"""`netc build-site` writes /data/map.json for the home page's header map (T152; research R15)."""
+"""`netc build-site` and the home page's header map: /data/map.json (T152) and the page markup,
+vendored three.js and static image (T153); research R15."""
 
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
 import pytest
+from selectolax.lexbor import LexborHTMLParser
 
+from netc.cli import main
 from tests.data_samples import utc
-from tests.site_support import build, make_data, site_event
+from tests.site_support import NOW, WEB, build, html_files, make_data, site_event
 
 pytestmark = pytest.mark.integration
 
@@ -68,3 +72,60 @@ def test_towns_are_every_point_in_the_table(tmp_path: Path) -> None:
     assert names == sorted(names)
     assert {"name": "Scottsbluff", "lat": 41.87, "lon": -103.67} in towns
     assert all(set(t) == {"name", "lat", "lon"} for t in towns)
+
+
+# --- The header map on the page (T153)
+
+
+def pages(tmp_path: Path) -> dict[str, LexborHTMLParser]:
+    data = make_data(tmp_path / "data", [])
+    assert build(data, tmp_path / "site") == 0
+    return {k: LexborHTMLParser(v) for k, v in html_files(tmp_path / "site").items()}
+
+
+def test_the_home_page_has_a_hidden_decorative_map(tmp_path: Path) -> None:
+    home = pages(tmp_path)["index.html"]
+    [box] = home.css("[data-header-map]")
+    assert box.attributes["aria-hidden"] == "true"
+    [canvas] = box.css("canvas")
+    [still] = box.css("img")
+    assert "hidden" in canvas.attributes and "hidden" in still.attributes
+    assert still.attributes["alt"] == ""
+    # The loader is an external module (CSP script-src 'self'); the title stays real text.
+    scripts = [s.attributes for s in home.css("script")]
+    assert scripts == [{"type": "module", "src": "/js/home.js"}]
+    [h1] = home.css("h1")
+    assert h1.text() == "Upcoming tech events in Nebraska"
+
+
+def test_other_pages_have_no_map(tmp_path: Path) -> None:
+    for name, page in pages(tmp_path).items():
+        if name != "index.html":
+            assert not page.css("[data-header-map]"), name
+            assert not page.css("script"), name
+
+
+def test_build_copies_the_vendored_three_js(tmp_path: Path) -> None:
+    web = tmp_path / "web"
+    shutil.copytree(WEB, web, ignore=shutil.ignore_patterns("node_modules", "vendor"))
+    (web / "vendor").mkdir()
+    (web / "vendor" / "three.js").write_text("export const Scene = 1;\n")
+    data = make_data(tmp_path / "data", [])
+    out = tmp_path / "site"
+    assert main(["build-site", "--data", str(data), "--out", str(out), "--web", str(web),
+                 "--now", NOW]) == 0  # fmt: skip
+    assert (out / "vendor" / "three.js").read_text() == "export const Scene = 1;\n"
+    assert sorted(p.name for p in (out / "vendor").iterdir()) == ["three.js"]
+
+
+def test_the_static_image_is_a_small_webp() -> None:
+    image = (WEB / "img" / "header-map.webp").read_bytes()
+    assert image[:4] == b"RIFF" and image[8:12] == b"WEBP"
+    assert len(image) <= 40 * 1024
+
+
+def test_only_header_map_js_imports_three() -> None:
+    importers = sorted(
+        p.name for p in (WEB / "js").glob("*.js") if "/vendor/three.js" in p.read_text()
+    )
+    assert importers == ["header-map.js"]

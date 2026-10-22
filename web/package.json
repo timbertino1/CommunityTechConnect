@@ -2,8 +2,9 @@
   "name": "netc-web",
   "private": true,
   "type": "module",
-  "description": "NETechConnect static front-end assets (no runtime dependencies)",
+  "description": "NETechConnect static front-end assets (three.js is bundled at build time for the home header map only)",
   "scripts": {
+    "build:vendor": "esbuild vendor-src/three.js --bundle --minify --format=esm --target=es2020 --legal-comments=none --banner:js=\"/* three.js | MIT License | Copyright (c) 2010-2026 three.js authors | https://threejs.org */\" --outfile=vendor/three.js",
     "lint": "eslint .",
     "test:a11y": "playwright test"
   },
@@ -11,7 +12,9 @@
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.64.1",
+    "esbuild": "0.28.2",
     "eslint": "10.12.0",
-    "globals": "17.13.0"
+    "globals": "17.13.0",
+    "three": "0.186.1"
   }
 }

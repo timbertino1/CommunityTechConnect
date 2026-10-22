@@ -1,0 +1,28 @@
+// The three.js classes header-map.js uses, and nothing else: esbuild tree-shakes the rest away
+// (npm run build:vendor → vendor/three.js). Add a name here before using it in header-map.js.
+export {
+  AdditiveBlending,
+  AmbientLight,
+  BufferGeometry,
+  CylinderGeometry,
+  DirectionalLight,
+  DoubleSide,
+  EdgesGeometry,
+  ExtrudeGeometry,
+  Float32BufferAttribute,
+  Group,
+  LineBasicMaterial,
+  LineSegments,
+  Mesh,
+  MeshBasicMaterial,
+  MeshStandardMaterial,
+  PerspectiveCamera,
+  Points,
+  PointsMaterial,
+  RingGeometry,
+  Scene,
+  Shape,
+  SphereGeometry,
+  Vector2,
+  WebGLRenderer,
+} from "three";

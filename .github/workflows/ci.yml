@@ -67,6 +67,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npx eslint .
+      - name: Bundle three.js (T153)
+        run: npm run build:vendor
       - name: Dependency audit
         run: npm audit --audit-level=high
 

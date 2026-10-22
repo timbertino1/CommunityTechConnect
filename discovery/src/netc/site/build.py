@@ -29,7 +29,7 @@ PUBLIC_FIELDS: Final = (
     "id", "slug", "title", "start", "end", "all_day", "area", "location", "organizer", "summary",
     "categories", "original_url", "status", "last_verified", "inferred", "original_unavailable",
 )  # fmt: skip
-WEB_ASSETS: Final = ("css", "js", "img", "fonts", "_headers", "favicon.ico", "robots.txt")
+WEB_ASSETS: Final = ("css", "js", "vendor", "img", "fonts", "_headers", "favicon.ico", "robots.txt")
 REPO_URL: Final = "https://github.com/timbertino1/CommunityTechConnect"
 INFERRED_LABELS: Final = {"area": "area", "categories": "topics", "source_tz": "time zone"}
 

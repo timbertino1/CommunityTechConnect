@@ -22,8 +22,11 @@
     </nav>
   </div>
 </header>
-<main id="main" class="wrap" tabindex="-1">
+<main id="main" tabindex="-1">
+{% block hero %}{% endblock %}
+<div class="wrap main-inner">
 {% block content %}{% endblock %}
+</div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
