@@ -125,6 +125,16 @@
   name: INTERFACE Omaha
   source_ids: []
   status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://infosec-conferences.com/event/20261105-interface-omaha-2026
+  name: INTERFACE Omaha 2026, Omaha, United States | Cyber Event
+  source_ids:
+  - src_infosec-conferences-com
+  status: active
 - aliases:
   - ISACA Omaha Chapter
   area: omaha
@@ -164,6 +174,16 @@
   area: lincoln
   cadence_days: null
   last_searched: null
+  links:
+  - https://allevents.in/lincoln/meetups
+  name: Meetups in Lincoln | Networking & Community Groups
+  source_ids:
+  - src_allevents-in
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Nebraska Code Camp
   source_ids: []
@@ -171,7 +191,7 @@
 - aliases: []
   area: null
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Nebraska Cybersecurity Conference
   source_ids: []
@@ -179,7 +199,7 @@
 - aliases: []
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Nebraska Data and Analytics Forum
   source_ids: []
@@ -187,7 +207,7 @@
 - aliases: []
   area: lincoln
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://innovate.unl.edu/
   name: Nebraska Innovation Campus
@@ -195,9 +215,19 @@
   - src_unl-nic
   status: active
 - aliases: []
-  area: null
+  area: omaha
   cadence_days: null
   last_searched: null
+  links:
+  - https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit
+  name: Nebraska Public Sector Cybersecurity & AI Summit 2026
+  source_ids:
+  - src_events-govtech-com
+  status: active
+- aliases: []
+  area: null
+  cadence_days: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Nebraska Women of Color in Tech
   source_ids: []
@@ -206,7 +236,7 @@
   - Nebraska Code
   area: lincoln
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://nebraskacode.amegala.com/
   name: Nebraska.Code()
@@ -215,7 +245,7 @@
 - aliases: []
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://www.nebraskacert.org/
   name: NEbraskaCERT
@@ -234,7 +264,7 @@
 - aliases: []
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://omahamakergroup.org/
   name: Omaha Maker Group
@@ -255,7 +285,7 @@
   - Omaha Web Developers
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: OMWEB
   source_ids: []
@@ -263,7 +293,7 @@
 - aliases: []
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://owasp.org/chapters/omaha
   name: OWASP Omaha
@@ -283,7 +313,7 @@
   - Omaha Salesforce Developers
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Salesforce Developer Group, Omaha
   source_ids: []
@@ -302,7 +332,7 @@
   - UNO
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links:
   - https://events.unomaha.edu/
   name: University of Nebraska Omaha
@@ -323,7 +353,7 @@
   - Women in CyberSecurity Nebraska
   area: null
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: WiCyS Nebraska
   source_ids: []
@@ -332,7 +362,7 @@
   - WiTH
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Women in Technology of the Heartland
   source_ids: []
