@@ -5,8 +5,9 @@
   "description": "NETechConnect static front-end assets (three.js is bundled at build time for the home header map only)",
   "scripts": {
     "build:vendor": "esbuild vendor-src/three.js --bundle --minify --format=esm --target=es2020 --legal-comments=none --banner:js=\"/* three.js | MIT License | Copyright (c) 2010-2026 three.js authors | https://threejs.org */\" --outfile=vendor/three.js",
+    "check:budget": "node scripts/check-map-budget.js",
     "lint": "eslint .",
-    "test:a11y": "playwright test"
+    "test": "playwright test"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
