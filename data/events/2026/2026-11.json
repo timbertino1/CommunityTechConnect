@@ -1,5 +1,96 @@
 [
   {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_c956ee787027",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "45e76dbca872220050c836f01e2abbe1a8e57452bf50b18e8901db06331510b1",
+        "external_id": "https://allevents.in/lincoln/monthly-round-up-meeting/200030851720135",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/monthly-round-up-meeting/200030851720135"
+      }
+    ],
+    "location": {
+      "address": "205 NW 40th St, Lincoln, NE, United States, Nebraska 68528, 205 NW 40th St, Lincoln, NE 68528-2265, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "205 NW 40th St"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/monthly-round-up-meeting/200030851720135",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "monthly-round-up-meeting-2026-11-03",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-03T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Monthly Round-Up/Meeting",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "omaha",
+    "categories": [
+      "security",
+      "networking-infra"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_952f27c093f4",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "51a0431b79751d486c60c3b5e29d448643b0edd2e99d81df2df6777a7a4140d4",
+        "external_id": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_infosec-conferences-com",
+        "url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/"
+      }
+    ],
+    "location": {
+      "address": "Omaha, United States, Nebraska",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Omaha"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "interface-omaha-2026-2026-11-05",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-05T06:00:00Z",
+    "status": "scheduled",
+    "summary": "INTERFACE 2026 is recognized as a leading regional conference focused on the advancement of IT infrastructure and cybersecurity. The event is tailored for technology leaders seeking to stay ahead in a landscape marked by rapid digital transformation and evolving security threats. By addressing the most pressing challenges in the industry, INTERFACE 2026 aims to provide attendees with the knowledge and",
+    "title": "INTERFACE Omaha 2026",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": false,
     "area": "omaha",
     "categories": [
@@ -12,12 +103,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-21T15:47:36Z",
+    "last_verified": "2026-10-22T15:45:41Z",
     "listings": [
       {
         "content_hash": "d8756740266c405f186cd2808de0da51f1bfc4002f769667495e6f2e93f6ae76",
         "external_id": "https://www.meetup.com/ai_omaha/events/317053693/",
-        "last_seen": "2026-10-21T15:47:36Z",
+        "last_seen": "2026-10-22T15:45:41Z",
         "missing_runs": 1,
         "source_id": "src_ai-omaha",
         "url": "https://www.meetup.com/ai_omaha/events/317053693/"
@@ -41,6 +132,231 @@
     "status": "scheduled",
     "summary": "What happens when AI helps your teams move faster than your processes were designed to handle? Join us at **[Werner Enterprises](https://werner.com/)** for",
     "title": "From Auto-Complete to Dark Factories: Accelerating Engineering Practices",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_9b6eb23fb28f",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "c70cb2d8302135a6185d8a20c4a1535af88fbfe978347d505e95ff953cec6123",
+        "external_id": "https://allevents.in/lincoln/fall-expo-and-coffee-event/200030775358214",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/fall-expo-and-coffee-event/200030775358214"
+      }
+    ],
+    "location": {
+      "address": "Lincoln Community Playhouse (2500 S 56th, Lincoln, NE 68506), 2500 S 56th St, Lincoln, NE 68506-3503, United States, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Lincoln Community Playhouse (2500 S 56th"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/fall-expo-and-coffee-event/200030775358214",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "fall-expo-coffee-event-2026-11-07",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-07T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Fall Expo & Coffee Event",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_c26911b4c082",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "2fd2cbdb69a1568bb4e28df078765fce24e2038fe7b3896cb4250b942ba1d51d",
+        "external_id": "https://allevents.in/lincoln/bgr-x-good-life-halfsy-2026-national-meetup-dinner/100002002921829108",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/bgr-x-good-life-halfsy-2026-national-meetup-dinner/100002002921829108"
+      }
+    ],
+    "location": {
+      "address": "Courtyard by Marriott Lincoln Downtown/Haymarket, 808 R Street, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Courtyard by Marriott Lincoln Downtown/Haymarket"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/bgr-x-good-life-halfsy-2026-national-meetup-dinner/100002002921829108",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "bgr-x-good-life-halfsy-2026-national-meetup-dinner-2026-11-07",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-07T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "BGR! X Good Life Halfsy 2026 National Meetup Dinner",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_540a3d68f74d",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "9566e363ce79aa7e28fcd235dcf1bd9cefd0d204adc13962eb820c1f5ff4808a",
+        "external_id": "https://allevents.in/lincoln/national-meetup-good-life-halfsy/200029720891802",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/national-meetup-good-life-halfsy/200029720891802"
+      }
+    ],
+    "location": {
+      "address": "Lincoln station, Lincoln,NE,United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Lincoln station"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/national-meetup-good-life-halfsy/200029720891802",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "national-meetup-good-life-halfsy-2026-11-08",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-08T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "National Meetup: Good Life Halfsy",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_a878772942d2",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "73bf969d7a6c4cbc251d183715709a34ac004be9b179bc4a2e5f6c996ad174b3",
+        "external_id": "https://allevents.in/lincoln/highland-neighborhood-association-monthly-meeting/200030851719018",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/highland-neighborhood-association-monthly-meeting/200030851719018"
+      }
+    ],
+    "location": {
+      "address": "Spirit of Hope - Lincoln, NE, 5801 NW 1st St, Lincoln, NE 68521-4476, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Spirit of Hope - Lincoln"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/highland-neighborhood-association-monthly-meeting/200030851719018",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "highland-neighborhood-association-monthly-meeting-2026-11-09",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-09T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Highland Neighborhood Association Monthly Meeting",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_224758ba3cfa",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "1b704858970ce3386c7741b50460f22b65805ea8dfd8edafec6d7d9def35e2bd",
+        "external_id": "https://allevents.in/lincoln/sscco-monthly-meeting/200030851723530",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/sscco-monthly-meeting/200030851723530"
+      }
+    ],
+    "location": {
+      "address": "Friedens Lutheran Church, 540 D St, Lincoln, NE 68502-1054, United States, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Friedens Lutheran Church"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/sscco-monthly-meeting/200030851723530",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "sscco-monthly-meeting-2026-11-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-10T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "SSCCO Monthly Meeting",
     "tz_assumed": true,
     "visibility": "shown"
   },
@@ -103,12 +419,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-21T15:47:36Z",
+    "last_verified": "2026-10-22T15:45:41Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-10-21T15:47:36Z",
+        "last_seen": "2026-10-22T15:45:41Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
@@ -132,6 +448,141 @@
     "status": "scheduled",
     "summary": "Free evening meetup for network engineers in the Omaha area. Lightning talks: Human vs AI by Paresh Patel and Follow the Annoyance: Level 1 of a Network Engineer's Automation Journey by Sean Mahoney, then a panel on emerging networking ideas and trends and time to talk.",
     "title": "(NE)NUG Omaha Fall Event 2026",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_f05c6bd26558",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "7ae76e9d9394d8e65c16f7ae0c8f139aaf4b23bb1a314d146815ee1e6af1775b",
+        "external_id": "https://allevents.in/lincoln/stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-adults/200030710401326",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-adults/200030710401326"
+      }
+    ],
+    "location": {
+      "address": "136 S. 14th Street, Lincoln, NE, United States, Nebraska 68508, 136 S 14th St, Lincoln, NE 68508-1801, United States",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "136 S. 14th Street"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-adults/200030710401326",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-2026-11-17",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-17T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Stacks of Facts: Tuesday Trivia! @ Bennett Martin Public Library | For Adults",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_0fe59e2290b5",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "611a50dc2ea4845dca617272b5f387f69e05b26e023444f0a2c8ecb5a8ab53e8",
+        "external_id": "https://allevents.in/lincoln/at-the-well-lincoln-ne-in-person-group/100001985563241104",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/at-the-well-lincoln-ne-in-person-group/100001985563241104"
+      }
+    ],
+    "location": {
+      "address": "City Impact, 1035 North 33rd Street, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "City Impact"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/at-the-well-lincoln-ne-in-person-group/100001985563241104",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "at-the-well-lincoln-ne-in-person-group-2026-11-20",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-20T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "At the Well - Lincoln, NE - In-person Group",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "lincoln",
+    "categories": [
+      "general-tech"
+    ],
+    "end": null,
+    "first_seen": "2026-10-22T15:45:41Z",
+    "id": "evt_41c4ffa804aa",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-22T15:45:41Z",
+    "listings": [
+      {
+        "content_hash": "02d5a4a25363e5a2bf8a87c4f3bef1f91ae355665a2c402fb0a69e5bf6d6631a",
+        "external_id": "https://allevents.in/lincoln/mahjong-cafe/200030855024433",
+        "last_seen": "2026-10-22T15:45:41Z",
+        "missing_runs": 1,
+        "source_id": "src_allevents-in",
+        "url": "https://allevents.in/lincoln/mahjong-cafe/200030855024433"
+      }
+    ],
+    "location": {
+      "address": "The Canvas Event Studio, 8335 Cody Dr, Lincoln, NE 68512-3757, United States, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "The Canvas Event Studio"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://allevents.in/lincoln/mahjong-cafe/200030855024433",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "mahjong-cafe-2026-11-21",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-21T06:00:00Z",
+    "status": "scheduled",
+    "summary": "",
+    "title": "Mahjong Cafe",
     "tz_assumed": true,
     "visibility": "shown"
   },
