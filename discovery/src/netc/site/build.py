@@ -10,6 +10,7 @@ Public data files hold public fields only.
 from __future__ import annotations
 
 import shutil
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -19,7 +20,7 @@ from urllib.parse import urlsplit
 from jinja2 import Environment, PackageLoader, StrictUndefined
 
 from netc.fetch.robots import ROBOTS_USER_AGENT
-from netc.models import Event
+from netc.models import AreaConfig, Event
 from netc.pipeline.overrides import apply_overrides
 from netc.pipeline.timeutil import format_central
 from netc.storage import DataStore, atomic_write, dump_json
@@ -117,7 +118,27 @@ def build_site(
             }
         ),
     )
+    atomic_write(out_dir / "data" / "map.json", dump_json(_map_data(upcoming, areas)))
     return BuildReport(pages=pages, events_listed=len(upcoming))
+
+
+def _map_data(upcoming: list[Event], areas: AreaConfig | None) -> dict[str, Any]:
+    """The header map's towns, and a pin per city with upcoming in-person events (T152).
+    Cancelled and online events get no pin, nor does a city missing from the points table."""
+    points = areas.points if areas else {}
+    counts: Counter[str] = Counter()
+    for event in upcoming:
+        if areas is None or event.status == "cancelled" or event.location.online:
+            continue
+        if found := areas.map_point(event.location.city):
+            counts[found[0]] += 1
+    return {
+        "towns": [{"name": n, "lat": p.lat, "lon": p.lon} for n, p in sorted(points.items())],
+        "pins": [
+            {"city": n, "lat": points[n].lat, "lon": points[n].lon, "events": c}
+            for n, c in sorted(counts.items())
+        ],
+    }
 
 
 def _view(

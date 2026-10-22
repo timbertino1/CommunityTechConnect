@@ -436,6 +436,9 @@ ZipPrefix = Annotated[str, StringConstraints(pattern=r"^[0-9]{3}$")]
 
 # Nebraska ZIP codes run from 680xx to 693xx (682 is unused).
 NEBRASKA_ZIP_PREFIXES: Final = frozenset(f"{n:03d}" for n in range(680, 694)) - {"682"}
+# Nebraska's bounding box, a little padded: catches swapped or sign-flipped coordinates.
+NEBRASKA_LAT: Final = (39.99, 43.01)
+NEBRASKA_LON: Final = (-104.06, -95.30)
 
 
 class AreaEntry(_Model):
@@ -453,11 +456,25 @@ class OutOfStatePlace(_Model):
     zips: Annotated[list[Zip], AfterValidator(_unique)] = []
 
 
+class MapPoint(_Model):
+    lat: float
+    lon: float
+
+
 class AreaConfig(_Model):
     """data/areas.yaml: the four areas and the gazetteer that places events in them."""
 
     areas: list[AreaEntry]
     out_of_state: list[OutOfStatePlace] = []
+    points: dict[Place, MapPoint] = {}
+    """City → map coordinates for the home page's header map (T152); no geocoding service."""
+
+    def map_point(self, city: str | None) -> tuple[str, MapPoint] | None:
+        """The table's spelling of ``city`` and its point, matched ignoring case."""
+        if not city:
+            return None
+        folded = city.strip().casefold()
+        return next(((n, p) for n, p in self.points.items() if n.casefold() == folded), None)
 
     @model_validator(mode="after")
     def _consistent(self) -> Self:
@@ -474,6 +491,14 @@ class AreaConfig(_Model):
         for place in self.out_of_state:
             if place.state == "NE" or place.name.casefold() in nebraska_cities:
                 raise ValueError(f"{place.name} is listed both in Nebraska and out of state")
+        for name, point in self.points.items():
+            if name.casefold() not in nebraska_cities:
+                raise ValueError(f"points: {name} is not a city in any area")
+            if not (
+                NEBRASKA_LAT[0] <= point.lat <= NEBRASKA_LAT[1]
+                and NEBRASKA_LON[0] <= point.lon <= NEBRASKA_LON[1]
+            ):
+                raise ValueError(f"points: {name}: {point.lat}, {point.lon} is outside Nebraska")
         return self
 
     def area(self, area_id: str) -> AreaEntry:
