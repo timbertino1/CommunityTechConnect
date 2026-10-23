@@ -121,17 +121,9 @@
   area: omaha
   cadence_days: null
   last_searched: '2026-10-21T02:04:10Z'
-  links: []
-  name: INTERFACE Omaha
-  source_ids: []
-  status: active
-- aliases: []
-  area: omaha
-  cadence_days: null
-  last_searched: null
   links:
   - https://infosec-conferences.com/event/20261105-interface-omaha-2026
-  name: INTERFACE Omaha 2026, Omaha, United States | Cyber Event
+  name: INTERFACE Omaha
   source_ids:
   - src_infosec-conferences-com
   status: active
