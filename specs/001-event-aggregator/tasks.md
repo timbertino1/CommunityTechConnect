@@ -254,7 +254,7 @@ navigation and links to original pages.
 - [X] T107 [P] [US3] Write a failing integration test in `discovery/tests/integration/test_build_site_calendar.py`: `/calendar/<YYYY>/<MM>/` and `/calendar/<YYYY>/week/<WW>/` render semantic `<table>` grids with `<caption>`, `<th scope>`, and day headings; each event links to its detail page and shows the original-page link; prev/next links exist; `/calendar/index.html` points to the current month.
 - [X] T108 [US3] Implement `discovery/src/netc/site/calendar.py` so T106 passes.
 - [X] T109 [US3] Add `discovery/src/netc/site/templates/calendar_month.html` and `calendar_week.html`, and render the month/week pages in `discovery/src/netc/site/build.py` (from 12 months back to 12 months ahead), so T107 passes; add calendar styles to `web/css/site.css` (stacked agenda layout under 600 px).
-- [ ] T110 [US3] Checkpoint: run quickstart.md scenario 3, including keyboard-only navigation. Record the results in `docs/checkpoints/us3.md`.
+- [X] T110 [US3] Checkpoint: run quickstart.md scenario 3, including keyboard-only navigation. Record the results in `docs/checkpoints/us3.md`.
 
 ---
 
