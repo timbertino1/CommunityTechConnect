@@ -18,7 +18,8 @@ kv_namespaces = [
 ]
 
 [env.suggest.vars]
-SITE_ORIGIN = "https://REPLACE_WITH_SITE_DOMAIN"
+# Origins allowed to post the form, comma-separated: the Pages host now, the domain from launch (T156).
+SITE_ORIGIN = "https://netechconnect.pages.dev, https://netechconnect.com, https://www.netechconnect.com"
 
 [env.inbox]
 name = "netc-inbox"
