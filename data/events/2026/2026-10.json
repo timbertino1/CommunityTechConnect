@@ -6,6 +6,7 @@
       "ai-ml",
       "web-mobile"
     ],
+    "cost": null,
     "end": "2026-10-22T01:30:00Z",
     "first_seen": "2026-10-19T00:33:52Z",
     "id": "evt_22ea791e1566",
@@ -34,6 +35,7 @@
     "organizer_id": "org_drupal-nebraska",
     "original_unavailable": false,
     "original_url": "https://groups.drupal.org/node/537358",
+    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "drupal-nebraska-oct-2026-us-central-timezone-quarterly-meeting-ai-2026-10-21",
@@ -51,6 +53,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_ef5e77cd1abf",
@@ -79,6 +82,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/diventures-travel-night/200030838573817",
+    "price": null,
     "review_state": "pending_review",
     "series_key": null,
     "slug": "diventures-travel-night-2026-10-22",
@@ -97,6 +101,7 @@
       "ai-ml",
       "security"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_09f665033646",
@@ -125,6 +130,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+    "price": null,
     "review_state": "pending_review",
     "series_key": null,
     "slug": "nebraska-public-sector-cybersecurity-ai-summit-2026-2026-10-22",
@@ -137,11 +143,109 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "lincoln",
+    "categories": [
+      "software-dev"
+    ],
+    "cost": "free",
+    "end": "2026-10-23T09:15:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_91a44c5b89e3",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "cost"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "eada1c28dea429d84442bb7bbca59f1dce45ebbdd632156749981407a2c639ad",
+        "external_id": "https://www.meetup.com/the-claude-code-developers-night-out/events/316722290/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 0,
+        "source_id": "src_the-claude-code-developers-night-out",
+        "url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316722290/"
+      }
+    ],
+    "location": {
+      "address": "2401 S 75th St, 2401 S 75th St, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "2401 S 75th St"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316722290/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "lincoln-claude-code-hands-on-workshop-2026-10-23",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-23T08:15:00Z",
+    "status": "scheduled",
+    "summary": "We are getting together for a hands-on workshop focused on exploring Claude Code. This session is designed for developers who are curious about how to inte",
+    "title": "Lincoln Claude Code Hands-On Workshop",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "lincoln",
+    "categories": [
+      "ai-ml",
+      "software-dev"
+    ],
+    "cost": "free",
+    "end": "2026-10-24T14:50:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_3f2daf6dd009",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "cost"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "a499113c0cfe99b3b2630a1557661c25a37212dd073c551abdf5fca59c7c0a10",
+        "external_id": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_the-claude-code-developers-night-out",
+        "url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/"
+      }
+    ],
+    "location": {
+      "address": "3001 W Claire Ave, 3001 W Claire Ave, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "3001 W Claire Ave"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "lincoln-unlock-ai-productivity-with-claude-code-2026-10-24",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-24T13:50:00Z",
+    "status": "scheduled",
+    "summary": "We are hosting a casual evening for local developers interested in getting hands-on with Claude Code. If you have been curious about how to integrate AI di",
+    "title": "Lincoln Unlock AI Productivity with Claude Code",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_798c26645827",
@@ -170,6 +274,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/divers-and-drip/200030838573513",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "divers-drip-2026-10-25",
@@ -187,6 +292,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_986ed2cee556",
@@ -215,6 +321,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/monthly-book-club/200030772219858",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "monthly-book-club-2026-10-25",
@@ -227,11 +334,342 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "lincoln",
+    "categories": [
+      "software-dev"
+    ],
+    "cost": "free",
+    "end": "2026-10-26T00:50:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_4b1f77b7ce67",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "cost"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "ca99962ff57ba1bd52829d19c47369ad4c9e6b7ed731ccefa1c0d580a0364f2e",
+        "external_id": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_the-claude-code-developers-night-out",
+        "url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/"
+      }
+    ],
+    "location": {
+      "address": "750 Blue Sage Blvd, 750 Blue Sage Blvd, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "750 Blue Sage Blvd"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "lincoln-automate-your-workflow-with-claude-2026-10-25",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-25T23:50:00Z",
+    "status": "scheduled",
+    "summary": "Join us for a hands-on evening focused on practical ways to integrate Claude into your daily coding workflow. This session is designed for local developers",
+    "title": "Lincoln Automate Your Workflow with Claude",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-10-26T20:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_2dba596e514e",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "478685f15a902266c443746e7f80c2d422a765ea77edde8a9fff9f958219bc00",
+        "external_id": "10000469-1793019600-1793026800@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-10-26/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-10-26/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-10-26",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-26T18:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "other_ne",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-10-27T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_1b7f3ff01cf0",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "8c008340dbe3621b9cf4e6dcd0a15220323cfb5ba73c87ea09b6e559ec0a36aa",
+        "external_id": "10711-1793088000-1793116800@netasite.org",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_netasite-org",
+        "url": "https://netasite.org/event/nefetc/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://netasite.org/event/nefetc/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "nefetc-2026-10-27",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-27T13:00:00Z",
+    "status": "scheduled",
+    "summary": "Nebraska Fall Ed Tech Conference in partnership with NCSA Registration Schedule",
+    "title": "NEFETC",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "lincoln",
+    "categories": [
+      "cloud-devops",
+      "software-dev"
+    ],
+    "cost": null,
+    "end": "2026-10-27T20:30:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_03f6fb9d20ae",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "e5f37f4839f466b5c3e9165349bf7eec77486bbbbb6fce49590d12911800e7eb",
+        "external_id": "https://www.meetup.com/digitallincoln/events/316883219/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_digitallincoln",
+        "url": "https://www.meetup.com/digitallincoln/events/316883219/"
+      }
+    ],
+    "location": {
+      "address": "Mosaic, 13-14 Silver Street, Lincoln, H7",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Mosaic"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/digitallincoln/events/316883219/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "intelligent-document-processing-on-aws-2026-10-27",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-27T18:30:00Z",
+    "status": "scheduled",
+    "summary": "For October's Digital Lincoln meetup we will be joined by Shaun Hare, Head of Software Engineering at DVSA, to learn how he and his team have built an Inte",
+    "title": "Intelligent Document Processing on AWS",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-10-28T01:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_558c8230b7b6",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "e0f60f4403fa7a58d60a8ce645cf679cc2e1b2031360ba67e73e9ee82fd8268c",
+        "external_id": "10000483-1793122200-1793131200@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/industrial-pumpkin-carving/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/industrial-pumpkin-carving/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "industrial-pumpkin-carving-2026-10-27",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-27T22:30:00Z",
+    "status": "scheduled",
+    "summary": "It’s time to take your pumpkin carving to the next level! Join us for a fun, family-friendly evening of industrial pumpkin carving using tools from the makerspace! Bring your own pumpkin and get creative with tools like drills, saws, and more. Want to do something totally unique, like incorporate electronics or laser engrave embellishments? You can do that, too! This free event is a great opportunity to try something different, have some fun, and make a one-of-a-kind Halloween creation!",
+    "title": "Industrial Pumpkin Carving",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-10-28T01:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_d8df1563ce37",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "9671515a61cdee800f3396d03a36eede8c3d553b295f27e0bd702f13a7425847",
+        "external_id": "10000038-1793122200-1793131200@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-10-27/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-10-27/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-10-27",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-27T22:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "lincoln",
+    "categories": [
+      "ai-ml"
+    ],
+    "cost": "free",
+    "end": "2026-10-28T01:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_d974e9ab2b81",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "cost"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "3f98e6b8c9e940715a0cb57693d48b60eea5dbe50ea14fb642e00642a5026d2f",
+        "external_id": "https://www.meetup.com/lincoln-code/events/317024050/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_lincoln-code",
+        "url": "https://www.meetup.com/lincoln-code/events/317024050/"
+      }
+    ],
+    "location": {
+      "address": "Assurity Life Insurance Company, 2000 Q St, Lincoln, NE 68503, USA, Lincoln, NE",
+      "city": "Lincoln",
+      "online": false,
+      "state": "NE",
+      "venue": "Assurity Life Insurance Company"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/lincoln-code/events/317024050/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "when-should-ai-stop-and-hand-the-work-back-to-a-human-2026-10-27",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-27T23:00:00Z",
+    "status": "scheduled",
+    "summary": "Abstract: We all want AI that moves fast. We also know some work should never run without a person signing off, especially when it touches money, customers",
+    "title": "When Should AI Stop and Hand the Work Back to a Human?",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_3e7f4642fc22",
@@ -260,6 +698,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/veteran-coffee-hour/200030772221807",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "veteran-coffee-hour-2026-10-28",
@@ -275,8 +714,56 @@
     "all_day": false,
     "area": "omaha",
     "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-10-28T20:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_8fff5eb48051",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "7dd64bb3efa0cd520ea393e2a0ea1d797bd0948cf1c2be90b12ba4ba3d4e0f89",
+        "external_id": "10000470-1793192400-1793199600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-10-28/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-10-28/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-10-28",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-28T18:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
       "cloud-devops"
     ],
+    "cost": null,
     "end": "2026-10-29T00:15:00Z",
     "first_seen": "2026-10-23T15:34:41Z",
     "id": "evt_37cbb870a38d",
@@ -305,6 +792,7 @@
     "organizer_id": "org_omaha-azure",
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
+    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "your-agent-works-on-your-laptop-now-what-2026-10-28",
@@ -322,6 +810,7 @@
     "categories": [
       "networking-infra"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_89bd2436fb8e",
@@ -350,6 +839,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/networking/200030770413701",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "networking-2026-10-29",

@@ -1,10 +1,104 @@
 [
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-12-02T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_95153047f870",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "97f32d15ca2e9b0843f9f440a67ca36940a4204b18c73573e08ccecdb4d85db0",
+        "external_id": "10000043-1796146200-1796155200@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-01/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-01/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-12-01",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-01T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-12-02T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_546f2a562524",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "395b89c7fd7967a92a4937f02afe0ee14dc2e95678c02b0f7c3cb6e860fe428c",
+        "external_id": "10000477-1796216400-1796223600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-12-02/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-12-02/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-12-02",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-02T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": "2026-12-04T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_2ae1f434db2e",
@@ -33,6 +127,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/principal-developer-online-5-2022",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "the-principal-dev-masterclass-for-tech-leads-2026-12-02",
@@ -46,10 +141,104 @@
   },
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-12-07T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_f9238eba58f6",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "19433183c8b928f6299439f64e33eb1b6a894022e66b7e3a2a48a026213bb519",
+        "external_id": "10000478-1796648400-1796655600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-12-07/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-12-07/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-12-07",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-07T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-12-09T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_ece5a7286e8e",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "824be229c9cc367f7a6a47f73b4bf1ce044d236f0fb7c1326292c93f75acd300",
+        "external_id": "10000044-1796751000-1796760000@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-08/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-08/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-12-08",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-08T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "web-mobile"
     ],
+    "cost": null,
     "end": "2026-12-09T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_e2bca0735977",
@@ -78,6 +267,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcqblb",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "angular-community-meetup-en-espanol-2026-12-08",
@@ -91,10 +281,58 @@
   },
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-12-09T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_3e753066b153",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "e7635c29ab3d79d5fae66ff974cb69d2f99c980f302fd20a549a065d8d5db75d",
+        "external_id": "10000479-1796821200-1796828400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-12-09/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-12-09/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-12-09",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-09T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": "2026-12-11T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_91be51cd0f16",
@@ -123,6 +361,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/clean-architecture-online-4-2023",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "clean-architecture-masterclass-2026-12-09",
@@ -132,6 +371,238 @@
     "summary": "Tech masterclass Online",
     "title": "Clean Architecture Masterclass",
     "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-12-14T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_b513d821c1b7",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "aca4db1324910b97b36c1165711d947fd56c95f3cc4b64151dc466615d49017c",
+        "external_id": "10000480-1797253200-1797260400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-12-14/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-12-14/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-12-14",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-14T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-12-16T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_a32291f5f3e3",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "a1fc91d59fc0ae25d497f5f0f40a2a2999e950cabefd9bbf19ad7e08463cbbbd",
+        "external_id": "10000045-1797355800-1797364800@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-15/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-15/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-12-15",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-15T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-12-16T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_9abf3c8ea59a",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "cbe355de2f74ecbce623c4354c1b38cccc683939b6e21645e954627d695b3e5f",
+        "external_id": "10000481-1797426000-1797433200@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-12-16/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-12-16/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-12-16",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-16T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-12-23T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_760183e465e3",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "ea9e91a1d1c2939d8e6fe7a143121ac9c3a1fe9df1c7a916d495b355542074bf",
+        "external_id": "10000046-1797960600-1797969600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-22/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-22/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-12-22",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-22T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-12-30T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_ff83e617f810",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "9b27f174a2f7837df28bb0258f6bebecb07edeb4b3a3d09e3c0f7feafcb6e570",
+        "external_id": "10000047-1798565400-1798574400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-29/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-12-29/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-12-29",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-29T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
     "visibility": "shown"
   }
 ]

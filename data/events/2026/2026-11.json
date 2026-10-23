@@ -1,10 +1,58 @@
 [
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-02T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_c8cdafca33aa",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "72ed5d3425611b1351ef87af4dd39ecba9b1c873f02b3eefcdf49d2d74f4b9d8",
+        "external_id": "10000471-1793624400-1793631600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-02/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-02/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-02",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-02T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_c956ee787027",
@@ -33,6 +81,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/monthly-round-up-meeting/200030851720135",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "monthly-round-up-meeting-2026-11-03",
@@ -45,12 +94,106 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-11-04T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_3d4f5d8cdbc8",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "d674521fcf1157a03ce7dbee1f3940c627080260ed74d15816cae99aaaa2bca5",
+        "external_id": "10000039-1793727000-1793736000@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-03/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-03/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-11-03",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-03T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-04T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_c11f3a517293",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "126bd8faa49ac1de0a366b80e63f5437aa6b4edecf79e8cfefab3ce3d4a69078",
+        "external_id": "10000472-1793797200-1793804400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-04/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-04/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-04",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-04T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "omaha",
     "categories": [
       "security",
       "networking-infra"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_952f27c093f4",
@@ -79,6 +222,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
+    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "interface-omaha-2026-2026-11-05",
@@ -96,6 +240,7 @@
     "categories": [
       "ai-ml"
     ],
+    "cost": null,
     "end": "2026-11-06T01:00:00Z",
     "first_seen": "2026-10-19T22:47:07Z",
     "id": "evt_cdc0a7432421",
@@ -124,6 +269,7 @@
     "organizer_id": "org_ai-omaha",
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/ai_omaha/events/317053693/",
+    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "from-auto-complete-to-dark-factories-accelerating-engineering-2026-11-05",
@@ -141,6 +287,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_9b6eb23fb28f",
@@ -169,6 +316,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/fall-expo-and-coffee-event/200030775358214",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "fall-expo-coffee-event-2026-11-07",
@@ -186,6 +334,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_c26911b4c082",
@@ -214,6 +363,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/bgr-x-good-life-halfsy-2026-national-meetup-dinner/100002002921829108",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "bgr-x-good-life-halfsy-2026-national-meetup-dinner-2026-11-07",
@@ -231,6 +381,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_540a3d68f74d",
@@ -259,6 +410,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/national-meetup-good-life-halfsy/200029720891802",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "national-meetup-good-life-halfsy-2026-11-08",
@@ -276,6 +428,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_a878772942d2",
@@ -304,6 +457,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/highland-neighborhood-association-monthly-meeting/200030851719018",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "highland-neighborhood-association-monthly-meeting-2026-11-09",
@@ -316,11 +470,59 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-09T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_34a1648119f1",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "ea4d85d0821861772665158fc264cc642ee39b0f622e38071ec5b45fdf56f991",
+        "external_id": "10000473-1794229200-1794236400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-09/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-09/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-09",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-09T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_224758ba3cfa",
@@ -349,6 +551,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/sscco-monthly-meeting/200030851723530",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "sscco-monthly-meeting-2026-11-10",
@@ -362,10 +565,57 @@
   },
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-11-11T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_933ca1c0a5b2",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "faeaa97f872055d5e832632030d7fb830b1a4e90d33021a135b0ef241fd184a7",
+        "external_id": "10000040-1794331800-1794340800@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-10/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-10/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-11-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-10T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "web-mobile"
     ],
+    "cost": null,
     "end": "2026-11-11T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_08cbdd98e541",
@@ -394,6 +644,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcpbnb",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "angular-community-meetup-en-espanol-2026-11-10",
@@ -409,9 +660,56 @@
     "all_day": false,
     "area": "omaha",
     "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-11-11T03:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_bc32e9f3d8fc",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "ef38bb191ead9c527aa51a9652c59d321a2881574058a4139b60d8dbd906b84b",
+        "external_id": "10000060-1794337200-1794344400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/fir-lumber-rally/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/fir-lumber-rally/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "fir-lumber-rally-2026-11-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-11T01:00:00Z",
+    "status": "scheduled",
+    "summary": "IMPORTANT UPDATE: Due to attendance and track readiness issues, the event date has been moved to November 10. The Fir Lumber Rally is back! Do you like building things? Do you have a need for speed? Do you wish there was a derby car racing event that YOU could sign up for? If you answered yes to any of those questions, have we got the event for you! The Omaha Maker Group at Made New Makerspace proudly presents the 2026 Fir Lumber Rally! This is a derby car rally for all ages, where creative…",
+    "title": "Fir Lumber Rally",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
       "ai-ml",
       "networking-infra"
     ],
+    "cost": null,
     "end": "2026-11-13T03:00:00Z",
     "first_seen": "2026-10-19T00:33:52Z",
     "id": "evt_50ea21bebf51",
@@ -440,6 +738,7 @@
     "organizer_id": "org_nenug",
     "original_unavailable": false,
     "original_url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
+    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "ne-nug-omaha-fall-event-2026-2026-11-12",
@@ -452,11 +751,59 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-16T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_6c9ed78eba42",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "e053a4b9fd3c684946276716ea762082b4432de80d3241ad76b5b201ff5910e5",
+        "external_id": "10000474-1794834000-1794841200@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-16/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-16/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-16",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-16T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_f05c6bd26558",
@@ -485,6 +832,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-adults/200030710401326",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-2026-11-17",
@@ -497,11 +845,153 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-11-18T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_092c37dc6e46",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "5b480254416997927dcbe170db6867640a09b93e217ac07cf1ef848a612e437f",
+        "external_id": "10000041-1794936600-1794945600@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-17/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-17/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-11-17",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-17T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-18T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_e8a7ebaa20b9",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "3b9d2f0c49fb240b645b032d1dba33386e5fd65cac3cbd9d877c83da5275febb",
+        "external_id": "10000475-1795006800-1795014000@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-18/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-18/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-18",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-18T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "data-analytics"
+    ],
+    "cost": "free",
+    "end": "2026-11-20T00:30:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_5524c30a64ad",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "cost"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
+        "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_nebraska-data-analytics-forum",
+        "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
+      }
+    ],
+    "location": {
+      "address": "18881 West Dodge Road, 18881 W Dodge Rd, Elkhorn, NE 68022, USA, Elkhorn, NE",
+      "city": "Elkhorn",
+      "online": false,
+      "state": "NE",
+      "venue": "18881 West Dodge Road"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "ready-before-you-build-2026-11-19",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-19T22:30:00Z",
+    "status": "scheduled",
+    "summary": "Hello! I am excited to introduce our next presenter, Jason Nocita! Jason is a longtime local IT leader turned entrepreneur and founder of Devantas. This t",
+    "title": "Ready Before You Build",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_0fe59e2290b5",
@@ -530,6 +1020,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/at-the-well-lincoln-ne-in-person-group/100001985563241104",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "at-the-well-lincoln-ne-in-person-group-2026-11-20",
@@ -547,6 +1038,7 @@
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_41c4ffa804aa",
@@ -575,6 +1067,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/mahjong-cafe/200030855024433",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "mahjong-cafe-2026-11-21",
@@ -588,10 +1081,104 @@
   },
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "hardware-iot-makers"
+    ],
+    "cost": null,
+    "end": "2026-11-25T02:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_308556b3df85",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "da718a1ea8afa8013859689ab5ad9c0d767d4922938e9326344478ef037830cb",
+        "external_id": "10000042-1795541400-1795550400@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-24/"
+      }
+    ],
+    "location": {
+      "address": "Made New Makerspace, 5366 F St, Omaha, NE, 68117, United States",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Made New Makerspace"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-24/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "open-house-community-hangout-2026-11-24",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-24T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
+    "title": "Open House & Community Hangout",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "cost": null,
+    "end": "2026-11-30T21:00:00Z",
+    "first_seen": "2026-10-23T17:40:38Z",
+    "id": "evt_b8bb6b90e6b5",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-23T17:40:38Z",
+    "listings": [
+      {
+        "content_hash": "fa4635762987c6824867d00add3e5976e8017cddc3d52589b134620154595b62",
+        "external_id": "10000476-1796043600-1796050800@madenewomaha.com",
+        "last_seen": "2026-10-23T17:40:38Z",
+        "missing_runs": 1,
+        "source_id": "src_madenewomaha-com",
+        "url": "https://madenewomaha.com/event/oss-welding/2026-11-30/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-30/",
+    "price": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "oss-welding-2026-11-30",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-30T19:00:00Z",
+    "status": "scheduled",
+    "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
+    "title": "OSS Welding",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "general-tech"
     ],
+    "cost": null,
     "end": "2026-12-01T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_e9919b25de48",
@@ -620,6 +1207,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/bitcoin-shipshow-expedition-03-slsbezb8",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "bitcoin-shipshow-expedition-03-2026-11-30",

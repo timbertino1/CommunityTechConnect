@@ -5,6 +5,7 @@
     "categories": [
       "web-mobile"
     ],
+    "cost": null,
     "end": "2027-01-13T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_6ff23c592d21",
@@ -33,6 +34,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykccbqb",
+    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "angular-community-meetup-en-espanol-2027-01-12",
