@@ -301,3 +301,10 @@ def test_the_footer_links_to_about_and_the_source(site: Path) -> None:
     links = {flat(a): a.attributes["href"] for a in footer.css("a")}
     assert links["About"] == "/about/"
     assert links["Source on GitHub"].startswith("https://github.com/")
+
+
+def test_the_site_has_a_favicon(site: Path) -> None:
+    # Browsers ask for /favicon.ico on every page; without it each page logs a 404 (T155).
+    icon = (site / "favicon.ico").read_bytes()
+    assert icon[:4] == b"\x00\x00\x01\x00"  # ICO header
+    assert len(icon) <= 4 * 1024
