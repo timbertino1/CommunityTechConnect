@@ -9,12 +9,12 @@ found_via: link_graph
 html_rules: null
 id: src_cms-erepublic-com
 name: cms.erepublic.com
-notes: 'Discovered via link graph: the URL is an iCal feed.'
+notes: 'Discovered via link graph: the URL is an iCal feed. Paused 2026-10-23: it is a news CMS link that adds one event to your calendar, not a group''s calendar. Candidate evaluation now rejects such links (add_event_to_calendar).'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
 rejected_count: 0
-status: active
+status: paused
 trust: probationary
 updated_at: null
 url: https://cms.erepublic.com/common/events/add_event_to_calendar/144627

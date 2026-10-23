@@ -13,6 +13,11 @@ same rules (and AI) as everyday events:
   month (FR-015);
 - nothing readable, no upcoming events, or events only a person can judge: needs review.
 
+Candidates that can be judged from their address alone (terms-blocked sites, and
+``not_a_source``: job boards, sign-in pages, reference sites, other Lincolns) are settled first,
+with no fetch and without counting toward the run's limit. The rest are evaluated most
+promising first: event platform group pages naming a Nebraska place (in the address or the
+search result's title), other pages naming one, other platform group pages, then the rest.
 At most MAX_EVALUATIONS a run, and none started once the run's time is up (``should_stop``);
 the rest wait for the next run. Each sample is at most MAX_SAMPLE events: one relevant event is
 enough to add a source, and every unclear one can cost an AI call.
@@ -36,7 +41,7 @@ from netc.connectors.base import Connector, RawPayload
 from netc.connectors.detect import Detection, detect
 from netc.connectors.eventbrite_org import organizer_id
 from netc.fetch import FetchError, HttpClient
-from netc.finders.base import SKIP_HOSTS, luma_calendar_feed, site_key
+from netc.finders.base import PLATFORMS, luma_calendar_feed, not_a_source, site_key
 from netc.models import AreaConfig, CandidateSource, Category, FollowLinks, Source
 from netc.pipeline.ai import Ai
 from netc.pipeline.classify import ClassifyInput, classify
@@ -44,7 +49,7 @@ from netc.pipeline.normalize import Dropped, normalize
 from netc.pipeline.runner import LogSink
 from netc.pipeline.sanitize import to_plain_text
 
-MAX_EVALUATIONS: Final = 25
+MAX_EVALUATIONS: Final = 75
 MAX_SAMPLE: Final = 8
 RECHECK_AFTER: Final = timedelta(days=30)
 TERMS_BLOCKED: Final = frozenset(
@@ -57,6 +62,13 @@ TERMS_BLOCKED: Final = frozenset(
         "tiktok.com",
     }
 )
+_NEBRASKA: Final = re.compile(
+    r"nebraska|omaha|lincoln|\bneb\b|kearney|grand.?island|bellevue|papillion|unl\.edu|"
+    r"unomaha|unmc|creighton",
+    re.IGNORECASE,
+)
+"""A Nebraska place or school, in a candidate's address or the title of the result that found
+it. (Every search query names Nebraska, so the query itself doesn't count.)"""
 _TITLE_SUFFIX: Final = re.compile(r"\s*[^\w\s]+\s*(Meetup|Eventbrite|Luma|Home|Events?)\s*$", re.I)
 
 Result = Literal["added", "rejected", "needs_review", "blocked_by_terms"]
@@ -97,10 +109,16 @@ def evaluate_candidates(
 ) -> EvaluateResult:
     taken = {s.id for s in sources}
     result = EvaluateResult(list(candidates))
+    due = [i for i, c in enumerate(candidates) if _due(c, now)]
+    for i in due:
+        quick = _quick_verdict(candidates[i])
+        if quick is not None:
+            _record(result, i, candidates[i], quick, now)
     done = 0
-    for i, candidate in enumerate(candidates):
-        if not _due(candidate, now):
-            continue
+    for i in sorted(due, key=lambda i: _promise(candidates[i])):
+        candidate = candidates[i]
+        if result.candidates[i] is not candidate:
+            continue  # settled above
         if done >= max_evaluations:
             result.counts["deferred"] += 1
             continue
@@ -122,22 +140,49 @@ def evaluate_candidates(
                     }
                 )
             )
-        evidence = list(candidate.evidence)
-        if verdict.note:
-            evidence = [*evidence, verdict.note][-50:]
-        result.candidates[i] = candidate.model_copy(
-            update={
-                "result": verdict.result,
-                "reason": verdict.reason[:280],
-                "last_evaluated": now,
-                "evidence": evidence,
-            }
-        )
-        result.counts[verdict.result] += 1
+        _record(result, i, candidate, verdict, now)
         if verdict.source is not None:
             taken.add(verdict.source.id)
-            result.added.append(verdict.source)
     return result
+
+
+def _record(
+    result: EvaluateResult, i: int, candidate: CandidateSource, verdict: _Verdict, now: datetime
+) -> None:
+    evidence = list(candidate.evidence)
+    if verdict.note:
+        evidence = [*evidence, verdict.note][-50:]
+    result.candidates[i] = candidate.model_copy(
+        update={
+            "result": verdict.result,
+            "reason": verdict.reason[:280],
+            "last_evaluated": now,
+            "evidence": evidence,
+        }
+    )
+    result.counts[verdict.result] += 1
+    if verdict.source is not None:
+        result.added.append(verdict.source)
+
+
+def _quick_verdict(candidate: CandidateSource) -> _Verdict | None:
+    """A verdict from the address alone, or None when the site has to be read."""
+    host = (urlsplit(candidate.url).hostname or "").removeprefix("www.")
+    if any(host == h or host.endswith(f".{h}") for h in TERMS_BLOCKED):
+        return _Verdict("blocked_by_terms", "this site's terms don't allow automated reading")
+    reason = not_a_source(candidate.url)
+    return _Verdict("rejected", reason) if reason is not None else None
+
+
+def _promise(candidate: CandidateSource) -> int:
+    """Lower goes first: 0, an event platform group page naming a Nebraska place (most local
+    groups are on Meetup or Luma); 1, any other page naming one; 2, another platform group
+    page; 3, anything else."""
+    results = [e for e in candidate.evidence if not e.startswith("web search:")]
+    local = _NEBRASKA.search(" ".join([candidate.url, *results])) is not None
+    host = (urlsplit(candidate.url).hostname or "").removeprefix("www.")
+    platform = host in PLATFORMS
+    return (0 if platform else 1) if local else (2 if platform else 3)
 
 
 def _due(candidate: CandidateSource, now: datetime) -> bool:
@@ -159,11 +204,6 @@ def _evaluate(
     taken: set[str],
 ) -> _Verdict:
     host = (urlsplit(candidate.url).hostname or "").removeprefix("www.")
-    if any(host == h or host.endswith(f".{h}") for h in TERMS_BLOCKED):
-        return _Verdict("blocked_by_terms", "this site's terms don't allow automated reading")
-    if any(host == h or host.endswith(f".{h}") for h in SKIP_HOSTS):
-        return _Verdict("rejected", "not an event source")
-
     key = site_key(candidate.url) or host
     origin: Literal["discovered", "suggested"] = (
         "suggested" if candidate.found_via == "suggestion" else "discovered"

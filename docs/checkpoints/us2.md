@@ -84,7 +84,30 @@ data PR #46 merged by itself.
 5. **Workflow note:** the run summary is only on the Actions page; the data PR body carries the
    same report, which is where to read it.
 
+## Later attempts (Oct 22–23)
+
+`OPENAI_API_KEY` and `CLOUDFLARE_ACCOUNT_ID` were added and SPN's sender allowed (T100 progress);
+the AI's answers were made usable (#50). Each re-run then exposed the next bottleneck:
+
+| Run (UTC) | Outcome | What it showed | Fix |
+|---|---|---|---|
+| Oct 22 22:55 (39868403415) | Cancelled at the 60-minute job timeout; nothing saved | Run times had grown 12 → 37 → 39 → 60+ min, with no progress logged | #59: 40-minute evaluation budget, per-stage and per-candidate timing log, samples of 8 events |
+| Oct 23 00:11 (39876646399) | Finished in 58 min, but 0 candidates evaluated | Finders 5.4 min, **mention resolution 52.4 min**, evaluation 0 s (budget already spent) | #66: mentions get 10 minutes, at most 10 a run, 3 pages each |
+| Oct 23 01:34 (39884807906) | Finished in 22 min; 25 evaluated: 1 added, 1 rejected, 2 blocked by terms, 21 need a look | Every stage got its turn (finders 5.1, mentions 12.0, evaluation 4.1 min), but candidates were evaluated in address order, so the 25 were mostly noise (gitlab.com, a Princeton help page, Lincoln Financial jobs). The one added, `cms.erepublic.com/.../add_event_to_calendar/144627`, is a one-event calendar link | This PR: see below |
+
+**Did not pass:** one new source from one channel, one rejection (UNMC events, "no tech events
+among 8 upcoming"); unresolved mentions stayed unpublished.
+
+**Fix (this PR):** candidates that are obviously not sources (job boards, sign-in, account and
+help pages, reference and vendor-documentation sites, other Lincolns, sites outside the US,
+one-event calendar links, a platform's own home page) are rejected from their address alone,
+with no fetch and without using the run's evaluations. The rest go most promising first:
+Meetup, Luma and Eventbrite group pages naming a Nebraska place, then other pages naming one,
+then other group pages, then everything else. The per-run limit rises from 25 to 75 (about
+10 s each). On the Oct 23 backlog: 30 of 222 pending candidates are settled without a fetch,
+and the first 18 to be evaluated are real Nebraska groups' pages (Lincoln AI, Lincoln Code,
+Omaha SQL User Group, Nebraska UX, NEB-RUG and others). The erepublic source is paused.
+
 ## To pass
 
-Add `OPENAI_API_KEY` (and `CLOUDFLARE_ACCOUNT_ID` once SPN's sender is known), run
-`discover-sources` once more, and check the three criteria again. Record that run here.
+Run `discover-sources` once more and check the three criteria. Record that run here.

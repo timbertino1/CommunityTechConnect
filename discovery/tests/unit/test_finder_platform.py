@@ -146,3 +146,17 @@ def test_the_finder_fetches_and_searches_nothing() -> None:
     assert urls(ctx(known_groups=[group], http=None, search=None)) == [
         "https://www.meetup.com/omaha-golang/"
     ]
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://jobs.lincolnfinancial.com/go/Information-Technology-&-Digital-Jobs/7746400",
+        "https://portal.lincolntech.edu/dashboard",
+        "https://www.lincolnshirecybersecurityforum.net/",
+        "https://www.meetup.com/de-de/",
+        "https://cms.erepublic.com/common/events/add_event_to_calendar/144627",
+    ],
+)
+def test_obvious_non_sources_never_become_candidates(url: str) -> None:
+    assert candidate_url(url) is None
