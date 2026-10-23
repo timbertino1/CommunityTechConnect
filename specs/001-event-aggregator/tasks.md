@@ -293,7 +293,7 @@ linked.
 - [X] T116 [P] [US5] Write failing tests in `discovery/tests/unit/test_linkcheck.py`: a monthly check of past events' `original_url` via `SafeHttp` (GET only, since SafeHttp has no HEAD and caps the body; max 50 per run, a different slice each month) flags 404/410 so the page shows "The original page may no longer be available."
 - [X] T117 [US5] Implement past pages in `discovery/src/netc/site/build.py` with `discovery/src/netc/site/templates/past.html` so T115 passes.
 - [X] T118 [US5] Implement `discovery/src/netc/pipeline/linkcheck.py` and the `original_unavailable` field already defined in data-model.md and contracts/event.schema.json (add it to `discovery/src/netc/models.py` and `discovery/src/netc/schemas/event.schema.json` with default `false`); call the link check from `discover-events` on the first day of each month, so T116 passes.
-- [ ] T119 [US5] Checkpoint: run quickstart.md scenario 5. Record the results in `docs/checkpoints/us5.md`.
+- [X] T119 [US5] Checkpoint: run quickstart.md scenario 5. Record the results in `docs/checkpoints/us5.md`.
 
 ---
 
