@@ -12,7 +12,7 @@ from __future__ import annotations
 import shutil
 from collections import Counter
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Final
 from urllib.parse import urlsplit
@@ -22,7 +22,8 @@ from jinja2 import Environment, PackageLoader, StrictUndefined
 from netc.fetch.robots import ROBOTS_USER_AGENT
 from netc.models import AreaConfig, Event
 from netc.pipeline.overrides import apply_overrides
-from netc.pipeline.timeutil import format_central, to_central
+from netc.pipeline.timeutil import clock_time, format_central, short_day, to_central
+from netc.site import calendar as cal
 from netc.storage import DataStore, atomic_write, dump_json
 
 PUBLIC_FIELDS: Final = (
@@ -112,6 +113,7 @@ def build_site(
         ),
     )
     pages += 1
+    pages += _calendar_pages(env, out_dir, public, views, now, common)
     # Without 404.html, Cloudflare Pages serves index.html with a 200 for every unknown path.
     _write(out_dir / "404.html", env.get_template("404.html").render(nav="", **common))
     pages += 1
@@ -133,6 +135,129 @@ def build_site(
     )
     atomic_write(out_dir / "data" / "map.json", dump_json(_map_data(upcoming, areas)))
     return BuildReport(pages=pages, events_listed=len(upcoming))
+
+
+MONTH_NAMES: Final = (
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+)  # fmt: skip
+WEEKDAYS: Final = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+
+def _calendar_pages(
+    env: Environment,
+    out_dir: Path,
+    public: list[Event],
+    views: dict[str, dict[str, Any]],
+    now: datetime,
+    common: dict[str, Any],
+) -> int:
+    """/calendar/ (to the current month), and a page per month and ISO week from 12 months
+    back to 12 ahead (T109). Returns the number of pages written."""
+    months = cal.months_around(now)
+    weeks = cal.weeks_around(now)
+    month_set, week_set = set(months), set(weeks)
+    today = to_central(now).date()
+
+    def month_link(month: cal.Month) -> dict[str, str] | None:
+        if month not in month_set:
+            return None
+        return {"href": f"/calendar/{month[0]}/{month[1]:02d}/", "label": _month_label(month)}
+
+    def week_link(week: cal.Week) -> dict[str, str] | None:
+        if week not in week_set:
+            return None
+        return {"href": f"/calendar/{week[0]}/week/{week[1]:02d}/", "label": f"Week {week[1]}"}
+
+    def day_view(day: date, events: list[Event], month: int | None) -> dict[str, Any]:
+        return {
+            "iso": day.isoformat(),
+            "number": day.day,
+            "label": short_day(day),
+            "in_month": month is None or day.month == month,
+            "today": day == today,
+            "events": [_cal_entry(views[e.id], e, day) for e in events],
+        }
+
+    current = cal.current_month(now)
+    _write(
+        out_dir / "calendar" / "index.html",
+        env.get_template("calendar_index.html").render(
+            nav="calendar",
+            current_href=f"/calendar/{current[0]}/{current[1]:02d}/",
+            current_label=_month_label(current),
+            **common,
+        ),
+    )
+    pages = 1
+    for month in months:
+        grid = cal.month_weeks(*month)
+        by_day = cal.events_by_day(public, [d for w in grid for d in w])
+        rows = [
+            {
+                **(week_link(cal.iso_week(w[0])) or {}),
+                "days": [day_view(d, by_day[d], month[1]) for d in w],
+            }
+            for w in grid
+        ]
+        _write(
+            out_dir / "calendar" / str(month[0]) / f"{month[1]:02d}" / "index.html",
+            env.get_template("calendar_month.html").render(
+                nav="calendar",
+                label=_month_label(month),
+                weekdays=WEEKDAYS,
+                weeks=rows,
+                any_events=any(by_day[d] for w in grid for d in w if d.month == month[1]),
+                prev=month_link(cal.prev_month(*month)),
+                next=month_link(cal.next_month(*month)),
+                **common,
+            ),
+        )
+        pages += 1
+    for week in weeks:
+        days = cal.week_days(*week)
+        by_day = cal.events_by_day(public, days)
+        first, last = days[0], days[-1]
+        dash = " \N{EN DASH} "
+        end = str(last.day) if first.month == last.month else _month_day(last)
+        span = f"{_month_day(first)}{dash}{end}"
+        _write(
+            out_dir / "calendar" / str(week[0]) / "week" / f"{week[1]:02d}" / "index.html",
+            env.get_template("calendar_week.html").render(
+                nav="calendar",
+                label=f"Week {week[1]}: {span}, {last.year}",
+                days=[day_view(d, by_day[d], None) for d in days],
+                prev=week_link(cal.prev_week(*week)),
+                next=week_link(cal.next_week(*week)),
+                # The week's month; at the range's edges, the one of its two that has a page.
+                month=month_link((first.year, first.month)) or month_link((last.year, last.month)),
+                **common,
+            ),
+        )
+        pages += 1
+    return pages
+
+
+def _month_label(month: tuple[int, int]) -> str:
+    return f"{MONTH_NAMES[month[1] - 1]} {month[0]}"
+
+
+def _month_day(day: date) -> str:
+    """ "Nov 2"."""
+    return f"{MONTH_NAMES[day.month - 1][:3]} {day.day}"
+
+
+def _cal_entry(view: dict[str, Any], event: Event, day: date) -> dict[str, Any]:
+    """One event on one calendar day: its start time on its first day, "All day", or
+    "Continues" on the days after."""
+    start = to_central(event.start)
+    if event.all_day:
+        time = "All day"
+    elif start.date() == day:
+        time = clock_time(start)
+    else:
+        time = "Continues"
+    return {**view, "time": time}
 
 
 def _months(views: list[dict[str, Any]]) -> list[dict[str, Any]]:

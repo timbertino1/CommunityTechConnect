@@ -17,3 +17,13 @@ for (const colorScheme of ["light", "dark"]) {
     });
   });
 }
+
+for (const path of ["/calendar/2026/11/", "/calendar/2026/week/45/"]) {
+  test(`${path} has no axe violations`, async ({ page }) => {
+    await page.goto(path);
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(results.violations).toEqual([]);
+  });
+}

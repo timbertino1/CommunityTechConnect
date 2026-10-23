@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Calendar{% endblock %}
+{% block head %}
+<meta http-equiv="refresh" content="0; url={{ current_href }}">
+{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>Calendar</h1>
+<p class="lede">Taking you to <a href="{{ current_href }}">{{ current_label }}</a>.</p>
+</div>
+{% endblock %}

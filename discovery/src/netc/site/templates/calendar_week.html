@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ label }} calendar{% endblock %}
+{% block description %}Community tech events across Nebraska, {{ label }}.{% endblock %}
+{% block content %}
+<div class="cal-head">
+  <h1>{{ label }}</h1>
+  <nav class="cal-nav" aria-label="Weeks">
+    {% if prev %}<a href="{{ prev.href }}" rel="prev"><span aria-hidden="true">← </span>{{ prev.label }}</a>{% endif %}
+    {% if month %}<a href="{{ month.href }}">{{ month.label }}</a>{% endif %}
+    {% if next %}<a href="{{ next.href }}" rel="next">{{ next.label }}<span aria-hidden="true"> →</span></a>{% endif %}
+  </nav>
+</div>
+<table class="cal cal-week">
+  <caption>Tech events in {{ label }}, by day. Times are Central.</caption>
+  <tbody>
+  {% for day in days %}
+    <tr>
+      <th scope="row">{{ day.label }}</th>
+      <td data-date="{{ day.iso }}" class="cal-day{% if not day.events %} is-empty{% endif %}"{% if day.today %} aria-current="date"{% endif %}>
+        {% if day.events %}{% include "_cal_events.html" %}{% else %}<span class="cal-none">No events</span>{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
