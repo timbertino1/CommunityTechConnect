@@ -1,10 +1,10 @@
 # Checkpoint: US6 (Phase 8), owner review and data quality
 
-**Date:** 2026-10-19 (America/Chicago; times below are UTC)
+**Date:** 2026-10-19, live part 2026-10-22 (America/Chicago; times below are UTC)
 **Task:** T128
-**Result:** The offline scenario passed. The live review PR end to end is **still open**: nothing
-has been held for review since the review PR shipped. Every current UNL event is filtered out
-by rules, and every other active source is trusted. The first held event will exercise it.
+**Result:** **Passed.** The offline scenario passed on Oct 19, and on Oct 22 the first real review
+PR went end to end: 14 held events, 1 approved and 13 rejected, applied by a follow-up PR that
+merged itself, with the approved event live on the site and a mostly rejected source paused.
 
 ## Quickstart scenario 6 (offline)
 
@@ -39,11 +39,30 @@ is built by `netc review-pr`. It's corrected.
 | Overrides (T125–T126) | `data/overrides.yaml` is empty. Applied at the end of `discover-events` and `apply-review`, and in `build-site` |
 | Admin guide (T127) | `docs/admin-guide.md` |
 
-## Still to do for T128
+## The first real review PR (Oct 22)
 
-When the first review PR appears:
+The first held events came from two probationary sources found by `discover-sources`. The
+review PR job opened the review PR; the owner ticked boxes and merged it; **Apply review** did
+the rest.
 
-1. Tick at least one approve (and a reject, if one fits), then merge.
-2. Confirm that **Apply review** finds the merge and opens `Apply review #N`, that the
-   follow-up PR merges itself, and that approved events appear on the site.
-3. Record the result here and mark T128 done.
+| Step | Result |
+|---|---|
+| Review PR opened by the bot | #52, `Review: 14 items (events)`, branch `review/open`, opened 22:56 by `netechconnect-bot` |
+| Owner ticks and merges | 1 approve, 13 reject; merged 23:12:09 by the owner (admin) as `733d6f4` |
+| Apply review finds the merge | Run 39870217398 at 23:12:11: "Found review PR #52, merged by timbertino1", then `netc apply-review` (which checks the branch, the bot author, the merge commit, the merger's admin role, and that the description wasn't edited after the merge): "1 approved, 13 rejected, 0 left waiting for the next review PR." |
+| Follow-up PR merges itself | #54, `Apply review #52`, opened 23:12:29, every check green, auto-merged 23:13:15 as `d46e337`. It changes only `data/`: the events, the review queue and the two sources |
+| Approved event on the site | **INTERFACE Omaha 2026** (Nov 5) published; the deploy of `d46e337` succeeded at 23:13, and the live home page lists it |
+| Rejected events kept off | All 13 (trivia nights, mahjong, a generic "Networking" and the like) are rejected and not on the site |
+| Source counts and trust | "Meetups in Lincoln" (allevents.in): 0 approved, 13 rejected, so **paused** automatically. INTERFACE (infosec-conferences.com): 1 approved, so it stays probationary (3 are needed to be trusted) |
+
+## Found along the way
+
+- **Aggregators make poor sources.** The paused source is allevents.in, a general event
+  aggregator: 13 of its 14 held events weren't tech events. The review rule handled it as
+  designed (paused, nothing published), but candidate evaluation should be stricter about
+  aggregator listing pages, as already noted after the first T105 attempt.
+- **Source names from page titles.** The approved event's source is named "INTERFACE Omaha
+  2026, Omaha, United States | Cyber Event", the page title of a single conference listing, and
+  the site shows that as the organizer. Rename it in
+  `data/sources/src_infosec-conferences-com.yaml` (or give the event an organizer record), and
+  discovery should name new sources better.
