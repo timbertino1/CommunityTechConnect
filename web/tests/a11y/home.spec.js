@@ -18,7 +18,8 @@ for (const colorScheme of ["light", "dark"]) {
   });
 }
 
-for (const path of ["/calendar/2026/11/", "/calendar/2026/week/45/"]) {
+// /past/ from the fixture site (port 4174), which has past events by its clock.
+for (const path of ["/calendar/2026/11/", "/calendar/2026/week/45/", "http://127.0.0.1:4174/past/"]) {
   test(`${path} has no axe violations`, async ({ page }) => {
     await page.goto(path);
     const results = await new AxeBuilder({ page })

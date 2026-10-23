@@ -121,7 +121,7 @@ function pageLinks() {
     .map((a) => {
       const href = a.getAttribute("href");
       const base = a.dataset.currentMonth || href; // /calendar/ is a redirect: go to the month
-      const list = href === "/";
+      const list = href === "/" || href.startsWith("/past/");
       const calendar = href.startsWith("/calendar/");
       return list || calendar ? { a, base } : null;
     })

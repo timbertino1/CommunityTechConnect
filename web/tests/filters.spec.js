@@ -7,6 +7,11 @@
 //   Omaha Cloud Day                omaha     cloud-devops    Nov 18
 //   Lincoln AI & Security Summit   lincoln   ai-ml,security  Nov 20-21
 //   Kearney Data Workshop          other_ne  data-analytics  Dec 2
+//
+// and two past events, on /past/ only:
+//
+//   Lincoln Security Kickoff       lincoln   security        Sep 10
+//   Omaha AI Summer Social         omaha     ai-ml           Aug 20
 
 import { expect, test } from "@playwright/test";
 
@@ -151,5 +156,29 @@ test.describe("with JavaScript off", () => {
     // Playwright's text matchers skip <noscript>; browsers with JavaScript off show it.
     expect(await page.content()).toMatch(/<noscript><p[^>]*>Filters need JavaScript/);
     await expect(page.getByRole("search")).toBeHidden();
+  });
+});
+
+test.describe("on past events", () => {
+  const PAST = ["Lincoln Security Kickoff", "Omaha AI Summer Social"];
+
+  test("past events show most recent first, and not on the list", async ({ page }) => {
+    await page.goto("/past/");
+    await expectShown(page, PAST);
+    await page.goto("/");
+    await expect(page.getByText("Lincoln Security Kickoff")).toHaveCount(0);
+  });
+
+  test("filters work on /past/", async ({ page }) => {
+    await page.goto("/past/?area=lincoln");
+    await expectShown(page, ["Lincoln Security Kickoff"]);
+    await expect(page.getByRole("status")).toHaveText(/1 of 2 events/);
+  });
+
+  test("the Past link keeps the filters from the list", async ({ page }) => {
+    await page.goto("/?cat=ai-ml");
+    await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Past" }).click();
+    await expect(page).toHaveURL(/\/past\/\?cat=ai-ml$/);
+    await expectShown(page, ["Omaha AI Summer Social"]);
   });
 });

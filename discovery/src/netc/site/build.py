@@ -32,6 +32,8 @@ PUBLIC_FIELDS: Final = (
 )  # fmt: skip
 WEB_ASSETS: Final = ("css", "js", "vendor", "img", "fonts", "_headers", "favicon.ico", "robots.txt")
 REPO_URL: Final = "https://github.com/timbertino1/CommunityTechConnect"
+PAST_PAGE_SIZE: Final = 50
+"""Past events per page of /past/ (T117); older ones are on /past/page/<n>/."""
 INFERRED_LABELS: Final = {"area": "area", "categories": "topics", "source_tz": "time zone"}
 
 
@@ -61,6 +63,12 @@ def build_site(
     public = [e for e in events if e.is_public]
     upcoming = sorted(
         (e for e in public if (e.end or e.start) > now), key=lambda e: (e.start, e.id)
+    )
+    # FR-035: past once it has ended; listed most recent first (FR-034).
+    past = sorted(
+        (e for e in public if (e.end or e.start) <= now),
+        key=lambda e: (e.start, e.id),
+        reverse=True,
     )
 
     _prepare(out_dir)
@@ -95,6 +103,7 @@ def build_site(
         out_dir / "index.html",
         env.get_template("list.html").render(
             nav="upcoming",
+            past=False,
             events=[views[e.id] for e in upcoming],
             months=_months([views[e.id] for e in upcoming]),
             counts={
@@ -121,6 +130,7 @@ def build_site(
         ),
     )
     pages += 1
+    pages += _past_pages(env, out_dir, [views[e.id] for e in past], common)
     pages += _calendar_pages(env, out_dir, public, views, now, common)
     # Without 404.html, Cloudflare Pages serves index.html with a 200 for every unknown path.
     _write(out_dir / "404.html", env.get_template("404.html").render(nav="", **common))
@@ -142,6 +152,12 @@ def build_site(
         ),
     )
     atomic_write(out_dir / "data" / "map.json", dump_json(_map_data(upcoming, areas)))
+    by_year: dict[int, list[dict[str, Any]]] = {}
+    for event in past:
+        year = to_central(event.start).year
+        by_year.setdefault(year, []).append(_public_record(event, organizer_of(event)))
+    for year, records in by_year.items():
+        atomic_write(out_dir / "data" / "past" / f"{year}.json", dump_json(records))
     return BuildReport(pages=pages, events_listed=len(upcoming))
 
 
@@ -268,8 +284,37 @@ def _cal_entry(view: dict[str, Any], event: Event, day: date) -> dict[str, Any]:
     return {**view, "time": time}
 
 
+def _past_pages(
+    env: Environment, out_dir: Path, views: list[dict[str, Any]], common: dict[str, Any]
+) -> int:
+    """/past/ and /past/page/<n>/, PAST_PAGE_SIZE events each, most recent first (T117).
+    Returns the number of pages written."""
+    chunks = [views[i : i + PAST_PAGE_SIZE] for i in range(0, len(views), PAST_PAGE_SIZE)] or [[]]
+
+    def href(number: int) -> str:
+        return "/past/" if number == 1 else f"/past/page/{number}/"
+
+    for number, chunk in enumerate(chunks, start=1):
+        path = out_dir / "past" if number == 1 else out_dir / "past" / "page" / str(number)
+        _write(
+            path / "index.html",
+            env.get_template("past.html").render(
+                nav="past",
+                past=True,
+                events=chunk,
+                months=_months(chunk),
+                page=number,
+                page_count=len(chunks),
+                newer=href(number - 1) if number > 1 else None,
+                older=href(number + 1) if number < len(chunks) else None,
+                **common,
+            ),
+        )
+    return len(chunks)
+
+
 def _months(views: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Upcoming event views grouped by their Central Time month, in order."""
+    """Event views grouped by their Central Time month, in the order given."""
     months: list[dict[str, Any]] = []
     for view in views:
         if not months or months[-1]["name"] != view["month"]:

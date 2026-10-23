@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Past tech events in Nebraska{% if page > 1 %}, page {{ page }}{% endif %}{% endblock %}
+{% block description %}Community tech events that have already happened across Nebraska, most recent first.{% endblock %}
+{% block content %}
+<div class="cal-head">
+  <h1>Past events</h1>
+</div>
+<p class="lede">Most recent first. Each event links to its organizer's page, which may have slides or recordings.</p>
+{% include "_filters.html" %}
+{% if events %}
+<div id="events" class="months">
+{% for m in months %}
+  <section class="month" aria-labelledby="month-{{ loop.index }}">
+    <h2 id="month-{{ loop.index }}"><span class="month-name">{{ m.name }}</span> <span class="month-count">{{ m.count }}</span></h2>
+    <ol class="events">
+    {% for e in m.events %}
+      <li>{% include "_card.html" %}</li>
+    {% endfor %}
+    </ol>
+  </section>
+{% endfor %}
+</div>
+{% else %}
+<p id="events" class="empty">No past events yet.</p>
+{% endif %}
+{% if newer or older %}
+<nav class="pager" aria-label="Pages of past events">
+  {% if newer %}<a href="{{ newer }}" rel="prev"><span aria-hidden="true">← </span>Newer events</a>{% endif %}
+  <span class="pager-where">Page {{ page }} of {{ page_count }}</span>
+  {% if older %}<a href="{{ older }}" rel="next">Older events<span aria-hidden="true"> →</span></a>{% endif %}
+</nav>
+{% endif %}
+<script type="module" src="/js/filters.js"></script>
+{% endblock %}
