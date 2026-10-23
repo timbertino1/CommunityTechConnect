@@ -7,9 +7,11 @@ from mentions it couldn't resolve.
 
 from __future__ import annotations
 
+import json
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -63,7 +65,7 @@ def data(tmp_path: Path) -> Path:
     return root
 
 
-def run(root: Path, *, dry_run: bool = False) -> DiscoverSourcesReport:
+def run(root: Path, *, dry_run: bool = False, **kw: Any) -> DiscoverSourcesReport:
     store = DataStore(root)
     search = BudgetedSearch(
         FixtureSearch(FIXTURES / "search_index.json"), store.read_search_usage(now=NOW), now=NOW
@@ -76,7 +78,7 @@ def run(root: Path, *, dry_run: bool = False) -> DiscoverSourcesReport:
         search=search,
         news_feeds=[FEED],
         dry_run=dry_run,
-        log=lambda _line: None,
+        **{"log": lambda _line: None, **kw},
     )
 
 
@@ -179,3 +181,25 @@ def test_the_command_runs_offline(data: Path, tmp_path: Path) -> None:
     # The documented command reaches all three channels, like the in-process run (T105).
     added = [s for s in DataStore(data).read_sources() if s.origin == "discovered"]
     assert {s.found_via for s in added} == {"web_search", "link_graph", "news"}
+
+
+def test_evaluation_stops_at_the_time_budget_and_the_rest_wait(data: Path) -> None:
+    # Each clock reading is 10 minutes later: the budget runs out after the finders.
+    ticks = iter(range(0, 100_000, 600))
+    report = run(data, clock=lambda: float(next(ticks)), time_budget_seconds=40 * 60)
+    assert report.stopped_for_time
+    assert report.evaluated["deferred"] > 0 and not report.added
+    pending = [c for c in DataStore(data).read_candidates() if c.result == "pending"]
+    assert len(pending) == report.evaluated["deferred"]  # kept for the next run
+    text = render_sources_markdown(report)
+    assert "time limit" in text and f"{report.evaluated['deferred']} candidates wait" in text
+
+
+def test_each_stage_is_logged_with_its_time(data: Path) -> None:
+    lines: list[str] = []
+    run(data, log=lines.append)
+    events = [json.loads(x) for x in lines]
+    stages = [e["stage"] for e in events if e.get("event") == "stage_done"]
+    assert stages[-3:] == ["finders", "mentions", "evaluation"]
+    assert all(isinstance(e["seconds"], float) for e in events if e.get("event") == "stage_done")
+    assert any(e.get("event") == "finder_done" for e in events)

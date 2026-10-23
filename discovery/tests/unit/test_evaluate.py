@@ -250,6 +250,34 @@ def test_at_most_max_evaluations_a_run(tmp_path: Path) -> None:
     assert result.counts["deferred"] == 40 - MAX_EVALUATIONS
 
 
+def test_a_run_stops_starting_evaluations_when_time_is_up(tmp_path: Path) -> None:
+    many = [pending(f"https://site{i}.example.org/") for i in range(5)]
+    calls = iter([False, False, True, True, True])
+    result = evaluate(tmp_path, many, should_stop=lambda: next(calls))
+    evaluated = [c for c in result.candidates if c.last_evaluated == NOW and c.result != "pending"]
+    assert len(evaluated) == 2
+    assert result.counts["deferred"] == 3 and result.stopped_for_time
+    assert [c.result for c in result.candidates[2:]] == ["pending"] * 3  # wait for next run
+
+
+def test_the_count_limit_is_not_a_time_stop(tmp_path: Path) -> None:
+    many = [pending(f"https://site{i}.example.org/") for i in range(MAX_EVALUATIONS + 1)]
+    assert not evaluate(tmp_path, many).stopped_for_time
+
+
+def test_each_evaluation_is_logged_with_its_time(tmp_path: Path) -> None:
+    lines: list[str] = []
+    ticks = iter([10.0, 12.5])
+    one(tmp_path, "https://heartlandrust.example.org/", log=lines.append, clock=lambda: next(ticks))
+    [line] = [json.loads(x) for x in lines]
+    assert line == {
+        "event": "candidate_evaluated",
+        "host": "heartlandrust.example.org",
+        "result": "added",
+        "seconds": 2.5,
+    }
+
+
 # --- With the AI
 
 
