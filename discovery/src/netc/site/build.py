@@ -360,7 +360,7 @@ def _view(
         "also_listed": list({o["url"]: o for o in others}.values()),
         "last_verified": format_central(event.last_verified, None, all_day=False),
         "inferred_note": (
-            f"The {' and '.join(inferred)} were worked out by NETechConnect, "
+            f"The {_and_list(inferred)} were worked out by NETechConnect, "
             "not stated by the organizer."
             if inferred
             else ""
@@ -372,6 +372,11 @@ def _public_record(event: Event, organizer: str | None) -> dict[str, Any]:
     data = event.model_dump(mode="json")
     data["organizer"] = organizer
     return {field: data.get(field) for field in PUBLIC_FIELDS}
+
+
+def _and_list(items: list[str]) -> str:
+    """ "topics", "topics and cost", "topics, time zone and cost"."""
+    return items[0] if len(items) == 1 else f"{', '.join(items[:-1])} and {items[-1]}"
 
 
 def _host(url: str) -> str:
