@@ -4,7 +4,7 @@
     <h3 id="ev-{{ e.id }}"><a href="/events/{{ e.slug }}/">{{ e.title }}</a></h3>
     {% if e.status == "cancelled" %}<p class="badge badge--cancelled">Cancelled</p>
     {% elif e.status == "unverified" %}<p class="badge badge--unverified">Not confirmed recently</p>{% endif %}
-    <p class="event-meta"><time datetime="{{ e.start_iso }}">{{ e.when }}</time> <span class="sep" aria-hidden="true">·</span> {{ e.where }}{% if e.organizer %} <span class="sep" aria-hidden="true">·</span> {{ e.organizer }}{% endif %}</p>
+    <p class="event-meta"><time datetime="{{ e.start_iso }}">{{ e.when }}</time> <span class="sep" aria-hidden="true">·</span> {{ e.where }}{% if e.organizer %} <span class="sep" aria-hidden="true">·</span> {{ e.organizer }}{% endif %}{% if e.cost_label %} <span class="sep" aria-hidden="true">·</span> <span class="cost cost--{{ e.cost }}"><span class="visually-hidden">Cost: </span>{{ e.cost_label }}</span>{% endif %}</p>
     <ul class="tags" aria-label="Topics">{% for label in e.category_labels %}<li>{{ label }}</li>{% endfor %}</ul>
   </div>
   <p class="cta"><a class="primary" href="{{ e.original_url }}" rel="noopener external">View and register on {{ e.host }}</a></p>

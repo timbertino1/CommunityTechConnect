@@ -175,3 +175,29 @@ def test_unrelated_events_stay_separate_and_in_order() -> None:
 def test_listing_hashes_survive_merging() -> None:
     (merged,) = deduplicate([ev(), ev(url="https://b.example.org/e", source_id="src_b")])
     assert all(x.content_hash == HASH for x in merged.listings)
+
+
+# --- Cost (T157; FR-052): stated beats inferred beats unknown
+
+
+def test_a_stated_cost_wins_when_listings_merge() -> None:
+    a = ev(cost="free", inferred=["cost"])  # from a source default
+    b = ev(
+        url="https://prairiepython.example.org/nov",
+        source_id="src_prairie-python-site",
+        cost="paid",
+        price="$10",
+    )
+    [merged] = deduplicate([a, b])
+    assert (merged.cost, merged.price) == ("paid", "$10") and "cost" not in merged.inferred
+
+
+def test_a_known_cost_wins_over_an_unknown_one() -> None:
+    a = ev()
+    b = ev(
+        url="https://prairiepython.example.org/nov",
+        source_id="src_prairie-python-site",
+        cost="free",
+    )
+    [merged] = deduplicate([a, b])
+    assert merged.cost == "free"

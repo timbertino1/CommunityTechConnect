@@ -413,6 +413,11 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
 - **FR-050**: List and calendar views MUST meet WCAG 2.2 Level AA, including full keyboard
   operation and screen-reader support for the calendar.
 - **FR-051**: All public views MUST be usable on mobile phones as well as desktop browsers.
+- **FR-052** *(owner request, 2026-10-23)*: Each event MUST show whether it is free, or its
+  price, when its source says so (the event page's own data, or a platform's API); an
+  administrator MAY mark a source whose events are always free, which then applies to that
+  source's events whose pages say nothing, and is labeled as worked out by NETechConnect. When
+  the cost is unknown, nothing is shown: cost is never guessed.
 
 ### Key Entities
 

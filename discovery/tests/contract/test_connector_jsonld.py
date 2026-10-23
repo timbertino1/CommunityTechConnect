@@ -310,3 +310,44 @@ def test_malformed_links_on_a_page_are_skipped_not_fatal() -> None:
         payload(html, url="https://www.example.org/e", content_type="text/html")
     )
     assert [item.title for item in listings] == ["Rust Night"]
+
+
+# --- Cost (T157; FR-052)
+
+
+def _cost(extra: str) -> tuple[str | None, str | None]:
+    from netc.connectors.jsonld import page_listings
+
+    html = (
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event",'
+        '"name":"Rust Night","startDate":"2026-11-18T18:30:00-06:00"' + extra + "}</script>"
+    )
+    page = payload(html, url="https://www.example.org/e", content_type="text/html")
+    [listing] = page_listings(page)
+    return listing.cost, listing.price
+
+
+@pytest.mark.parametrize(
+    ("extra", "expected"),
+    [
+        ("", (None, None)),
+        (',"isAccessibleForFree":true', ("free", None)),
+        (',"isAccessibleForFree":"True"', ("free", None)),
+        (',"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}', ("free", None)),
+        (',"offers":[{"price":0},{"price":"0.00"}]', ("free", None)),
+        (',"offers":{"price":"25","priceCurrency":"USD"}', ("paid", "$25")),
+        (',"offers":{"price":"7.50","priceCurrency":"USD"}', ("paid", "$7.50")),
+        (',"offers":[{"price":"10"},{"price":"25.00"}]', ("paid", "$10\N{EN DASH}$25")),
+        (
+            ',"offers":{"@type":"AggregateOffer","lowPrice":"0","highPrice":"15"}',
+            ("paid", "Free\N{EN DASH}$15"),
+        ),
+        (',"offers":{"price":"20","priceCurrency":"EUR"}', ("paid", None)),
+        (',"isAccessibleForFree":false', ("paid", None)),
+        (',"offers":{"price":"call us"}', (None, None)),
+    ],
+)
+def test_cost_comes_from_free_flags_and_offers(
+    extra: str, expected: tuple[str | None, str | None]
+) -> None:
+    assert _cost(extra) == expected

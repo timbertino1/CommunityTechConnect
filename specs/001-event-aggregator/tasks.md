@@ -272,6 +272,35 @@ the URL.
 
 ---
 
+## Cost signifier (owner request 2026-10-23; FR-052)
+
+**Goal**: Each event card says "Free", or its price, when the source says so; nothing when the
+cost is unknown. An administrator can mark a source whose events are always free.
+
+- [X] T157 [P] Write failing tests: `cost`/`price` on Event and `default_cost` on Source (models,
+  both JSON schemas, validation: a price only with `paid`); the JSON-LD reader reads
+  `isAccessibleForFree` and `offers` (price 0 → free; a price or a low/high range → paid with a
+  label like `$25` or `$10–$25`); the Eventbrite reader reads `is_free` and ticket prices;
+  normalization uses the source's `default_cost` only when the listing says nothing, adding
+  `cost` to `inferred`; the site shows the label on cards, calendar entries and the event page,
+  in `/data/upcoming.json`, and nothing when unknown.
+- [X] T158 Add `cost` and `price` to `Event`, `RawListing` and the event schema, and
+  `default_cost` to `Source` and the source schema (`discovery/src/netc/models.py`,
+  `discovery/src/netc/schemas/`, `specs/001-event-aggregator/contracts/`), so T157's model tests pass.
+- [X] T159 Read cost in `discovery/src/netc/connectors/jsonld.py` and `eventbrite_org.py`, and
+  carry it through `normalize`, merging and the lifecycle (a later read that knows the cost
+  wins over an unknown one), so T157's pipeline tests pass.
+- [X] T160 Show it: a "Free" or price label on cards (`_card.html`), calendar entries
+  (`_cal_events.html`) and a "Cost" row on the event page, with styles in `web/css/site.css`;
+  add `cost` and `price` to `PUBLIC_FIELDS`, so T157's site tests pass.
+- [ ] T161 [OWNER] Mark sources whose events are always free: review the proposed list and set
+  `default_cost: free` in their `data/sources/*.yaml`.
+- [ ] T162 Checkpoint: after a discover-events run, confirm on the live site that events with a
+  known cost show it, sources marked free show "Free" with the inferred note, and unknown costs
+  show nothing. Record the results in `docs/checkpoints/cost.md`.
+
+---
+
 ## Phase 7: User Story 5 - Browse past events (Priority: P5)
 
 **Goal**: Ended events move to a past-events archive, most recent first, still filterable and

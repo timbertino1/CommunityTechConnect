@@ -209,3 +209,18 @@ def test_events_are_returned_soonest_first() -> None:
     sooner = seen(ev(url="https://example.org/sooner"))
     result = run([], [later, sooner])
     assert [e.start for e in result.events] == [START, START + timedelta(days=3)]
+
+
+# --- Cost (T157; FR-052)
+
+
+def test_a_new_price_from_the_source_replaces_the_old_one() -> None:
+    old = ev(cost="paid", price="$20")
+    event = only(run([old], [seen(ev(cost="paid", price="$25"))]))
+    assert (event.cost, event.price) == ("paid", "$25")
+
+
+def test_a_read_that_says_nothing_keeps_a_known_cost() -> None:
+    old = ev(cost="free")
+    event = only(run([old], [seen(ev())]))
+    assert event.cost == "free"

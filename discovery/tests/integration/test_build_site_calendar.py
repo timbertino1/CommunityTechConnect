@@ -32,10 +32,10 @@ def events() -> list[Event]:
                    utc(2026, 11, 10, 23, 30), NOVEMBER),
         # 8 AM Nov 5 to 5 PM Nov 6, Central: a two-day conference.
         site_event("https://heartlanddev.example.org/2026", "Heartland Dev Conference",
-                   utc(2026, 11, 5, 14), CONFERENCE, end=utc(2026, 11, 6, 23)),
+                   utc(2026, 11, 5, 14), CONFERENCE, end=utc(2026, 11, 6, 23), cost="free"),
         # 10 PM Nov 12 to 1 AM Nov 13, Central.
         site_event("https://hacknight.example.org/nov", "Late Hack Night",
-                   utc(2026, 11, 13, 4), HACK_NIGHT, end=utc(2026, 11, 13, 7)),
+                   utc(2026, 11, 13, 4), HACK_NIGHT, end=utc(2026, 11, 13, 7), cost="paid"),
         # Before the build's "now" (Oct 18): past, but still on October's page.
         site_event("https://prairiepython.example.org/oct", "October Meetup",
                    utc(2026, 10, 6, 23, 30), OCTOBER),
@@ -210,3 +210,18 @@ def test_the_nav_calendar_link_knows_the_current_month(site: Path) -> None:
     home = LexborHTMLParser((site / "index.html").read_text(encoding="utf-8"))
     [link] = [a for a in home.css("header nav a") if a.attributes.get("href") == "/calendar/"]
     assert link.attributes["data-current-month"] == "/calendar/2026/10/"
+
+
+def test_calendar_entries_say_free_or_paid(site: Path) -> None:
+    tree = page(site, "calendar/2026/11")
+
+    def label(day: str, slug: str) -> str | None:
+        for entry in cell(tree, day).css("li.cal-event"):
+            if f"/events/{slug}/" in hrefs(entry):
+                found = entry.css_first(".cost")
+                return flat(found) if found else None
+        raise AssertionError(f"{slug} not on {day}")
+
+    assert label("2026-11-05", CONFERENCE) == "Cost: Free"
+    assert label("2026-11-12", HACK_NIGHT) == "Cost: Paid"  # no price given
+    assert label("2026-11-10", NOVEMBER) is None
