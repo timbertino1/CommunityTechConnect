@@ -1,0 +1,37 @@
+{# The event filter (T112; FR-036-FR-038, contracts/site-urls.md). filters.js shows it, applies
+   it in the browser and keeps it in the address; nothing is sent anywhere. Without JavaScript
+   it stays hidden and every event shows. #}
+<noscript><p class="filters-nojs">Filters need JavaScript. Every event is shown.</p></noscript>
+<form class="filters" role="search" aria-label="Filter events" data-filters hidden>
+  <fieldset class="chips">
+    <legend>Area</legend>
+    {% for id, label in filter_areas %}
+    <label class="chip"><input type="checkbox" name="area" value="{{ id }}"> <span>{{ label }}</span></label>
+    {% endfor %}
+  </fieldset>
+  <div class="filter-fields">
+    <div class="field">
+      <label for="filter-topic">Topic</label>
+      <select id="filter-topic" name="cat">
+        <option value="">All topics</option>
+        {% for id, label in filter_topics %}
+        <option value="{{ id }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="filter-from">From</label>
+      <input type="date" id="filter-from" name="from">
+    </div>
+    <div class="field">
+      <label for="filter-to">To</label>
+      <input type="date" id="filter-to" name="to">
+    </div>
+    <div class="field field-q">
+      <label for="filter-q">Search</label>
+      <input type="search" id="filter-q" name="q" maxlength="100">
+    </div>
+    <a class="filter-clear" href="" data-filter-clear>Clear filters</a>
+  </div>
+</form>
+<p class="filter-status" role="status" data-filter-status></p>

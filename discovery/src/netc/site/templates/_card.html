@@ -1,4 +1,4 @@
-<article class="event{% if e.status != "scheduled" %} event--{{ e.status }}{% endif %}" aria-labelledby="ev-{{ e.id }}">
+<article class="event{% if e.status != "scheduled" %} event--{{ e.status }}{% endif %}" aria-labelledby="ev-{{ e.id }}" data-area="{{ e.filter.area }}" data-cats="{{ e.filter.cats }}" data-start="{{ e.filter.start }}" data-end="{{ e.filter.end }}" data-search="{{ e.filter.search }}">
   <div class="date-block" aria-hidden="true"><span class="db-month">{{ e.date_block.month }}</span> <span class="db-day">{{ e.date_block.day }}</span> <span class="db-dow">{{ e.date_block.dow }}</span></div>
   <div class="event-body">
     <h3 id="ev-{{ e.id }}"><a href="/events/{{ e.slug }}/">{{ e.title }}</a></h3>

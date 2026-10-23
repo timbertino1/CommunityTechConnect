@@ -18,7 +18,7 @@
     <nav aria-label="Main">
       <ul class="nav">
         <li><a href="/"{% if nav == "upcoming" %} aria-current="page"{% endif %}>Upcoming</a></li>
-        <li><a href="/calendar/"{% if nav == "calendar" %} aria-current="page"{% endif %}>Calendar</a></li>
+        <li><a href="/calendar/" data-current-month="{{ calendar_now }}"{% if nav == "calendar" %} aria-current="page"{% endif %}>Calendar</a></li>
         <li><a href="/about/"{% if nav == "about" %} aria-current="page"{% endif %}>About</a></li>
       </ul>
     </nav>

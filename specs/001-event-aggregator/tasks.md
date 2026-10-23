@@ -265,9 +265,9 @@ the URL.
 
 **Independent Test**: quickstart.md scenario 4.
 
-- [ ] T111 [P] [US4] Write failing tests in `web/tests/filters.spec.ts` (Playwright against a fixture build): `?area=lincoln` shows only Lincoln events; `?cat=security,ai-ml` shows events in either category; `from`/`to` limit the dates; `q` (≤ 100 chars) matches title, organizer, and summary; filters persist when switching list ↔ calendar and navigating months; invalid values are ignored; without JS, all events show plus a notice.
-- [ ] T112 [US4] Add `data-area`, `data-cats`, `data-start`, and `data-search` attributes to event cards and calendar entries in `discovery/src/netc/site/templates/list.html`, `calendar_month.html`, and `calendar_week.html`, plus a filter form (labeled controls, fieldsets) in `base.html`.
-- [ ] T113 [US4] Implement `web/js/filters.js` (parse/serialize the URL params from contracts/site-urls.md, show/hide items, rewrite nav links to carry params, announce result counts via an `aria-live` region) and `web/js/search.js` (keyword match) as ES modules with no dependencies and no `innerHTML`, so T111 passes.
+- [X] T111 [P] [US4] Write failing tests in `web/tests/filters.spec.ts` (written as `filters.spec.js`, like the other browser tests; it runs against `discovery/tests/web_fixture.py` served on a second port) (Playwright against a fixture build): `?area=lincoln` shows only Lincoln events; `?cat=security,ai-ml` shows events in either category; `from`/`to` limit the dates; `q` (≤ 100 chars) matches title, organizer, and summary; filters persist when switching list ↔ calendar and navigating months; invalid values are ignored; without JS, all events show plus a notice.
+- [X] T112 [US4] Add `data-area`, `data-cats`, `data-start`, and `data-search` attributes to event cards and calendar entries in `discovery/src/netc/site/templates/list.html`, `calendar_month.html`, and `calendar_week.html`, plus a filter form (labeled controls, fieldsets) in `base.html`.
+- [X] T113 [US4] Implement `web/js/filters.js` (parse/serialize the URL params from contracts/site-urls.md, show/hide items, rewrite nav links to carry params, announce result counts via an `aria-live` region) and `web/js/search.js` (keyword match) as ES modules with no dependencies and no `innerHTML`, so T111 passes.
 - [ ] T114 [US4] Checkpoint: run quickstart.md scenario 4. Record the results in `docs/checkpoints/us4.md`.
 
 ---

@@ -4,6 +4,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 4173;
+// The filter tests' fixed events (T111), served on a second port: see tests/filters.spec.js.
+const FIXTURE_PORT = 4174;
 
 export default defineConfig({
   testDir: "tests",
@@ -23,10 +25,18 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: `node tests/support/site.js ${PORT}`,
-    url: `http://127.0.0.1:${PORT}/`,
-    reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
-  },
+  webServer: [
+    {
+      command: `node tests/support/site.js ${PORT}`,
+      url: `http://127.0.0.1:${PORT}/`,
+      reuseExistingServer: !process.env.CI,
+      timeout: 180_000,
+    },
+    {
+      command: `node tests/support/site.js ${FIXTURE_PORT} fixture`,
+      url: `http://127.0.0.1:${FIXTURE_PORT}/`,
+      reuseExistingServer: !process.env.CI,
+      timeout: 180_000,
+    },
+  ],
 });

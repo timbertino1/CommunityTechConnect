@@ -99,11 +99,23 @@ def test_pages_load_nothing_from_other_hosts(site: Path) -> None:
             assert not urlsplit(ref).netloc, (name, ref)
 
 
+FILTER_FIELDS = {"area": "checkbox", "from": "date", "to": "date", "q": "search"}
+
+
 def test_no_forms_ask_for_personal_information(site: Path) -> None:
+    # The only form is the event filter (T112): it reads the page's own events in the browser,
+    # sends nothing anywhere, and has no field for anything about the visitor.
     for name, page in html_files(site).items():
         tree = LexborHTMLParser(page)
-        assert tree.css("form") == [], name
-        assert tree.css("input") == [], name
+        for form in tree.css("form"):
+            assert form.attributes.get("role") == "search", name
+            assert (form.attributes.get("method") or "get").lower() == "get", name
+            assert (form.attributes.get("action") or "") == "", name
+        for field in tree.css("input"):
+            kind = FILTER_FIELDS.get(field.attributes.get("name") or "")
+            assert kind is not None and field.attributes.get("type") == kind, (name, field.html)
+        for select in tree.css("select"):
+            assert select.attributes.get("name") == "cat", name
 
 
 def test_headers_file_has_the_exact_contract_headers(site: Path) -> None:

@@ -93,7 +93,10 @@ def test_the_home_page_has_a_hidden_decorative_map(tmp_path: Path) -> None:
     assert still.attributes["alt"] == ""
     # The loader is an external module (CSP script-src 'self'); the title stays real text.
     scripts = [s.attributes for s in home.css("script")]
-    assert scripts == [{"type": "module", "src": "/js/home.js"}]
+    assert scripts == [
+        {"type": "module", "src": "/js/home.js"},
+        {"type": "module", "src": "/js/filters.js"},  # T113
+    ]
     [h1] = home.css("h1")
     assert " ".join(h1.text().split()) == "Every Nebraska tech event, in one place."
 
@@ -102,7 +105,9 @@ def test_other_pages_have_no_map(tmp_path: Path) -> None:
     for name, page in pages(tmp_path).items():
         if name != "index.html":
             assert not page.css("[data-header-map]"), name
-            assert not page.css("script"), name
+            assert not [
+                s for s in page.css("script") if s.attributes.get("src") == "/js/home.js"
+            ], name
 
 
 def test_build_copies_the_vendored_three_js(tmp_path: Path) -> None:

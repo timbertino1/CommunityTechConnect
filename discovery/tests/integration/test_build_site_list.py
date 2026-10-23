@@ -276,14 +276,34 @@ def test_each_card_has_a_date_block_hidden_from_screen_readers(site: Path) -> No
     assert flat(block) == "NOV 10 Tue"
 
 
-def test_the_filter_bar_is_markup_only_until_its_script_exists(site: Path) -> None:
-    bar = home(site).css_first("[data-filters]")
-    assert "hidden" in bar.attributes  # shown by filters.js in Phase 6
-    areas = [flat(b) for b in bar.css("button[aria-pressed]")]
-    assert areas == ["All areas", "Omaha area", "Lincoln area", "Other Nebraska", "Online"]
-    select = bar.css_first("select")
-    assert bar.css_first(f"label[for='{select.attributes['id']}']") is not None
-    assert flat(select.css_first("option")) == "All topics"
+def test_the_filter_form_waits_for_its_script(site: Path) -> None:
+    page = home(site)
+    form = page.css_first("form[data-filters]")
+    assert form.attributes["role"] == "search"
+    assert "hidden" in form.attributes  # filters.js shows it; without JavaScript it stays hidden
+    assert "Filters need JavaScript" in flat(page.css_first("noscript"))
+    [legend] = form.css("fieldset legend")
+    assert flat(legend) == "Area"
+    areas = {
+        flat(lab): lab.css_first("input").attributes["value"] for lab in form.css("fieldset label")
+    }
+    assert areas == {"Omaha area": "omaha", "Lincoln area": "lincoln", "Other Nebraska": "other_ne",
+                     "Online": "online"}  # fmt: skip
+    for field in ("filter-topic", "filter-from", "filter-to", "filter-q"):
+        assert form.css_first(f"label[for='{field}']") is not None, field
+    assert form.css_first("#filter-q").attributes["maxlength"] == "100"
+    assert flat(form.css_first("#filter-topic option")) == "All topics"
+    assert page.css_first("[role='status'][data-filter-status]") is not None
+    assert [s.attributes["src"] for s in page.css("script")] == ["/js/home.js", "/js/filters.js"]
+
+
+def test_cards_carry_what_the_filters_need(site: Path) -> None:
+    card = cards(site)[0]  # Prairie Python November: Tue Nov 10, 5:30 PM CT, AIM Institute
+    assert card.attributes["data-area"] == "omaha"
+    assert card.attributes["data-cats"] == "software-dev"
+    assert card.attributes["data-start"] == card.attributes["data-end"] == "2026-11-10"
+    search = card.attributes["data-search"]
+    assert "prairie python november" in search and search == search.lower()
 
 
 def test_nav_links_only_go_to_pages_that_exist(site: Path) -> None:
