@@ -172,7 +172,7 @@ TypeScript, and front-end assets are kept separate so they can be tested and lin
 
 | Added complexity | Why it's needed | Simpler alternative and why it isn't enough | Limits that keep it in bounds |
 |---|---|---|---|
-| three.js (front end), for one decorative 3D map in the home-page header (R15) | Owner decision (2026-10-20): the site should look modern and professional, and the home page should be memorable | Direction A, the same design with no 3D. Kept as the fallback; the owner preferred B | Home header only; loads after the event list; ≤ 150 KB compressed (CI check); still under reduced motion; static image on Save-Data, low-power or small screens and without WebGL; paused off screen; `aria-hidden`; self-hosted and pinned; never needed to find an event |
+| three.js (front end), for one decorative 3D map in the home-page header (R15) | Owner decision (2026-10-20): the site should look modern and professional, and the home page should be memorable | Direction A, the same design with no 3D. Kept as the fallback; the owner preferred B | Home header only; loads after the event list; ≤ 150 KB compressed (CI check); still under reduced motion; static image on Save-Data or low-power devices and without WebGL; paused off screen; `aria-hidden`; self-hosted and pinned; never needed to find an event |
 
 ## Open items carried into tasks
 

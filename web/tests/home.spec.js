@@ -1,6 +1,6 @@
 // The home page and its header map (T154; research R15): the list works without JavaScript,
 // the map is still under reduced motion, pauses off screen, and becomes a static image without
-// WebGL or on small screens. three.js is downloaded only when the 3D map is drawn.
+// WebGL, under Save-Data or on low-memory devices. three.js is downloaded only when the 3D map is drawn.
 
 import { expect, test } from "@playwright/test";
 
@@ -87,15 +87,33 @@ test.describe("without WebGL", () => {
 });
 
 test.describe("on a phone", () => {
-  test.use({ viewport: { width: 390, height: 844 } });
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 
-  test("the static image is shown and three.js is never downloaded", async ({ page }) => {
+  test("the 3D map draws and animates under the title", async ({ page }) => {
     const paths = await watch(page);
     await page.goto("/");
-    await expectStill(page);
-    expect(paths).not.toContain(THREE);
+    await expect(map(page).locator("canvas")).toBeVisible();
+    const before = await frames(page);
+    await page.waitForTimeout(500);
+    expect(await frames(page)).toBeGreaterThan(before + 5);
+    expect(paths).toContain(THREE);
   });
 });
+
+for (const [name, setup] of [
+  ["with Save-Data on", () => Object.defineProperty(navigator, "connection", { value: { saveData: true } })],
+  ["on a device with under 4 GB of memory", () => Object.defineProperty(navigator, "deviceMemory", { value: 2 })],
+]) {
+  test.describe(name, () => {
+    test("the static image is shown and three.js is never downloaded", async ({ page }) => {
+      await page.addInitScript(setup);
+      const paths = await watch(page);
+      await page.goto("/");
+      await expectStill(page);
+      expect(paths).not.toContain(THREE);
+    });
+  });
+}
 
 test.describe("with JavaScript off", () => {
   test.use({ javaScriptEnabled: false });
