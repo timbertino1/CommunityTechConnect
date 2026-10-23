@@ -26,11 +26,10 @@ from datetime import UTC, datetime
 from typing import Any, ClassVar, Final, Protocol
 from urllib.parse import urlencode, urlsplit, urlunsplit
 
-from netc.connectors import cost as costs
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
 from netc.fetch import FetchError, HttpClient
 from netc.fetch.api import RawApiResponse, SafeApi
-from netc.models import Cost, RawListing, Source
+from netc.models import RawListing, Source
 
 EVENTBRITE_API: Final = "https://www.eventbriteapi.com/v3"
 MAX_CALLS_PER_RUN: Final = 200
@@ -99,12 +98,8 @@ class EventbriteOrgConnector:
         for _ in range(MAX_PAGES_PER_SOURCE):
             if self.calls >= MAX_CALLS_PER_RUN:
                 raise FetchError(f"the Eventbrite call limit for this run ({MAX_CALLS_PER_RUN})")
-            query = {
-                "status": "live",
-                "order_by": "start_asc",
-                "expand": "venue,ticket_availability",
-                "page_size": str(PAGE_SIZE),
-            }
+            query = {"status": "live", "order_by": "start_asc", "expand": "venue",
+                     "page_size": str(PAGE_SIZE)}  # fmt: skip
             if continuation:
                 query["continuation"] = continuation
             url = f"{EVENTBRITE_API}/organizers/{organizer}/events/?{urlencode(query)}"
@@ -194,7 +189,6 @@ def _listing(item: Any, label: str, warnings: list[str]) -> RawListing | None:
         item.get("summary"), MAX_DESCRIPTION_CHARS
     )
     tz = _text(_field(item, "start", "timezone"), 100) or None
-    cost, price = _cost(item)
     return RawListing(
         external_id=_text(item.get("id"), 100) or None,
         url=_event_url(item.get("url")),
@@ -208,28 +202,8 @@ def _listing(item: Any, label: str, warnings: list[str]) -> RawListing | None:
         organizer_text=None,
         description_text=description or None,
         cancelled=item.get("status") == "canceled",
-        cost=cost,
-        price=price,
         country=_text(_field(venue, "address", "country"), 100) or None if venue else None,
     )
-
-
-def _cost(item: Mapping[str, Any]) -> tuple[Cost | None, str | None]:
-    """``is_free``, with the ticket price range from ``ticket_availability`` for paid events."""
-    if item.get("is_free") is True:
-        return "free", None
-    if item.get("is_free") is not False:
-        return None, None
-    tickets = item.get("ticket_availability")
-    prices = [
-        tickets.get(key) for key in ("minimum_ticket_price", "maximum_ticket_price")
-    ] if isinstance(tickets, dict) else []  # fmt: skip
-    amounts = [
-        a for p in prices if isinstance(p, dict) and (a := costs.amount(p.get("major_value")))
-    ]
-    dollars = all(isinstance(p, dict) and p.get("currency") == "USD" for p in prices)
-    stated = costs.from_amounts([a for a in amounts if a > 0], dollars=dollars)
-    return "paid", stated[1] if stated else None
 
 
 def _field(item: Mapping[str, Any], outer: str, inner: str) -> Any:

@@ -5,7 +5,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-02T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_c8cdafca33aa",
@@ -34,7 +33,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-02/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-02",
@@ -52,7 +50,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_c956ee787027",
@@ -81,7 +78,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/monthly-round-up-meeting/200030851720135",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "monthly-round-up-meeting-2026-11-03",
@@ -99,7 +95,6 @@
     "categories": [
       "hardware-iot-makers"
     ],
-    "cost": null,
     "end": "2026-11-04T02:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_3d4f5d8cdbc8",
@@ -127,7 +122,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-03/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "open-house-community-hangout-2026-11-03",
@@ -145,7 +139,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-04T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_c11f3a517293",
@@ -174,7 +167,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-04/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-04",
@@ -193,7 +185,6 @@
       "security",
       "networking-infra"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_952f27c093f4",
@@ -222,7 +213,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "interface-omaha-2026-2026-11-05",
@@ -240,7 +230,6 @@
     "categories": [
       "ai-ml"
     ],
-    "cost": null,
     "end": "2026-11-06T01:00:00Z",
     "first_seen": "2026-10-19T22:47:07Z",
     "id": "evt_cdc0a7432421",
@@ -269,7 +258,6 @@
     "organizer_id": "org_ai-omaha",
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/ai_omaha/events/317053693/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "from-auto-complete-to-dark-factories-accelerating-engineering-2026-11-05",
@@ -287,7 +275,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_9b6eb23fb28f",
@@ -316,7 +303,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/fall-expo-and-coffee-event/200030775358214",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "fall-expo-coffee-event-2026-11-07",
@@ -334,7 +320,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_c26911b4c082",
@@ -363,7 +348,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/bgr-x-good-life-halfsy-2026-national-meetup-dinner/100002002921829108",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "bgr-x-good-life-halfsy-2026-national-meetup-dinner-2026-11-07",
@@ -381,7 +365,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_540a3d68f74d",
@@ -410,7 +393,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/national-meetup-good-life-halfsy/200029720891802",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "national-meetup-good-life-halfsy-2026-11-08",
@@ -428,7 +410,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_a878772942d2",
@@ -457,7 +438,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/highland-neighborhood-association-monthly-meeting/200030851719018",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "highland-neighborhood-association-monthly-meeting-2026-11-09",
@@ -475,7 +455,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-09T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_34a1648119f1",
@@ -504,7 +483,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-09/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-09",
@@ -522,7 +500,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_224758ba3cfa",
@@ -551,7 +528,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/sscco-monthly-meeting/200030851723530",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "sscco-monthly-meeting-2026-11-10",
@@ -569,7 +545,6 @@
     "categories": [
       "hardware-iot-makers"
     ],
-    "cost": null,
     "end": "2026-11-11T02:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_933ca1c0a5b2",
@@ -597,7 +572,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-10/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "open-house-community-hangout-2026-11-10",
@@ -615,7 +589,6 @@
     "categories": [
       "web-mobile"
     ],
-    "cost": null,
     "end": "2026-11-11T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_08cbdd98e541",
@@ -644,7 +617,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltyjcpbnb",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "angular-community-meetup-en-espanol-2026-11-10",
@@ -662,7 +634,6 @@
     "categories": [
       "hardware-iot-makers"
     ],
-    "cost": null,
     "end": "2026-11-11T03:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_bc32e9f3d8fc",
@@ -690,7 +661,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/fir-lumber-rally/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "fir-lumber-rally-2026-11-10",
@@ -709,7 +679,6 @@
       "ai-ml",
       "networking-infra"
     ],
-    "cost": null,
     "end": "2026-11-13T03:00:00Z",
     "first_seen": "2026-10-19T00:33:52Z",
     "id": "evt_50ea21bebf51",
@@ -738,7 +707,6 @@
     "organizer_id": "org_nenug",
     "original_unavailable": false,
     "original_url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "ne-nug-omaha-fall-event-2026-2026-11-12",
@@ -756,7 +724,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-16T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_6c9ed78eba42",
@@ -785,7 +752,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-16/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-16",
@@ -803,7 +769,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_f05c6bd26558",
@@ -832,7 +797,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-adults/200030710401326",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "stacks-of-facts-tuesday-trivia-bennett-martin-public-library-for-2026-11-17",
@@ -850,7 +814,6 @@
     "categories": [
       "hardware-iot-makers"
     ],
-    "cost": null,
     "end": "2026-11-18T02:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_092c37dc6e46",
@@ -878,7 +841,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-17/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "open-house-community-hangout-2026-11-17",
@@ -896,7 +858,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-18T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_e8a7ebaa20b9",
@@ -925,7 +886,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-18/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-18",
@@ -943,14 +903,12 @@
     "categories": [
       "data-analytics"
     ],
-    "cost": "free",
     "end": "2026-11-20T00:30:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_5524c30a64ad",
     "inferred": [
       "categories",
-      "source_tz",
-      "cost"
+      "source_tz"
     ],
     "last_verified": "2026-10-23T17:40:38Z",
     "listings": [
@@ -973,7 +931,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "ready-before-you-build-2026-11-19",
@@ -991,7 +948,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_0fe59e2290b5",
@@ -1020,7 +976,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/at-the-well-lincoln-ne-in-person-group/100001985563241104",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "at-the-well-lincoln-ne-in-person-group-2026-11-20",
@@ -1038,7 +993,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_41c4ffa804aa",
@@ -1067,7 +1021,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/mahjong-cafe/200030855024433",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "mahjong-cafe-2026-11-21",
@@ -1085,7 +1038,6 @@
     "categories": [
       "hardware-iot-makers"
     ],
-    "cost": null,
     "end": "2026-11-25T02:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_308556b3df85",
@@ -1113,7 +1065,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-11-24/",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "open-house-community-hangout-2026-11-24",
@@ -1131,7 +1082,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-11-30T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_b8bb6b90e6b5",
@@ -1160,7 +1110,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-11-30/",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-11-30",
@@ -1178,7 +1127,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2026-12-01T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_e9919b25de48",
@@ -1207,7 +1155,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/bitcoin-shipshow-expedition-03-slsbezb8",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "bitcoin-shipshow-expedition-03-2026-11-30",

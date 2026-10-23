@@ -121,12 +121,8 @@ FoundVia = Literal[
     "web_search", "link_graph", "newsletter", "news", "platform", "gap", "suggestion"
 ]
 InferredField = Literal[
-    "categories", "area", "location", "organizer_id", "end", "source_tz", "summary", "cost"
+    "categories", "area", "location", "organizer_id", "end", "source_tz", "summary"
 ]
-Cost = Literal["free", "paid"]
-"""What an event costs to attend, when its source says (FR-052); None is unknown."""
-Price = Annotated[str, StringConstraints(min_length=1, max_length=40), AfterValidator(_plain)]
-"""A price label like "$25" or "$10-$25", only for a paid event."""
 
 DEFAULT_TZ: Final = "America/Chicago"
 
@@ -249,15 +245,11 @@ class Event(_Model):
     first_seen: UtcDatetime
     last_verified: UtcDatetime
     original_unavailable: bool = False
-    cost: Cost | None = None
-    price: Price | None = None
 
     @model_validator(mode="after")
     def _end_after_start(self) -> Self:
         if self.end is not None and self.end < self.start:
             raise ValueError("end must not be before start")
-        if self.price is not None and self.cost != "paid":
-            raise ValueError("a price is only for a paid event")
         return self
 
     @property
@@ -282,9 +274,6 @@ class RawListing(BaseModel):
     organizer_text: str | None
     description_text: str | None
     cancelled: bool
-    cost: Cost | None = None
-    price: str | None = None
-    """Untrusted, like the rest; normalize cleans it."""
     country: str | None = None
     """The venue's country as the source gives it (a code or a name); None when not given."""
 
@@ -320,8 +309,6 @@ class Source(_Model):
     status: Literal["active", "paused", "blocked_by_terms"]
     organizer_id: OrganizerId | None = None
     default_area: Area | None = None
-    default_cost: Literal["free"] | None = None
-    """Set by an administrator for a source whose events are always free (FR-052)."""
     approved_count: NonNegativeInt = 0
     rejected_count: NonNegativeInt = 0
     check_interval_hours: Annotated[int, Field(ge=1, le=24)] = 24

@@ -18,7 +18,6 @@ from urllib.parse import urlsplit
 from netc.models import (
     Area,
     AreaConfig,
-    Cost,
     Event,
     InferredField,
     Location,
@@ -38,7 +37,6 @@ VENUE_MAX: Final = 200
 ADDRESS_MAX: Final = 300
 ORGANIZER_MAX: Final = 200
 EXTERNAL_ID_MAX: Final = 512
-PRICE_MAX: Final = 40
 UNITED_STATES: Final = frozenset({"us", "usa", "united states", "united states of america"})
 
 type ReviewState = Literal["published", "pending_review", "rejected"]
@@ -72,8 +70,6 @@ class Normalized:
     inferred: tuple[InferredField, ...] = field(default=())
     nebraska_host: bool = False
     """The source is a Nebraska group (it has a default area)."""
-    cost: Cost | None = None
-    price: str | None = None
 
 
 def normalize(
@@ -120,11 +116,6 @@ def normalize(
         online=raw.online,
     )
     summary = to_plain_text(raw.description_text, SUMMARY_MAX)
-    cost = raw.cost
-    price = (to_plain_text(raw.price, PRICE_MAX) or None) if cost == "paid" else None
-    if cost is None and source.default_cost is not None:
-        cost = source.default_cost  # the administrator says this source's events are free
-        inferred.append("cost")
     local_day = times.start.astimezone(CENTRAL).date()
     listing = SourceListing(
         source_id=source.id,
@@ -154,8 +145,6 @@ def normalize(
         listing=listing,
         inferred=tuple(inferred),
         nebraska_host=nebraska_host,
-        cost=cost,
-        price=price,
     )
 
 
@@ -198,8 +187,6 @@ def to_event(
         listings=[item.listing],
         first_seen=now,
         last_verified=now,
-        cost=item.cost,
-        price=item.price,
     )
 
 

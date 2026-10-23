@@ -3,7 +3,6 @@ approved_count: 1
 check_interval_hours: 24
 connector: jsonld
 default_area: lincoln
-default_cost: free
 feed_url: null
 follow_links:
   max_pages: 3

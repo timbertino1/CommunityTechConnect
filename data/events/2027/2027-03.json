@@ -5,7 +5,6 @@
     "categories": [
       "general-tech"
     ],
-    "cost": null,
     "end": "2027-03-05T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_02212ade905b",
@@ -34,7 +33,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/kernelcon-2027-jh1avsyx",
-    "price": null,
     "review_state": "published",
     "series_key": null,
     "slug": "kernelcon-2027-2027-03-01",
@@ -52,7 +50,6 @@
     "categories": [
       "web-mobile"
     ],
-    "cost": null,
     "end": "2027-03-10T00:00:00Z",
     "first_seen": "2026-10-21T15:47:36Z",
     "id": "evt_14607d59c4e9",
@@ -81,7 +78,6 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://dev.events/conferences/angular-community-meetup-en-espanol-rbvdltykcfbmb",
-    "price": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "angular-community-meetup-en-espanol-2027-03-09",

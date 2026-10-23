@@ -3,7 +3,6 @@ approved_count: 1
 check_interval_hours: 24
 connector: ical
 default_area: other_ne
-default_cost: null
 feed_url: https://netasite.org/events-old/?ical=1
 follow_links: null
 found_via: web_search
