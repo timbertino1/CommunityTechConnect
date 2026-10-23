@@ -362,7 +362,7 @@ def test_a_cost_from_the_source_default_is_labeled_as_worked_out(site: Path) -> 
     page = (site / "events" / "prairie-python-december-2026-12-08" / "index.html").read_text(
         encoding="utf-8"
     )
-    note = " ".join(LexborHTMLParser(page).css_first(".meta").text().split())
+    note = flat(LexborHTMLParser(page).css_first(".meta"))
     assert "cost" in note and "worked out by NETechConnect" in note
 
 
