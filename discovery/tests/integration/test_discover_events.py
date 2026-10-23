@@ -9,7 +9,7 @@ import pytest
 
 from netc.cli import main
 from netc.storage import DataStore
-from tests.data_samples import make_override, make_source
+from tests.data_samples import make_event, make_override, make_source, utc
 
 pytestmark = pytest.mark.integration
 
@@ -184,3 +184,38 @@ def test_an_override_survives_a_re_run(data: Path, capsys: pytest.CaptureFixture
     assert after.area == "omaha"
     assert "categories" not in after.inferred and "area" not in after.inferred
     assert main(["validate-data", "--data-dir", str(data)]) == 0, capsys.readouterr().err
+
+
+# --- The monthly link check (T118)
+
+
+def test_on_the_first_of_the_month_gone_pages_of_past_events_are_flagged(
+    data: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    store = DataStore(data)
+    gone = make_event(
+        url="https://gone.example.org/talk", start=utc(2026, 9, 1, 23),
+        source_id="src_drupal-nebraska", first_seen=utc(2026, 8, 1),
+    )  # fmt: skip
+    store.write_events([gone])
+    report = tmp_path / "report.md"
+    args = ["--offline", "--fixtures", str(FIXTURES), "--now", "2026-11-01T11:00:00Z"]
+    code = main(["discover-events", "--data-dir", str(data), *args, "--report", str(report)])
+    out = capsys.readouterr()
+    assert code == 0, out.err
+    [stored] = [e for e in store.read_events() if e.id == gone.id]
+    assert stored.original_unavailable is True
+    assert "**Past events' original pages:** 1 page checked; 1 may be gone." in report.read_text(
+        encoding="utf-8"
+    )
+    assert '"event": "link_check_done"' in out.err
+
+
+def test_other_days_do_not_check_links(
+    data: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    report = tmp_path / "report.md"
+    code, out = discover(data, capsys, "--report", str(report))
+    assert code == 0, out
+    assert "original pages" not in report.read_text(encoding="utf-8")
+    assert "link_check_done" not in out
