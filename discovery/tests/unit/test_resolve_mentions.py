@@ -12,7 +12,13 @@ import pytest
 from netc.fetch import FixtureHttp
 from netc.finders.base import make_mention
 from netc.models import EventMention, SearchUsage
-from netc.pipeline.resolve import MAX_ATTEMPTS, parse_date_hint, resolve_mentions
+from netc.pipeline.resolve import (
+    MAX_ATTEMPTS,
+    MAX_PAGES_PER_MENTION,
+    MAX_RESOLVE,
+    parse_date_hint,
+    resolve_mentions,
+)
 from netc.search.base import BudgetedSearch, SearchResult
 from tests.ai_support import NOW
 from tests.data_samples import make_event
@@ -110,6 +116,62 @@ def test_a_mention_whose_date_has_passed_is_discarded(tmp_path: Path) -> None:
 def test_resolved_and_discarded_mentions_are_left_alone(tmp_path: Path) -> None:
     done = [mention(resolution="resolved"), mention("B", resolution="discarded")]
     assert resolve_mentions(done, http=http(tmp_path), now=NOW).mentions == done
+
+
+# --- Limits: the stage must leave the run time to evaluate candidates
+
+
+class Recording(FixtureHttp):
+    """FixtureHttp that records every page it is asked for."""
+
+    def __init__(self, root: Path) -> None:
+        super().__init__(root)
+        self.asked: list[str] = []
+
+    def get(self, url: str, **kw: Any) -> Any:
+        self.asked.append(url)
+        return super().get(url, **kw)
+
+
+def misses(n: int) -> list[EventMention]:
+    return [mention(f"Unmatched talk {i}") for i in range(n)]
+
+
+def test_a_run_tries_at_most_max_resolve_mentions(tmp_path: Path) -> None:
+    result = resolve_mentions(misses(MAX_RESOLVE + 5), http=http(tmp_path), now=NOW)
+    assert result.counts["unresolved"] == MAX_RESOLVE
+    assert result.counts["deferred"] == 5
+    assert [m.attempts for m in result.mentions[MAX_RESOLVE:]] == [0] * 5  # waiting isn't a try
+
+
+def test_a_run_stops_starting_mentions_when_time_is_up(tmp_path: Path) -> None:
+    stops = iter([False, True, True, True])
+    result = resolve_mentions(
+        misses(4), http=http(tmp_path), now=NOW, should_stop=lambda: next(stops)
+    )
+    assert result.counts["unresolved"] == 1 and result.counts["deferred"] == 3
+    assert result.stopped_for_time
+    assert [m.attempts for m in result.mentions] == [1, 0, 0, 0]
+
+
+def test_at_most_max_pages_per_mention_are_fetched(tmp_path: Path) -> None:
+    links = [f"https://site{i}.example.org/events" for i in range(MAX_PAGES_PER_MENTION + 3)]
+    http(tmp_path)  # writes the fixture index
+    client = Recording(tmp_path)
+    resolve_mentions([mention(links=links)], http=client, now=NOW)
+    assert client.asked == links[:MAX_PAGES_PER_MENTION]
+
+
+def test_each_mention_tried_is_logged_with_its_time(tmp_path: Path) -> None:
+    lines: list[str] = []
+    ticks = iter([5.0, 6.5])
+    resolve_mentions(
+        [mention()], http=http(tmp_path), now=NOW, log=lines.append, clock=lambda: next(ticks)
+    )
+    assert [json.loads(x) for x in lines] == [
+        {"event": "mention_tried", "channel": "newsletter", "result": "resolved", "pages": 1,
+         "seconds": 1.5}
+    ]  # fmt: skip
 
 
 def test_nothing_is_ever_published(tmp_path: Path) -> None:
