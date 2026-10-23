@@ -12,11 +12,12 @@ from __future__ import annotations
 
 import re
 from typing import ClassVar, Final
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 from selectolax.lexbor import LexborHTMLParser
 
 from netc.fetch import FetchError
+from netc.fetch.urls import join_url
 from netc.finders.base import (
     PLATFORMS,
     FinderContext,
@@ -101,7 +102,7 @@ def _links(base: str, html: str) -> list[tuple[str, str]]:
     for node in tree.css("a[href]")[:MAX_LINKS_PER_PAGE]:
         href = (node.attributes.get("href") or "").strip()
         # A "Subscribe" link to a Luma calendar is often webcal://, which safe_url refuses.
-        url = luma_calendar_feed(href) or safe_url(urljoin(base, href))
+        url = luma_calendar_feed(href) or safe_url(join_url(base, href))
         if url is not None:
             found.append((url, to_plain_text(node.text(), 200)))
     return found

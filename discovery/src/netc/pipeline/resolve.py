@@ -109,7 +109,11 @@ def resolve_mentions(
         if not urls and search is not None:
             urls = _search(mention, search, result)
         pages: list[str] = []
-        found = _find(mention, urls[:MAX_PAGES_PER_MENTION], when, http, now, pages)
+        try:
+            found = _find(mention, urls[:MAX_PAGES_PER_MENTION], when, http, now, pages)
+        except Exception:  # one strange page must not stop the run; the mention tries again
+            result.counts["errors"] += 1
+            found = None
         if log is not None:
             log(
                 json.dumps(

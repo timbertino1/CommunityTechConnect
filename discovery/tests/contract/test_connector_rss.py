@@ -107,3 +107,16 @@ def test_external_entities_are_not_resolved() -> None:
 
 def test_the_fetch_time_sets_the_window() -> None:
     assert FETCHED_AT.year == 2026  # the window runs from Oct 17, 2026 to mid-April 2027
+
+
+def test_malformed_links_in_a_feed_are_skipped_not_fatal() -> None:
+    feed = read_feed(
+        news("""<?xml version="1.0"?><rss version="2.0"><channel><title>T</title>
+<item><title>Broken link</title><link>http://[bad</link>
+<description>&lt;a href="https://[::1"&gt;x&lt;/a&gt;</description></item>
+<item><title>Fine</title><link>https://news.example.com/fine</link>
+<description>&lt;a href="http://[bad"&gt;x&lt;/a&gt; &lt;a href="https://ok.example.org/"&gt;ok&lt;/a&gt;</description></item>
+</channel></rss>""")
+    )
+    links = [link for article in feed.articles for link in article.links]
+    assert "https://ok.example.org/" in links

@@ -18,12 +18,13 @@ import re
 from collections.abc import Callable, Iterator
 from datetime import UTC, date, datetime, time
 from typing import Any, ClassVar, Final
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.parse import urlsplit, urlunsplit
 
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
 from netc.fetch import FetchError, HttpClient
+from netc.fetch.urls import join_url
 from netc.models import FollowLinks, RawListing, Source
 
 MAX_TITLE_CHARS: Final = 2_000
@@ -110,7 +111,7 @@ def _matching_links(page_url: str, html: str, rule: FollowLinks) -> list[str]:
     except Exception:
         hrefs = []
     for href in [*hrefs, *_TEXT_URL.findall(html)]:
-        parts = urlsplit(urljoin(page_url, href))
+        parts = urlsplit(join_url(page_url, href))
         if parts.scheme != "https" or (parts.hostname or "") != (base.hostname or ""):
             continue
         if not fnmatch.fnmatchcase(parts.path, rule.path_glob):
@@ -227,7 +228,7 @@ def _listing(
 
     raw_url = node.get("url")
     url = (
-        urljoin(page_url, raw_url.strip())
+        join_url(page_url, raw_url.strip())
         if isinstance(raw_url, str) and raw_url.strip()
         else page_url
     )
@@ -385,9 +386,9 @@ def _microdata_value(element: LexborNode, page_url: str) -> str:
     if tag == "meta":
         return (attrs.get("content") or "").strip()
     if tag in {"a", "link", "area"}:
-        return urljoin(page_url, (attrs.get("href") or "").strip())
+        return join_url(page_url, (attrs.get("href") or "").strip())
     if tag in {"img", "audio", "video", "source", "iframe", "embed"}:
-        return urljoin(page_url, (attrs.get("src") or "").strip())
+        return join_url(page_url, (attrs.get("src") or "").strip())
     if tag == "time" and attrs.get("datetime"):
         return (attrs.get("datetime") or "").strip()
     if tag in {"data", "meter"}:

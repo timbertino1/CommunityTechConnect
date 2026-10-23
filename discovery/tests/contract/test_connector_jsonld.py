@@ -295,3 +295,18 @@ def test_address_parts_already_in_the_street_line_are_not_repeated() -> None:
     )
     (event,) = CONNECTOR.parse(jsonld_source(), payload(page, content_type="text/html")).listings
     assert event.location_text == "Improving, 18881 W Dodge Road Suite 120E, Omaha, NE"
+
+
+def test_malformed_links_on_a_page_are_skipped_not_fatal() -> None:
+    from netc.connectors.jsonld import page_listings
+
+    html = (
+        '<html><body><a href="http://[bad">x</a><script type="application/ld+json">'
+        '{"@context":"https://schema.org","@type":"Event","name":"Rust Night",'
+        '"startDate":"2026-11-18T18:30:00-06:00","url":"http://[bad",'
+        '"image":"https://[::1"}</script></body></html>'
+    )
+    listings = page_listings(
+        payload(html, url="https://www.example.org/e", content_type="text/html")
+    )
+    assert [item.title for item in listings] == ["Rust Night"]

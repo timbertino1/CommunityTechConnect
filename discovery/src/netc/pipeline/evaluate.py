@@ -128,7 +128,10 @@ def evaluate_candidates(
             continue
         done += 1
         started = clock()
-        verdict = _evaluate(candidate, http, connectors, categories, areas, now, ai, taken)
+        try:
+            verdict = _evaluate(candidate, http, connectors, categories, areas, now, ai, taken)
+        except Exception as exc:  # one strange site must not stop the run (and lose its work)
+            verdict = _Verdict("needs_review", f"could not be evaluated: {type(exc).__name__}")
         if log is not None:
             log(
                 json.dumps(

@@ -18,13 +18,13 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime, time
 from typing import Any, ClassVar, Final
-from urllib.parse import urljoin
 
 import feedparser
 from selectolax.lexbor import LexborHTMLParser
 
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
 from netc.fetch import FetchError, HttpClient
+from netc.fetch.urls import join_url
 from netc.models import RawListing, Source
 from netc.pipeline.sanitize import safe_url, to_plain_text
 
@@ -181,7 +181,7 @@ def _link(entry: Any, base: str) -> str | None:
     raw = _text(entry.get("link"), 2_048)
     if not raw:
         return None
-    url = urljoin(base, raw)
+    url = join_url(base, raw)
     return url if url.startswith(("https://", "http://")) else None
 
 
@@ -198,7 +198,7 @@ def _links(html: str, base: str) -> list[str]:
         return []
     found: list[str] = []
     for node in LexborHTMLParser(html).css("a[href]"):
-        url = safe_url(urljoin(base, node.attributes.get("href") or ""))
+        url = safe_url(join_url(base, node.attributes.get("href") or ""))
         if url and url not in found:
             found.append(url)
         if len(found) >= MAX_LINKS:

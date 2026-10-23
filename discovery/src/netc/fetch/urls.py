@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import ipaddress
 import re
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from netc.fetch.errors import UnsafeURLError
 
@@ -86,3 +86,13 @@ def vet_url(url: str, *, upgrade_http: bool = True) -> str:
 
     host = vet_hostname(parts.hostname or "")
     return urlunsplit(("https", host, parts.path or "/", parts.query, ""))
+
+
+def join_url(base: str, href: str) -> str:
+    """``urljoin`` for addresses found in other sites' pages: a malformed one (like
+    ``http://[x``, which makes urllib raise) becomes "" instead, which every check after this
+    rejects. One such link stopped a whole discovery run (Oct 23, 2026)."""
+    try:
+        return urljoin(base, href)
+    except ValueError:
+        return ""

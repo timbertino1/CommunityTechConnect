@@ -28,7 +28,7 @@ from http.cookiejar import CookieJar, DefaultCookiePolicy
 from ipaddress import ip_address
 from types import MappingProxyType, TracebackType
 from typing import Final, Literal, Self
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 import httpcore
 import httpx
@@ -44,7 +44,7 @@ from netc.fetch.errors import (
 )
 from netc.fetch.ratelimit import HostRateLimiter
 from netc.fetch.robots import ROBOTS_USER_AGENT, RobotsCache
-from netc.fetch.urls import IPAddress, is_public_ip, vet_url
+from netc.fetch.urls import IPAddress, is_public_ip, join_url, vet_url
 
 type FetchKind = Literal["page", "feed"]
 type _Kind = Literal["page", "feed", "robots"]
@@ -295,7 +295,7 @@ class SafeHttp:
             result = self._exchange(current, kind, allowed_types)
             if isinstance(result, FetchResponse):
                 return result
-            current = vet_url(urljoin(current, result))
+            current = vet_url(join_url(current, result))
         raise TooManyRedirectsError(f"More than {MAX_REDIRECTS} redirects starting at {url}")
 
     def _exchange(

@@ -7,7 +7,7 @@ import json
 from collections.abc import Collection
 from datetime import timedelta
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 import pytest
 
@@ -328,6 +328,41 @@ def test_candidates_naming_a_nebraska_place_are_evaluated_first(tmp_path: Path) 
                                      "result: Omaha Cloud Night"])  # fmt: skip
     result = evaluate(tmp_path, [plain, local], max_evaluations=1)
     assert [c.result for c in result.candidates] == ["pending", "needs_review"]
+
+
+class Crashes:
+    """A reader whose parse fails with an error nobody planned for."""
+
+    kind: ClassVar[str] = "jsonld"
+
+    def __init__(self, real: Any) -> None:
+        self.real = real
+
+    def fetch(self, source: Any, http: Any) -> Any:
+        return self.real.fetch(source, http)
+
+    def parse(self, source: Any, payload: Any) -> Any:
+        raise ValueError("Invalid IPv6 URL")
+
+
+def test_a_crash_on_one_candidate_does_not_stop_the_run(tmp_path: Path) -> None:
+    connectors = dict(default_connectors(lambda: NOW))
+    connectors["jsonld"] = Crashes(connectors["jsonld"])
+    lines: list[str] = []
+    result = evaluate(
+        tmp_path,
+        [
+            pending("https://heartlandrust.example.org/"),
+            pending("https://cowork.example.org/events"),
+        ],
+        connectors=connectors,
+        log=lines.append,
+    )
+    crashed, fine = result.candidates
+    assert crashed.result == "needs_review"
+    assert crashed.reason == "could not be evaluated: ValueError"
+    assert fine.result == "added"
+    assert [json.loads(x)["result"] for x in lines] == ["needs_review", "added"]
 
 
 # --- With the AI
