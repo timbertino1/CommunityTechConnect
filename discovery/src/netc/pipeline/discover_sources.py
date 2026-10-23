@@ -48,6 +48,8 @@ from netc.storage import DataStore
 
 RUN_TIME_BUDGET_SECONDS: Final = 40 * 60
 """Evaluations start only within this; the workflow's job timeout is 60 minutes."""
+MENTIONS_BUDGET_SECONDS: Final = 10 * 60
+"""Resolving mentions starts no new one after this, so evaluation always gets its turn."""
 
 
 def default_finders(inbox: Inbox | None = None) -> list[Finder]:
@@ -99,6 +101,7 @@ def discover_sources(
     dry_run: bool = False,
     log: LogSink = stderr_sink,
     time_budget_seconds: float = RUN_TIME_BUDGET_SECONDS,
+    mentions_budget_seconds: float = MENTIONS_BUDGET_SECONDS,
     clock: Callable[[], float] = time.monotonic,
 ) -> DiscoverSourcesReport:
     started = mark = clock()
@@ -168,8 +171,19 @@ def discover_sources(
 
     stage_done("finders")
 
+    mentions_started = clock()
     resolved = resolve_mentions(
-        list(mentions.values()), http=http, now=now, search=search, events=events
+        list(mentions.values()),
+        http=http,
+        now=now,
+        search=search,
+        events=events,
+        should_stop=lambda: (
+            clock() - mentions_started >= mentions_budget_seconds
+            or clock() - started >= time_budget_seconds
+        ),
+        log=log,
+        clock=clock,
     )
     report.mentions = resolved.counts
     _add_candidates(ctx, resolved.candidates, found)

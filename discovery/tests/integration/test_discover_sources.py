@@ -203,3 +203,11 @@ def test_each_stage_is_logged_with_its_time(data: Path) -> None:
     assert stages[-3:] == ["finders", "mentions", "evaluation"]
     assert all(isinstance(e["seconds"], float) for e in events if e.get("event") == "stage_done")
     assert any(e.get("event") == "finder_done" for e in events)
+
+
+def test_mentions_stop_at_their_own_budget_and_the_report_says_so(data: Path) -> None:
+    # Every clock reading is 5 minutes later; the mention stage gets 10 minutes of the run.
+    ticks = iter(range(0, 100_000, 300))
+    report = run(data, clock=lambda: float(next(ticks)), mentions_budget_seconds=10 * 60)
+    assert report.mentions["deferred"] > 0
+    assert "wait for the next run" in render_sources_markdown(report).split("### Mentions")[1]

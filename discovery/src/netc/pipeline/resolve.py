@@ -7,13 +7,20 @@ one). The page's site then becomes a candidate source, so its other events can b
 normal way. Nothing is published here: the event reaches the site only through that source.
 
 A mention is discarded once its date has passed or after MAX_ATTEMPTS weekly tries.
+
+Each try can fetch pages from slow or unreachable sites, so a run tries at most MAX_RESOLVE
+mentions, MAX_PAGES_PER_MENTION pages each, and starts none once ``should_stop`` says the
+stage's time is up (the Oct 23 run spent 52 of its 58 minutes here). The rest wait, without
+using up a try, and each mention tried is logged with its time.
 """
 
 from __future__ import annotations
 
+import json
 import re
+import time
 from collections import Counter
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 from typing import Final, Literal
@@ -27,14 +34,15 @@ from netc.connectors.jsonld import page_listings
 from netc.fetch import FetchError, HttpClient
 from netc.finders.base import PLATFORMS, candidate_url, make_candidate
 from netc.models import CandidateSource, Event, EventMention
+from netc.pipeline.runner import LogSink
 from netc.pipeline.sanitize import safe_url
 from netc.pipeline.timeutil import to_central
 from netc.search.base import BudgetedSearch, SearchBudgetExhaustedError, SearchError
 
 MAX_ATTEMPTS: Final = 4
 MATCH_SCORE: Final = 80
-MAX_PAGES_PER_MENTION: Final = 5
-MAX_RESOLVE: Final = 30
+MAX_PAGES_PER_MENTION: Final = 3
+MAX_RESOLVE: Final = 10
 _MONTHS: Final = (
     "jan",
     "feb",
@@ -62,6 +70,8 @@ class ResolveResult:
     mentions: list[EventMention]
     candidates: list[CandidateSource] = field(default_factory=list)
     counts: Counter[str] = field(default_factory=Counter)
+    stopped_for_time: bool = False
+    """``should_stop`` ended the stage early; the deferred mentions wait for the next run."""
 
 
 def resolve_mentions(
@@ -71,6 +81,9 @@ def resolve_mentions(
     now: datetime,
     search: BudgetedSearch | None = None,
     events: Iterable[Event] = (),
+    should_stop: Callable[[], bool] | None = None,
+    log: LogSink | None = None,
+    clock: Callable[[], float] = time.monotonic,
 ) -> ResolveResult:
     by_url = {e.original_url: e.id for e in events}
     result = ResolveResult(list(mentions))
@@ -86,11 +99,29 @@ def resolve_mentions(
         if tried >= MAX_RESOLVE:
             result.counts["deferred"] += 1
             continue
+        if result.stopped_for_time or (should_stop is not None and should_stop()):
+            result.stopped_for_time = True
+            result.counts["deferred"] += 1
+            continue
         tried += 1
+        started = clock()
         urls = list(mention.links)
         if not urls and search is not None:
             urls = _search(mention, search, result)
-        found = _find(mention, urls[:MAX_PAGES_PER_MENTION], when, http, now)
+        pages: list[str] = []
+        found = _find(mention, urls[:MAX_PAGES_PER_MENTION], when, http, now, pages)
+        if log is not None:
+            log(
+                json.dumps(
+                    {
+                        "event": "mention_tried",
+                        "channel": mention.channel,
+                        "result": "unresolved" if found is None else "resolved",
+                        "pages": len(pages),
+                        "seconds": round(clock() - started, 1),
+                    }
+                )
+            )
         if found is None:
             result.mentions[i] = mention.model_copy(update={"attempts": mention.attempts + 1})
             result.counts["unresolved"] += 1
@@ -151,13 +182,20 @@ def _search(mention: EventMention, search: BudgetedSearch, result: ResolveResult
 
 
 def _find(
-    mention: EventMention, urls: Sequence[str], when: date | None, http: HttpClient, now: datetime
+    mention: EventMention,
+    urls: Sequence[str],
+    when: date | None,
+    http: HttpClient,
+    now: datetime,
+    fetched: list[str],
 ) -> tuple[str, str] | None:
-    """(page URL, event URL) for the first page with a matching event."""
+    """(page URL, event URL) for the first page with a matching event. Each page asked for is
+    added to ``fetched``."""
     for url in urls:
         safe = safe_url(url)
         if safe is None:
             continue
+        fetched.append(safe)
         try:
             response = http.get(safe, kind="page")
         except FetchError:

@@ -86,7 +86,8 @@ def render_sources_markdown(report: DiscoverSourcesReport) -> str:
         "### Mentions",
         "",
         f"{m['resolved']} resolved to an organizer's page, {m['unresolved']} still looking, "
-        f"{m['discarded']} retired (past, or not found after 4 tries).",
+        f"{m['discarded']} retired (past, or not found after 4 tries)."
+        + (f" {m['deferred']} wait for the next run." if m["deferred"] else ""),
     ]
     budgets = []
     if report.searches_used is not None:
