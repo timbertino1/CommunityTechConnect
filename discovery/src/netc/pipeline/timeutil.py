@@ -129,6 +129,16 @@ def format_central(start: datetime, end: datetime | None, *, all_day: bool) -> s
     return f"{text} CT"
 
 
+def short_day(value: date | datetime) -> str:
+    """ "Tue, Oct 20": a day label for calendar pages."""
+    return _day(value)
+
+
+def clock_time(value: datetime) -> str:
+    """ "6:30 PM", for a time already in Central Time."""
+    return _clock(value)
+
+
 # ---------------------------------------------------------------- helpers
 
 
@@ -184,7 +194,7 @@ _MONTHS: Final = (
 )
 
 
-def _day(value: datetime) -> str:
+def _day(value: date) -> str:
     """ "Tue, Oct 20" (no zero padding, independent of the OS locale)."""
     return f"{_DAYS[value.weekday()]}, {_MONTHS[value.month - 1]} {value.day}"
 

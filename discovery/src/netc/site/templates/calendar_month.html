@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ label }} calendar{% endblock %}
+{% block description %}Community tech events across Nebraska in {{ label }}, day by day.{% endblock %}
+{% block content %}
+<div class="cal-head">
+  <h1>{{ label }}</h1>
+  <nav class="cal-nav" aria-label="Months">
+    {% if prev %}<a href="{{ prev.href }}" rel="prev"><span aria-hidden="true">← </span>{{ prev.label }}</a>{% endif %}
+    {% if next %}<a href="{{ next.href }}" rel="next">{{ next.label }}<span aria-hidden="true"> →</span></a>{% endif %}
+  </nav>
+</div>
+{% if not any_events %}<p class="empty">No events in {{ label }} yet. New events are added twice a day.</p>{% endif %}
+<table class="cal cal-month">
+  <caption>Tech events in {{ label }}, by day. Times are Central.</caption>
+  <thead>
+    <tr>{% for name in weekdays %}<th scope="col"><abbr title="{{ name }}">{{ name[:3] }}</abbr></th>{% endfor %}</tr>
+  </thead>
+  <tbody>
+  {% for week in weeks %}
+    <tr>
+    {% for day in week.days %}
+      <td data-date="{{ day.iso }}" class="cal-day{% if not day.in_month %} is-other-month{% endif %}{% if not day.events %} is-empty{% endif %}"{% if day.today %} aria-current="date"{% endif %}>
+        <span class="cal-num" aria-hidden="true">{{ day.number }}</span>
+        <span class="cal-label">{{ day.label }}</span>
+        {% include "_cal_events.html" %}
+      </td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<nav class="cal-weeks" aria-label="Weeks in {{ label }}">
+  <h2>By week</h2>
+  <ul>
+  {% for week in weeks %}
+    <li><a href="{{ week.href }}">{{ week.label }}</a></li>
+  {% endfor %}
+  </ul>
+</nav>
+{% endblock %}

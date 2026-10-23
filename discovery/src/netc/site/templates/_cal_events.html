@@ -1,0 +1,11 @@
+{% if day.events %}
+<ul class="cal-events">
+{% for item in day.events %}
+  <li class="cal-event{% if item.status != "scheduled" %} cal-event--{{ item.status }}{% endif %}">
+    <span class="cal-time">{{ item.time }}</span>
+    <a class="cal-title" href="/events/{{ item.slug }}/">{{ item.title }}</a>{% if item.status == "cancelled" %} <span class="cal-flag">Cancelled</span>{% endif %}
+    <a class="cal-original" href="{{ item.original_url }}" rel="noopener external"><span class="visually-hidden">View and register on </span><span aria-hidden="true">↗ </span>{{ item.host }}</a>
+  </li>
+{% endfor %}
+</ul>
+{% endif %}

@@ -363,6 +363,71 @@ main:focus { outline: none; }
   .event .primary { text-align: center; }
 }
 
+/* Text for screen readers only. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Calendar (T109): month grids and week lists, both plain tables; under 600 px the month
+   becomes a stacked agenda of the days that have events. */
+.cal-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1.5rem; margin-bottom: 1rem; }
+.cal-head h1 { margin: 0; }
+.cal-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-weight: 600; }
+.cal-nav a { display: inline-block; padding-block: 0.4rem; }
+.cal { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); }
+.cal caption { text-align: left; color: var(--muted); font-size: var(--step--1); padding-bottom: 0.5rem; caption-side: top; }
+.cal th, .cal td { border: 1px solid var(--line); vertical-align: top; text-align: left; }
+.cal thead th { font: 500 0.75rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0.5rem; background: var(--surface-2); }
+.cal abbr { text-decoration: none; }
+.cal-month { table-layout: fixed; }
+.cal-month td { height: 7rem; padding: 0.35rem 0.4rem; }
+.cal-num { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.cal-month .cal-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cal-day.is-other-month { background: var(--bg); }
+.cal-day.is-other-month .cal-num { color: var(--muted); font-weight: 500; }
+.cal-day[aria-current="date"] { box-shadow: inset 0 0 0 2px var(--accent); }
+.cal-day[aria-current="date"] .cal-num { color: var(--accent); }
+.cal-events { list-style: none; margin: 0.25rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
+.cal-event { font-size: 0.8rem; line-height: 1.3; overflow-wrap: anywhere; }
+.cal-time { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+/* Every link is at least 24 px tall, with room between them (WCAG 2.2 target size, 2.5.8). */
+.cal-title, .cal-original { display: block; min-height: 24px; padding-block: 3px; }
+.cal-title { color: var(--ink); font-weight: 600; text-decoration: none; }
+.cal-title:hover { text-decoration: underline; }
+.cal-original { font-size: 0.75rem; margin-top: 2px; }
+.cal-event--cancelled .cal-title { text-decoration: line-through; }
+.cal-flag { font-size: 0.7rem; font-weight: 700; color: var(--bad); }
+.cal-week th[scope="row"] { width: 11rem; padding: 0.75rem; font-family: var(--font-display); font-weight: 700; background: var(--surface-2); }
+.cal-week td { padding: 0.75rem; }
+.cal-week .cal-event { font-size: 0.95rem; }
+.cal-week .cal-time { font-size: 0.8rem; }
+.cal-week .cal-original { font-size: 0.85rem; }
+.cal-none { color: var(--muted); font-size: var(--step--1); }
+.cal-weeks { margin-top: 1.5rem; }
+.cal-weeks h2 { font-size: var(--step-1); margin: 0 0 0.5rem; }
+.cal-weeks ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+
+@media (max-width: 599px) {
+  .cal-month, .cal-month tbody, .cal-month tr, .cal-month td { display: block; width: 100%; }
+  .cal-month thead { display: none; }
+  .cal-month caption { display: block; width: 100%; }
+  .cal-month { border: 0; background: none; }
+  .cal-month td { height: auto; border: 0; border-bottom: 1px solid var(--line); background: var(--surface); padding: 0.75rem; }
+  .cal-month td.is-empty { display: none; }
+  .cal-month .cal-num { display: none; }
+  .cal-month .cal-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: block; font-family: var(--font-display); font-weight: 700; }
+  .cal-event { font-size: 0.95rem; }
+  .cal-week th[scope="row"] { width: 6.5rem; }
+}
+
 /* Event detail */
 .event-detail {
   max-width: 52rem;
