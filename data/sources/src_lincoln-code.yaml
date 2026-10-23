@@ -1,0 +1,22 @@
+added_at: '2026-10-23'
+approved_count: 0
+check_interval_hours: 24
+connector: jsonld
+default_area: lincoln
+feed_url: null
+follow_links:
+  max_pages: 3
+  path_glob: /lincoln-code/events/[0-9]*
+found_via: web_search
+html_rules: null
+id: src_lincoln-code
+name: Lincoln.Code
+notes: 'Discovered. Meetup (gate V1): public event pages only, 10 s apart, no member data.'
+organizer_id: null
+origin: discovered
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: probationary
+updated_at: null
+url: https://www.meetup.com/lincoln-code/events/
