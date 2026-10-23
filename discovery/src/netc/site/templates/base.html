@@ -29,9 +29,17 @@
 </div>
 </main>
 <footer class="site-footer">
-  <div class="wrap">
-    <p>NETechConnect lists community tech events across Nebraska and sends you to each organizer's own page. It is not the organizer of any event.</p>
-    <p>Updated {{ updated }}. <a href="/about/">How events are found</a>.</p>
+  <div class="wrap footer-inner">
+    <div>
+      <p>NETechConnect lists community tech events across Nebraska and sends you to each organizer's own page. It isn't the organizer of any event.</p>
+      <p class="updated">Updated {{ updated }}.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-nav">
+        <li><a href="/about/">About</a></li>
+        <li><a href="{{ repo_url }}" rel="noopener external">Source on GitHub</a></li>
+      </ul>
+    </nav>
   </div>
 </footer>
 </body>

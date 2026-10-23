@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 from selectolax.lexbor import LexborHTMLParser
@@ -94,7 +95,7 @@ def cards(out: Path) -> list:  # type: ignore[type-arg]
 
 
 def test_list_shows_published_shown_upcoming_events_soonest_first(site: Path) -> None:
-    titles = [c.css_first("h2").text(strip=True) for c in cards(site)]
+    titles = [c.css_first("h3").text(strip=True) for c in cards(site)]
     assert titles == [
         "Prairie Python November",
         "Remote Rust night",
@@ -129,7 +130,7 @@ def test_primary_link_goes_to_the_original_page(site: Path) -> None:
 
 
 def test_cards_link_to_detail_pages(site: Path) -> None:
-    title_link = cards(site)[0].css_first("h2 a")
+    title_link = cards(site)[0].css_first("h3 a")
     assert title_link.attributes["href"] == "/events/prairie-python-november-2026-11-10/"
     detail = site / "events" / "prairie-python-november-2026-11-10" / "index.html"
     page = detail.read_text(encoding="utf-8")
@@ -228,3 +229,75 @@ def test_removing_the_override_shows_the_event_again(tmp_path: Path) -> None:
     out = tmp_path / "dist"
     assert build(data, out) == 0
     assert "Hidden by admin" in (out / "index.html").read_text(encoding="utf-8")
+
+
+# --- Design direction B (T151; research R15)
+
+
+def home(out: Path) -> Any:
+    return LexborHTMLParser((out / "index.html").read_text(encoding="utf-8"))
+
+
+def flat(node: Any) -> str:
+    return " ".join(node.text(separator=" ").split())
+
+
+def test_the_hero_has_the_headline_and_real_counts(site: Path) -> None:
+    page = home(site)
+    hero = page.css_first(".home-hero")
+    assert flat(hero.css_first("h1")) == "Every Nebraska tech event, in one place."
+    counts = {flat(c.css_first(".count-label")): flat(c.css_first(".count-n"))
+              for c in hero.css(".count")}  # fmt: skip
+    assert counts["upcoming events"] == str(len(cards(site)))
+    assert counts["groups and calendars watched"] == "1"  # make_data's one active source
+    cta = hero.css_first("a.hero-cta")
+    assert cta.attributes["href"] == "#events"
+    assert page.css_first("#events") is not None
+
+
+def test_the_map_legend_waits_for_the_3d_map(site: Path) -> None:
+    legend = home(site).css_first("[data-map-legend]")
+    assert "hidden" in legend.attributes
+
+
+def test_events_are_grouped_by_month_in_central_time(site: Path) -> None:
+    months = home(site).css("section.month")
+    assert [flat(m.css_first("h2 .month-name")) for m in months] == [
+        "November 2026",
+        "December 2026",
+    ]
+    assert [flat(m.css_first("h2 .month-count")) for m in months] == ["3 events", "1 event"]
+    assert [len(m.css("article.event")) for m in months] == [3, 1]
+
+
+def test_each_card_has_a_date_block_hidden_from_screen_readers(site: Path) -> None:
+    block = cards(site)[0].css_first(".date-block")
+    assert block.attributes["aria-hidden"] == "true"
+    assert flat(block) == "NOV 10 Tue"
+
+
+def test_the_filter_bar_is_markup_only_until_its_script_exists(site: Path) -> None:
+    bar = home(site).css_first("[data-filters]")
+    assert "hidden" in bar.attributes  # shown by filters.js in Phase 6
+    areas = [flat(b) for b in bar.css("button[aria-pressed]")]
+    assert areas == ["All areas", "Omaha area", "Lincoln area", "Other Nebraska", "Online"]
+    select = bar.css_first("select")
+    assert bar.css_first(f"label[for='{select.attributes['id']}']") is not None
+    assert flat(select.css_first("option")) == "All topics"
+
+
+def test_nav_links_only_go_to_pages_that_exist(site: Path) -> None:
+    for name, page in html_files(site).items():
+        tree = LexborHTMLParser(page)
+        for link in tree.css("header a, footer a"):
+            href = link.attributes.get("href") or ""
+            if href.startswith("/"):
+                path = href.split("#")[0].rstrip("/")
+                assert (site / path.lstrip("/") / "index.html").exists() or path == "", (name, href)
+
+
+def test_the_footer_links_to_about_and_the_source(site: Path) -> None:
+    footer = home(site).css_first("footer nav")
+    links = {flat(a): a.attributes["href"] for a in footer.css("a")}
+    assert links["About"] == "/about/"
+    assert links["Source on GitHub"].startswith("https://github.com/")

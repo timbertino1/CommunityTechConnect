@@ -95,7 +95,7 @@ def test_the_home_page_has_a_hidden_decorative_map(tmp_path: Path) -> None:
     scripts = [s.attributes for s in home.css("script")]
     assert scripts == [{"type": "module", "src": "/js/home.js"}]
     [h1] = home.css("h1")
-    assert h1.text() == "Upcoming tech events in Nebraska"
+    assert " ".join(h1.text().split()) == "Every Nebraska tech event, in one place."
 
 
 def test_other_pages_have_no_map(tmp_path: Path) -> None:
