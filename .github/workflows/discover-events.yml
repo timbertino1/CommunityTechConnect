@@ -16,39 +16,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Built from main as it is, so the PR lists only items already in main's queue; items this
-  # run finds join the next one. Never auto-merged: only the owner merges a review PR.
-  review:
-    name: Open or update the review PR
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment: discovery
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        with:
-          python-version: "3.13"
-          enable-cache: true
-          cache-dependency-glob: discovery/uv.lock
-      - name: Install
-        working-directory: discovery
-        run: uv sync --locked
-      - name: Create the bot's token
-        id: bot
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          app-id: ${{ secrets.BOT_APP_ID }}
-          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-      - name: Open, update or close the review PR
-        env:
-          GH_TOKEN: ${{ steps.bot.outputs.token }}
-          BOT_SLUG: ${{ steps.bot.outputs.app-slug }}
-        run: bash .github/scripts/review-pr.sh
-
   discover:
     name: Discover events and open the data PR
     runs-on: ubuntu-latest

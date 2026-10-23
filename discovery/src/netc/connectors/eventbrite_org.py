@@ -210,6 +210,7 @@ def _listing(item: Any, label: str, warnings: list[str]) -> RawListing | None:
         cancelled=item.get("status") == "canceled",
         cost=cost,
         price=price,
+        country=_text(_field(venue, "address", "country"), 100) or None if venue else None,
     )
 
 

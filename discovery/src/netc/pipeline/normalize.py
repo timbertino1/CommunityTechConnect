@@ -39,6 +39,7 @@ ADDRESS_MAX: Final = 300
 ORGANIZER_MAX: Final = 200
 EXTERNAL_ID_MAX: Final = 512
 PRICE_MAX: Final = 40
+UNITED_STATES: Final = frozenset({"us", "usa", "united states", "united states of america"})
 
 type ReviewState = Literal["published", "pending_review", "rejected"]
 
@@ -90,6 +91,10 @@ def normalize(
     if times.tz_assumed:
         inferred.append("source_tz")
 
+    country = to_plain_text(raw.country, 100)
+    if country and country.casefold() not in UNITED_STATES:
+        # Before the place match: "Lincoln" in England is not Lincoln, Nebraska.
+        return Dropped(f"outside the United States ({country})")
     location_text = to_plain_text(raw.location_text, ADDRESS_MAX)
     place = match_place(location_text, areas)
     nebraska_host = source.default_area is not None

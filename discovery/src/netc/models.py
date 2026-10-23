@@ -285,6 +285,8 @@ class RawListing(BaseModel):
     cost: Cost | None = None
     price: str | None = None
     """Untrusted, like the rest; normalize cleans it."""
+    country: str | None = None
+    """The venue's country as the source gives it (a code or a name); None when not given."""
 
 
 # ---------------------------------------------------------------- sources

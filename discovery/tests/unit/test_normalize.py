@@ -294,3 +294,18 @@ def test_the_cost_reaches_the_event() -> None:
     n = norm(raw(), make_source(default_area=None, default_cost="free"))
     event = to_event(n, categories=["software-dev"], review_state="published", now=NOW)
     assert event.cost == "free" and "cost" in event.inferred
+
+
+# --- Country: Lincoln, England is not Lincoln, Nebraska
+
+
+@pytest.mark.parametrize("country", ["gb", "GB", "United Kingdom", "CA"])
+def test_a_listing_outside_the_united_states_is_dropped(country: str) -> None:
+    listing = raw(location_text="The Hub, Lincoln, H7 LN1 1AA", country=country)
+    reason = dropped(listing, make_source(default_area="lincoln")).reason
+    assert "outside the United States" in reason
+
+
+@pytest.mark.parametrize("country", ["US", "us", "USA", "United States", None])
+def test_a_us_or_unstated_country_is_kept(country: str | None) -> None:
+    assert norm(raw(country=country)).area == "omaha"
