@@ -3,6 +3,7 @@ approved_count: 0
 check_interval_hours: 24
 connector: ical
 default_area: omaha
+default_cost: free
 feed_url: https://groups.drupal.org/ical/4145
 follow_links: null
 found_via: null
