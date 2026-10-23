@@ -12,6 +12,7 @@ from datetime import date, datetime, timedelta
 from typing import Any
 
 import pytest
+
 from netc.site.calendar import (
     current_month,
     days_spanned,
@@ -26,7 +27,6 @@ from netc.site.calendar import (
     week_days,
     weeks_around,
 )
-
 from tests.data_samples import make_event, utc
 
 pytestmark = pytest.mark.unit
