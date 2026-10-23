@@ -31,7 +31,7 @@ def events() -> list[Event]:
         site_event("https://d.example.org/e", "Saturday Workshop", utc(2026, 10, 18, 10),
                    "saturday-workshop-2026-10-18", end=utc(2026, 10, 18, 14)),
         site_event("https://e.example.org/e", "Holiday Demo Day", utc(2025, 12, 10, 0),
-                   "holiday-demo-day-2025-12-09"),
+                   "holiday-demo-day-2025-12-09", original_unavailable=True),
         site_event("https://f.example.org/e", "November Meetup", utc(2026, 11, 10, 23),
                    "november-meetup-2026-11-10"),
         site_event("https://g.example.org/e", "Unreviewed Past Thing", utc(2026, 10, 2, 0),
@@ -145,3 +145,15 @@ def test_without_past_events_the_page_says_so(tmp_path: Path) -> None:
     text = " ".join(page(out, "past").text().split())
     assert "No past events yet." in text
     assert not (out / "data" / "past").exists() or not any((out / "data" / "past").iterdir())
+
+
+def test_a_gone_original_page_is_noted_on_the_card_and_the_event_page(site: Path) -> None:
+    note = "The original page may no longer be available."
+    cards = {
+        c.css_first("h3").text(strip=True): c
+        for c in page(site, "past/page/2").css("article.event")
+    }
+    assert note in " ".join(cards["Holiday Demo Day"].text().split())
+    assert note not in " ".join(cards["September Security Night"].text().split())
+    detail = page(site, "events/holiday-demo-day-2025-12-09")
+    assert note in " ".join(detail.text().split())

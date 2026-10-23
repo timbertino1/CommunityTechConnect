@@ -50,6 +50,7 @@ def render_markdown(report: DiscoverReport) -> str:
         + ("" if report.written else " *(Dry run: nothing was saved.)*"),
         "",
         *_ai_line(report),
+        *_link_line(report),
         "### Sources",
         "",
         "| Source | Result | Upcoming | Added or kept | Held | Rejected | Dropped "
@@ -122,6 +123,16 @@ def _ai_line(report: DiscoverReport) -> list[str]:
         f"${MONTHLY_BUDGET_USD:.2f} spent this month.{problems}",
         "",
     ]
+
+
+def _link_line(report: DiscoverReport) -> list[str]:
+    """The monthly check of past events' original pages (T118)."""
+    check = report.link_check
+    if check is None:
+        return []
+    pages = "1 page" if check.checked == 1 else f"{check.checked} pages"
+    gone = "1 may be gone" if check.unavailable == 1 else f"{check.unavailable} may be gone"
+    return [f"**Past events' original pages:** {pages} checked; {gone}.", ""]
 
 
 def _source_row(row: SourceRow) -> str:
