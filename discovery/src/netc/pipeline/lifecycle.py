@@ -25,7 +25,7 @@ from datetime import datetime
 from typing import Final
 
 from netc.models import Event, ReviewItem, Source
-from netc.pipeline.dedupe import merge, same_event
+from netc.pipeline.dedupe import cost_rank, merge, same_event
 
 UNVERIFIED_AFTER_MISSED_RUNS: Final = 2
 PROBATIONARY_REASON: Final = "new event from a probationary source"
@@ -116,6 +116,8 @@ def _ended_eventbrite_only(event: Event, sources: Mapping[str, Source], now: dat
 def _update(stored: Event, fresh: Event, now: datetime) -> Event:
     combined = merge(stored, fresh)
     status = "cancelled" if fresh.status == "cancelled" else "scheduled"
+    # A stated cost outlives a read that says nothing; a default the admin removed does not.
+    kept = stored if cost_rank(stored) == 2 and cost_rank(fresh) < 2 else fresh
     return combined.model_copy(
         update={
             "title": fresh.title,
@@ -128,7 +130,11 @@ def _update(stored: Event, fresh: Event, now: datetime) -> Event:
             "location": fresh.location,
             "area": fresh.area,
             "categories": fresh.categories,
-            "inferred": fresh.inferred,
+            "inferred": fresh.inferred
+            if kept is fresh
+            else [f for f in fresh.inferred if f != "cost"],
+            "cost": kept.cost,
+            "price": kept.price,
             "status": status,
             "first_seen": stored.first_seen,
             "last_verified": now,

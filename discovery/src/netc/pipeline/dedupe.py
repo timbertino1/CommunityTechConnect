@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 
 from rapidfuzz import fuzz
 
-from netc.models import Event, SourceListing
+from netc.models import Event, InferredField, SourceListing
 from netc.pipeline.timeutil import CENTRAL
 
 MAX_START_GAP: Final = timedelta(minutes=30)
@@ -80,15 +80,29 @@ def merge(primary: Event, other: Event) -> Event:
     listings = _merge_listings(primary.listings, other.listings)
     best = min((primary, other), key=lambda e: _link_rank(e.original_url))
     categories = list(dict.fromkeys([*primary.categories, *other.categories]))[:3]
+    priced = max((primary, other), key=cost_rank)  # ties keep primary
+    inferred: list[InferredField] = [f for f in primary.inferred if f != "cost"]
+    if cost_rank(priced) == 1:
+        inferred.append("cost")
     return primary.model_copy(
         update={
             "original_url": best.original_url,
+            "cost": priced.cost,
+            "price": priced.price,
+            "inferred": inferred,
             "listings": listings,
             "categories": categories,
             "first_seen": min(primary.first_seen, other.first_seen),
             "last_verified": max(primary.last_verified, other.last_verified),
         }
     )
+
+
+def cost_rank(event: Event) -> int:
+    """2 = the event's own page says, 1 = from the source's default, 0 = unknown (FR-052)."""
+    if event.cost is None:
+        return 0
+    return 1 if "cost" in event.inferred else 2
 
 
 def link_rank(url: str) -> int:

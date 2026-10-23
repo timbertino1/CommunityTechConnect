@@ -201,3 +201,56 @@ def test_garbage_never_raises(body: bytes) -> None:
 
 def test_the_connector_is_registered() -> None:
     assert default_connectors(lambda: FETCHED_AT)["eventbrite_org"].kind == "eventbrite_org"
+
+
+# --- Cost (T157; FR-052)
+
+
+def _price(value: str) -> dict[str, object]:
+    return {"currency": "USD", "major_value": value, "display": f"${value} USD"}
+
+
+def test_ticket_prices_are_asked_for() -> None:
+    api = FakeApi((200, recorded()))
+    connector(api).fetch(source(), NeverFetch())
+    assert "ticket_availability" in api.calls[0][0]
+
+
+@pytest.mark.parametrize(
+    ("fields", "expected"),
+    [
+        ({"is_free": True}, ("free", None)),
+        (
+            {
+                "is_free": False,
+                "ticket_availability": {
+                    "minimum_ticket_price": _price("25.00"),
+                    "maximum_ticket_price": _price("25.00"),
+                },
+            },
+            ("paid", "$25"),
+        ),
+        (
+            {
+                "is_free": False,
+                "ticket_availability": {
+                    "minimum_ticket_price": _price("10.00"),
+                    "maximum_ticket_price": _price("40.00"),
+                },
+            },
+            ("paid", "$10\N{EN DASH}$40"),
+        ),
+        ({"is_free": False}, ("paid", None)),
+        ({}, (None, None)),
+    ],
+)
+def test_cost_comes_from_is_free_and_ticket_prices(
+    fields: dict[str, object], expected: tuple[str | None, str | None]
+) -> None:
+    data = json.loads(recorded())
+    first = data["events"][0]
+    base = {k: v for k, v in first.items() if k not in ("is_free", "ticket_availability")}
+    data["events"] = [{**base, **fields}]
+    eb, page = parsed(json.dumps(data).encode())
+    [listing] = eb.parse(source(), page).listings
+    assert (listing.cost, listing.price) == expected
