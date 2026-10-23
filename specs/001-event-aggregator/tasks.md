@@ -295,9 +295,13 @@ cost is unknown. An administrator can mark a source whose events are always free
   add `cost` and `price` to `PUBLIC_FIELDS`, so T157's site tests pass.
 - [X] T161 [OWNER] Mark sources whose events are always free: review the proposed list and set
   `default_cost: free` in their `data/sources/*.yaml`.
-- [ ] T162 Checkpoint: after a discover-events run, confirm on the live site that events with a
-  known cost show it, sources marked free show "Free" with the inferred note, and unknown costs
-  show nothing. Record the results in `docs/checkpoints/cost.md`.
+- [ ] T162 Checkpoint: after a discover-events run, confirm on the live site that event pages
+  with a known cost show it, sources marked free show "Free" with the inferred note, unknown
+  costs show nothing, and cards and calendar entries carry no cost label. Record the results in
+  `docs/checkpoints/cost.md`.
+- [X] T163 Remove the cost label from cards and calendar entries (owner decision 2026-10-23:
+  a "Free" label on some events suggests the others cost money); keep the event page's Cost row
+  and `cost`/`price` in the public data.
 
 ---
 

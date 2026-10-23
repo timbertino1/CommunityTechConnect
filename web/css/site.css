@@ -58,8 +58,6 @@
   --bad-bg: #f8e1de;
   --warn: #6e4b00;
   --warn-bg: #fbefd2;
-  --good: #1f5c2c;
-  --good-bg: #e1efdf;
   --focus: #141414;
   /* The header band and hero are dark in both themes. */
   --band-bg: #121110;
@@ -101,8 +99,6 @@
     --bad-bg: #3b1d19;
     --warn: #f0c374;
     --warn-bg: #3a2e17;
-    --good: #a3d9a8;
-    --good-bg: #18301c;
     --focus: #f2eee6;
     --band-bg: #0b0a09;
     color-scheme: dark;
@@ -369,20 +365,6 @@ main .filter-status { margin-bottom: 1rem; }
 }
 .badge--cancelled { background: var(--bad-bg); color: var(--bad); }
 .badge--unverified { background: var(--warn-bg); color: var(--warn); }
-/* FR-052: what an event costs, only when the source says. */
-.cost {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.4;
-  padding: 0 0.45rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  color: var(--ink);
-  white-space: nowrap;
-}
-.cost--free { background: var(--good-bg); border-color: transparent; color: var(--good); }
-.cal-event .cost { font-size: 0.7rem; padding: 0 0.3rem; }
 .event--cancelled h3 a { text-decoration: line-through; }
 
 .empty {
