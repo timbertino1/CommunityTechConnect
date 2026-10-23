@@ -307,7 +307,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Now in <strong>Phase 4 of 10</strong> (31 of 33) &middot; <strong>New look</strong> done &middot; Phase 8 tools 8 of 9, pulled forward</span>
+    <span>Now in <strong>Phase 4 of 10</strong> (31 of 33) &middot; <strong>New look</strong> done &middot; Phase 8 tools done, pulled forward</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -320,11 +320,11 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
       <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
-      <li class="now"><div class="bar"><span style="width:89%"></span></div><div class="lbl"><b>08</b>Admin tools</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>08</b>Admin tools</div></li>
       <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4, and Phase 8 pulled forward)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4; Phase 8 was pulled forward and is done)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -335,7 +335,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-4" aria-controls="phase-4" aria-selected="false" tabindex="-1">Phase 4 &middot; Find new groups <span class="pill now">now</span></button>
   <button class="tab" role="tab" id="tab-design-b" aria-controls="design-b" aria-selected="false" tabindex="-1">New look <span class="pill ok">done</span></button>
-  <button class="tab" role="tab" id="tab-phase-8" aria-controls="phase-8" aria-selected="false" tabindex="-1">Phase 8 &middot; Review tools <span class="pill now">early</span></button>
+  <button class="tab" role="tab" id="tab-phase-8" aria-controls="phase-8" aria-selected="false" tabindex="-1">Phase 8 &middot; Review tools <span class="pill ok">done</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -537,7 +537,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
           <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">06</td><td><b>Filters.</b> By city (Omaha, Lincoln, elsewhere in Nebraska, online) and by topic.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">07</td><td><b>Past events.</b> An archive of what already happened.</td><td><span class="status next">Planned</span></td></tr>
-          <tr><td class="num">08</td><td><b>Admin tools.</b> Review new sources, hide or correct events, watch for failing sources.</td><td><span class="status now">In progress (early)</span></td></tr>
+          <tr><td class="num">08</td><td><b>Admin tools.</b> Review new sources, hide or correct events, watch for failing sources.</td><td><span class="status done">Done (early)</span></td></tr>
           <tr><td class="num">09</td><td><b>Suggestions.</b> Visitors can suggest a group or event source.</td><td><span class="status next">Planned</span></td></tr>
           <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews.</td><td><span class="status next">Planned</span></td></tr>
         </tbody>
@@ -1702,7 +1702,7 @@ I first planned a still picture on phones. Then I wanted the animation on my Pix
     </div>
     <p class="lede">Phase 8 is the owner's toolkit. Part of it couldn't wait: the UNL computing calendar is on probation, so each of its events needs a person to approve it, and until now those events just sat in a file. So the review tools came first, along with a report that says what every run did.</p>
     <div class="stats">
-      <div class="stat"><span class="n">8<small> of 9</small></span><p>Phase 8 tasks done. The last one waits for the first real review PR.</p></div>
+      <div class="stat"><span class="n">9<small> of 9</small></span><p>Phase 8 tasks done, the last one with the first real review PR on Oct 22.</p></div>
       <div class="stat"><span class="n">891</span><p>Automated tests across the project, all passing.</p></div>
       <div class="stat"><span class="n">20<small> of 20</small></span><p>Event titles on the live UNL computing calendar now filtered out automatically. None of them are public events.</p></div>
     </div>
@@ -1713,7 +1713,7 @@ I first planned a still picture on phones. Then I wanted the animation on my Pix
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Health issue</b><small>One pinned issue that shows every source's health, and pings me only when something needs me.</small></div><span class="ids">T124</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Overrides</b><small>Hide an event or fix its topics or area with one line in a file; every later run keeps it.</small></div><span class="ids">T125&ndash;T126</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Admin guide</b><small>Reviewing, overrides, sources, the health issue, and who has access, in one page.</small></div><span class="ids">T127</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Checkpoint</b><small>The offline run-through passed, and on Oct 22 the first real review PR went end to end: 1 event approved, 13 rejected, applied automatically (PRs #52 and #54). Writing it up is next.</small></div><span class="ids">T128</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint</b><small>The offline run-through passed, and on Oct 22 the first real review PR went end to end: 1 event approved, 13 rejected, applied automatically (PRs #52 and #54), and a source that was mostly noise paused itself.</small></div><span class="ids">T128</span></li>
     </ul>
   </section>
 
@@ -1829,6 +1829,7 @@ I first planned a still picture on phones. Then I wanted the animation on my Pix
     <div class="notes">
       <div class="note hi"><div><h3>Deleting a source would have broken the archive</h3><p>The first draft of the admin guide said "to remove a source, delete its file". Checking that against the code showed past events still point at their source, and the data check fails if that file is gone. The guide now says to pause a source and keep the file.</p></div></div>
       <div class="note"><div><h3>A checkpoint that has to wait</h3><p>The offline run-through passed: three approvals promoted a source to trusted, two rejections paused another, and a merge by a non-admin was refused. The live run waits for something to review. Every UNL event is now filtered out and every other source is trusted, so the review queue is empty.</p></div></div>
+      <div class="note hi"><div><h3>The first real review</h3><p>On Oct 22 the weekly hunt's new sources finally held something back: 14 events from two probationary sources. I approved one, INTERFACE Omaha 2026, and rejected 13 from a general event aggregator: a library trivia night, mahjong, a book club, a half-marathon dinner, neighborhood association meetings. A minute after I merged, the bot had checked the merge, applied my choices, merged its own follow-up, and the site had the event. The aggregator, 13 rejections and no approvals, paused itself.</p></div></div>
     </div>
   </section>
 
