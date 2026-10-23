@@ -64,6 +64,13 @@ def render_sources_markdown(report: DiscoverSourcesReport) -> str:
             f" · found via {CHANNELS.get(s.found_via or '', s.found_via or 'unknown')}"
             for s in report.added[:MAX_LISTED]
         ]
+    if report.stopped_for_time:
+        waiting = report.evaluated["deferred"]
+        lines += [
+            "",
+            f"**Stopped at the time limit:** {waiting} candidate{'s' if waiting != 1 else ''} "
+            "wait for the next run.",
+        ]
     if report.set_aside:
         lines += ["", "### Looked at and not added", ""]
         lines += [

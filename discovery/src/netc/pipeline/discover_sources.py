@@ -7,21 +7,26 @@ research R6, R7; FR-010-FR-015).
    ones before it found, so nothing is found twice.
 2. Mentions, new and old, are resolved to organizers' pages where possible (FR-014).
 3. Candidates due a look are evaluated; relevant ones become probationary sources, whose events
-   the next discover-events run collects and holds for review.
+   the next discover-events run collects and holds for review. No evaluation starts once the run
+   has used its time budget (the job is stopped at 60 minutes, and a stopped job saves
+   nothing); the rest wait for the next run.
 4. Known groups record when they were last searched and gain the new sources.
 
 Writes candidates.json, mentions.json, new source files, known_groups.yaml, the search usage and
 the AI cache; nothing else. Newsletters the run is done with are then deleted from the inbox,
-so an email is never lost to a crash. In a dry run nothing is written or deleted.
+so an email is never lost to a crash. In a dry run nothing is written or deleted. Each finder
+and stage logs its time, and each evaluation its result, as JSON lines.
 """
 
 from __future__ import annotations
 
 import json
+import time
 from collections import Counter
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Final
 
 from netc.connectors.base import Connector
 from netc.fetch import HttpClient
@@ -40,6 +45,9 @@ from netc.pipeline.resolve import resolve_mentions
 from netc.pipeline.runner import LogSink, stderr_sink
 from netc.search.base import BudgetedSearch
 from netc.storage import DataStore
+
+RUN_TIME_BUDGET_SECONDS: Final = 40 * 60
+"""Evaluations start only within this; the workflow's job timeout is 60 minutes."""
 
 
 def default_finders(inbox: Inbox | None = None) -> list[Finder]:
@@ -70,6 +78,8 @@ class DiscoverSourcesReport:
     searches_left: int | None = None
     ai_calls: int | None = None
     ai_spent_usd: float = 0.0
+    stopped_for_time: bool = False
+    """The time budget ran out during evaluation; deferred candidates wait for the next run."""
     inbox_deleted: int = 0
     inbox_delete_errors: int = 0
     written: bool = False
@@ -88,7 +98,17 @@ def discover_sources(
     inbox: Inbox | None = None,
     dry_run: bool = False,
     log: LogSink = stderr_sink,
+    time_budget_seconds: float = RUN_TIME_BUDGET_SECONDS,
+    clock: Callable[[], float] = time.monotonic,
 ) -> DiscoverSourcesReport:
+    started = mark = clock()
+
+    def stage_done(stage: str) -> None:
+        nonlocal mark
+        now_s = clock()
+        log(json.dumps({"event": "stage_done", "stage": stage, "seconds": round(now_s - mark, 1)}))
+        mark = now_s
+
     areas = store.read_areas()
     if areas is None:
         raise RuntimeError("data/areas.yaml is required for discovery")
@@ -117,6 +137,7 @@ def discover_sources(
     found: Counter[str] = Counter()
     processed: list[str] = []
     for finder in finders if finders is not None else default_finders(inbox):
+        finder_started = clock()
         try:
             result = finder.run(ctx)
         except Exception as exc:  # one broken finder must not stop the hunt
@@ -128,6 +149,15 @@ def discover_sources(
             )
             continue
         report.finders[finder.name] = result.stats
+        log(
+            json.dumps(
+                {
+                    "event": "finder_done",
+                    "finder": finder.name,
+                    "seconds": round(clock() - finder_started, 1),
+                }
+            )
+        )
         _add_candidates(ctx, result.candidates, found)
         for mention in result.mentions:
             if mention.id not in mentions:
@@ -136,12 +166,15 @@ def discover_sources(
         searched.update(result.searched_groups)
         processed += result.processed_messages
 
+    stage_done("finders")
+
     resolved = resolve_mentions(
         list(mentions.values()), http=http, now=now, search=search, events=events
     )
     report.mentions = resolved.counts
     _add_candidates(ctx, resolved.candidates, found)
     report.found = dict(found)
+    stage_done("mentions")
 
     evaluation = evaluate_candidates(
         ctx.candidates,
@@ -152,8 +185,13 @@ def discover_sources(
         areas=areas,
         now=now,
         ai=ai,
+        should_stop=lambda: clock() - started >= time_budget_seconds,
+        log=log,
+        clock=clock,
     )
+    stage_done("evaluation")
     report.evaluated = evaluation.counts
+    report.stopped_for_time = evaluation.stopped_for_time
     report.added = evaluation.added
     # The evaluator returns a new object for each candidate it looked at.
     report.set_aside = [

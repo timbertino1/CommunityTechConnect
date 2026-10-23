@@ -13,14 +13,18 @@ same rules (and AI) as everyday events:
   month (FR-015);
 - nothing readable, no upcoming events, or events only a person can judge: needs review.
 
-At most MAX_EVALUATIONS a run; the rest wait for the next run.
+At most MAX_EVALUATIONS a run, and none started once the run's time is up (``should_stop``);
+the rest wait for the next run. Each sample is at most MAX_SAMPLE events: one relevant event is
+enough to add a source, and every unclear one can cost an AI call.
 """
 
 from __future__ import annotations
 
+import json
 import re
+import time
 from collections import Counter
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Final, Literal
@@ -37,10 +41,11 @@ from netc.models import AreaConfig, CandidateSource, Category, FollowLinks, Sour
 from netc.pipeline.ai import Ai
 from netc.pipeline.classify import ClassifyInput, classify
 from netc.pipeline.normalize import Dropped, normalize
+from netc.pipeline.runner import LogSink
 from netc.pipeline.sanitize import to_plain_text
 
 MAX_EVALUATIONS: Final = 25
-MAX_SAMPLE: Final = 20
+MAX_SAMPLE: Final = 8
 RECHECK_AFTER: Final = timedelta(days=30)
 TERMS_BLOCKED: Final = frozenset(
     {
@@ -63,6 +68,8 @@ class EvaluateResult:
     """All candidates, in the order given, with the evaluated ones updated."""
     added: list[Source] = field(default_factory=list)
     counts: Counter[str] = field(default_factory=Counter)
+    stopped_for_time: bool = False
+    """``should_stop`` ended the run early; the deferred candidates wait for the next run."""
 
 
 @dataclass(frozen=True)
@@ -84,6 +91,9 @@ def evaluate_candidates(
     now: datetime,
     ai: Ai | None = None,
     max_evaluations: int = MAX_EVALUATIONS,
+    should_stop: Callable[[], bool] | None = None,
+    log: LogSink | None = None,
+    clock: Callable[[], float] = time.monotonic,
 ) -> EvaluateResult:
     taken = {s.id for s in sources}
     result = EvaluateResult(list(candidates))
@@ -94,8 +104,24 @@ def evaluate_candidates(
         if done >= max_evaluations:
             result.counts["deferred"] += 1
             continue
+        if result.stopped_for_time or (should_stop is not None and should_stop()):
+            result.stopped_for_time = True
+            result.counts["deferred"] += 1
+            continue
         done += 1
+        started = clock()
         verdict = _evaluate(candidate, http, connectors, categories, areas, now, ai, taken)
+        if log is not None:
+            log(
+                json.dumps(
+                    {
+                        "event": "candidate_evaluated",
+                        "host": urlsplit(candidate.url).hostname or "",
+                        "result": verdict.result,
+                        "seconds": round(clock() - started, 1),
+                    }
+                )
+            )
         evidence = list(candidate.evidence)
         if verdict.note:
             evidence = [*evidence, verdict.note][-50:]
