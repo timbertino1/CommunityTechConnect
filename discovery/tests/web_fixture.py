@@ -51,6 +51,14 @@ def events() -> list[Event]:
                    utc(2026, 12, 2, 18), "kearney-data-workshop-2026-12-02",
                    categories=["data-analytics"], summary="Dashboards for small towns.",
                    **at("Kearney", "other_ne")),
+        # Past by the fixture's clock (Oct 1, 2026): on /past/, not on the list.
+        site_event("https://lincolnsec.example.org/sep", "Lincoln Security Kickoff",
+                   utc(2026, 9, 10, 23), "lincoln-security-kickoff-2026-09-10",
+                   categories=["security"], summary="The fall season starts.",
+                   **at("Lincoln", "lincoln")),
+        site_event("https://omahaai.example.org/aug", "Omaha AI Summer Social",
+                   utc(2026, 8, 20, 23), "omaha-ai-summer-social-2026-08-20",
+                   categories=["ai-ml"], summary="Patio talks.", **at("Omaha", "omaha")),
     ]  # fmt: skip
 
 
