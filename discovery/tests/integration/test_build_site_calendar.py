@@ -212,16 +212,7 @@ def test_the_nav_calendar_link_knows_the_current_month(site: Path) -> None:
     assert link.attributes["data-current-month"] == "/calendar/2026/10/"
 
 
-def test_calendar_entries_say_free_or_paid(site: Path) -> None:
-    tree = page(site, "calendar/2026/11")
-
-    def label(day: str, slug: str) -> str | None:
-        for entry in cell(tree, day).css("li.cal-event"):
-            if f"/events/{slug}/" in hrefs(entry):
-                found = entry.css_first(".cost")
-                return flat(found) if found else None
-        raise AssertionError(f"{slug} not on {day}")
-
-    assert label("2026-11-05", CONFERENCE) == "Cost: Free"
-    assert label("2026-11-12", HACK_NIGHT) == "Cost: Paid"  # no price given
-    assert label("2026-11-10", NOVEMBER) is None
+def test_calendar_entries_carry_no_cost_label(site: Path) -> None:
+    # The conference is free and the hack night paid, but cost shows only on the event page.
+    entries = page(site, "calendar/2026/11").css("li.cal-event")
+    assert entries and not [e for e in entries if e.css_first(".cost")]

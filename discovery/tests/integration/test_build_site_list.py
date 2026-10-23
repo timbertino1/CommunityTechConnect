@@ -338,14 +338,11 @@ def test_the_site_has_a_favicon(site: Path) -> None:
 # --- Cost (T157; FR-052)
 
 
-def test_cards_say_free_or_the_price_and_nothing_when_unknown(site: Path) -> None:
-    labels = {
-        flat(c.css_first("h3")): (flat(c.css_first(".cost")) if c.css_first(".cost") else None)
-        for c in cards(site)
-    }
-    assert labels["Remote Rust night"] == "Cost: $25"  # "Cost: " is for screen readers only
-    assert labels["Prairie Python December"] == "Cost: Free"
-    assert labels["Prairie Python November"] is None
+def test_cards_carry_no_cost_label(site: Path) -> None:
+    # Owner decision 2026-10-23: a "Free" label on some cards would suggest the rest cost money,
+    # so cost is shown only on the event page (FR-052).
+    found = [c for c in cards(site) if c.css_first(".cost") or "Free" in flat(c)]
+    assert found == []
 
 
 def test_the_event_page_has_a_cost_row_only_when_known(site: Path) -> None:

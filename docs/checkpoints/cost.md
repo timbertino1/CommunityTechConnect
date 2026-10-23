@@ -7,6 +7,11 @@
 Playwright: 6 of 6 checks passed. The third case in the task, a cost the event page itself
 states, is not live yet (see below).
 
+> **Later the same day (T163):** the owner removed the cost label from cards and calendar
+> entries, since a "Free" label on some events would suggest the others cost money. Cost now
+> shows only as the Cost row on the event page. The card and calendar results below record
+> what was live before that change.
+
 ## How the events got there
 
 1. PR #77 (T161) set `default_cost: free` on nine sources the owner knows are free.
