@@ -65,6 +65,16 @@
   name: Creighton University
   source_ids: []
   status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/digitallincoln/events/
+  name: Digital Lincoln Events
+  source_ids:
+  - src_digitallincoln
+  status: active
 - aliases:
   - Omaha Drupal Meetup
   area: omaha
@@ -75,6 +85,16 @@
   name: Drupal Nebraska
   source_ids:
   - src_drupal-nebraska
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://madenewomaha.com/events
+  name: Events from October 26 – November 17 – Made New Makerspace
+  source_ids:
+  - src_madenewomaha-com
   status: active
 - aliases: []
   area: lincoln
@@ -165,6 +185,16 @@
 - aliases: []
   area: lincoln
   cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/lincoln-code/events/
+  name: Lincoln.Code
+  source_ids:
+  - src_lincoln-code
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
   last_searched: '2026-10-23T00:12:04Z'
   links:
   - https://allevents.in/lincoln/meetups
@@ -195,6 +225,16 @@
   links: []
   name: Nebraska Data and Analytics Forum
   source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/nebraska-data-analytics-forum/events/
+  name: Nebraska Data and Analytics Forum Events
+  source_ids:
+  - src_nebraska-data-analytics-forum
   status: active
 - aliases: []
   area: lincoln
@@ -242,6 +282,17 @@
   - https://www.nebraskacert.org/
   name: NEbraskaCERT
   source_ids: []
+  status: active
+- aliases: []
+  area: other_ne
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://netasite.org/
+  name: NETA | Nebraska Educational Technology Association – NETA continuously creates and curates equitable
+    opportunities for learning through innovative practices and processes to effectively prepare…
+  source_ids:
+  - src_netasite-org
   status: active
 - aliases: []
   area: omaha
@@ -319,6 +370,16 @@
   name: Tech meetups in Omaha 2026 / 2027
   source_ids:
   - src_dev-events
+  status: active
+- aliases: []
+  area: lincoln
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/the-claude-code-developers-night-out/events/
+  name: The Claude Code Developers Night Out Events
+  source_ids:
+  - src_the-claude-code-developers-night-out
   status: active
 - aliases:
   - UNO

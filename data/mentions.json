@@ -24,7 +24,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "A Look Back at the Tech Builders Challenge"
   },
   {
@@ -54,7 +54,7 @@
     "title": "Lincoln Team"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "news",
     "date_hint": "Thursday, Oct. 29",
     "event_id": null,
@@ -78,7 +78,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "New website connects communities with data, tools to thrive"
   },
   {
@@ -106,11 +106,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -138,7 +138,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI | Digital Lincoln — Digital Lincoln"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "news",
     "date_hint": "March 2-3, 2027",
     "event_id": null,
@@ -146,11 +146,11 @@
     "links": [],
     "organizer_hint": "Nebraska Cures and NWIS",
     "place_hint": "Lincoln, NE",
-    "resolution": "unresolved",
+    "resolution": "resolved",
     "title": "2027 Nebraska Women in STEM Conference"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -164,7 +164,7 @@
     "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -489,6 +489,20 @@
   },
   {
     "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_746853d13974",
+    "links": [
+      "https://www.wowt.com/2026/10/06/neighbors-fight-blight-designation-va-shows-interest-omahas-center-mall-site"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Residents, developer push back on Omaha over mall site’s blight designation"
+  },
+  {
+    "attempts": 0,
     "channel": "news",
     "date_hint": "Nov. 16-21",
     "event_id": null,
@@ -770,6 +784,20 @@
     "place_hint": "Grand Island",
     "resolution": "unresolved",
     "title": "Spur AgConverge 2026"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_bd8a5ca9d82d",
+    "links": [
+      "https://bpb-eu-w2.wpmucdn.com/blogs.lincoln.ac.uk/dist/7/9039/files/2025/11/AI-policy-2025.pdf"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "University of Lincoln Artificial Intelligence Policy - CDN"
   },
   {
     "attempts": 3,
