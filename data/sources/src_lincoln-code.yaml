@@ -1,5 +1,5 @@
 added_at: '2026-10-23'
-approved_count: 0
+approved_count: 1
 check_interval_hours: 24
 connector: jsonld
 default_area: lincoln
@@ -19,5 +19,5 @@ rate_limit_seconds: 10
 rejected_count: 0
 status: active
 trust: probationary
-updated_at: null
+updated_at: '2026-10-23'
 url: https://www.meetup.com/lincoln-code/events/

@@ -1,8 +1,9 @@
 added_at: '2026-10-23'
-approved_count: 0
+approved_count: 10
 check_interval_hours: 24
 connector: ical
 default_area: omaha
+default_cost: null
 feed_url: https://madenewomaha.com/events/?ical=1
 follow_links: null
 found_via: link_graph
@@ -13,8 +14,8 @@ notes: 'Discovered via link graph: the page links an iCal feed.'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
-rejected_count: 0
-status: active
+rejected_count: 15
+status: paused
 trust: probationary
-updated_at: null
+updated_at: '2026-10-23'
 url: https://madenewomaha.com/events

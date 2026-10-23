@@ -1,8 +1,9 @@
 added_at: '2026-10-23'
-approved_count: 0
+approved_count: 1
 check_interval_hours: 24
 connector: ical
 default_area: other_ne
+default_cost: null
 feed_url: https://netasite.org/events-old/?ical=1
 follow_links: null
 found_via: web_search
@@ -17,5 +18,5 @@ rate_limit_seconds: 5
 rejected_count: 0
 status: active
 trust: probationary
-updated_at: null
+updated_at: '2026-10-23'
 url: https://netasite.org/
