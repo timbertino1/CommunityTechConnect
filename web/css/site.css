@@ -421,7 +421,7 @@ main:focus { outline: none; }
   .cal-month caption { display: block; width: 100%; }
   .cal-month { border: 0; background: none; }
   .cal-month td { height: auto; border: 0; border-bottom: 1px solid var(--line); background: var(--surface); padding: 0.75rem; }
-  .cal-month td.is-empty { display: none; }
+  .cal-month td.is-empty, .cal-month td.is-other-month { display: none; }
   .cal-month .cal-num { display: none; }
   .cal-month .cal-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: block; font-family: var(--font-display); font-weight: 700; }
   .cal-event { font-size: 0.95rem; }
