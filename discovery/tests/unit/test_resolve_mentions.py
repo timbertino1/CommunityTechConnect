@@ -193,3 +193,23 @@ def test_nothing_is_ever_published(tmp_path: Path) -> None:
 )
 def test_date_hints_are_read(hint: str | None, expected: date | None) -> None:
     assert parse_date_hint(hint, NOW) == expected
+
+
+def test_a_crash_on_one_mention_does_not_stop_the_rest(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from netc.connectors.jsonld import page_listings as real
+
+    calls = iter([ValueError("Invalid IPv6 URL")])
+
+    def flaky(page: Any) -> Any:
+        error = next(calls, None)
+        if error is not None:
+            raise error
+        return real(page)
+
+    monkeypatch.setattr("netc.pipeline.resolve.page_listings", flaky)
+    result = resolve_mentions([mention("Rust Night"), mention("Rust Night", date_hint="Nov 18")],
+                              http=http(tmp_path), now=NOW)  # fmt: skip
+    assert [m.resolution for m in result.mentions] == ["unresolved", "resolved"]
+    assert result.counts["errors"] == 1

@@ -117,3 +117,16 @@ def test_detect_reports_errors_as_none(tmp_path: Path) -> None:
     assert found.kind == "none" and "404" in found.reason
     missing = detect("https://unknown.example.org/", http)
     assert missing.kind == "none" and "could not be read" in missing.reason
+
+
+def test_a_malformed_link_is_skipped_not_fatal() -> None:
+    html = (
+        '<html><head><link rel="alternate" type="application/rss+xml" href="https://[::1">'
+        '</head><body><a href="http://[bad">broken</a>'
+        '<a href="https://site.example.org/events.ics">Calendar</a></body></html>'
+    )
+    found = detect_in(
+        payload(html, url="https://site.example.org/events", content_type="text/html")
+    )
+    assert found.kind == "ical"
+    assert found.feed_url == "https://site.example.org/events.ics"

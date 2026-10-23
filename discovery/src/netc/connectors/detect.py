@@ -15,7 +15,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Final, Literal
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 import feedparser
 from selectolax.lexbor import LexborHTMLParser
@@ -23,6 +23,7 @@ from selectolax.lexbor import LexborHTMLParser
 from netc.connectors.base import RawPayload
 from netc.connectors.jsonld import page_listings
 from netc.fetch import DEFAULT_CONTENT_TYPES, FetchError, HttpClient
+from netc.fetch.urls import join_url
 from netc.pipeline.sanitize import safe_url, to_plain_text
 
 type DetectedKind = Literal["ical", "jsonld", "rss", "none"]
@@ -97,7 +98,7 @@ def _calendar_link(tree: LexborHTMLParser, base: str) -> str | None:
         href = (node.attributes.get("href") or "").strip()
         if href.lower().startswith("webcal://"):
             href = "https://" + href[len("webcal://") :]
-        url = safe_url(urljoin(base, href))
+        url = safe_url(join_url(base, href))
         if url is not None and _looks_like_ics(url):
             return url
     return None
@@ -108,7 +109,7 @@ def _alternate(tree: LexborHTMLParser, base: str, types: tuple[str, ...]) -> str
         rel = (node.attributes.get("rel") or "").lower().split()
         kind = (node.attributes.get("type") or "").strip().lower()
         if "alternate" in rel and kind in types:
-            url = safe_url(urljoin(base, node.attributes.get("href") or ""))
+            url = safe_url(join_url(base, node.attributes.get("href") or ""))
             if url is not None:
                 return url
     return None
