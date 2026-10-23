@@ -275,7 +275,22 @@ def _listing(
         cancelled=cancelled,
         cost=cost,
         price=price,
+        country=_country(places, index),
     )
+
+
+def _country(places: list[Any], index: dict[str, dict[str, Any]]) -> str | None:
+    """``addressCountry`` of the first place that gives one: a code ("gb") or a Country's name."""
+    for place in places:
+        address = _resolve(place.get("address"), index)
+        if not isinstance(address, dict):
+            continue
+        country = _resolve(address.get("addressCountry"), index)
+        if isinstance(country, dict):
+            country = country.get("name")
+        if isinstance(country, str) and country.strip():
+            return country.strip()[:100]
+    return None
 
 
 def _cost(node: dict[str, Any], index: dict[str, dict[str, Any]]) -> tuple[Cost | None, str | None]:

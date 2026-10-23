@@ -5,8 +5,9 @@
 | Workflow | Trigger | Permissions | Secrets (Environment `discovery`) | Does |
 |---|---|---|---|---|
 | `ci.yml` | `pull_request`, `push` to `main` | `contents: read` | none | Tests, lint, type check, schema validation of `data/`, `pip-audit`, `npm audit`, gitleaks, accessibility check on built site |
-| `discover-events.yml` | `schedule` twice daily (11:00 and 23:00 UTC) + manual | `contents: read` (writes via App token) | OpenAI, Cloudflare KV token, GitHub App key | Pull suggestions/newsletters from KV, run connectors, classify, de-dupe, update data; open/update the **daily data PR** (auto-merge); create/update the **review PR** when items are pending |
-| `discover-sources.yml` | `schedule` weekly + manual | same | + search API key | Run finders, evaluate candidates, resolve mentions, gap checks; open/update the **review PR**; update the health issue |
+| `discover-events.yml` | `schedule` twice daily (11:00 and 23:00 UTC) + manual | `contents: read` (writes via App token) | OpenAI, Cloudflare KV token, GitHub App key | Pull suggestions/newsletters from KV, run connectors, classify, de-dupe, update data; open/update the **daily data PR** (auto-merge) |
+| `discover-sources.yml` | `schedule` weekly + manual | same | + search API key | Run finders, evaluate candidates, resolve mentions, gap checks; update the health issue |
+| `review-pr.yml` | `push` to `main` changing `data/review/queue.json` + manual | `contents: read` (writes via App token) | GitHub App key | Open, update or close the **review PR** from main's queue, so items a run finds are listed once its data PR merges |
 | `apply-review.yml` | `push` to `main` | `contents: read` (writes via App token) | GitHub App key | Look up the merged PR for the pushed commit; if it is the `review/open` PR authored by the App and merged by an admin, apply its decisions; otherwise exit |
 | `deploy.yml` | `push` to `main` | `contents: read`, `deployments: write` | Cloudflare Pages token | Build static site and deploy |
 | `deploy-workers.yml` | `push` to `main` changing `workers/**` | `contents: read` | Cloudflare Workers token (Environment `production`) | Test and deploy both Workers |
@@ -27,8 +28,8 @@ job has a timeout (discovery ≤ 60 min).
 ## Review PR
 
 - Branch `review/open`, title `Review: N items (events, sources, suggestions)`. Created or
-  updated by either discovery workflow whenever items are pending (at most daily); no PR when
-  nothing is pending. Visitor notes never appear in it.
+  updated by `review-pr.yml` whenever main's review queue changes and items are pending (an
+  unticked PR is refreshed at most daily); no PR when nothing is pending. Visitor notes never appear in it.
 - Its only file change is `data/review/open.json` (the `rev_` ids included in this PR). Data PRs
   never modify that file, so the two kinds of PR cannot conflict. It is never set to auto-merge;
   only the owner merges it.

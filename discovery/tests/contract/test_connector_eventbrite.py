@@ -254,3 +254,16 @@ def test_cost_comes_from_is_free_and_ticket_prices(
     eb, page = parsed(json.dumps(data).encode())
     [listing] = eb.parse(source(), page).listings
     assert (listing.cost, listing.price) == expected
+
+
+# --- Country
+
+
+def test_the_venues_country_is_read() -> None:
+    data = json.loads(recorded())
+    first = data["events"][0]
+    venue = {**first["venue"], "address": {**first["venue"].get("address", {}), "country": "GB"}}
+    data["events"] = [{**first, "venue": venue}]
+    eb, page = parsed(json.dumps(data).encode())
+    [listing] = eb.parse(source(), page).listings
+    assert listing.country == "GB"

@@ -351,3 +351,34 @@ def test_cost_comes_from_free_flags_and_offers(
     extra: str, expected: tuple[str | None, str | None]
 ) -> None:
     assert _cost(extra) == expected
+
+
+# --- Country: Lincoln, England is not Lincoln, Nebraska
+
+
+def _country(address: str) -> str | None:
+    from netc.connectors.jsonld import page_listings
+
+    html = (
+        '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event",'
+        '"name":"AWS night","startDate":"2026-10-27T18:30:00+00:00","location":{"@type":"Place",'
+        '"name":"The Hub","address":{"@type":"PostalAddress","addressLocality":"Lincoln"'
+        + address
+        + "}}}</script>"
+    )
+    page = payload(html, url="https://www.example.org/e", content_type="text/html")
+    [listing] = page_listings(page)
+    return listing.country
+
+
+@pytest.mark.parametrize(
+    ("address", "expected"),
+    [
+        (',"addressRegion":"H7","addressCountry":"gb"', "gb"),
+        (',"addressRegion":"NE","addressCountry":"US"', "US"),
+        (',"addressCountry":{"@type":"Country","name":"United Kingdom"}', "United Kingdom"),
+        (',"addressRegion":"NE"', None),
+    ],
+)
+def test_the_places_country_is_read(address: str, expected: str | None) -> None:
+    assert _country(address) == expected
