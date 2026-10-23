@@ -29,13 +29,10 @@ from netc.storage import DataStore, atomic_write, dump_json
 PUBLIC_FIELDS: Final = (
     "id", "slug", "title", "start", "end", "all_day", "area", "location", "organizer", "summary",
     "categories", "original_url", "status", "last_verified", "inferred", "original_unavailable",
-    "cost", "price",
 )  # fmt: skip
 WEB_ASSETS: Final = ("css", "js", "vendor", "img", "fonts", "_headers", "favicon.ico", "robots.txt")
 REPO_URL: Final = "https://github.com/timbertino1/CommunityTechConnect"
-INFERRED_LABELS: Final = {
-    "area": "area", "categories": "topics", "source_tz": "time zone", "cost": "cost"
-}  # fmt: skip
+INFERRED_LABELS: Final = {"area": "area", "categories": "topics", "source_tz": "time zone"}
 
 
 class BuildError(Exception):
@@ -343,11 +340,6 @@ def _view(
         "original_url": event.original_url,
         "host": _host(event.original_url),
         "original_unavailable": event.original_unavailable,
-        # FR-052: "Free", the price, or "Paid"; None (nothing shown) when the cost is unknown.
-        "cost": event.cost,
-        "cost_label": (
-            {"free": "Free", "paid": event.price or "Paid"}[event.cost] if event.cost else None
-        ),
         # For filters.js (T112, contracts/site-urls.md): the area, the topic ids, the Central
         # Time days covered, and the lowercase text that keyword search matches.
         "filter": {
@@ -375,7 +367,7 @@ def _public_record(event: Event, organizer: str | None) -> dict[str, Any]:
 
 
 def _and_list(items: list[str]) -> str:
-    """ "topics", "topics and cost", "topics, time zone and cost"."""
+    """ "topics", "topics and area", "topics, area and time zone"."""
     return items[0] if len(items) == 1 else f"{', '.join(items[:-1])} and {items[-1]}"
 
 

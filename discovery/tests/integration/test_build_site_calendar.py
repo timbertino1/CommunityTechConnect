@@ -32,10 +32,10 @@ def events() -> list[Event]:
                    utc(2026, 11, 10, 23, 30), NOVEMBER),
         # 8 AM Nov 5 to 5 PM Nov 6, Central: a two-day conference.
         site_event("https://heartlanddev.example.org/2026", "Heartland Dev Conference",
-                   utc(2026, 11, 5, 14), CONFERENCE, end=utc(2026, 11, 6, 23), cost="free"),
+                   utc(2026, 11, 5, 14), CONFERENCE, end=utc(2026, 11, 6, 23)),
         # 10 PM Nov 12 to 1 AM Nov 13, Central.
         site_event("https://hacknight.example.org/nov", "Late Hack Night",
-                   utc(2026, 11, 13, 4), HACK_NIGHT, end=utc(2026, 11, 13, 7), cost="paid"),
+                   utc(2026, 11, 13, 4), HACK_NIGHT, end=utc(2026, 11, 13, 7)),
         # Before the build's "now" (Oct 18): past, but still on October's page.
         site_event("https://prairiepython.example.org/oct", "October Meetup",
                    utc(2026, 10, 6, 23, 30), OCTOBER),
@@ -210,9 +210,3 @@ def test_the_nav_calendar_link_knows_the_current_month(site: Path) -> None:
     home = LexborHTMLParser((site / "index.html").read_text(encoding="utf-8"))
     [link] = [a for a in home.css("header nav a") if a.attributes.get("href") == "/calendar/"]
     assert link.attributes["data-current-month"] == "/calendar/2026/10/"
-
-
-def test_calendar_entries_carry_no_cost_label(site: Path) -> None:
-    # The conference is free and the hack night paid, but cost shows only on the event page.
-    entries = page(site, "calendar/2026/11").css("li.cal-event")
-    assert entries and not [e for e in entries if e.css_first(".cost")]

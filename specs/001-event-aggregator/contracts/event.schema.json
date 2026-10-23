@@ -214,8 +214,7 @@
           "organizer_id",
           "end",
           "source_tz",
-          "summary",
-          "cost"
+          "summary"
         ]
       }
     },
@@ -241,17 +240,6 @@
     "original_unavailable": {
       "type": "boolean",
       "default": false
-    },
-    "cost": {
-      "description": "free or paid when the source says so (FR-052); null when unknown",
-      "enum": ["free", "paid", null],
-      "default": null
-    },
-    "price": {
-      "description": "A price label like $25, only with cost paid",
-      "type": ["string", "null"],
-      "maxLength": 40,
-      "default": null
     }
   }
 }

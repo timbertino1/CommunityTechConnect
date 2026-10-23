@@ -9,7 +9,6 @@
   {% elif e.status == "unverified" %}<p class="badge badge--unverified">Not confirmed recently: check the organizer's page</p>{% endif %}
   <dl class="facts">
     <div><dt>Where</dt><dd>{{ e.where_full }}</dd></div>
-    {% if e.cost_label %}<div><dt>Cost</dt><dd>{{ e.cost_label }}</dd></div>{% endif %}
     {% if e.organizer %}<div><dt>Organizer</dt><dd>{{ e.organizer }}</dd></div>{% endif %}
     <div><dt>Topics</dt><dd><ul class="tags">{% for label in e.category_labels %}<li>{{ label }}</li>{% endfor %}</ul></dd></div>
   </dl>

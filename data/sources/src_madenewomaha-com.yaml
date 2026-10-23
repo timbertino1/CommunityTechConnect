@@ -3,7 +3,6 @@ approved_count: 10
 check_interval_hours: 24
 connector: ical
 default_area: omaha
-default_cost: null
 feed_url: https://madenewomaha.com/events/?ical=1
 follow_links: null
 found_via: link_graph

@@ -22,11 +22,10 @@ from urllib.parse import urlsplit, urlunsplit
 
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
-from netc.connectors import cost as costs
 from netc.connectors.base import WINDOW_AHEAD, WINDOW_BEHIND, ParseResult, RawPayload
 from netc.fetch import FetchError, HttpClient
 from netc.fetch.urls import join_url
-from netc.models import Cost, FollowLinks, RawListing, Source
+from netc.models import FollowLinks, RawListing, Source
 
 MAX_TITLE_CHARS: Final = 2_000
 MAX_DESCRIPTION_CHARS: Final = 20_000
@@ -257,7 +256,6 @@ def _listing(
         online = bool(locations) and not places
 
     description = node.get("description")
-    cost, price = _cost(node, index)
     return RawListing(
         external_id=external_id,
         url=url[:MAX_SHORT_CHARS],
@@ -273,8 +271,6 @@ def _listing(
         if isinstance(description, str)
         else None,
         cancelled=cancelled,
-        cost=cost,
-        price=price,
         country=_country(places, index),
     )
 
@@ -291,34 +287,6 @@ def _country(places: list[Any], index: dict[str, dict[str, Any]]) -> str | None:
         if isinstance(country, str) and country.strip():
             return country.strip()[:100]
     return None
-
-
-def _cost(node: dict[str, Any], index: dict[str, dict[str, Any]]) -> tuple[Cost | None, str | None]:
-    """``isAccessibleForFree``, then the amounts in ``offers`` (``price``, or an
-    AggregateOffer's ``lowPrice``/``highPrice``)."""
-    flag = node.get("isAccessibleForFree")
-    if isinstance(flag, str):
-        flag = {"true": True, "false": False}.get(flag.strip().lower())
-    if flag is True:
-        return "free", None
-    amounts = []
-    dollars = True
-    for offer in _as_list(_resolve(node.get("offers"), index)):
-        if not isinstance(offer, dict):
-            continue
-        found = [
-            a
-            for key in ("price", "lowPrice", "highPrice")
-            if (a := costs.amount(offer.get(key))) is not None
-        ]
-        currency = offer.get("priceCurrency")
-        if found and isinstance(currency, str) and currency.strip().upper() != "USD":
-            dollars = False
-        amounts.extend(found)
-    stated = costs.from_amounts(amounts, dollars=dollars)
-    if stated is not None:
-        return stated
-    return ("paid", None) if flag is False else (None, None)
 
 
 def _when(value: Any) -> tuple[datetime, bool] | None:

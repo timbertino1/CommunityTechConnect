@@ -264,38 +264,6 @@ def test_bare_nebraska_without_a_group_area_is_other_nebraska() -> None:
     assert norm(raw(location_text="Nebraska Union Room")).area == "other_ne"
 
 
-# --- Cost (T157; FR-052)
-
-
-def test_the_listings_cost_is_kept() -> None:
-    n = norm(raw(cost="paid", price="$25"))
-    assert (n.cost, n.price) == ("paid", "$25") and "cost" not in n.inferred
-
-
-def test_a_sources_free_default_fills_in_an_unknown_cost_and_says_so() -> None:
-    n = norm(raw(), make_source(default_area=None, default_cost="free"))
-    assert (n.cost, n.price) == ("free", None) and "cost" in n.inferred
-
-
-def test_what_the_event_says_beats_the_sources_default() -> None:
-    n = norm(raw(cost="paid", price="$40"), make_source(default_area=None, default_cost="free"))
-    assert (n.cost, n.price) == ("paid", "$40") and "cost" not in n.inferred
-
-
-def test_without_either_the_cost_stays_unknown() -> None:
-    assert norm(raw()).cost is None
-
-
-def test_a_price_is_cleaned_to_plain_text() -> None:
-    assert norm(raw(cost="paid", price=" <b>$25</b>  ")).price == "$25"
-
-
-def test_the_cost_reaches_the_event() -> None:
-    n = norm(raw(), make_source(default_area=None, default_cost="free"))
-    event = to_event(n, categories=["software-dev"], review_state="published", now=NOW)
-    assert event.cost == "free" and "cost" in event.inferred
-
-
 # --- Country: Lincoln, England is not Lincoln, Nebraska
 
 

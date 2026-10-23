@@ -20,7 +20,6 @@ pytestmark = pytest.mark.integration
 PUBLIC_FIELDS = {
     "id", "slug", "title", "start", "end", "all_day", "area", "location", "organizer", "summary",
     "categories", "original_url", "status", "last_verified", "inferred", "original_unavailable",
-    "cost", "price",
 }  # fmt: skip
 
 
@@ -31,8 +30,6 @@ def events() -> list[Event]:
             "Prairie Python December",
             utc(2026, 12, 8, 23, 30),
             "prairie-python-december-2026-12-08",
-            cost="free",
-            inferred=["categories", "cost"],  # from the source's default_cost
         ),
         site_event(
             "https://www.meetup.com/prairie-python/events/1/",
@@ -48,8 +45,6 @@ def events() -> list[Event]:
             location={"venue": None, "city": None, "state": None, "online": True},
             area="online",
             categories=["software-dev", "web-mobile"],
-            cost="paid",
-            price="$25",
         ),
         site_event(
             "https://cancel.example.org/e",
@@ -333,40 +328,3 @@ def test_the_site_has_a_favicon(site: Path) -> None:
     icon = (site / "favicon.ico").read_bytes()
     assert icon[:4] == b"\x00\x00\x01\x00"  # ICO header
     assert len(icon) <= 4 * 1024
-
-
-# --- Cost (T157; FR-052)
-
-
-def test_cards_carry_no_cost_label(site: Path) -> None:
-    # Owner decision 2026-10-23: a "Free" label on some cards would suggest the rest cost money,
-    # so cost is shown only on the event page (FR-052).
-    found = [c for c in cards(site) if c.css_first(".cost") or "Free" in flat(c)]
-    assert found == []
-
-
-def test_the_event_page_has_a_cost_row_only_when_known(site: Path) -> None:
-    def facts(slug: str) -> dict[str, str]:
-        tree = LexborHTMLParser((site / "events" / slug / "index.html").read_text(encoding="utf-8"))
-        return {flat(d.css_first("dt")): flat(d.css_first("dd")) for d in tree.css(".facts div")}
-
-    assert facts("remote-rust-night-2026-11-19")["Cost"] == "$25"
-    assert facts("prairie-python-december-2026-12-08")["Cost"] == "Free"
-    assert "Cost" not in facts("prairie-python-november-2026-11-10")
-
-
-def test_a_cost_from_the_source_default_is_labeled_as_worked_out(site: Path) -> None:
-    page = (site / "events" / "prairie-python-december-2026-12-08" / "index.html").read_text(
-        encoding="utf-8"
-    )
-    note = flat(LexborHTMLParser(page).css_first(".meta"))
-    assert "The topics and cost were worked out by NETechConnect" in note
-
-
-def test_public_data_carries_cost_and_price(site: Path) -> None:
-    records = {r["title"]: r for r in json.loads((site / "data" / "upcoming.json").read_text())}
-    assert (records["Remote Rust night"]["cost"], records["Remote Rust night"]["price"]) == (
-        "paid",
-        "$25",
-    )
-    assert records["Prairie Python November"]["cost"] is None
