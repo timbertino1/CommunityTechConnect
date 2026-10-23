@@ -272,6 +272,51 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "cloud-devops"
+    ],
+    "end": "2026-10-29T00:15:00Z",
+    "first_seen": "2026-10-23T15:34:41Z",
+    "id": "evt_37cbb870a38d",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-23T15:34:41Z",
+    "listings": [
+      {
+        "content_hash": "b3741f1362e5c877a880eff2e4f8e4165a9be31d7cf8d7a8e68a5cbb24598f0b",
+        "external_id": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
+        "last_seen": "2026-10-23T15:34:41Z",
+        "missing_runs": 1,
+        "source_id": "src_omaha-azure",
+        "url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/"
+      }
+    ],
+    "location": {
+      "address": "Farm Credit Services, 4949 S. 118th St., Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Farm Credit Services"
+    },
+    "organizer_id": "org_omaha-azure",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
+    "review_state": "published",
+    "series_key": null,
+    "slug": "your-agent-works-on-your-laptop-now-what-2026-10-28",
+    "source_tz": "America/Chicago",
+    "start": "2026-10-28T22:45:00Z",
+    "status": "scheduled",
+    "summary": "Evaluations, observability, cost control, and failure modes like tool loops, hallucinated tool calls, and runaway tokens. This one draws from real producti",
+    "title": "Your Agent Works on Your Laptop. Now What?",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "lincoln",
     "categories": [
