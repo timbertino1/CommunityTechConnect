@@ -8,8 +8,8 @@ follow_links: null
 found_via: gap
 html_rules: null
 id: src_infosec-conferences-com
-name: INTERFACE Omaha 2026, Omaha, United States | Cyber Event
-notes: 'Discovered via gap: the page has schema.org Event data.'
+name: INTERFACE Omaha
+notes: 'Discovered via gap: the page has schema.org Event data. Renamed from its page title ("INTERFACE Omaha 2026, Omaha, United States | Cyber Event") on 2026-10-22; it lists one conference on infosec-conferences.com.'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
