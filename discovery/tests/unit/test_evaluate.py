@@ -241,13 +241,13 @@ def test_added_and_blocked_candidates_are_never_re_evaluated(tmp_path: Path) -> 
 
 
 def test_at_most_max_evaluations_a_run(tmp_path: Path) -> None:
-    many = [pending(f"https://site{i}.example.org/") for i in range(40)]
+    many = [pending(f"https://site{i}.example.org/") for i in range(MAX_EVALUATIONS + 15)]
     result = evaluate(tmp_path, many)
     assert (
         sum(c.last_evaluated == NOW and c.result != "pending" for c in result.candidates)
         == MAX_EVALUATIONS
     )
-    assert result.counts["deferred"] == 40 - MAX_EVALUATIONS
+    assert result.counts["deferred"] == 15
 
 
 def test_a_run_stops_starting_evaluations_when_time_is_up(tmp_path: Path) -> None:
@@ -276,6 +276,58 @@ def test_each_evaluation_is_logged_with_its_time(tmp_path: Path) -> None:
         "result": "added",
         "seconds": 2.5,
     }
+
+
+# --- Cheap first: obvious non-sources, and the most promising candidates
+
+
+NOT_SOURCES = [
+    "https://www.ziprecruiter.com/Jobs/Devops/-in-Lincoln,NE",
+    "https://learn.microsoft.com/en-us/azure/devops/organizations/security/permissions",
+    "https://www.britannica.com/place/Omaha-city-Nebraska",
+    "https://itsupport.lincoln.edu/login",
+    "https://csguide.cs.princeton.edu/account/groups",
+    "https://cms.erepublic.com/common/events/add_event_to_calendar/144627",
+    "https://slcg.nebraska.gov/docs/cybersecurity-plan.pdf",
+    "https://www.digitallincoln.co.uk/",
+]
+
+
+class NoFetch:
+    """An HTTP client that fails the test if anything is fetched."""
+
+    def get(self, url: str, **kw: Any) -> Any:
+        raise AssertionError(f"fetched {url}")
+
+
+@pytest.mark.parametrize("url", NOT_SOURCES)
+def test_obvious_non_sources_are_rejected_without_a_fetch(tmp_path: Path, url: str) -> None:
+    candidate, _ = one(tmp_path, url, client=NoFetch())
+    assert candidate.result == "rejected"
+    assert candidate.reason.startswith("not an event source")
+
+
+def test_quick_rejections_do_not_use_up_the_runs_evaluations(tmp_path: Path) -> None:
+    junk = [pending(u) for u in NOT_SOURCES]
+    result = evaluate(tmp_path, [*junk, pending("https://heartlandrust.example.org/")],
+                      max_evaluations=1)  # fmt: skip
+    assert [c.result for c in result.candidates] == ["rejected"] * len(junk) + ["added"]
+    assert result.counts["deferred"] == 0
+
+
+def test_candidates_naming_a_nebraska_place_are_evaluated_first(tmp_path: Path) -> None:
+    # Every search query names Nebraska, so only the result itself counts.
+    plain = make_candidate(
+        "https://yoga.example.org/",
+        found_via="web_search",
+        now=NOW,
+        evidence=["web search: Nebraska tech meetup", "result: Studio news"],
+    )
+    local = make_candidate("https://acme-hosting.example.com/", found_via="web_search", now=NOW,
+                           evidence=["web search: Nebraska tech meetup",
+                                     "result: Omaha Cloud Night"])  # fmt: skip
+    result = evaluate(tmp_path, [plain, local], max_evaluations=1)
+    assert [c.result for c in result.candidates] == ["pending", "needs_review"]
 
 
 # --- With the AI

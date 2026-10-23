@@ -103,8 +103,46 @@ SKIP_HOSTS: Final = frozenset(
         "amazon.com",
         "yelp.com",
         "tripadvisor.com",
+        # Reference, rankings and directories (from the Oct 2026 candidate backlog).
+        "britannica.com",
+        "usnews.com",
+        "princetonreview.com",
+        "municode.com",
+        "ycombinator.com",
+        # Job boards.
+        "ziprecruiter.com",
+        "monster.com",
+        # Vendor documentation, support and product pages.
+        "microsoft.com",
+        "atlassian.com",
+        "redhat.com",
+        "gitlab.com",
+        "hubspot.com",
+        "codecademy.com",
+        "hackingwithswift.com",
+        # Link wrappers.
+        "safelinks.protection.outlook.com",
+        # Other Lincolns: schools, companies and a carmaker, none of them in Lincoln, NE.
+        "lincoln.edu",
+        "lincolnu.edu",
+        "lincolntech.edu",
+        "lincolneducationalservices.com",
+        "lincolnfinancial.com",
+        "lincoln.com",
+        "lincolncanada.com",
     }
 )
+NOT_SOURCE_PATH: Final = re.compile(
+    r"/(login|log-in|signin|sign-in|account|accounts|myaccount|dashboard|portal|parentportal|"
+    r"jobs|careers|support|help)(/|$)|add_event_to_calendar|\.pdf$",
+    re.IGNORECASE,
+)
+"""Pages that are never an event source: sign-ins, accounts, jobs, help, one-event calendar
+links and documents."""
+PLATFORM_LOCALE: Final = re.compile(r"/[a-z]{2}-[a-z]{2}/?$", re.IGNORECASE)
+"""A platform's home page in another language, like meetup.com/de-de/."""
+ELSEWHERE_HOST: Final = re.compile(r"lincolnshire|\.(uk|ca|au|nz)$")
+"""Sites outside the US, including England's Lincoln and Lincolnshire."""
 _ARTICLE: Final = re.compile(r"/(19|20)\d\d/|/(news|blog|article|articles|story|stories|press)/")
 
 
@@ -207,6 +245,22 @@ def _skip_host(host: str) -> bool:
     return any(host == h or host.endswith(f".{h}") for h in SKIP_HOSTS)
 
 
+def not_a_source(url: str) -> str | None:
+    """Why ``url`` can't be an event source, judged from the address alone (no fetch), or
+    None. Cheap enough to run on every candidate before anything is fetched."""
+    parts = urlsplit(url)
+    host = (parts.hostname or "").lower().removeprefix("www.")
+    if _skip_host(host):
+        return "not an event source"
+    if ELSEWHERE_HOST.search(host):
+        return "not an event source: a site outside the US"
+    if host in PLATFORMS and PLATFORM_LOCALE.match(parts.path):
+        return "not an event source: the platform's own home page"
+    if NOT_SOURCE_PATH.search(parts.path):
+        return "not an event source: a sign-in, account, jobs, help or document page"
+    return None
+
+
 def candidate_url(url: str) -> str | None:
     """The URL to evaluate for a site: the group page on a platform, the feed for a Luma
     calendar, the page itself elsewhere."""
@@ -218,7 +272,7 @@ def candidate_url(url: str) -> str | None:
         return None
     parts = urlsplit(safe)
     host = (parts.hostname or "").removeprefix("www.")
-    if _skip_host(host):
+    if not_a_source(safe) is not None:
         return None
     key = site_key(safe)
     if key is None:
