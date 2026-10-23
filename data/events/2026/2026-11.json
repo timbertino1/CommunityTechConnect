@@ -58,12 +58,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-22T15:45:41Z",
+    "last_verified": "2026-10-23T15:34:41Z",
     "listings": [
       {
         "content_hash": "51a0431b79751d486c60c3b5e29d448643b0edd2e99d81df2df6777a7a4140d4",
         "external_id": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
-        "last_seen": "2026-10-22T15:45:41Z",
+        "last_seen": "2026-10-23T15:34:41Z",
         "missing_runs": 1,
         "source_id": "src_infosec-conferences-com",
         "url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/"
@@ -103,12 +103,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-22T15:45:41Z",
+    "last_verified": "2026-10-23T15:34:41Z",
     "listings": [
       {
         "content_hash": "d8756740266c405f186cd2808de0da51f1bfc4002f769667495e6f2e93f6ae76",
         "external_id": "https://www.meetup.com/ai_omaha/events/317053693/",
-        "last_seen": "2026-10-22T15:45:41Z",
+        "last_seen": "2026-10-23T15:34:41Z",
         "missing_runs": 1,
         "source_id": "src_ai-omaha",
         "url": "https://www.meetup.com/ai_omaha/events/317053693/"
@@ -419,12 +419,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-22T15:45:41Z",
+    "last_verified": "2026-10-23T15:34:41Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-10-22T15:45:41Z",
+        "last_seen": "2026-10-23T15:34:41Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
