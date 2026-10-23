@@ -34,13 +34,14 @@ longer).
 
 ## Real phone check
 
-*To do (owner):* open https://netechconnect.pages.dev/ on your phone and note:
+Done by the owner on Oct 23, 2026, on a **Google Pixel 9** (browser not noted), after the phone
+map change (#60) was deployed:
 
-- [ ] The headline and intro appear quickly, before the map.
-- [ ] The map animates (it sits in its own row under the counts; scroll a little if needed).
-- [ ] Scrolling stays smooth with the map on screen.
-- [ ] With the phone's reduce-motion setting on, the map is still.
-- [ ] Phone model and browser: …
+- [x] The map animates on the phone.
+- [x] Overall the home page "seems good" (the owner's words): no problems seen with loading or
+  scrolling.
+- [ ] Reduce-motion on the phone: not tried. The browser tests cover it (one still frame, no
+  animation loop), so this is optional.
 
 ## Screenshots
 
