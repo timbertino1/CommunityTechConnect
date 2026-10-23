@@ -1,7 +1,7 @@
 {% if day.events %}
 <ul class="cal-events">
 {% for item in day.events %}
-  <li class="cal-event{% if item.status != "scheduled" %} cal-event--{{ item.status }}{% endif %}">
+  <li class="cal-event{% if item.status != "scheduled" %} cal-event--{{ item.status }}{% endif %}" data-area="{{ item.filter.area }}" data-cats="{{ item.filter.cats }}" data-start="{{ item.filter.start }}" data-end="{{ item.filter.end }}" data-search="{{ item.filter.search }}">
     <span class="cal-time">{{ item.time }}</span>
     <a class="cal-title" href="/events/{{ item.slug }}/">{{ item.title }}</a>{% if item.status == "cancelled" %} <span class="cal-flag">Cancelled</span>{% endif %}
     <a class="cal-original" href="{{ item.original_url }}" rel="noopener external"><span class="visually-hidden">View and register on </span><span aria-hidden="true">↗ </span>{{ item.host }}</a>

@@ -246,11 +246,18 @@ main:focus { outline: none; }
   .home-hero-text { padding-block: 4.5rem 2.5rem; justify-content: space-between; }
 }
 
-/* Filter bar (wired up in Phase 6; hidden until then) */
-.filter-bar { background: var(--surface); border-bottom: 1px solid var(--line); }
-.filter-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; }
-.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.chips button {
+/* Filters (T112-T113): area chips (checkboxes), a topic, a date range and a search box. The
+   form stays hidden until filters.js runs; the status line announces how many events match. */
+.filter-band { background: var(--surface); border-bottom: 1px solid var(--line); }
+.filter-band .wrap { padding-block: 1rem; }
+.filters { display: grid; gap: 0.75rem; }
+.filters fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.chips legend { float: left; margin-right: 0.5rem; font-size: var(--step--1); color: var(--muted); }
+.chip { position: relative; display: inline-flex; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center;
   font: 500 var(--step--1) var(--font-text);
   min-height: 2.75rem;
   padding: 0.6rem 1rem;
@@ -258,11 +265,13 @@ main:focus { outline: none; }
   border: 1.5px solid var(--line);
   background: var(--surface);
   color: var(--ink);
-  cursor: pointer;
 }
-.chips button[aria-pressed="true"] { font-weight: 600; background: var(--ink); border-color: var(--ink); color: var(--bg); }
-.topic { display: flex; align-items: center; gap: 0.75rem; font-size: var(--step--1); color: var(--muted); }
-.topic select {
+.chip input:checked + span { font-weight: 600; background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.filter-fields { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.75rem 1rem; }
+.field { display: grid; gap: 0.25rem; font-size: var(--step--1); color: var(--muted); }
+.field-q { flex: 1 1 14rem; }
+.filters select, .filters input[type="date"], .filters input[type="search"] {
   font: 500 var(--step--1) var(--font-text);
   min-height: 2.75rem;
   padding: 0.5rem 0.75rem;
@@ -270,7 +279,16 @@ main:focus { outline: none; }
   border: 1.5px solid var(--line);
   background: var(--surface);
   color: var(--ink);
+  width: 100%;
 }
+/* Always outlined on focus: inside a date field, focus moves to its month, day and year parts. */
+.filters select:focus, .filters input:focus, .filters input:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.filter-clear { align-self: center; padding-block: 0.6rem; font-weight: 600; }
+.filter-status { margin: 0; font-size: var(--step--1); color: var(--muted); }
+.filter-status:empty { display: none; }
+.filters-nojs { margin: 0; font-size: var(--step--1); color: var(--muted); }
+main .filters, main .filters-nojs { margin-bottom: 0.75rem; }
+main .filter-status { margin-bottom: 1rem; }
 
 /* Event list: month groups of cards */
 .months { display: grid; gap: 2.5rem; }
@@ -421,7 +439,7 @@ main:focus { outline: none; }
   .cal-month caption { display: block; width: 100%; }
   .cal-month { border: 0; background: none; }
   .cal-month td { height: auto; border: 0; border-bottom: 1px solid var(--line); background: var(--surface); padding: 0.75rem; }
-  .cal-month td.is-empty, .cal-month td.is-other-month { display: none; }
+  .cal-month td.is-empty, .cal-month td.is-other-month, .cal-month td.is-filtered-empty { display: none; }
   .cal-month .cal-num { display: none; }
   .cal-month .cal-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: block; font-family: var(--font-display); font-weight: 700; }
   .cal-event { font-size: 0.95rem; }

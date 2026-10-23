@@ -72,7 +72,17 @@ def build_site(
         lstrip_blocks=True,
         keep_trailing_newline=True,
     )
-    common = {"updated": format_central(now, None, all_day=False), "repo_url": REPO_URL}
+    this_month = cal.current_month(now)
+    common = {
+        "updated": format_central(now, None, all_day=False),
+        "repo_url": REPO_URL,
+        # Where the nav's Calendar link goes once filters.js adds the filters (T113): /calendar/
+        # itself is a redirect, which would drop them.
+        "calendar_now": f"/calendar/{this_month[0]}/{this_month[1]:02d}/",
+        # The filter form's choices (_filters.html, on the list and calendar pages).
+        "filter_areas": [(a, label) for a, label in area_labels.items()],
+        "filter_topics": list(categories.items()),
+    }
 
     def organizer_of(event: Event) -> str | None:
         if event.organizer_id and event.organizer_id in organizers:
@@ -91,8 +101,6 @@ def build_site(
                 "upcoming": len(upcoming),
                 "watched": sum(1 for s in sources if s.status == "active"),
             },
-            filter_areas=list(area_labels.items()),
-            filter_topics=list(categories.items()),
             **common,
         ),
     )
@@ -297,6 +305,7 @@ def _view(
 ) -> dict[str, Any]:
     location = event.location
     local = to_central(event.start)
+    days = cal.days_spanned(event.start, event.end, all_day=event.all_day)
     if location.online and not location.venue:
         where = "Online"
     else:
@@ -331,6 +340,15 @@ def _view(
         "original_url": event.original_url,
         "host": _host(event.original_url),
         "original_unavailable": event.original_unavailable,
+        # For filters.js (T112, contracts/site-urls.md): the area, the topic ids, the Central
+        # Time days covered, and the lowercase text that keyword search matches.
+        "filter": {
+            "area": event.area,
+            "cats": " ".join(event.categories),
+            "start": days[0].isoformat(),
+            "end": days[-1].isoformat(),
+            "search": " ".join(p for p in (event.title, organizer, event.summary) if p).lower(),
+        },
         "also_listed": list({o["url"]: o for o in others}.values()),
         "last_verified": format_central(event.last_verified, None, all_day=False),
         "inferred_note": (

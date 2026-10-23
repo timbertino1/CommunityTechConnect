@@ -194,3 +194,19 @@ def test_no_calendar_link_points_at_a_missing_page(site: Path) -> None:
                 assert (site / href.strip("/") / "index.html").exists(), (name, href)
                 checked += 1
     assert checked > 100  # every month and week page links to its neighbours
+
+
+def test_calendar_entries_carry_what_the_filters_need(site: Path) -> None:
+    tree = page(site, "calendar/2026/11")
+    [entry] = cell(tree, "2026-11-06").css("li.cal-event")
+    assert entry.attributes["data-start"] == "2026-11-05"  # the conference's first day
+    assert entry.attributes["data-end"] == "2026-11-06"
+    assert entry.attributes["data-cats"] and entry.attributes["data-area"]
+    assert tree.css_first("form[data-filters]") is not None
+    assert [s.attributes["src"] for s in tree.css("script")] == ["/js/filters.js"]
+
+
+def test_the_nav_calendar_link_knows_the_current_month(site: Path) -> None:
+    home = LexborHTMLParser((site / "index.html").read_text(encoding="utf-8"))
+    [link] = [a for a in home.css("header nav a") if a.attributes.get("href") == "/calendar/"]
+    assert link.attributes["data-current-month"] == "/calendar/2026/10/"

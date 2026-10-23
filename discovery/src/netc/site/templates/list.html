@@ -26,27 +26,13 @@
     </div>
   </div>
 </section>
-{# Filters need JavaScript: filters.js (Phase 6) wires this bar up and removes `hidden`. #}
-<section class="filter-bar" aria-label="Filters" data-filters hidden>
-  <div class="wrap filter-inner">
-    <div class="chips" role="group" aria-label="Area">
-      <button type="button" data-area="" aria-pressed="true">All areas</button>
-      {% for id, label in filter_areas %}
-      <button type="button" data-area="{{ id }}" aria-pressed="false">{{ label }}</button>
-      {% endfor %}
-    </div>
-    <div class="topic">
-      <label for="filter-topic">Topic</label>
-      <select id="filter-topic">
-        <option value="">All topics</option>
-        {% for id, label in filter_topics %}
-        <option value="{{ id }}">{{ label }}</option>
-        {% endfor %}
-      </select>
-    </div>
+<section class="filter-band" aria-label="Filters">
+  <div class="wrap">
+  {% include "_filters.html" %}
   </div>
 </section>
 <script type="module" src="/js/home.js"></script>
+<script type="module" src="/js/filters.js"></script>
 {% endblock %}
 {% block content %}
 {% if events %}

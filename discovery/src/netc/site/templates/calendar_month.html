@@ -9,6 +9,7 @@
     {% if next %}<a href="{{ next.href }}" rel="next">{{ next.label }}<span aria-hidden="true"> →</span></a>{% endif %}
   </nav>
 </div>
+{% include "_filters.html" %}
 {% if not any_events %}<p class="empty">No events in {{ label }} yet. New events are added twice a day.</p>{% endif %}
 <table class="cal cal-month">
   <caption>Tech events in {{ label }}, by day. Times are Central.</caption>
@@ -37,4 +38,5 @@
   {% endfor %}
   </ul>
 </nav>
+<script type="module" src="/js/filters.js"></script>
 {% endblock %}

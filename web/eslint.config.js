@@ -3,7 +3,7 @@ import globals from "globals";
 
 export default [
   // Generated, not our code: the tree-shaken three.js and the browser tests' built site.
-  { ignores: ["vendor/**", ".test-site/**", "test-results/**"] },
+  { ignores: ["vendor/**", ".test-site/**", ".test-fixture/**", ".test-fixture-data/**", "test-results/**"] },
   js.configs.recommended,
   {
     files: ["**/*.js"],
