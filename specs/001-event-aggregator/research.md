@@ -416,8 +416,10 @@ artboard "B · Refined + three.js header"):
 
 1. Loads after the event list (no effect on main-content time, SC-006).
 2. At most **150 KB** compressed for the header's script, three.js included. CI checks it.
-3. Still under `prefers-reduced-motion`; a static image under Save-Data, on low-power or
-   small screens, and when WebGL is unavailable; paused when scrolled out of view.
+3. Still under `prefers-reduced-motion`; a static image under Save-Data, on low-power devices
+   (under 4 GB of memory), and when WebGL is unavailable; paused when scrolled out of view.
+   Phones get the 3D map like other screens (owner decision, 2026-10-22: it was a static image
+   under 600 px wide at first).
 4. Self-hosted, pinned to an exact release at least 14 days old, updated by Dependabot. No
    CDN: the CSP stays `script-src 'self'`.
 5. No 3D anywhere else, and never needed to find or open an event.

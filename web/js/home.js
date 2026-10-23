@@ -1,6 +1,7 @@
 // Home page loader for the header map (T153; research R15). After the page has loaded, show the
-// 3D map, or its static image under Save-Data, low device memory, a viewport under 600 px, or no
-// WebGL. Nothing here imports three.js: header-map.js does, and only when it is used.
+// 3D map, or its static image under Save-Data, low device memory (under 4 GB), or no WebGL.
+// Phones get the 3D map too (owner decision, 2026-10-22). Nothing here imports three.js:
+// header-map.js does, and only when it is used.
 
 const box = document.querySelector("[data-header-map]");
 const LOAD_TIMEOUT_MS = 10_000;
@@ -20,8 +21,7 @@ function lowPower() {
   const connection = navigator.connection;
   return Boolean(
     (connection && connection.saveData) ||
-      (navigator.deviceMemory !== undefined && navigator.deviceMemory < 4) ||
-      window.matchMedia("(max-width: 599px)").matches,
+      (navigator.deviceMemory !== undefined && navigator.deviceMemory < 4),
   );
 }
 

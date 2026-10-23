@@ -45,7 +45,7 @@ const CENTERED_SCALE = 1.3;
 // Behind the copy on wide screens (as in the design mockup), and centered in its own row.
 const RIGHT_SCALE = 1.0;
 const RIGHT_Y = 0.1;
-const CENTER_SCALE = 1.15;
+const CENTER_SCALE = 1.3;
 
 // Longitude is scaled by about cos(41.5°) so the state keeps its shape.
 function xy(lon, lat) {
