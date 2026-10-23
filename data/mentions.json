@@ -10,11 +10,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Lincoln joins pact of 42 global cities to set data center standards | Nebraska Public Media"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -50,11 +50,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Lincoln Team"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "news",
     "date_hint": "Thursday, Oct. 29",
     "event_id": null,
@@ -68,7 +68,7 @@
     "title": "Pitch competition by Big Idea Buffalo County"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -96,7 +96,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -114,17 +114,31 @@
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
+    "id": "men_1618eaf5acec",
+    "links": [
+      "https://news.unl.edu/article/hackathon-aims-to-create-kinder-braver-online-world"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Hackathon aims to create kinder, braver online world"
+  },
+  {
+    "attempts": 1,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
     "id": "men_170a4288cb69",
     "links": [
       "https://www.digitallincoln.co.uk/events-list/2025/9/10/chat-ai"
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "resolved",
     "title": "Chat AI Meetup – Exploring Generative AI | Digital Lincoln — Digital Lincoln"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "news",
     "date_hint": "March 2-3, 2027",
     "event_id": null,
@@ -136,7 +150,21 @@
     "title": "2027 Nebraska Women in STEM Conference"
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1a6091adb45e",
+    "links": [
+      "https://siliconprairienews.com/2025/05/how-nebraskas-business-ecosystem-is-learning-and-leveraging-ai"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
+  },
+  {
+    "attempts": 2,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -200,7 +228,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Local Cybersecurity Meetups Near You | Rapid7 Blog"
   },
   {
@@ -214,7 +242,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Nucamp"
   },
   {
@@ -266,8 +294,22 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Cyber Roadmap: 2025 and beyond - Lincoln International LLC"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_464137712903",
+    "links": [
+      "https://siliconprairienews.com/2026/03/from-hackathon-idea-to-govtech-startup-serving-nebraska-cities"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "From hackathon idea to govtech startup serving Nebraska cities - Silicon Prairie News"
   },
   {
     "attempts": 3,
@@ -294,7 +336,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "AI Meetups, Communities, and Networking Events in Lincoln ..."
   },
   {
@@ -308,8 +350,22 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "October is Cybersecurity Awareness Month | Lincoln County Schools"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_5047f114d290",
+    "links": [
+      "https://studentscholarships.org/articles/41371/7-nebraska-web-development-scholarships-and-funding-paths-worth-applying-for"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "7 Nebraska Web Development Scholarships And Funding ..."
   },
   {
     "attempts": 0,
@@ -364,6 +420,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Nebraska Recurring Startup Events Guide - Updated for 2026 - Silicon Prairie News"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_6c9de19be587",
+    "links": [
+      "https://nebraskapublicmedia.org/es/news/news-articles/university-of-nebraska-launches-ai-institute-for-artificial-intelligence-research"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "University of Nebraska launches ‘AI Institute’ for artificial intelligence research | Nebraska Public Media"
   },
   {
     "attempts": 1,
@@ -487,6 +557,20 @@
   },
   {
     "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_864487e06e4b",
+    "links": [
+      "https://news.unl.edu/article/new-website-connects-communities-with-data-tools-to-thrive"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "New website connects communities with data, tools to thrive | Nebraska Today"
+  },
+  {
+    "attempts": 0,
     "channel": "news",
     "date_hint": "Thursday, Oct. 29",
     "event_id": null,
@@ -590,7 +674,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Entering the Age of the AI Economy - Lincoln International LLC"
   },
   {
@@ -754,6 +838,20 @@
     "title": "NO UPCOMING TECH EVENTS FOUND"
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_d739bfcc7749",
+    "links": [
+      "https://nebraska.edu/offices/information-technology-services/news-and-events/news/2026/10/2026-cyber-awareness-month"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "2026 Cybersecurity Awareness Month"
+  },
+  {
     "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
@@ -766,6 +864,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "From hackathon idea to govtech startup serving Nebraska ..."
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_d8e0774d3b97",
+    "links": [
+      "https://ruralinnovation.us/blog/building-innovation-in-rural-nebraska-a-look-back-at-the-tech-builders-challenge"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Building Innovation in Rural Nebraska: A Look Back at the Tech Builders Challenge - Center on Rural Innovation"
   },
   {
     "attempts": 2,

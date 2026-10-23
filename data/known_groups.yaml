@@ -60,6 +60,16 @@
 - aliases: []
   area: omaha
   cadence_days: null
+  last_searched: null
+  links:
+  - https://cms.erepublic.com/common/events/add_event_to_calendar/144627
+  name: cms.erepublic.com
+  source_ids:
+  - src_cms-erepublic-com
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
   last_searched: '2026-10-21T02:04:10Z'
   links: []
   name: Creighton University
