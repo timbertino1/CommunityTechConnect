@@ -363,7 +363,7 @@ def test_a_cost_from_the_source_default_is_labeled_as_worked_out(site: Path) -> 
         encoding="utf-8"
     )
     note = flat(LexborHTMLParser(page).css_first(".meta"))
-    assert "cost" in note and "worked out by NETechConnect" in note
+    assert "The topics and cost were worked out by NETechConnect" in note
 
 
 def test_public_data_carries_cost_and_price(site: Path) -> None:
