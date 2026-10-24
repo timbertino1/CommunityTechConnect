@@ -130,6 +130,8 @@ SKIP_HOSTS: Final = frozenset(
         "lincolnfinancial.com",
         "lincoln.com",
         "lincolncanada.com",
+        # Not tech groups, though their meeting calendars look like one (owner, 2026-10-24).
+        "omahaaa.org",
     }
 )
 NOT_SOURCE_PATH: Final = re.compile(

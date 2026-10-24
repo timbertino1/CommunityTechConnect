@@ -193,16 +193,6 @@
   - src_lincoln-code
   status: active
 - aliases: []
-  area: omaha
-  cadence_days: null
-  last_searched: null
-  links:
-  - https://www.omahaaa.org/meetings
-  name: Meetings | OmahaAA.org
-  source_ids:
-  - src_omahaaa-org
-  status: active
-- aliases: []
   area: lincoln
   cadence_days: null
   last_searched: '2026-10-23T00:12:04Z'
