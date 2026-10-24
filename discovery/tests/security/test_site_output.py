@@ -89,8 +89,15 @@ def test_no_inline_scripts_styles_or_event_handlers(site: Path) -> None:
                 assert attr.lower() != "style", (name, attr)
 
 
+# The one exception: /suggest/ loads Cloudflare Turnstile's script and posts to the suggestion
+# Worker (FR-039); tests/integration/test_build_site_suggest.py checks exactly that.
+SUGGEST_PAGE = "suggest/index.html"
+
+
 def test_pages_load_nothing_from_other_hosts(site: Path) -> None:
     for name, page in html_files(site).items():
+        if name == SUGGEST_PAGE:
+            continue
         tree = LexborHTMLParser(page)
         for node in tree.css(
             "script[src], link[href], img[src], iframe, source[src], video, audio, embed, object"
@@ -104,8 +111,11 @@ FILTER_FIELDS = {"area": "checkbox", "from": "date", "to": "date", "q": "search"
 
 def test_no_forms_ask_for_personal_information(site: Path) -> None:
     # The only form is the event filter (T112): it reads the page's own events in the browser,
-    # sends nothing anywhere, and has no field for anything about the visitor.
+    # sends nothing anywhere, and has no field for anything about the visitor. (The suggestion
+    # form, which asks for an address and an optional note only, is checked on its own.)
     for name, page in html_files(site).items():
+        if name == SUGGEST_PAGE:
+            continue
         tree = LexborHTMLParser(page)
         for form in tree.css("form"):
             assert form.attributes.get("role") == "search", name

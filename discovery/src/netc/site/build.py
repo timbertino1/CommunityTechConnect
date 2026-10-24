@@ -35,7 +35,7 @@ REPO_URL: Final = "https://github.com/timbertino1/CommunityTechConnect"
 PAST_PAGE_SIZE: Final = 50
 # The suggestion form (T132). SUGGEST_ENDPOINT is the deployed Worker's /suggest URL (T134); until
 # it is set, the /suggest/ page and its links are left out, so nothing half-working goes live.
-SUGGEST_ENDPOINT: Final[str | None] = None
+SUGGEST_ENDPOINT: Final[str | None] = "https://netc-suggest.tim-bertino.workers.dev/suggest"
 TURNSTILE_SITE_KEY: Final = "0x4AAAAAAFjOWyUQYlRhF1wP"  # public; the secret is a Worker secret
 TURNSTILE_HOST: Final = "https://challenges.cloudflare.com"
 """Past events per page of /past/ (T117); older ones are on /past/page/<n>/."""
@@ -61,7 +61,7 @@ def build_site(
     site_domain: str,
     suggest_endpoint: str | None = SUGGEST_ENDPOINT,
 ) -> BuildReport:
-    if suggest_endpoint is not None and not suggest_endpoint.startswith("https://"):
+    if suggest_endpoint and not suggest_endpoint.startswith("https://"):
         raise BuildError(f"the suggestion endpoint must be an https URL: {suggest_endpoint!r}")
     store = DataStore(data_dir)
     categories = {c.id: c.label for c in store.read_categories()}
