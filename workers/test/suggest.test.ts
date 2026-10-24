@@ -248,3 +248,44 @@ describe("privacy", () => {
     }
   });
 });
+
+describe("logs", () => {
+  function logged(): Array<Record<string, string>> {
+    return (console.log as unknown as ReturnType<typeof vi.fn>).mock.calls.map((c) => JSON.parse(String(c[0])));
+  }
+
+  beforeEach(() => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("say which check refused a request, never what was sent", async () => {
+    fetchMock.mockResolvedValueOnce(Response.json({ success: false, "error-codes": ["invalid-input-secret"] }));
+    await call(post(valid()));
+    await call(post(valid({ url: "http://plain.example.org/" })));
+    const { "cf-turnstile-response": _t, ...noToken } = valid();
+    await call(post(noToken));
+    await call(post(valid(), { origin: "https://evil.example" }));
+    expect(logged().map((l) => l.reason)).toEqual(["turnstile:invalid-input-secret", "url", "no_token", "origin"]);
+    const text = JSON.stringify(logged());
+    for (const sent of ["meetup.com", "plain.example.org", "monthly downtown", "token-abc", "203.0.113.7"]) {
+      expect(text).not.toContain(sent);
+    }
+  });
+
+  it("keep only plain Turnstile error codes", async () => {
+    fetchMock.mockResolvedValueOnce(Response.json({ success: false, "error-codes": ["<b>x</b>", 42] }));
+    await call(post(valid()));
+    fetchMock.mockRejectedValueOnce(new Error("network"));
+    await call(post(valid()));
+    expect(logged().map((l) => l.reason)).toEqual(["turnstile:failed", "turnstile:unreachable"]);
+  });
+
+  it("a received suggestion is logged without a reason", async () => {
+    await call(post(valid()));
+    expect(logged()).toEqual([{ event: "suggest", outcome: "received" }]);
+  });
+});

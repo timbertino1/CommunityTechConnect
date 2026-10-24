@@ -7,7 +7,8 @@
  * hash of the client IP; the URL must be a public-looking https address. A valid suggestion is
  * stored in KV for 30 days for the discover-sources workflow to evaluate. The note is private:
  * cut to 280 characters with e-mail addresses and phone numbers removed, and kept only in KV.
- * Responses are neutral and never echo what was sent; logs carry the outcome only.
+ * Responses are neutral and never echo what was sent. Logs carry the outcome and, for a refusal,
+ * which check failed (with Turnstile's own error codes), never anything the visitor sent.
  */
 
 export interface Env {
@@ -43,30 +44,34 @@ export default {
     }
     const origin = allowedOrigin(request.headers.get("origin"), env.SITE_ORIGIN);
     if (request.method === "OPTIONS") {
-      return origin ? preflight(origin) : reply(403, "forbidden");
+      return origin ? preflight(origin) : reply(403, "forbidden", null, "origin");
     }
     if (request.method !== "POST") {
       return reply(405, "method_not_allowed", origin);
     }
     if (!origin) {
-      return reply(403, "forbidden");
+      return reply(403, "forbidden", null, "origin");
     }
 
     const fields = await readFields(request);
     if (!fields) {
-      return reply(400, "invalid", origin);
+      return reply(400, "invalid", origin, "body");
     }
     const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
     const token = fields.get("cf-turnstile-response") ?? "";
-    if (!token || !(await turnstilePasses(token, ip, env.TURNSTILE_SECRET))) {
-      return reply(400, "invalid", origin);
+    if (!token) {
+      return reply(400, "invalid", origin, "no_token");
+    }
+    const turnstile = await verifyTurnstile(token, ip, env.TURNSTILE_SECRET);
+    if (turnstile !== "ok") {
+      return reply(400, "invalid", origin, `turnstile:${turnstile}`);
     }
     if (!(await withinRateLimit(ip, env))) {
       return reply(429, "rate_limited", origin);
     }
     const suggested = publicHttpsUrl(fields.get("url") ?? "");
     if (!suggested) {
-      return reply(400, "invalid", origin);
+      return reply(400, "invalid", origin, "url");
     }
 
     const record = { url: suggested, note: scrubNote(fields.get("note") ?? ""), received_at: new Date().toISOString() };
@@ -116,7 +121,8 @@ async function readFields(request: Request): Promise<Map<string, string> | null>
   return fields;
 }
 
-async function turnstilePasses(token: string, ip: string, secret: string): Promise<boolean> {
+/** "ok", or why not: Turnstile's error codes (e.g. "invalid-input-secret"), or "unreachable". */
+async function verifyTurnstile(token: string, ip: string, secret: string): Promise<string> {
   const body = new URLSearchParams({ secret, response: token });
   if (ip !== "unknown") body.set("remoteip", ip);
   try {
@@ -126,10 +132,15 @@ async function turnstilePasses(token: string, ip: string, secret: string): Promi
       body: body.toString(),
       signal: AbortSignal.timeout(5000),
     });
-    const result: { success?: unknown } = await response.json();
-    return result.success === true;
+    const result: { success?: unknown; "error-codes"?: unknown } = await response.json();
+    if (result.success === true) {
+      return "ok";
+    }
+    const codes = Array.isArray(result["error-codes"]) ? result["error-codes"] : [];
+    const safe = codes.filter((c): c is string => typeof c === "string" && /^[a-z0-9-]{1,40}$/.test(c));
+    return safe.join(",") || "failed";
   } catch {
-    return false;
+    return "unreachable";
   }
 }
 
@@ -203,8 +214,8 @@ function preflight(origin: string): Response {
   });
 }
 
-function reply(status: number, outcome: Outcome, origin: string | null = null): Response {
-  console.log(JSON.stringify({ event: "suggest", outcome }));
+function reply(status: number, outcome: Outcome, origin: string | null = null, reason?: string): Response {
+  console.log(JSON.stringify({ event: "suggest", outcome, ...(reason ? { reason } : {}) }));
   const headers = new Headers({
     "content-type": "application/json",
     "cache-control": "no-store",
