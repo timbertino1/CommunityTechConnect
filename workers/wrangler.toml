@@ -15,6 +15,8 @@ main = "suggest/index.ts"
 # The form posts here from the browser, so this Worker needs a public address: its workers.dev
 # one (https://netc-suggest.<account>.workers.dev). The inbox Worker gets mail only, so has none.
 workers_dev = true
+# No per-version preview addresses: the form only ever posts to the deployed Worker.
+preview_urls = false
 kv_namespaces = [
   { binding = "SUGGESTIONS", id = "9df218ecf9ea43acbea671744abdfa67" },
 ]

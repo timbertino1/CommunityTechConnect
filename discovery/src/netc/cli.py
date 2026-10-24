@@ -95,7 +95,10 @@ def _parser() -> argparse.ArgumentParser:
     site.add_argument("--now", type=_utc_datetime, help="build as if it were this UTC time")
     site.add_argument(
         "--suggest-endpoint",
-        help="the suggestion Worker's /suggest URL (default: the one in netc.site.build)",
+        help=(
+            "the suggestion Worker's /suggest URL (default: the one in netc.site.build; "
+            "an empty value leaves the form out)"
+        ),
     )
     review = commands.add_parser(
         "review-pr",

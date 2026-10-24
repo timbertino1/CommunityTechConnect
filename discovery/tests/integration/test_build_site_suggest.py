@@ -11,7 +11,7 @@ import pytest
 from selectolax.lexbor import LexborHTMLParser
 
 from netc.cli import main
-from netc.site.build import TURNSTILE_SITE_KEY
+from netc.site.build import SUGGEST_ENDPOINT, TURNSTILE_SITE_KEY
 from tests.data_samples import utc
 from tests.site_support import NOW, WEB, build, html_files, make_data, site_event
 
@@ -56,7 +56,8 @@ def flat(node: Any) -> str:
 
 def test_without_an_endpoint_there_is_no_form_or_link(tmp_path: Path) -> None:
     out = tmp_path / "dist"
-    assert build(data(tmp_path), out) == 0
+    args = ["build-site", "--data", str(data(tmp_path)), "--out", str(out), "--web", str(WEB)]
+    assert main([*args, "--now", NOW, "--suggest-endpoint", ""]) == 0
     assert not (out / "suggest").exists()
     pages = html_files(out)
     assert not any(
@@ -128,6 +129,14 @@ def test_headers_get_the_suggest_block_replacing_the_site_csp(site: Path) -> Non
     assert block[1] == "! Content-Security-Policy"
     assert block[2] == SUGGEST_CSP
     assert lines[0] == "/*"  # the site-wide rules are still first
+
+
+def test_the_deployed_worker_is_the_default(tmp_path: Path) -> None:
+    out = tmp_path / "dist"
+    assert build(data(tmp_path), out) == 0
+    form = page(out, "suggest").css_first("form[data-suggest]")
+    assert form.attributes["action"] == SUGGEST_ENDPOINT
+    assert urlsplit(SUGGEST_ENDPOINT).hostname == "netc-suggest.tim-bertino.workers.dev"
 
 
 def test_an_endpoint_must_be_https(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
