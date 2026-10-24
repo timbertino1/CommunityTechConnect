@@ -9,7 +9,7 @@ found_via: link_graph
 html_rules: null
 id: src_madenewomaha-com
 name: Made New Makerspace
-notes: 'Discovered via link graph: the page links an iCal feed.'
+notes: 'Discovered via link graph: the page links an iCal feed. Paused 2026-10-24 (owner): its events are mostly maker classes, rejected in review, and the weekly Open House & Community Hangout floods the list; those 10 events are hidden by overrides. Keep paused.'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
