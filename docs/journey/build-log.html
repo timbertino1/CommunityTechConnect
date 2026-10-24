@@ -307,7 +307,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Now in <strong>Phase 4 of 10</strong> (31 of 33) &middot; <strong>New look</strong> done &middot; Phase 8 tools done, pulled forward</span>
+    <span>Now in <strong>Phase 10 of 10</strong> (8 of 15) &middot; Phases 1&ndash;3 and 5&ndash;9 done &middot; Phase 4 waits on its live checkpoint</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -317,14 +317,14 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
       <li class="now"><div class="bar"><span style="width:94%"></span></div><div class="lbl"><b>04</b>Find new groups</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>08</b>Admin tools</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
-      <li><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
+      <li class="now"><div class="bar"><span style="width:53%"></span></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4; Phase 8 was pulled forward and is done)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 10, and Phase 4's live checkpoint)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -335,7 +335,12 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-4" aria-controls="phase-4" aria-selected="false" tabindex="-1">Phase 4 &middot; Find new groups <span class="pill now">now</span></button>
   <button class="tab" role="tab" id="tab-design-b" aria-controls="design-b" aria-selected="false" tabindex="-1">New look <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-5" aria-controls="phase-5" aria-selected="false" tabindex="-1">Phase 5 &middot; Calendar <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-6" aria-controls="phase-6" aria-selected="false" tabindex="-1">Phase 6 &middot; Filters <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-7" aria-controls="phase-7" aria-selected="false" tabindex="-1">Phase 7 &middot; Past events <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-8" aria-controls="phase-8" aria-selected="false" tabindex="-1">Phase 8 &middot; Review tools <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-9" aria-controls="phase-9" aria-selected="false" tabindex="-1">Phase 9 &middot; Suggestions <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-phase-10" aria-controls="phase-10" aria-selected="false" tabindex="-1">Phase 10 &middot; Launch prep <span class="pill now">now</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -410,9 +415,11 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
           <text class="t-ok" x="496" y="143" text-anchor="end">BUILT</text>
           <rect class="box" x="280" y="186" width="226" height="50" rx="7"/>
           <text class="t-title" x="294" y="207">Classify</text>
+          <text class="t-ok" x="496" y="207" text-anchor="end">BUILT</text>
           <text class="t-sub" x="294" y="224">rules first, AI only if unclear</text>
           <rect class="box" x="280" y="250" width="226" height="50" rx="7"/>
           <text class="t-title" x="294" y="271">Merge duplicates</text>
+          <text class="t-ok" x="496" y="271" text-anchor="end">BUILT</text>
           <text class="t-sub" x="294" y="288">one event, many listings</text>
           <line class="edge" x1="393" y1="108" x2="393" y2="120" marker-end="url(#ah)"/>
           <line class="edge" x1="393" y1="172" x2="393" y2="184" marker-end="url(#ah)"/>
@@ -534,12 +541,12 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
           <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status now">In progress</span></td></tr>
           <tr><td class="num">&middot;</td><td><b>New look.</b> Self-hosted type, a restyle, and a 3D map of Nebraska in the home page header.</td><td><span class="status done">Done</span></td></tr>
-          <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status next">Planned</span></td></tr>
-          <tr><td class="num">06</td><td><b>Filters.</b> By city (Omaha, Lincoln, elsewhere in Nebraska, online) and by topic.</td><td><span class="status next">Planned</span></td></tr>
-          <tr><td class="num">07</td><td><b>Past events.</b> An archive of what already happened.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status done">Done</span></td></tr>
+          <tr><td class="num">06</td><td><b>Filters.</b> By area (Omaha, Lincoln, elsewhere in Nebraska, online), topic, dates and keyword.</td><td><span class="status done">Done</span></td></tr>
+          <tr><td class="num">07</td><td><b>Past events.</b> An archive of what already happened.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">08</td><td><b>Admin tools.</b> Review new sources, hide or correct events, watch for failing sources.</td><td><span class="status done">Done (early)</span></td></tr>
-          <tr><td class="num">09</td><td><b>Suggestions.</b> Visitors can suggest a group or event source.</td><td><span class="status next">Planned</span></td></tr>
-          <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews.</td><td><span class="status next">Planned</span></td></tr>
+          <tr><td class="num">09</td><td><b>Suggestions.</b> Visitors can suggest a group or calendar; discovery evaluates it.</td><td><span class="status done">Done</span></td></tr>
+          <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews, a tested backup, then launch on netechconnect.com.</td><td><span class="status now">In progress</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1566,7 +1573,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A second opinion from AI</b><small>Only for events the rules can't decide, and for reading newsletters. Fenced, cached, capped at $1 a month, and it can't publish anything. Merged in PR #35.</small></div><span class="ids">T079&ndash;T083</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Finders, evaluation and the weekly run</b><small>Four finders, a check for each candidate site, mentions matched to real event pages, and a Monday run with its own data PR.</small></div><span class="ids">T086&ndash;T095</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Newsletter inbox and platforms</b><small>events@netechconnect.com is live and subscribed to Silicon Prairie News. Meetup groups and Luma calendars are read through their public feeds, Eventbrite through its API. PRs #39&ndash;#42 and #51.</small></div><span class="ids">T096&ndash;T104</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Checkpoint: a real weekly run</b><small>First try: the AI key was missing. Second: ran out of time. Third: finished, but matching news mentions to real pages took 52 of its 58 minutes, so no new site got checked. That step gets a time limit next.</small></div><span class="ids">T105</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Checkpoint: a real weekly run</b><small>Three fixes later (PRs #66, #68, #70) the hunt finishes in about 40 minutes and adds real Nebraska groups: 7 are active so far. But they came through only two kinds of channel, web search and gap checks, and the checkpoint asks for three.</small></div><span class="ids">T105</span></li>
     </ul>
   </section>
 
@@ -1589,6 +1596,9 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
       <h2>What happened</h2>
     </div>
     <div class="notes">
+      <div class="note hi"><div><h3>Oct 23&ndash;24: the hunt starts finding real groups</h3><p>With the mention step capped at 10 minutes, obvious non-sources (job boards, encyclopedias, social media) skipped before any fetch, the most promising candidates checked first, and one malformed link no longer able to crash the run, the weekly hunt found Lincoln.Code, the Nebraska Data and Analytics Forum, NETA, the Claude Code Developers Night Out and the Tech Nebraska Summit, among others.</p></div></div>
+      <div class="note"><div><h3>Lincoln, England</h3><p>One "Lincoln" group it found meets in Lincoln, England. Its event pages said so (country: GB); the reader just didn't look. Now any event whose page names a country other than the US is dropped (PR #82).</p></div></div>
+      <div class="note"><div><h3>Not every Omaha calendar is about tech</h3><p>A gap check added "Meetings | OmahaAA.org": the Omaha area's Alcoholics Anonymous meetings calendar. It was removed before any of its meetings reached review, and the site is now on the list of addresses discovery skips (PR #100).</p></div></div>
       <div class="note hi"><div><h3>The inbox that threw everything away</h3><p>I subscribed the new newsletter inbox to Silicon Prairie News and waited. Nothing arrived. The inbox only accepts mail from senders on an allow-list, and the list was empty, so it had been quietly dropping every email, including the ones I was waiting for. One line of configuration and a redeploy later, it's listening.</p></div></div>
       <div class="note"><div><h3>Each platform on its own terms</h3><p>Before writing any code for Meetup, Luma and Eventbrite, I read each one's terms. So Meetup groups are read from their public event pages only, 10 seconds apart; Luma only through a calendar's own iCal feed, never its pages; and Eventbrite through its official API.</p></div></div>
       <div class="note hi"><div><h3>The AI was answering; we were throwing it away</h3><p>Once the AI key went in, 10 of 13 answers came back "outside the schema" and got ignored. The AI wasn't wrong: its one-line reasons ran past our 200-character limit, and the check threw out the whole answer. Now long text is trimmed, and anything actually wrong, like extra fields or made-up topics, is still rejected.</p></div></div>
@@ -1688,6 +1698,165 @@ On a simulated slow phone, the events show in 1.7 seconds with the map. Accessib
 I first planned a still picture on phones. Then I wanted the animation on my Pixel too, so now phones get it.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech #threejs</textarea>
       <span class="count" data-count-for="post-design-b"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 5 -->
+<div class="panel" role="tabpanel" id="phase-5" aria-labelledby="tab-phase-5" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 5 &middot; Calendar &middot; Oct 23, 2026</p>
+      <h2>The same events, by month and by week</h2>
+    </div>
+    <p class="lede">A list is good for "what's next". A calendar is good for "what's on the week I'm free". Phase 5 adds month and week pages built from the same events, so the two views can never disagree.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">5<small> of 5</small></span><p>Phase 5 tasks done, checked on the live site on Oct 23.</p></div>
+      <div class="stat"><span class="n">135</span><p>Calendar pages: every month and every week from a year back to a year ahead.</p></div>
+      <div class="stat"><span class="n">0</span><p>Accessibility violations on the month and week pages, light and dark.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Tests first</b><small>Monday-first weeks, days in Central Time, an event shown on every day it spans, and pages from 12 months back to 12 ahead.</small></div><span class="ids">T106&ndash;T107</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Month and week pages</b><small><code>/calendar/</code> goes straight to the current month; each month and week links to the next and previous one. Merged in PR #69.</small></div><span class="ids">T108&ndash;T109</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint on the live site</b><small>Every event on its day in Central Time, multi-day events on each day, keyboard and screen reader friendly. Two phone fixes in PR #72.</small></div><span class="ids">T110</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>The first week pointed nowhere</h3><p>A month's first row often starts in the month before. Its week link pointed at a week page that didn't exist yet, because the oldest pages are a year back. Links at the edge of the range now fall back to the month.</p></div></div>
+      <div class="note"><div><h3>Links big enough to tap</h3><p>The accessibility checker flagged the small "next week" links: WCAG 2.2 asks for targets at least 24 pixels across. They grew.</p></div></div>
+      <div class="note hi"><div><h3>A phone isn't a small calendar</h3><p>Seven columns don't fit on a phone, so there the month turns into an agenda: one day after another. The first version also listed the grey days from the neighbouring months; now it shows only the month you asked for.</p></div></div>
+      <div class="note"><div><h3>"Continues"</h3><p>A two-day conference shows its start time on the first day and "Continues" on the second, so it never looks like two events.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 5</h3><button class="btn" type="button" data-copy="post-phase-5">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-5">Suggested post (edit freely)</label>
+      <textarea id="post-phase-5">NETechConnect build log, Phase 5: a calendar.
+Same events as the list, laid out by month and by week, a year back and a year ahead. /calendar/ always opens on this month.
+On a phone, seven columns don't fit, so the month becomes an agenda, one day after another.
+Small things that took the most care: weeks start on Monday, every day is in Central Time, a two-day conference says "Continues" on day two instead of looking like two events, and the "next week" links are big enough to tap (WCAG 2.2 asks for 24 pixels).
+Checked on the live site. Next: filters.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-5"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 6 -->
+<div class="panel" role="tabpanel" id="phase-6" aria-labelledby="tab-phase-6" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 6 &middot; Filters &middot; Oct 23, 2026</p>
+      <h2>Only Lincoln, only security, only this weekend</h2>
+    </div>
+    <p class="lede">Filters by area, topic, dates and keyword, on the list and the calendar. Whatever you pick goes into the page's address, so a filtered view can be bookmarked or sent to someone, and it follows you from the list to the calendar and back.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">4<small> of 4</small></span><p>Phase 6 tasks done.</p></div>
+      <div class="stat"><span class="n">15<small> of 15</small></span><p>Checks passed on the live site, against answers worked out separately from the site's own data.</p></div>
+      <div class="stat"><span class="n">0</span><p>Requests the filters make. Everything happens in your browser, on the page you already have.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Tests first</b><small>Area, topic, dates, keyword, the address bar, and what happens without JavaScript.</small></div><span class="ids">T111</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The filter bar</b><small>Area chips, a topic menu, from and to dates, and a search box, on the list and every calendar page. Merged in PR #73.</small></div><span class="ids">T112&ndash;T113</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint on the live site</b><small>Seven filter combinations, carried from the list to the calendar and back, a reload, the keyboard, a phone, and JavaScript off. PR #75.</small></div><span class="ids">T114</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Midnight in Greenwich is still yesterday in Omaha</h3><p>A test set "today" to midnight UTC, which in Omaha is 7 PM the day before, and the date filters were off by one day. The tests' clock now sits at noon, and every date in the filters is a Central Time date.</p></div></div>
+      <div class="note"><div><h3>Without JavaScript, you get everything</h3><p>The filters need JavaScript. Without it, every event shows, with a short note saying filters need JavaScript, instead of controls that don't work.</p></div></div>
+      <div class="note"><div><h3>A focus ring inside a date box</h3><p>Tabbing into a date field moves focus to its month, day and year parts, and the outline disappeared. Fields now show the outline whenever anything inside them has focus.</p></div></div>
+      <div class="note hi"><div><h3>The checkpoint that matched nothing, correctly</h3><p>The test scenario was written months earlier: Lincoln, security or AI. All five live events were in Omaha, so the right answer was "no events", and that's what the site said. The other cases used filters that did match.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 6</h3><button class="btn" type="button" data-copy="post-phase-6">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-6">Suggested post (edit freely)</label>
+      <textarea id="post-phase-6">NETechConnect build log, Phase 6: filters.
+Pick an area (Omaha, Lincoln, the rest of Nebraska, online), a topic, dates, or a keyword, on the list or the calendar. The filters live in the page's address, so you can bookmark "Lincoln security events" or send it to a friend, and they follow you from the list to the calendar and back.
+Everything runs in your browser, on the page you already have. No tracking, no extra requests. Without JavaScript you simply see every event.
+Bug of the week: a test's "today" was midnight UTC, which is 7 PM yesterday in Omaha. Dates were off by one until the tests moved to noon.
+Checked on the live site: 15 of 15.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-6"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 7 -->
+<div class="panel" role="tabpanel" id="phase-7" aria-labelledby="tab-phase-7" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 7 &middot; Past events &middot; Oct 23, 2026</p>
+      <h2>An archive of what already happened</h2>
+    </div>
+    <p class="lede">When an event ends, it moves from Upcoming to a Past page, newest first, with the same filters. It keeps its own page and its spot on the calendar, and links to the organizer's page, where slides or recordings often end up. Once a month the bot checks whether those pages still exist.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">5<small> of 5</small></span><p>Phase 7 tasks done.</p></div>
+      <div class="stat"><span class="n">27<small> of 27</small></span><p>Checks passed with the real data rebuilt as if it were January 1, 2027.</p></div>
+      <div class="stat"><span class="n">50</span><p>Past events checked each month for a page that's gone, a different slice each month.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The Past page</b><small><code>/past/</code>, newest first, grouped by month, 50 to a page, with the same filters and a Past link in the menu. Merged in PR #85.</small></div><span class="ids">T115, T117</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The monthly link check</b><small>On the 1st, up to 50 past events' original pages are re-read. A page that's gone (404 or 410) gets "The original page may no longer be available." PR #88.</small></div><span class="ids">T116, T118</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint</b><small>Today's real data, rebuilt as of Jan 1, 2027: 20 events in the archive, every filter right, every link working. PR #89.</small></div><span class="ids">T119</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">A detour</p>
+      <h2>A feature that lasted an afternoon</h2>
+      <p class="muted prose">Between Phases 6 and 7 I asked for a small tag on each event card saying "Free" or showing the price. It was built the same afternoon: prices read from event pages and from Eventbrite, and an "always free" setting for groups I know are free. Then I looked at it on the site.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>What the tag said by accident</h3><p>Most event pages, Meetup's included, don't publish a price at all. So only some cards could ever say "Free", and every card without the tag quietly suggested its event costs money.</p></div>
+      <div class="card"><h3>So it went</h3><p>First the tag came off the cards, then every trace of cost came out of the site and its data (PRs #83 and #84). The organizer's page is where cost belongs.</p></div>
+      <div class="card"><h3>What stayed</h3><p>A rule in the spec saying the site doesn't show cost, so it doesn't get added back by accident. And the habit of looking at a feature on the real site before calling it done.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Twelve open houses</h3><p>Rebuilding the archive as of January showed it: 12 of the 20 past events were the same weekly open house at one makerspace. It's a nice event, but not a tech one, so all of them are hidden, and the source stays paused (PR #95).</p></div></div>
+      <div class="note"><div><h3>Gone, or just having a bad day?</h3><p>The link check uses the same safe fetcher as everything else, so robots.txt and rate limits still apply. A 403, a timeout or a server error proves nothing, so only a clear "gone" (404 or 410) adds the note, and a page that comes back loses it.</p></div></div>
+      <div class="note"><div><h3>A PR that closed itself</h3><p>The link check was built on top of the Past page's branch. Merging that branch deleted it, and GitHub closed the PR that depended on it. Same commits, new PR (#88). Lesson: don't stack PRs on a branch that will be deleted on merge.</p></div></div>
+      <div class="note"><div><h3>Security notices, two in one evening</h3><p>A new advisory for Zod, used only by the Workers' test tools, failed every PR's checks. The fix was newer than the project's 14-day rule for new versions, so it was pinned to the patched release (PR #86).</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 7</h3><button class="btn" type="button" data-copy="post-phase-7">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-7">Suggested post (edit freely)</label>
+      <textarea id="post-phase-7">NETechConnect build log, Phase 7: past events.
+When an event ends it moves to a Past page, newest first, with the same filters, and still links to the organizer's page, where slides and recordings tend to end up. Once a month the bot checks whether those pages still exist and flags the ones that are gone.
+To test it, I rebuilt the real site as if it were January 1, 2027: 27 of 27 checks passed. It also showed that 12 of the 20 past events were one makerspace's weekly open house, so those are hidden now.
+And a detour: I added "Free" tags to event cards, then took them out the same afternoon. Most event pages don't list a price, so a tag on a few cards made all the others look paid. The organizer's page is the place for cost.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-7"></span>
     </div>
   </section>
 </div>
@@ -1850,17 +2019,126 @@ And when something on the site is wrong, one line in a file hides it or fixes it
     </div>
   </section>
 </div>
+
+<!-- ======================================================= PHASE 9 -->
+<div class="panel" role="tabpanel" id="phase-9" aria-labelledby="tab-phase-9" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 9 &middot; Suggestions &middot; Oct 24, 2026</p>
+      <h2>"You're missing a group": now one form away</h2>
+    </div>
+    <p class="lede">Visitors can suggest a group or calendar the site doesn't know. It's the site's only public form, so most of the work went into what it refuses: bots, floods, private addresses, and anything personal ending up in a public repository.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">7<small> of 7</small></span><p>Phase 9 tasks done, with my own suggestion sent through the live form, evaluated and cleared.</p></div>
+      <div class="stat"><span class="n">5<small>/hour</small></span><p>Suggestions allowed from one visitor. Only a salted hash of their address is kept, for one hour.</p></div>
+      <div class="stat"><span class="n">0</span><p>Files, pull requests or issues a suggestion's note can reach. It lives in private storage for at most 30 days.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Cloudflare Turnstile</b><small>A free, cookie-free check that the visitor is a person, set up in the Cloudflare dashboard.</small></div><span class="ids">T129</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The suggestion Worker</b><small>In order: the right website, at most 4 KB, Turnstile checked, the hourly limit, then an https address on a public site. Stores the address and a scrubbed note for 30 days. PR #90.</small></div><span class="ids">T130&ndash;T131</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The form</b><small><code>/suggest/</code>, with a privacy notice, and the only page allowed to load anything from another site (Turnstile). A Suggest button in the header. PRs #92, #94, #104.</small></div><span class="ids">T132, T134</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Discovery reads them</b><small>Each Monday, suggestions are evaluated first. One it can't decide goes to my review PR, with the address and the reason only. PRs #97, #99.</small></div><span class="ids">T133</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint</b><small>Every rule tested locally with Turnstile's test key, the refusals checked on the live Worker, and one real suggestion end to end. PR #103.</small></div><span class="ids">T135</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>Four snags between "deployed" and "works"</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>"Unable to connect to website"</h3><p>The first real try failed inside the Turnstile widget. The browser's log said error 110200: the widget didn't recognise the site's address. One missing hostname in the Cloudflare dashboard.</p></div></div>
+      <div class="note hi"><div><h3>"That didn't go through"</h3><p>Next, the Worker refused a perfectly good address, and its log only said "invalid". The Turnstile secret had been pasted wrong. Re-entering it fixed that; now every refusal logs which check failed, and never anything the visitor typed.</p></div></div>
+      <div class="note"><div><h3>A suggestion that vanished</h3><p>The weekly run read my suggestion, then dropped it as a duplicate: web search had found the same site days earlier and left it undecided. Now a suggestion for a site that's in doubt goes to my review instead. Someone asked, so a person decides.</p></div></div>
+      <div class="note"><div><h3>The local test server refused to start</h3><p>Cloudflare's runtime treats everything a Worker's main file exports as a way in, and both Workers exported a few constants. Production didn't mind; the local test server did. The constants moved to their own files, and a test checks it stays that way.</p></div></div>
+      <div class="note"><div><h3>Hidden at the bottom</h3><p>Once it worked, I noticed the only link to the form was in the footer. Now there's a Suggest button at the top of every page, beside the name on phones.</p></div></div>
+      <div class="note"><div><h3>The fastest fix was deleting</h3><p>Two more security advisories landed that night, and each one's fix failed the other's check, so they went in together. One was for a mail-parsing package no Worker actually used. It was removed instead of upgraded.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 9</h3><button class="btn" type="button" data-copy="post-phase-9">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-9">Suggested post (edit freely)</label>
+      <textarea id="post-phase-9">NETechConnect build log, Phase 9: you can now suggest a group the site is missing.
+It's the site's only public form, so most of the work went into what it turns away: bots (Cloudflare Turnstile, no cookies), floods (5 an hour per visitor, keeping only a salted hash), private and internal addresses, and personal details. Notes are scrubbed of emails and phone numbers, kept privately for at most 30 days, and never reach the public repo.
+Every Monday the bot evaluates suggestions first. Ones it can't decide come to me.
+Getting from "deployed" to "works" took four fixes: a missing hostname, a mis-pasted secret, a suggestion dropped as a duplicate, and a local test server that disliked a few exported constants.
+Then I noticed the form was only linked from the footer. It's in the header now.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-9"></span>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= PHASE 10 -->
+<div class="panel" role="tabpanel" id="phase-10" aria-labelledby="tab-phase-10" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Phase 10 &middot; Launch prep &middot; Oct 24, 2026</p>
+      <h2>Checking it all before telling anyone</h2>
+    </div>
+    <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review by me and then by someone else, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">8<small> of 15</small></span><p>Phase 10 tasks done. Most of the rest need someone other than the builder.</p></div>
+      <div class="stat"><span class="n">171<small> of 171</small></span><p>Files of the live site rebuilt byte for byte from a fresh copy of the repository.</p></div>
+      <div class="stat"><span class="n">1.83<small> s</small></span><p>Until the main content shows on a simulated slow phone, from 1.97 s, after trimming the fonts.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Accessibility, everywhere</b><small>Automated checks on all seven kinds of page, at three widths, in light and dark. No violations; one About page bug fixed. PR #105.</small></div><span class="ids">T136</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Speed</b><small>The calendar no longer jumps as it loads, and the fonts are 22% smaller with the same look. PRs #108, #109.</small></div><span class="ids">T138</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>My own security review</b><small>Every risk in the plan checked against the code. No critical or high findings; the one medium fixed the same day. PRs #106, #107.</small></div><span class="ids">T139</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Backup, tested</b><small>A fresh clone rebuilt the live site exactly, and a runbook covers every way to restore it. PR #113.</small></div><span class="ids">T141</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Routines</b><small>A monthly metrics log, a quarterly coverage check, a watchdog for switched-off schedules, and the full runbook. PRs #114&ndash;#117.</small></div><span class="ids">T143&ndash;T146</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>An independent security review</b><small>Someone who didn't build it reviews it. Launch waits for this.</small></div><span class="ids">T140</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Still to come</b><small>A screen-reader pass by a person, a deploy token so Workers stop deploying from my laptop, the cost check after two weeks of live runs, the final end-to-end run, and netechconnect.com.</small></div><span class="ids">6 tasks</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What the checks found</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>One long word</h3><p>On a phone, the About page scrolled sideways. The culprit was the GitHub link: one long word with nowhere to break. Long links now wrap.</p></div></div>
+      <div class="note hi"><div><h3>The calendar jumped</h3><p>The filter bar stayed hidden until its script ran, then appeared and pushed the calendar down. Google's measure for that rated it "poor". It's now there from the first moment, and hidden only for the rare visitor with JavaScript off.</p></div></div>
+      <div class="note"><div><h3>Half a second of fonts</h3><p>On a slow phone, the three web fonts cost about half a second. I tried four ways of loading them, and the one already in use was fastest. So I trimmed the files instead: the same fonts, cut to the weights the site uses. No letter moved by more than a thousandth of the type size.</p></div></div>
+      <div class="note"><div><h3>A check that wasn't required</h3><p>Of the six automatic checks on every change, the one that opens the site in a real browser wasn't required. A data update that broke a page could have gone live. Now all six are required.</p></div></div>
+      <div class="note hi"><div><h3>Rebuilt, byte for byte</h3><p>I cloned the repository fresh, installed everything from the lock files and rebuilt the site with the live site's own timestamp. All 171 files matched what's online, exactly. The repository really is the backup.</p></div></div>
+      <div class="note"><div><h3>A reminder once a month</h3><p>The health issue now asks for a monthly check in the first week of each month, and watches for GitHub switching off the scheduled runs, which it does to quiet public repositories after 60 days.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share Phase 10 so far</h3><button class="btn" type="button" data-copy="post-phase-10">Copy post</button></div>
+      <label class="eyebrow" for="post-phase-10">Suggested post (edit freely)</label>
+      <textarea id="post-phase-10">NETechConnect build log, Phase 10: every feature is built, so now I'm checking it all before launch.
+Accessibility: automated checks on every kind of page, at phone and desktop widths, light and dark. One bug: on a phone, the About page scrolled sideways because a GitHub link was one long unbreakable word.
+Speed: the calendar jumped as it loaded (fixed), and trimming the fonts took the main content on a slow phone from 1.97 to 1.83 seconds. Same look.
+Security: my own review found nothing critical or high, and one medium I fixed the same day. Next, someone who didn't build it reviews it.
+Backup: a fresh copy of the repository rebuilt the live site byte for byte, all 171 files.
+Then: launch, and netechconnect.com.
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-phase-10"></span>
+    </div>
+  </section>
+</div>
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Oct 22, 2026</span>
+  <span>NETechConnect build log &middot; updated Oct 24, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
 
 <script>
 (() => {
-  /* ---------- Tabs with deep links (#project, #phase-1 ... #phase-8) ---------- */
+  /* ---------- Tabs with deep links (#project, #phase-1 ... #phase-10, #design-b) ---------- */
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
   const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
 
