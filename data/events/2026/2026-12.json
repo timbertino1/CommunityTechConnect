@@ -41,7 +41,7 @@
     "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
     "title": "Open House & Community Hangout",
     "tz_assumed": false,
-    "visibility": "shown"
+    "visibility": "hidden"
   },
   {
     "all_day": false,
@@ -220,7 +220,7 @@
     "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
     "title": "Open House & Community Hangout",
     "tz_assumed": false,
-    "visibility": "shown"
+    "visibility": "hidden"
   },
   {
     "all_day": false,
@@ -444,7 +444,7 @@
     "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
     "title": "Open House & Community Hangout",
     "tz_assumed": false,
-    "visibility": "shown"
+    "visibility": "hidden"
   },
   {
     "all_day": false,
@@ -533,7 +533,7 @@
     "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
     "title": "Open House & Community Hangout",
     "tz_assumed": false,
-    "visibility": "shown"
+    "visibility": "hidden"
   },
   {
     "all_day": false,
@@ -577,6 +577,6 @@
     "summary": "Something special happens when people gather to create. Every Tuesday from 5:30–8:00 PM (but often later!), Made New Makerspace opens its doors for a free community Open House. Makers, learners, families, and curious visitors all come together to share ideas, work on projects, and build relationships. Whether you’re part of Omaha Maker Group or just curious and want to pop in to see what we’re all about, you’re invited. Bring your own dinner if you’d like, bring a friend, and bring your…",
     "title": "Open House & Community Hangout",
     "tz_assumed": false,
-    "visibility": "shown"
+    "visibility": "hidden"
   }
 ]

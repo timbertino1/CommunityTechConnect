@@ -520,5 +520,59 @@
     "kind": "event",
     "reason": "new event from a probationary source",
     "ref": "evt_3d4f5d8cdbc8"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_0ff656661765",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_1eafe3770146"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_2f9ae2ec1d9a",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_b01cdf393079"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_310e8df55177",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_31b392415f37"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_6126e46e4930",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_ab4b5f38d7c3"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_764113706b6d",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_a151f8a0d3d8"
+  },
+  {
+    "created": "2026-10-24T14:11:30Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_ba3525f50da3",
+    "kind": "event",
+    "reason": "needs review: no tech keywords",
+    "ref": "evt_4ed98769a272"
   }
 ]
