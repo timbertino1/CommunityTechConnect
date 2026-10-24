@@ -93,6 +93,8 @@ class DiscoverSourcesReport:
     suggestions_for_review: int = 0
     """Suggestions sent to the review queue: not a source page, or not decidable automatically."""
     suggestions_deleted: int = 0
+    suggestions_known: int = 0
+    """Suggested sites already listed as sources, or already added or awaiting evaluation."""
     suggestions_error: str | None = None
     written: bool = False
 
@@ -163,7 +165,10 @@ def discover_sources(
             report.suggestions_read = len(read.done)
             suggested_done = read.done
             set_aside_suggestions = [(s.url, s.reason) for s in read.for_review]
-            _add_candidates(ctx, read.candidates, found)
+            fresh, known = _new_suggestions(ctx, read.candidates)
+            set_aside_suggestions += known
+            report.suggestions_known = len(read.candidates) - len(fresh) - len(known)
+            _add_candidates(ctx, fresh, found)
     for finder in finders if finders is not None else default_finders(inbox):
         finder_started = clock()
         try:
@@ -296,6 +301,33 @@ def discover_sources(
     if ai is not None and ai.client is not None:
         report.ai_spent_usd = ai.cache.spent_usd()
     return report
+
+
+def _new_suggestions(
+    ctx: FinderContext, suggested: Sequence[CandidateSource]
+) -> tuple[list[CandidateSource], list[tuple[str, str]]]:
+    """Suggestions for sites nobody has looked at yet, and, for review, suggestions for sites
+    already in doubt (needs review, or rejected): someone asked, so a person decides. Sites
+    already listed, added, or waiting to be evaluated are neither."""
+    sources = {
+        key
+        for s in ctx.sources
+        for url in (s.url, s.feed_url)
+        if url and (key := site_key(url)) is not None
+    }
+    earlier = {key: c for c in ctx.candidates if (key := site_key(c.url)) is not None}
+    fresh: list[CandidateSource] = []
+    for_review: list[tuple[str, str]] = []
+    for candidate in suggested:
+        key = site_key(candidate.url)
+        if key in sources:
+            continue
+        before = earlier.get(key) if key else None
+        if before is None:
+            fresh.append(candidate)
+        elif before.result in ("needs_review", "rejected"):
+            for_review.append((before.url, f"already looked at: {before.reason}"))
+    return fresh, for_review
 
 
 def _suggestion_review_id(url: str) -> str:
