@@ -68,7 +68,7 @@
 - aliases: []
   area: lincoln
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-24T03:30:52Z'
   links:
   - https://www.meetup.com/digitallincoln/events/
   name: Digital Lincoln Events
@@ -89,7 +89,7 @@
 - aliases: []
   area: omaha
   cadence_days: null
-  last_searched: null
+  last_searched: '2026-10-24T03:30:52Z'
   links:
   - https://madenewomaha.com/events
   name: Events from October 26 – November 17 – Made New Makerspace
@@ -191,6 +191,16 @@
   name: Lincoln.Code
   source_ids:
   - src_lincoln-code
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.omahaaa.org/meetings
+  name: Meetings | OmahaAA.org
+  source_ids:
+  - src_omahaaa-org
   status: active
 - aliases: []
   area: lincoln
@@ -370,6 +380,16 @@
   name: Tech meetups in Omaha 2026 / 2027
   source_ids:
   - src_dev-events
+  status: active
+- aliases: []
+  area: other_ne
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.ippathways.com/event/tech-nebraska-summit
+  name: Tech Nebraska Summit | IP Pathways
+  source_ids:
+  - src_ippathways-com
   status: active
 - aliases: []
   area: lincoln

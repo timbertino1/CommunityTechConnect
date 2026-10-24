@@ -1,0 +1,20 @@
+added_at: '2026-10-24'
+approved_count: 0
+check_interval_hours: 24
+connector: ical
+default_area: omaha
+feed_url: https://www.omahaaa.org/calendar/?ical=1
+follow_links: null
+found_via: gap
+html_rules: null
+id: src_omahaaa-org
+name: Meetings | OmahaAA.org
+notes: 'Discovered via gap: the page links an iCal feed.'
+organizer_id: null
+origin: discovered
+rate_limit_seconds: 5
+rejected_count: 0
+status: active
+trust: probationary
+updated_at: null
+url: https://www.omahaaa.org/meetings
