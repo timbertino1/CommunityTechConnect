@@ -1,0 +1,4 @@
+/* Only for visitors with JavaScript off (loaded inside <noscript>): the filter bar needs
+   JavaScript, so it is hidden, and the notice after it says why. With JavaScript the bar is
+   there from the first paint, so nothing below it moves when filters.js starts (T138). */
+.filters { display: none !important; }

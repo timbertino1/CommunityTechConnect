@@ -18,7 +18,6 @@ if (form) {
   let filters = parse(window.location.search, topics);
   const links = pageLinks();
 
-  form.hidden = false;
   fill(form, filters);
   apply(filters, links);
 
