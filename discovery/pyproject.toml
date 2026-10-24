@@ -93,4 +93,8 @@ exclude-newer = "14 days"
 # Security exception (GHSA-6q48-6c7w-9gw2, 2026-10-20): certifi 2026.7.22 trusts emSign roots
 # whose intermediate keys were compromised; the fix, 2026.10.19 (uploaded 2026-10-20 02:24 UTC),
 # is younger than 14 days. This admits only certifi releases up to then. Remove on 2026-11-03.
-exclude-newer-package = { certifi = "2026-10-20T03:00:00Z" }
+# Security exception (CVE-2026-112907, -112913, -112940, 2026-10-23): filelock 4.0.9 is
+# vulnerable; the fix, 4.2.1 (uploaded 2026-10-17 16:48 UTC), is younger than 14 days. It comes
+# only through pip-audit's cache (dev). This admits only filelock releases up to then. Remove on
+# 2026-10-31.
+exclude-newer-package = { certifi = "2026-10-20T03:00:00Z", filelock = "2026-10-17T17:00:00Z" }
