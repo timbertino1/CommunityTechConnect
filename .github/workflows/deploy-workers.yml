@@ -1,0 +1,56 @@
+name: Deploy Workers
+
+# Tests and deploys both Cloudflare Workers (T148; contracts/workflows-and-review.md): the
+# suggestion endpoint and the newsletter inbox. Runs when Worker code or config changes on main,
+# or by hand. Worker secrets (TURNSTILE_SECRET, IP_HASH_SALT, OWNER_FORWARD_ADDRESS) stay on
+# Cloudflare and are untouched by a deploy.
+on:
+  push:
+    branches: [main]
+    paths: ["workers/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-workers
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Test and deploy the Workers
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    defaults:
+      run:
+        working-directory: workers
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: workers/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Test
+        run: npx vitest run
+      # CLOUDFLARE_WORKERS_TOKEN can only edit Workers scripts and read Workers KV (T147).
+      - name: Deploy the suggest Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: "false"
+        run: npx wrangler deploy --env suggest
+      - name: Deploy the inbox Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: "false"
+        run: npx wrangler deploy --env inbox

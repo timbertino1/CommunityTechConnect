@@ -14,6 +14,7 @@ scheduled run several minutes late, sometimes more.
 |---|---|---|
 | **Discover events** (`discover-events.yml`) | 11:00 and 23:00 daily | Reads every due source and updates `data/` through a bot PR that merges itself once CI passes. Updates the Discovery health issue. On the 1st of the month it also checks past events' original pages (T118). |
 | **Deploy site** (`deploy.yml`) | 11:30 and 23:30 daily, on every push to `main`, and by hand | Validates `data/`, builds the site and deploys it to Cloudflare Pages. The timed runs move ended events to Past even when no data changed. |
+| **Deploy Workers** (`deploy-workers.yml`) | On every push to `main` that changes `workers/`, and by hand | Type-checks and tests both Workers, then deploys the suggest and inbox Workers with `CLOUDFLARE_WORKERS_TOKEN` (T148). |
 | **Discover sources** (`discover-sources.yml`) | Mondays 12:00 | The weekly hunt for new groups (web search, links, news, newsletters, gap checks, visitor suggestions). New sources start on probation. |
 | **Review PR** (`review-pr.yml`) | When the review queue on `main` changes, and by hand | Opens or refreshes the review PR (branch `review/open`). |
 | **Apply review** (`apply-review.yml`) | When the review PR is merged | Applies your approve and reject ticks through a bot PR. |
@@ -46,6 +47,7 @@ scanning alert), when someone who had access no longer should, and otherwise abo
 | `KV_NEWSLETTERS_ID` | `discovery` | The `NEWSLETTERS` namespace id (not secret) | Only if the namespace is recreated | Newsletters aren't read |
 | `CLOUDFLARE_ACCOUNT_ID` | `discovery` (a variable) and `production` | Which Cloudflare account (not secret) | Doesn't change | Nothing on Cloudflare can be reached |
 | `CLOUDFLARE_API_TOKEN` | `production` | Deploying the site to Cloudflare Pages | Cloudflare → My Profile → API Tokens → this token → **Roll** | The site stays as last deployed |
+| `CLOUDFLARE_WORKERS_TOKEN` | `production` | Deploying the two Workers (Workers Scripts: Edit, Workers KV Storage: Read, this account only) | Cloudflare → My Profile → API Tokens → "NETechConnect Workers deploy" → **Roll** | The Workers stay as last deployed; Deploy Workers fails |
 | `TURNSTILE_SECRET` | Suggest Worker | Checking the form's Turnstile tokens | Cloudflare → Turnstile → the widget → rotate the secret key, then `npx wrangler secret put TURNSTILE_SECRET --env suggest` | Every suggestion is refused ("That didn't go through") |
 | `IP_HASH_SALT` | Suggest Worker | Salting the hourly rate-limit counters | Any new long random value: `npx wrangler secret put IP_HASH_SALT --env suggest` (the counters simply start over) | Rate limits rely on a predictable hash; set it |
 | `OWNER_FORWARD_ADDRESS` | Inbox Worker | Where subscription-confirmation emails go | `npx wrangler secret put OWNER_FORWARD_ADDRESS --env inbox` | Confirmation emails are dropped |
@@ -53,8 +55,9 @@ scanning alert), when someone who had access no longer should, and otherwise abo
 `KV_SUGGESTIONS_ID` in `discovery` is unused (the workflow passes the public id) and can be
 deleted.
 
-Worker secrets are set from `workers/`, in your own terminal. Until T147/T148 add a deploy
-token, Worker deploys also run from there: `npx wrangler deploy --env <suggest|inbox>`.
+Worker secrets are set from `workers/`, in your own terminal (`npx wrangler secret put`). Worker
+deploys run in GitHub (**Deploy Workers**), so the laptop's `wrangler` login is needed only for
+secrets; deploying from the laptop still works in an emergency.
 
 ## Pausing things
 
@@ -101,8 +104,8 @@ To redeploy without any change: **Actions → Deploy site → Run workflow**.
 `netechconnect` project if it doesn't exist, then deploys. After launch, reconnect the custom
 domain (T156).
 
-**A Worker is gone or broken.** From `workers/`, run `npx wrangler deploy --env suggest` and
-`npx wrangler deploy --env inbox`. If a Worker had to be recreated, set its secrets again with
+**A Worker is gone or broken.** Run **Actions → Deploy Workers → Run workflow** (or, from
+`workers/`, `npx wrangler deploy --env suggest` and `npx wrangler deploy --env inbox`). If a Worker had to be recreated, set its secrets again with
 `npx wrangler secret put <NAME> --env <suggest|inbox>`. The KV namespace ids are in
 `workers/wrangler.toml`. If a namespace itself is gone, create it with
 `npx wrangler kv namespace create <NAME>` and put the new id in `wrangler.toml` (and, for
