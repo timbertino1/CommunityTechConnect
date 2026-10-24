@@ -93,6 +93,10 @@ def _parser() -> argparse.ArgumentParser:
     site.add_argument("--out", type=Path, default=Path("dist"), help="output directory")
     site.add_argument("--web", type=Path, default=Path("web"), help="web assets directory")
     site.add_argument("--now", type=_utc_datetime, help="build as if it were this UTC time")
+    site.add_argument(
+        "--suggest-endpoint",
+        help="the suggestion Worker's /suggest URL (default: the one in netc.site.build)",
+    )
     review = commands.add_parser(
         "review-pr",
         help="Write the review PR's title, description and data/review/open.json.",
@@ -275,7 +279,8 @@ def _build_site(args: argparse.Namespace) -> int:
     now: datetime = args.now or datetime.now(UTC)
     domain = os.environ.get("NETC_SITE_DOMAIN", "netechconnect.example")
     try:
-        report = build_site(args.data, args.out, args.web, now=now, site_domain=domain)
+        extra = {} if args.suggest_endpoint is None else {"suggest_endpoint": args.suggest_endpoint}
+        report = build_site(args.data, args.out, args.web, now=now, site_domain=domain, **extra)
     except (StorageError, BuildError) as exc:
         print(f"netc build-site: {exc}", file=sys.stderr)
         return 1

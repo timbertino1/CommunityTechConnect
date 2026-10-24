@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Suggest a group or calendar{% endblock %}
+{% block description %}Know a Nebraska tech group, meetup or event calendar we're missing? Suggest it here.{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>Suggest a group or calendar</h1>
+<p class="lede">Know a Nebraska tech group, meetup or event calendar that isn't here yet? Send us its web address.</p>
+<p>The best address is the group's events page or calendar feed: for example a Meetup group, a Luma calendar, or the events page on its own website. We check every suggestion automatically, and a person reviews new sources before their events appear.</p>
+</div>
+<noscript><p class="note">This form needs JavaScript for its spam check. You can also suggest a source by opening an issue on <a href="{{ repo_url }}/issues" rel="noopener external">GitHub</a>.</p></noscript>
+<form class="suggest" method="post" action="{{ suggest.endpoint }}" data-suggest>
+  <div class="field">
+    <label for="suggest-url">Web address</label>
+    <input id="suggest-url" name="url" type="url" inputmode="url" required maxlength="2048" placeholder="https://" autocomplete="off" spellcheck="false" aria-describedby="suggest-url-hint">
+    <p id="suggest-url-hint" class="hint">Must start with https://</p>
+  </div>
+  <div class="field">
+    <label for="suggest-note">Note <span class="optional">(optional)</span></label>
+    <textarea id="suggest-note" name="note" rows="3" maxlength="280" aria-describedby="suggest-note-hint"></textarea>
+    <p id="suggest-note-hint" class="hint">Up to 280 characters, e.g. how often the group meets.</p>
+  </div>
+  <p class="notice">The address you suggest may become public. Notes are private, used only to evaluate your suggestion, and deleted after 30 days. Please don't include personal information.</p>
+  <div class="cf-turnstile" data-sitekey="{{ suggest.site_key }}"></div>
+  <p><button type="submit" class="primary">Send suggestion</button></p>
+  <p class="suggest-status" role="status" data-suggest-status></p>
+</form>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script type="module" src="/js/suggest.js"></script>
+{% endblock %}

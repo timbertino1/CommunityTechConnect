@@ -56,7 +56,10 @@ frame-ancestors 'none'`,
 `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`,
 `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
 
-`/suggest/*` only (overrides the CSP above):
+`/suggest/*` only (overrides the CSP above). `netc build-site` appends this block to `_headers`
+when the suggestion Worker is configured, starting with `! Content-Security-Policy`: Cloudflare
+Pages adds a path's headers to those of `/*`, and two CSPs would both apply and block Turnstile.
+Until the Worker is configured, neither the block nor the `/suggest/` page is built.
 
 `Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com;
 frame-src https://challenges.cloudflare.com; connect-src 'self' https://<worker-host>;
