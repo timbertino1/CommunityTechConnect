@@ -9,7 +9,7 @@
 independent reviewer a map, not to replace them.
 
 **Result: no critical or high findings.** One medium and two low findings, listed at the end,
-with what to do about each.
+with what to do about each. The medium one (M1) was fixed the same day.
 
 ## Automated checks
 
@@ -23,7 +23,7 @@ with what to do about each.
 | Workflows: `pull_request_target` | Not used (only mentioned in a comment saying so) |
 | Workflows: least permissions | Every workflow defaults to `contents: read`; only `deploy.yml` adds `deployments: write`. Writes to the repository go through the GitHub App's token, created per job with only `contents` and `pull-requests` write. The repository's default workflow token is read-only and can't approve PRs. |
 | Secrets | None at repository level. `discovery` environment: bot App id and key, Cloudflare KV token, Eventbrite, OpenAI, search API key, and the newsletters KV id. `production`: Cloudflare account id and Pages token. Both environments accept deployments from `main` only. |
-| `main` ruleset | Active, no bypass actors: no deletion, no force-push, PRs required, and five required checks (Python, Web, Workers, gitleaks, "Bot PRs change only data/"). Outside contributors need approval before their workflows run. |
+| `main` ruleset | Active, no bypass actors: no deletion, no force-push, PRs required, and required checks (Python, Web, Workers, gitleaks, "Bot PRs change only data/"; "Site (browser tests)" added after this review, see M1). Outside contributors need approval before their workflows run. |
 | Live headers (`curl -I` on `/`, a month, `/past/`, `/suggest/`, `/data/upcoming.json`, a 404) | All carry the contract CSP, HSTS (2 years, subdomains), `nosniff`, `strict-origin-when-cross-origin` and the Permissions-Policy. `/suggest/` alone has the Turnstile CSP, and only one CSP. No `Set-Cookie` anywhere. |
 
 ## The threat summary, item by item
@@ -46,7 +46,7 @@ From `specs/001-event-aggregator/plan.md`, "Threat summary".
 
 | # | Severity | Finding | Recommendation |
 |---|---|---|---|
-| M1 | Medium | **"Site (browser tests)" is not a required check** on `main`. The other five are. A PR, including an automatic data PR, could merge with failing browser, accessibility or Content-Security-Policy tests. The site build itself would still have to succeed to deploy. | Add "Site (browser tests)" to the ruleset's required checks (Settings → Rules → "Protect main" → Require status checks). |
+| M1 | Medium (**fixed 2026-10-24**) | **"Site (browser tests)" was not a required check** on `main`. The other five are. A PR, including an automatic data PR, could merge with failing browser, accessibility or Content-Security-Policy tests. The site build itself would still have to succeed to deploy. | **Done** with the owner's OK: "Protect main" now requires all six checks (Python, Web, Workers, gitleaks, "Bot PRs change only data/", "Site (browser tests)"), still with no bypass. |
 | L1 | Low | **2FA on the owner's GitHub account can't be verified** with the CLI's token. The plan requires it. | Owner confirms GitHub → Settings → Password and authentication shows two-factor authentication enabled, ideally with a passkey or app rather than SMS. |
 | L2 | Low | **Workers are deployed from the owner's machine** with `wrangler`'s login, which can do much more than deploy these two Workers. | T147/T148: a token limited to Workers Scripts edit and KV read, in the `production` environment, used only by a deploy workflow. Then sign wrangler out on the laptop, or leave it for emergencies. |
 | I1 | Info | Cloudflare Pages sends `Access-Control-Allow-Origin: *` on every response. | No action: the site and its JSON are public and cookie-free, so other origins can read only what anyone can. |
