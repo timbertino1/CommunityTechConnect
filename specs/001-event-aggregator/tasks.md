@@ -335,7 +335,7 @@ automatically.
 
 ## Phase 10: Polish & Cross-Cutting Concerns
 
-- [ ] T136 [P] Write Playwright + axe-core tests in `web/tests/a11y/a11y.spec.ts` for `/`, `/past/`, a month page, a week page, an event page, `/suggest/`, and `/about/` at 360 px and 1280 px widths; fix all WCAG 2.2 AA violations (SC-009); add the suite to `.github/workflows/ci.yml` against a fixture build.
+- [X] T136 [P] Write Playwright + axe-core tests in `web/tests/a11y/pages.spec.js` (the browser tests are JavaScript) for `/`, `/past/`, a month page, a week page, an event page, `/suggest/`, and `/about/` at 360 px and 1280 px widths; fix all WCAG 2.2 AA violations (SC-009); add the suite to `.github/workflows/ci.yml` against a fixture build.
 - [ ] T137 [P] Run a manual accessibility pass (keyboard only, a screen reader such as NVDA or VoiceOver, 200% zoom) and record the findings and fixes in `docs/reviews/accessibility-2026.md`.
 - [ ] T138 [P] Performance check: run Lighthouse (mobile, simulated 4G) on `/` and a month page; confirm main content in ≤ 2 s (SC-006); record the results in `docs/reviews/performance.md` and fix regressions (e.g., split `/data/upcoming.json` if > 200 KB).
 - [ ] T139 Self security review (before the independent review in T140): walk the plan.md threat summary item by item against the implementation, run `pytest -m security`, `pip-audit`, `npm audit`, and gitleaks, check that every workflow uses SHA-pinned actions and least permissions and none use `pull_request_target`, confirm the `_headers` output with `curl -I`, and record the results in `docs/reviews/security-review.md`. Fix every critical/high finding.
