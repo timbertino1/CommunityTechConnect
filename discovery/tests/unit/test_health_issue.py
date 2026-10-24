@@ -360,3 +360,55 @@ def test_candidates_needing_a_look_are_listed() -> None:
         "- `https://acme-hosting.example.com/`: `no calendar feed found`"
     )
     assert section(health().body, "Candidates needing a look") == "None."
+
+
+# --- The monthly check (T143; SC-001, SC-004, SC-010, SC-011)
+
+
+def found_source(sid: str, found_via: str, origin: str = "discovered", **kw: Any) -> Source:
+    return make_source(sid, origin=origin, found_via=found_via, trust="probationary", **kw)
+
+
+def test_the_monthly_check_is_always_listed_with_discovery_by_channel() -> None:
+    sources = [
+        make_source("src_preconfigured"),
+        found_source("src_a", "web_search"),
+        found_source("src_b", "web_search"),
+        found_source("src_c", "link_graph"),
+        found_source("src_d", "suggestion", origin="suggested"),
+        found_source("src_e", "news", status="paused"),
+    ]
+    text = section(health(sources).body, "Monthly check")
+    assert "docs/operations/metrics.md" in text
+    assert "4 active sources added by discovery" in text
+    assert "web search 2" in text and "linked from a source 1" in text
+    assert "visitor suggestion 1" in text
+    assert "news" not in text  # paused
+
+
+@pytest.mark.parametrize(
+    ("now", "due"),
+    [
+        (utc(2026, 11, 1, 11), True),  # Nov 1, 5 AM Central
+        (utc(2026, 11, 7, 23), True),  # Nov 7, 5 PM Central
+        (utc(2026, 11, 8, 11), False),
+        (utc(2026, 11, 1, 3), False),  # Oct 31, 10 PM Central
+    ],
+)
+def test_the_first_week_of_a_month_asks_for_the_check(now: datetime, due: bool) -> None:
+    h = health(now=now)
+    assert ("metrics" in keys(h)) is due
+    if due:
+        [note] = [a.text for a in h.attention if a.key == "metrics"]
+        assert "docs/operations/metrics.md" in note and "November" in note
+
+
+def test_the_monthly_reminder_is_posted_once() -> None:
+    first = health(now=utc(2026, 11, 1, 11))
+    comment = alert_comment(first, owner=OWNER, last=None, now=utc(2026, 11, 1, 11))
+    assert comment is not None and "metrics" in comment
+    later = health(now=utc(2026, 11, 2, 11))
+    again = alert_comment(
+        later, owner=OWNER, last=LastAlert(utc(2026, 11, 1, 11), comment), now=utc(2026, 11, 2, 11)
+    )
+    assert again is None

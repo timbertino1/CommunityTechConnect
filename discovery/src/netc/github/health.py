@@ -37,6 +37,9 @@ STALE_AFTER: Final = timedelta(hours=36)
 """Main's data older than this means the data PRs aren't merging (or runs aren't happening)."""
 MIN_ALERT_GAP: Final = timedelta(hours=20)
 REMIND_AFTER: Final = timedelta(days=7)
+METRICS_LOG: Final = "docs/operations/metrics.md"
+METRICS_DAYS: Final = 7
+"""The monthly check (T143) is asked for in the first days of each month, Central Time."""
 MAX_LISTED: Final = 25
 MAX_BODY_CHARS: Final = 60_000
 """GitHub caps an issue description at 65,536 characters."""
@@ -44,7 +47,7 @@ MAX_BODY_CHARS: Final = 60_000
 CENTRAL: Final = ZoneInfo("America/Chicago")
 _LOGIN: Final = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$")
 _MARKER: Final = re.compile(r"<!-- netc-health-alert: ([a-z0-9:_ -]*) -->")
-_KEY: Final = re.compile(r"^(?:review|schedule|ai-budget|failing:src_[a-z0-9-]+)$")
+_KEY: Final = re.compile(r"^(?:review|schedule|ai-budget|metrics|failing:src_[a-z0-9-]+)$")
 
 ORIGIN_LABELS: Final = {
     "preconfigured": "pre-configured",
@@ -143,6 +146,17 @@ def build_health(
             )
         )
 
+    local = now.astimezone(CENTRAL)
+    if local.day <= METRICS_DAYS:
+        attention.append(
+            Attention(
+                "metrics",
+                f"It's the first week of {local:%B}: time for the monthly check in "
+                f"`{METRICS_LOG}` (a spot check of 30 events, last month's admin minutes, and "
+                "the sources discovery added).",
+            )
+        )
+
     lines = [f"## {HEALTH_TITLE} · {_when(now)}", ""]
     if attention:
         lines += ["**Needs attention:**", ""] + [f"- {a.text}" for a in attention]
@@ -168,6 +182,7 @@ def build_health(
     lines += ["", "### Candidates needing a look", "", _needs_look(candidates)]
     lines += ["", "### AI and search spend", "", *_spend(ai_spent_usd)]
     lines += ["", "### Schedule", "", *schedule_lines]
+    lines += ["", "### Monthly check", "", *_monthly(ordered)]
 
     body = "\n".join(lines) + "\n"
     if len(body) > MAX_BODY_CHARS:
@@ -263,6 +278,20 @@ def _new_sources(sources: list[Source], now: datetime) -> str:
     if not counts:
         return "None."
     return "\n".join(f"- {label}: {counts[label]}" for label in sorted(counts))
+
+
+def _monthly(sources: list[Source]) -> list[str]:
+    """Where the monthly check is logged, and SC-011's count: active sources discovery added
+    (or visitors suggested), by channel."""
+    found = [s for s in sources if s.origin in ("discovered", "suggested") and s.status == "active"]
+    counts = Counter(FOUND_VIA_LABELS.get(s.found_via or "", "unknown") for s in found)
+    by_channel = ", ".join(f"{label} {counts[label]}" for label in sorted(counts)) or "none yet"
+    noun = "1 active source" if len(found) == 1 else f"{len(found)} active sources"
+    return [
+        f"In the first week of each month, add a row to `{METRICS_LOG}`.",
+        "",
+        f"{noun} added by discovery ({len(counts)} kinds of channel): {by_channel}.",
+    ]
 
 
 def _schedule(
