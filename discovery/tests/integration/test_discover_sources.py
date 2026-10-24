@@ -279,9 +279,16 @@ def test_suggestions_that_need_a_person_go_to_the_review_queue(data: Path) -> No
         ("suggestion", "https://www.facebook.com/omaha-tech"),
     ]
     assert report.suggestions_for_review == 2
-    # A second run with the same suggestions adds no duplicate review items.
+    # Suggested again: the site rejected the first time now goes to a person too, and nothing
+    # is listed twice, however often it is suggested.
     suggest(data)
-    assert len(DataStore(data).read_review_queue()) == 2
+    suggest(data)
+    queue = DataStore(data).read_review_queue()
+    assert sorted(r.ref for r in queue) == [
+        "https://nowhere.example.org/",
+        "https://www.facebook.com/omaha-tech",
+        "https://yoga.example.org/",
+    ]
 
 
 def test_a_note_never_reaches_a_file_or_the_review_pr(data: Path) -> None:
@@ -337,3 +344,36 @@ def test_suggestions_that_cannot_be_listed_do_not_stop_the_run(data: Path) -> No
     assert report.written
     assert report.suggestions_error is not None and "403" in report.suggestions_error
     assert "could not be read" in render_sources_markdown(report)
+
+
+def test_a_suggestion_for_a_site_already_in_doubt_goes_to_review(data: Path) -> None:
+    from netc.finders.base import make_candidate
+
+    store = DataStore(data)
+    earlier = make_candidate(
+        "https://nowhere.example.org/", found_via="web_search", evidence=["web search: x"], now=NOW
+    ).model_copy(update={"result": "needs_review", "reason": "no upcoming events to judge it by"})
+    rejected = make_candidate(
+        "https://yoga.example.org/", found_via="web_search", evidence=["web search: y"], now=NOW
+    ).model_copy(update={"result": "rejected", "reason": "no tech events among 2 upcoming"})
+    store.write_candidates([earlier, rejected])
+    inbox = FakeSuggestions(
+        [
+            "https://nowhere.example.org/",
+            "https://yoga.example.org/",
+            "https://www.meetup.com/prairie-python/",
+        ]
+    )
+    report = run(data, finders=[], suggestions=inbox)
+    queue = {r.ref: r.reason for r in DataStore(data).read_review_queue()}
+    assert queue == {
+        "https://nowhere.example.org/": (
+            "visitor suggestion: already looked at: no upcoming events to judge it by"
+        ),
+        "https://yoga.example.org/": (
+            "visitor suggestion: already looked at: no tech events among 2 upcoming"
+        ),
+    }
+    assert report.suggestions_known == 1  # Prairie Python is already a source
+    assert len([c for c in DataStore(data).read_candidates() if "nowhere" in c.url]) == 1
+    assert "1 already listed" in render_sources_markdown(report)

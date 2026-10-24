@@ -116,7 +116,8 @@ def render_sources_markdown(report: DiscoverSourcesReport) -> str:
             if report.suggestions_error
             else f"**Visitor suggestions:** {report.suggestions_read} read, "
             f"{report.suggestions_for_review} sent to review, "
-            f"{report.suggestions_deleted} cleared from KV"
+            + (f"{report.suggestions_known} already listed, " if report.suggestions_known else "")
+            + f"{report.suggestions_deleted} cleared from KV"
         )
         lines += ["", line + "."]
     return "\n".join(lines) + "\n"
