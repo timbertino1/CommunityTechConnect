@@ -4,9 +4,9 @@
 **Task:** T138 (SC-006: main content in ≤ 2 s on a phone on slow 4G)
 **Tool:** Lighthouse 13.5.0, default mobile settings (simulated slow 4G and a 4× slower CPU,
 Moto G-sized screen), in Microsoft Edge (headless), 3 runs per page.
-**Result:** **Passes, with almost no margin.** One regression was found and fixed: the calendar's
-layout shift. The main-content time (LCP) is about 1.97 s on both pages, against the 2 s target.
-What it would take to buy more margin is under "Options" below.
+**Result:** **Passes.** One regression was found and fixed (the calendar's layout shift). The
+main-content time (LCP) was about 1.97 s on both pages against the 2 s target; with the fonts
+trimmed (owner's choice, below) it is **1.83 s**.
 
 ## Live site, before the fix (`main` at `c4c0f10`)
 
@@ -65,7 +65,7 @@ So the fonts cost about half a second on a slow phone, and the shipped setup is 
 fastest way of loading them. The three.js header map doesn't affect LCP: it starts after the
 content is shown and accounts for most of the home page's 200 ms of blocking time.
 
-## Options for more margin (owner's call)
+## Options for more margin (owner's call: option 2)
 
 1. **Leave it.** It passes, and real phones on 4G or better are usually faster than this simulation.
 2. **Smaller font files.** Keep the same fonts, but cut each to the weights the site uses (for
@@ -74,6 +74,23 @@ content is shown and accounts for most of the home page's 200 ms of blocking tim
    step, with the results checked into `web/fonts/`.
 3. **System fonts for body text, web fonts for headings only.** Saves about half of what the
    fonts cost, but changes the look of design B.
+
+## Trimmed fonts (option 2, done)
+
+The owner chose to trim the font files and keep the look. All three fonts keep every character
+they had. Inter and Archivo are cut to the weights the site uses (400-700 and 500-800), and the
+unused fraction and proportional-figure features are dropped. JetBrains Mono loses its hinting.
+Details and the exact steps are in `web/fonts/README.md`.
+
+- **Size:** 105.0 KB → 82.3 KB (Inter 48.3 → 32.0, Archivo 34.9 → 30.1, JetBrains Mono 21.8 → 20.2).
+- **Look:** at every weight the site uses, glyph points move by less than one font unit, under
+  0.07 px at the largest heading. Inter's 400 and Archivo's 600 are exactly the same.
+- **Measured** (local build, as above):
+
+| Page | Perf | FCP | LCP | CLS |
+|---|--:|--:|--:|--:|
+| `/` (3 runs) | 95 | 1.68-1.69 s | **1.83-1.84 s** | 0.007 |
+| `/calendar/2026/10/` (3 runs) | 99 | 1.38 s | **1.83 s** | 0.000 |
 
 ## Not measured
 

@@ -480,7 +480,7 @@ def _copy_web(web_dir: Path, out_dir: Path) -> None:
         source = web_dir / name
         if source.is_dir():
             for file in sorted(source.rglob("*")):
-                if file.is_file() and file.name != ".gitkeep":
+                if file.is_file() and file.name not in (".gitkeep", "README.md"):
                     atomic_write(out_dir / name / file.relative_to(source), file.read_bytes())
         elif source.is_file():
             atomic_write(out_dir / name, source.read_bytes())
