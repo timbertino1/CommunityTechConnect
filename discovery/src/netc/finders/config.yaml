@@ -8,13 +8,12 @@
 news_feeds:
   # Omaha and Lincoln startup and tech news, with a weekly newsletter.
   - https://siliconprairienews.com/feed/
-  # University of Nebraska Omaha news: its IT college's events, cybersecurity talks,
-  # hackathons. Articles carry no dates of their own, so the newest 30 are read.
-  - https://www.unomaha.edu/news/index.rss
   # Omaha business and community news.
   - https://www.omahadailyrecord.com/rss.xml
 
 # Not included: the Nebraska Examiner (nebraskaexaminer.com/feed/). Its robots.txt allows general
 # crawlers but blocks every AI crawler and says ai-train=no; this finder sends articles to an AI,
 # so it stays out. TechOmaha (techomaha.com) answers automated requests with 403, and its feed's
-# last post is from 2023.
+# last post is from 2023. UNO News (unomaha.edu/news/index.rss) was added on 2026-10-24 and taken
+# out the same day: its robots.txt has "Disallow: /*.rss$" for every bot, and the fetcher
+# refused it.
