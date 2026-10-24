@@ -54,7 +54,7 @@
     "title": "Lincoln Team"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "news",
     "date_hint": "Thursday, Oct. 29",
     "event_id": null,
@@ -110,7 +110,7 @@
     "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -150,7 +150,7 @@
     "title": "2027 Nebraska Women in STEM Conference"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -164,7 +164,21 @@
     "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
   },
   {
-    "attempts": 3,
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1a737970514e",
+    "links": [
+      "https://www.retrocube.com/blog/mobile-app-development-company-in-lincoln"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Top 18 Mobile App Development Companies in Lincoln ..."
+  },
+  {
+    "attempts": 4,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -542,6 +556,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "UPDATE: Improper redaction reveals Lincoln’s Google Data Center water and electricity usage"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_815cd26c0c92",
+    "links": [
+      "https://primepowerpartners.com/blog/how-to-find-a-networking-group-in-omaha-ne"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "How to Find a Networking Group in Omaha, NE"
   },
   {
     "attempts": 0,
