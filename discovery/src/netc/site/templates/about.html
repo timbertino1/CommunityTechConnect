@@ -11,9 +11,12 @@
 
 <h2>For website owners</h2>
 <p>Our bot identifies itself as <code>{{ user_agent }}</code>. It only reads public pages, follows robots.txt, waits at least 5 seconds between requests to the same site (longer if your robots.txt asks), and reads each source at most once or twice a day.</p>
-<p>To ask us to stop reading your site, or to correct an event, open an issue at <a href="{{ repo_url }}/issues" rel="noopener external">{{ repo_host }}</a>. We will respond within a week.</p>
+{% if suggest %}<p>Know a group or calendar we're missing? <a href="/suggest/">Suggest it</a>.</p>
+{% endif %}<p>To ask us to stop reading your site, or to correct an event, open an issue at <a href="{{ repo_url }}/issues" rel="noopener external">{{ repo_host }}</a>. We will respond within a week.</p>
 
 <h2>Privacy</h2>
-<p>This site uses no cookies, no accounts and no tracking, and it loads nothing from other websites. We store only public event details: titles, times, places, organizers and short descriptions.</p>
+<p>This site uses no cookies, no accounts and no tracking, and it loads nothing from other websites{% if suggest %}, except Cloudflare Turnstile's spam check on the <a href="/suggest/">suggestion form</a>{% endif %}. We store only public event details: titles, times, places, organizers and short descriptions.</p>
+{% if suggest %}<p>On the suggestion form, the address you suggest may become public. Notes are private, used only to evaluate your suggestion, and deleted after 30 days.</p>
+{% endif %}
 </div>
 {% endblock %}

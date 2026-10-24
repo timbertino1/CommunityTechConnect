@@ -287,6 +287,27 @@ main:focus { outline: none; }
 .filter-status { margin: 0; font-size: var(--step--1); color: var(--muted); }
 .filter-status:empty { display: none; }
 .filters-nojs { margin: 0; font-size: var(--step--1); color: var(--muted); }
+/* The suggestion form (T132). */
+.suggest { display: grid; gap: 1.25rem; max-width: 40rem; margin-top: 1.5rem; }
+.suggest .field { font-size: 1rem; color: var(--ink); font-weight: 600; }
+.suggest input, .suggest textarea {
+  font: 400 1rem var(--font-text);
+  padding: 0.6rem 0.75rem;
+  min-height: 2.75rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  width: 100%;
+}
+.suggest input:focus, .suggest textarea:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.suggest .hint, .suggest .optional { margin: 0; font-weight: 400; font-size: var(--step--1); color: var(--muted); }
+.suggest .notice { margin: 0; font-size: var(--step--1); color: var(--muted); max-width: 60ch; }
+.suggest p { margin: 0; }
+.suggest button { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+.suggest button:disabled { opacity: 0.6; cursor: progress; }
+.suggest-status { font-weight: 600; }
+.suggest-status:empty { display: none; }
 main .filters, main .filters-nojs { margin-bottom: 0.75rem; }
 main .filter-status { margin-bottom: 1rem; }
 

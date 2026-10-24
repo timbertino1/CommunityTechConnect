@@ -40,6 +40,7 @@
     <nav aria-label="Footer">
       <ul class="footer-nav">
         <li><a href="/about/">About</a></li>
+        {% if suggest %}<li><a href="/suggest/">Suggest a group</a></li>{% endif %}
         <li><a href="{{ repo_url }}" rel="noopener external">Source on GitHub</a></li>
       </ul>
     </nav>

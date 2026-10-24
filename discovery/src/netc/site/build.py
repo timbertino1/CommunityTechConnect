@@ -33,6 +33,11 @@ PUBLIC_FIELDS: Final = (
 WEB_ASSETS: Final = ("css", "js", "vendor", "img", "fonts", "_headers", "favicon.ico", "robots.txt")
 REPO_URL: Final = "https://github.com/timbertino1/CommunityTechConnect"
 PAST_PAGE_SIZE: Final = 50
+# The suggestion form (T132). SUGGEST_ENDPOINT is the deployed Worker's /suggest URL (T134); until
+# it is set, the /suggest/ page and its links are left out, so nothing half-working goes live.
+SUGGEST_ENDPOINT: Final[str | None] = None
+TURNSTILE_SITE_KEY: Final = "0x4AAAAAAFjOWyUQYlRhF1wP"  # public; the secret is a Worker secret
+TURNSTILE_HOST: Final = "https://challenges.cloudflare.com"
 """Past events per page of /past/ (T117); older ones are on /past/page/<n>/."""
 INFERRED_LABELS: Final = {"area": "area", "categories": "topics", "source_tz": "time zone"}
 
@@ -48,8 +53,16 @@ class BuildReport:
 
 
 def build_site(
-    data_dir: Path, out_dir: Path, web_dir: Path, *, now: datetime, site_domain: str
+    data_dir: Path,
+    out_dir: Path,
+    web_dir: Path,
+    *,
+    now: datetime,
+    site_domain: str,
+    suggest_endpoint: str | None = SUGGEST_ENDPOINT,
 ) -> BuildReport:
+    if suggest_endpoint is not None and not suggest_endpoint.startswith("https://"):
+        raise BuildError(f"the suggestion endpoint must be an https URL: {suggest_endpoint!r}")
     store = DataStore(data_dir)
     categories = {c.id: c.label for c in store.read_categories()}
     areas = store.read_areas()
@@ -90,6 +103,11 @@ def build_site(
         # The filter form's choices (_filters.html, on the list and calendar pages).
         "filter_areas": [(a, label) for a, label in area_labels.items()],
         "filter_topics": list(categories.items()),
+        "suggest": (
+            {"endpoint": suggest_endpoint, "site_key": TURNSTILE_SITE_KEY}
+            if suggest_endpoint
+            else None
+        ),
     }
 
     def organizer_of(event: Event) -> str | None:
@@ -131,12 +149,20 @@ def build_site(
     )
     pages += 1
     pages += _past_pages(env, out_dir, [views[e.id] for e in past], common)
+    if suggest_endpoint:
+        _write(
+            out_dir / "suggest" / "index.html",
+            env.get_template("suggest.html").render(nav="", **common),
+        )
+        pages += 1
     pages += _calendar_pages(env, out_dir, public, views, now, common)
     # Without 404.html, Cloudflare Pages serves index.html with a 200 for every unknown path.
     _write(out_dir / "404.html", env.get_template("404.html").render(nav="", **common))
     pages += 1
 
     _copy_web(web_dir, out_dir)
+    if suggest_endpoint:
+        _add_suggest_headers(out_dir / "_headers", suggest_endpoint)
     atomic_write(
         out_dir / "data" / "upcoming.json",
         dump_json([_public_record(e, organizer_of(e)) for e in upcoming]),
@@ -432,6 +458,21 @@ def _prepare(out_dir: Path) -> None:
 
 def _write(path: Path, html: str) -> None:
     atomic_write(path, html.encode("utf-8"))
+
+
+def _add_suggest_headers(headers: Path, endpoint: str) -> None:
+    """The /suggest/* block of contracts/site-urls.md, for the configured Worker. Pages adds a
+    path's headers to those of /*, so the site-wide CSP is removed first (two CSPs would both
+    apply and block Turnstile)."""
+    worker = f"https://{urlsplit(endpoint).hostname}"
+    csp = (
+        f"default-src 'self'; script-src 'self' {TURNSTILE_HOST}; frame-src {TURNSTILE_HOST}; "
+        f"connect-src 'self' {worker}; img-src 'self' data:; style-src 'self'; "
+        f"object-src 'none'; base-uri 'none'; form-action {worker}; frame-ancestors 'none'"
+    )
+    text = headers.read_text(encoding="utf-8").rstrip("\n")
+    block = f"/suggest/*\n  ! Content-Security-Policy\n  Content-Security-Policy: {csp}\n"
+    atomic_write(headers, f"{text}\n\n{block}".encode())
 
 
 def _copy_web(web_dir: Path, out_dir: Path) -> None:
