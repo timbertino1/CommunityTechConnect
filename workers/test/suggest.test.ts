@@ -4,14 +4,8 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import suggest, {
-  KEY_PREFIX,
-  MAX_BODY_BYTES,
-  MAX_NOTE_CHARS,
-  RATE_LIMIT_PER_HOUR,
-  TTL_SECONDS,
-  type Env,
-} from "../suggest/index";
+import suggest, { type Env } from "../suggest/index";
+import { KEY_PREFIX, MAX_BODY_BYTES, MAX_NOTE_CHARS, RATE_LIMIT_PER_HOUR, TTL_SECONDS } from "../suggest/limits";
 
 // Test requests have no Cloudflare edge properties; the Worker reads none of them.
 type IncomingRequest = Parameters<typeof suggest.fetch>[0];

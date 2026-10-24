@@ -3,7 +3,8 @@
 
 import { describe, expect, it, vi } from "vitest";
 
-import inbox, { MAX_RAW_BYTES, TTL_SECONDS, type Env } from "../inbox/index";
+import inbox, { type Env } from "../inbox/index";
+import { MAX_RAW_BYTES, TTL_SECONDS } from "../inbox/limits";
 
 const NEWSLETTER = [
   "From: Prairie Tech Weekly <weekly@news.example.com>",

@@ -9,6 +9,8 @@
  * any address in them.
  */
 
+import { MAX_RAW_BYTES, TTL_SECONDS } from "./limits";
+
 export interface Env {
   NEWSLETTERS: KVNamespace;
   /** Comma- or space-separated: full addresses, or domains (which include their subdomains). */
@@ -16,9 +18,6 @@ export interface Env {
   /** A verified Email Routing destination address. */
   OWNER_FORWARD_ADDRESS: string;
 }
-
-export const MAX_RAW_BYTES = 1024 * 1024;
-export const TTL_SECONDS = 30 * 24 * 60 * 60;
 
 // Subjects of "click to confirm" mails. Allowed senders only, so a false match just lands a
 // newsletter in the owner's inbox.

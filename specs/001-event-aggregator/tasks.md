@@ -329,7 +329,7 @@ automatically.
 - [X] T132 [US7] Add the `/suggest/` page: `discovery/src/netc/site/templates/suggest.html` (labeled URL field, optional note, Turnstile widget, and the notice text from contracts/workers.md: the address may become public; notes are private, used only for evaluation, and deleted after 30 days) and `web/js/suggest.js` (submit via `fetch` to the Worker; show neutral confirmation or error text); add the `/suggest/*` CSP block to `web/_headers` exactly as in contracts/site-urls.md (Turnstile hosts allowed on that path only).
 - [X] T133 [US7] Write failing tests in `discovery/tests/unit/test_suggestions.py`, then extend `discovery/src/netc/inbox/kv.py` and `discovery/src/netc/pipeline/discover_sources.py` to read suggestions from KV into candidates (`found_via: suggestion`, `origin: suggested`), pass the note (after `scrub_pii`) to evaluation in memory only, evaluate them like other candidates, and send unevaluable ones to the review queue; a test MUST assert the note text never appears in any file under `data/` or in a review PR body.
 - [X] T134 [US7] [OWNER] Deploy the suggest Worker: in `workers/`, set the `SUGGESTIONS` KV id and `SITE_ORIGIN` in `wrangler.toml`, run `npx wrangler deploy --env suggest`, and send the Worker's hostname to the agent so it can be filled into `<worker-host>` in the `/suggest/*` CSP block of `web/_headers`.
-- [ ] T135 [US7] Checkpoint: run quickstart.md scenario 7 locally (`npx wrangler dev`) and once against the deployed Worker. Record the results in `docs/checkpoints/us7.md`.
+- [X] T135 [US7] Checkpoint: run quickstart.md scenario 7 locally (`npx wrangler dev`) and once against the deployed Worker. Record the results in `docs/checkpoints/us7.md`.
 
 ---
 

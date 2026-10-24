@@ -11,6 +11,8 @@
  * which check failed (with Turnstile's own error codes), never anything the visitor sent.
  */
 
+import { KEY_PREFIX, MAX_BODY_BYTES, MAX_URL_CHARS, MAX_NOTE_CHARS, RATE_LIMIT_PER_HOUR, TTL_SECONDS } from "./limits";
+
 export interface Env {
   SUGGESTIONS: KVNamespace;
   TURNSTILE_SECRET: string;
@@ -19,12 +21,6 @@ export interface Env {
   SITE_ORIGIN: string;
 }
 
-export const KEY_PREFIX = "suggestion:";
-export const MAX_BODY_BYTES = 4 * 1024;
-export const MAX_URL_CHARS = 2048;
-export const MAX_NOTE_CHARS = 280;
-export const RATE_LIMIT_PER_HOUR = 5;
-export const TTL_SECONDS = 30 * 24 * 60 * 60;
 const RATE_TTL_SECONDS = 60 * 60;
 const SITEVERIFY = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
