@@ -3,8 +3,7 @@
 #   wrangler deploy --env inbox     -> Email Worker for newsletters
 # Secrets (TURNSTILE_SECRET, IP_HASH_SALT, OWNER_FORWARD_ADDRESS) are set with `wrangler secret put`,
 # never in this file.
-# KV namespace ids are not secrets (useless without a token). SUGGESTIONS is still a placeholder
-# until the suggest Worker is deployed.
+# KV namespace ids are not secrets (useless without a token).
 
 name = "netc"
 compatibility_date = "2026-10-01"
@@ -13,12 +12,16 @@ workers_dev = false
 [env.suggest]
 name = "netc-suggest"
 main = "suggest/index.ts"
+# The form posts here from the browser, so this Worker needs a public address: its workers.dev
+# one (https://netc-suggest.<account>.workers.dev). The inbox Worker gets mail only, so has none.
+workers_dev = true
 kv_namespaces = [
-  { binding = "SUGGESTIONS", id = "REPLACE_WITH_SUGGESTIONS_KV_ID" },
+  { binding = "SUGGESTIONS", id = "9df218ecf9ea43acbea671744abdfa67" },
 ]
 
 [env.suggest.vars]
-SITE_ORIGIN = "https://REPLACE_WITH_SITE_DOMAIN"
+# Origins allowed to post the form, comma-separated: the Pages host now, the domain from launch (T156).
+SITE_ORIGIN = "https://netechconnect.pages.dev, https://netechconnect.com, https://www.netechconnect.com"
 
 [env.inbox]
 name = "netc-inbox"

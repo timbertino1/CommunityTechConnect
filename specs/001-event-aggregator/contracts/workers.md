@@ -21,7 +21,8 @@ and deletes items from KV using a token scoped to those namespaces.
 3. Rate limit: ≤ 5 suggestions per hour per salted hash of the client IP (hash only, 1-hour TTL);
    over limit → `429`.
 4. Validate fields as above; invalid → `400` with a neutral message (FR-022).
-5. Store `{url, note, received_at}` in KV `SUGGESTIONS` under a random key, TTL 30 days.
+5. Store `{url, note, received_at}` in KV `SUGGESTIONS` under a random key prefixed
+   `suggestion:`, TTL 30 days. (Rate-limit counters live in the same namespace under `rate:`.)
 6. Respond `202` with `{"status":"received"}`.
 
 **Responses** never echo submitted content. CORS allows only the site origin. The form states:
@@ -45,5 +46,5 @@ No parsing beyond headers happens in the Worker (stays within free-tier CPU, R8)
 
 | Worker | Bindings |
 |---|---|
-| suggest | `SUGGESTIONS` (KV), `TURNSTILE_SECRET` (secret), `IP_HASH_SALT` (secret), `SITE_ORIGIN` (var) |
+| suggest | `SUGGESTIONS` (KV), `TURNSTILE_SECRET` (secret), `IP_HASH_SALT` (secret), `SITE_ORIGIN` (var; one or more origins, comma-separated, so the form works from both the Pages host and the domain) |
 | inbox | `NEWSLETTERS` (KV), `ALLOWED_SENDERS` (var), `OWNER_FORWARD_ADDRESS` (var, verified address) |
