@@ -32,6 +32,16 @@ docs/        Operations, reviews, and coverage checks
 specs/       Spec-driven development artifacts (spec, plan, tasks)
 ```
 
+## Running it
+
+- [`docs/operations.md`](docs/operations.md): the runbook. It covers what runs when, the secrets
+  and how to rotate them, how to pause discovery, and backup and restore.
+- [`docs/admin-guide.md`](docs/admin-guide.md): reviewing held events, overrides, managing
+  sources, and reading the Discovery health issue.
+- [`docs/operations/metrics.md`](docs/operations/metrics.md) (monthly) and
+  [`docs/coverage/`](docs/coverage/README.md) (quarterly): checking that the site does its job.
+- [`docs/reviews/`](docs/reviews/): the security, accessibility and performance reviews.
+
 ## Getting started
 
 See the validation guide in
