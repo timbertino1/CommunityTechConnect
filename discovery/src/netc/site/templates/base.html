@@ -21,6 +21,7 @@
         <li><a href="/calendar/" data-current-month="{{ calendar_now }}"{% if nav == "calendar" %} aria-current="page"{% endif %}>Calendar</a></li>
         <li><a href="/past/"{% if nav == "past" %} aria-current="page"{% endif %}>Past</a></li>
         <li><a href="/about/"{% if nav == "about" %} aria-current="page"{% endif %}>About</a></li>
+        {% if suggest %}<li class="nav-suggest-item"><a class="nav-suggest" href="/suggest/"{% if nav == "suggest" %} aria-current="page"{% endif %}>Suggest<span class="nav-long"> a group</span></a></li>{% endif %}
       </ul>
     </nav>
   </div>
