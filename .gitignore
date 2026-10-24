@@ -19,6 +19,8 @@ dist/
 build/
 .out/
 coverage/
+# ...but not the quarterly coverage check logs (T144).
+!docs/coverage/
 playwright-report/
 test-results/
 
