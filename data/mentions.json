@@ -54,7 +54,7 @@
     "title": "Lincoln Team"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "news",
     "date_hint": "Thursday, Oct. 29",
     "event_id": null,
@@ -110,7 +110,7 @@
     "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -150,7 +150,7 @@
     "title": "2027 Nebraska Women in STEM Conference"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -164,7 +164,7 @@
     "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -178,6 +178,20 @@
     "title": "Top 18 Mobile App Development Companies in Lincoln ..."
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1af5a21116d8",
+    "links": [
+      "https://epscor.nebraska.edu/news-and-events/news/2026/free-ai-learning-across-nebraska"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Nebraskans can learn AI at free local trainings by UNO ..."
+  },
+  {
     "attempts": 4,
     "channel": "news",
     "date_hint": null,
@@ -186,11 +200,11 @@
     "links": [],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -204,7 +218,7 @@
     "title": "On the Silicon Prairie: Omaha’s Cybersecurity Leaders to Watch"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -218,7 +232,21 @@
     "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
   },
   {
-    "attempts": 3,
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2d44b885b80b",
+    "links": [
+      "https://siliconprairienews.com/2026/06/upcoming-events-june-3"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "upcoming events, June 3"
+  },
+  {
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -258,6 +286,20 @@
     "place_hint": null,
     "resolution": "discarded",
     "title": "Nucamp"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_3cd3fd0dcee8",
+    "links": [
+      "https://siliconprairienews.com/2025/12/workshop-surpasses-100-employees-as-it-nears-five-year-anniversary"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Workshop surpasses 100 employees as it nears five-year anniversary - Silicon Prairie News"
   },
   {
     "attempts": 1,
@@ -842,6 +884,32 @@
     "title": "Kubernetes and Cloud Native Computing April Meetup"
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_c30cad07b6a5",
+    "links": [
+      "https://news.unl.edu/article/hackathon-aims-to-create-kinder-braver-online-world"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Hackathon aims to create kinder, braver online world | Nebraska Today"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "2028",
+    "event_id": null,
+    "id": "men_c46b01a13792",
+    "links": [],
+    "organizer_hint": "Apple Corps Ltd.",
+    "place_hint": "Liverpool, UK",
+    "resolution": "unresolved",
+    "title": "The Beatles Story expansion in Liverpool (opening 2028)"
+  },
+  {
     "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
@@ -962,6 +1030,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Morning meetup | Nebraska Today"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_ea20a7142094",
+    "links": [
+      "https://www.espn.com/espn/story/_/id/50083587/india-asian-games-2026-aichi-nagoya-full-schedule-medal-events-fixtures-october-3-saturday"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "India at Asian Games 2026: Full schedule of medal events and fixtures on October 3, Saturday - ESPN"
   },
   {
     "attempts": 0,
