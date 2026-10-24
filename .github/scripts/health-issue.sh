@@ -10,6 +10,9 @@
 #
 # Only the bot's own issue and the bot's own comments are read: anyone can open an issue with
 # the same title or post a comment with the same marker.
+#
+# WORKFLOW_TOKEN, if set, is the workflow's own read-only token (actions: read), used only to
+# read whether the scheduled workflows are still switched on (T145; research R1).
 set -euo pipefail
 
 : "${GH_TOKEN:?GH_TOKEN (the GitHub App token) is required}"
@@ -35,6 +38,17 @@ if [ -n "$number" ]; then
 fi
 
 args=(--data-dir ../data --out "$out" --owner "$OWNER" --last-alert "$out/last-alert.json")
+if [ -n "${WORKFLOW_TOKEN:-}" ]; then
+  states=""
+  for workflow in discover-events.yml discover-sources.yml; do
+    state="$(GH_TOKEN="$WORKFLOW_TOKEN" gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/${workflow}" \
+      --jq .state 2>/dev/null || true)"
+    [[ "$state" =~ ^[a-z_]{1,40}$ ]] || state="unknown"
+    states+="${states:+,}\"${workflow}\":\"${state}\""
+  done
+  printf '{%s}\n' "$states" > "$out/workflows.json"
+  args+=(--workflows "$out/workflows.json")
+fi
 if [ -n "${PREVIOUS_STATUS:-}" ]; then
   args+=(--previous-status "$PREVIOUS_STATUS")
 fi

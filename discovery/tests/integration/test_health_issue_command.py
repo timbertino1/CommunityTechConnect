@@ -123,3 +123,26 @@ def test_a_bad_owner_fails(tmp_path: Path) -> None:
     code = main(["health-issue", "--data-dir", str(store.root), "--out", str(out),
                  "--owner", "not a login", "--now", NOW])  # fmt: skip
     assert code == 1
+
+
+def test_switched_off_schedules_are_reported(tmp_path: Path) -> None:
+    store = make_review_data(tmp_path / "data", [], [])
+    states = tmp_path / "workflows.json"
+    states.write_text(
+        json.dumps(
+            {"discover-events.yml": "disabled_inactivity", "discover-sources.yml": "active"}
+        ),
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    assert run(store.root, out, "--workflows", str(states)) == 0
+    assert "discover-events.yml" in (out / "comment.md").read_text(encoding="utf-8")
+
+
+def test_an_unreadable_workflows_file_means_unchecked(tmp_path: Path) -> None:
+    store = make_review_data(tmp_path / "data", [], [])
+    states = tmp_path / "workflows.json"
+    states.write_text("not json", encoding="utf-8")
+    out = tmp_path / "out"
+    assert run(store.root, out, "--workflows", str(states)) == 0
+    assert "couldn't be checked" in (out / "body.md").read_text(encoding="utf-8")

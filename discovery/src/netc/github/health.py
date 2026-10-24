@@ -37,6 +37,16 @@ STALE_AFTER: Final = timedelta(hours=36)
 """Main's data older than this means the data PRs aren't merging (or runs aren't happening)."""
 MIN_ALERT_GAP: Final = timedelta(hours=20)
 REMIND_AFTER: Final = timedelta(days=7)
+WATCHED_WORKFLOWS: Final = {
+    "discover-events.yml": "Discover events",
+    "discover-sources.yml": "Discover sources",
+}
+"""The scheduled workflows the watchdog checks (T145; research R1): GitHub switches a public
+repository's schedules off after 60 days without activity."""
+_SWITCHED_OFF: Final = {
+    "disabled_inactivity": "GitHub switched it off after 60 days without repository activity",
+    "disabled_manually": "it was switched off by hand",
+}
 METRICS_LOG: Final = "docs/operations/metrics.md"
 METRICS_DAYS: Final = 7
 """The monthly check (T143) is asked for in the first days of each month, Central Time."""
@@ -47,7 +57,9 @@ MAX_BODY_CHARS: Final = 60_000
 CENTRAL: Final = ZoneInfo("America/Chicago")
 _LOGIN: Final = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$")
 _MARKER: Final = re.compile(r"<!-- netc-health-alert: ([a-z0-9:_ -]*) -->")
-_KEY: Final = re.compile(r"^(?:review|schedule|ai-budget|metrics|failing:src_[a-z0-9-]+)$")
+_KEY: Final = re.compile(
+    r"^(?:review|schedule|ai-budget|metrics|workflows|failing:src_[a-z0-9-]+)$"
+)
 
 ORIGIN_LABELS: Final = {
     "preconfigured": "pre-configured",
@@ -100,10 +112,12 @@ def build_health(
     previous_status: Mapping[str, SourceStatus] | None = None,
     ai_spent_usd: float | None = None,
     candidates: Iterable[CandidateSource] = (),
+    workflows: Mapping[str, str] | None = None,
 ) -> Health:
     """The issue description after a run. ``previous_status`` is main's source status from
     before the run, used to tell whether earlier runs' data reached main. ``ai_spent_usd`` is
-    this month's AI spend, or None when the AI hasn't been used yet."""
+    this month's AI spend, or None when the AI hasn't been used yet. ``workflows`` is each
+    watched workflow's state from the GitHub API, or None when it couldn't be read."""
     ordered = sorted(sources, key=lambda s: (s.name.casefold(), s.id))
     events = list(events)
     attention: list[Attention] = []
@@ -137,6 +151,10 @@ def build_health(
     schedule_lines, stale = _schedule(statuses, previous_status, now)
     if stale is not None:
         attention.append(Attention("schedule", stale))
+    workflows_line, switched_off = _workflows(workflows)
+    schedule_lines += ["", workflows_line]
+    if switched_off is not None:
+        attention.append(Attention("workflows", switched_off))
     if ai_spent_usd is not None and ai_spent_usd >= MONTHLY_BUDGET_USD:
         attention.append(
             Attention(
@@ -316,6 +334,26 @@ def _schedule(
         f"Main's data was {hours} hours old before this run: check that the bot's data PRs "
         "are merging."
     )
+
+
+def _workflows(states: Mapping[str, str] | None) -> tuple[str, str | None]:
+    """The Schedule section's line about the scheduled workflows, and the attention text when
+    one is switched off. Only known states are shown: anything else counts as unchecked."""
+    if states is None:
+        return "Scheduled runs: couldn't be checked this run.", None
+    off = [(f, states[f]) for f in WATCHED_WORKFLOWS if states.get(f) in _SWITCHED_OFF]
+    on = [f for f in WATCHED_WORKFLOWS if states.get(f) == "active"]
+    if off:
+        reasons = "; ".join(f"`{f}`: {_SWITCHED_OFF[s]}" for f, s in off)
+        steps = ", ".join(f"Actions → {WATCHED_WORKFLOWS[f]} → **Enable workflow**" for f, _ in off)
+        return (
+            f"Scheduled runs: **switched off** for {', '.join(f'`{f}`' for f, _ in off)}.",
+            f"Scheduled runs are switched off ({reasons}), so discovery has stopped. Turn them "
+            f"back on: {steps}.",
+        )
+    if len(on) == len(WATCHED_WORKFLOWS):
+        return f"Scheduled runs: {' and '.join(WATCHED_WORKFLOWS)} are on.", None
+    return "Scheduled runs: couldn't be checked this run.", None
 
 
 def _needs_look(candidates: Iterable[CandidateSource]) -> str:

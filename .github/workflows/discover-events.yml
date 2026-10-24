@@ -19,6 +19,11 @@ jobs:
   discover:
     name: Discover events and open the data PR
     runs-on: ubuntu-latest
+    # actions: read only lets the health step see whether the scheduled workflows are still
+    # switched on (T145; GitHub turns schedules off after 60 days without activity).
+    permissions:
+      contents: read
+      actions: read
     timeout-minutes: 60
     environment: discovery
     steps:
@@ -85,4 +90,5 @@ jobs:
           BOT_SLUG: ${{ steps.issues.outputs.app-slug }}
           OWNER: ${{ github.repository_owner }}
           PREVIOUS_STATUS: ${{ runner.temp }}/previous-status.json
+          WORKFLOW_TOKEN: ${{ github.token }}
         run: bash .github/scripts/health-issue.sh

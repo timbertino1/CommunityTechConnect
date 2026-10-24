@@ -150,6 +150,11 @@ def _parser() -> argparse.ArgumentParser:
     health.add_argument(
         "--last-alert", type=Path, help='the last alert comment as {"created_at", "body"} JSON'
     )
+    health.add_argument(
+        "--workflows",
+        type=Path,
+        help="JSON of the scheduled workflows' states from the GitHub API (T145)",
+    )
     health.add_argument("--now", type=_utc_datetime, help="run as if it were this UTC time")
     validate = commands.add_parser(
         "validate-data",
@@ -414,6 +419,7 @@ def _health_issue(args: argparse.Namespace) -> int:
             previous_status=_previous_status(args.previous_status),
             ai_spent_usd=_ai_spent(args.data_dir, now),
             candidates=store.read_candidates(),
+            workflows=_workflow_states(args.workflows),
         )
         comment = alert_comment(
             health, owner=args.owner, last=_last_alert(args.last_alert), now=now
@@ -452,6 +458,20 @@ def _previous_status(path: Path | None) -> dict[str, SourceStatus] | None:
     except (OSError, ValueError, AttributeError) as exc:
         print(f"netc health-issue: ignoring --previous-status: {exc}", file=sys.stderr)
         return None
+
+
+def _workflow_states(path: Path | None) -> dict[str, str] | None:
+    """The scheduled workflows' states, as the script read them; unreadable means unchecked."""
+    if path is None or not path.is_file():
+        return None
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        print(f"netc health-issue: ignoring --workflows: {exc}", file=sys.stderr)
+        return None
+    if not isinstance(raw, dict):
+        return None
+    return {str(k): v for k, v in raw.items() if isinstance(v, str)}
 
 
 def _last_alert(path: Path | None) -> LastAlert | None:

@@ -412,3 +412,45 @@ def test_the_monthly_reminder_is_posted_once() -> None:
         later, owner=OWNER, last=LastAlert(utc(2026, 11, 1, 11), comment), now=utc(2026, 11, 2, 11)
     )
     assert again is None
+
+
+# --- The schedule watchdog (T145; research R1: the 60-day rule)
+
+ACTIVE = {"discover-events.yml": "active", "discover-sources.yml": "active"}
+
+
+def watched(workflows: dict[str, str] | None) -> Health:
+    return build_health([make_source()], {}, [], [], [], now=NOW, workflows=workflows)
+
+
+def test_enabled_schedules_are_listed_and_need_nothing() -> None:
+    h = watched(ACTIVE)
+    assert "workflows" not in keys(h)
+    assert "Scheduled runs: discover-events.yml and discover-sources.yml are on." in section(
+        h.body, "Schedule"
+    )
+
+
+@pytest.mark.parametrize("state", ["disabled_inactivity", "disabled_manually"])
+def test_a_switched_off_schedule_needs_attention(state: str) -> None:
+    h = watched({**ACTIVE, "discover-events.yml": state})
+    assert "workflows" in keys(h)
+    [note] = [a.text for a in h.attention if a.key == "workflows"]
+    assert "discover-events.yml" in note and "discover-sources.yml" not in note
+    assert "Enable workflow" in note
+    if state == "disabled_inactivity":
+        assert "60 days" in note
+    comment = alert_comment(h, owner=OWNER, last=None, now=NOW)
+    assert comment is not None and "discover-events.yml" in comment
+
+
+def test_schedules_that_could_not_be_checked_are_said_without_an_alert() -> None:
+    for workflows in (None, {**ACTIVE, "discover-sources.yml": "unknown"}):
+        h = watched(workflows)
+        assert "workflows" not in keys(h)
+        assert "couldn't be checked" in section(h.body, "Schedule")
+
+
+def test_odd_states_are_not_copied_into_the_issue() -> None:
+    h = watched({**ACTIVE, "discover-events.yml": "<b>@everyone</b>"})
+    assert "@everyone" not in h.body and "<b>" not in h.body
