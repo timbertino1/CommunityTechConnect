@@ -1,7 +1,20 @@
 # Finder settings (T093). Changes go through a normal PR.
 
 # Local tech news and blog feeds read by the news finder (research R6). Each must be a public
-# RSS or Atom feed. Silicon Prairie News: feed live at gate V7 (2026-10-17), though its editor
-# stepped down in May 2026, so it may go quiet.
+# RSS or Atom feed. The finder reads each feed's articles from the last 21 days (at most 30 a
+# feed) and asks the AI for the upcoming tech events they mention; answers are cached, so an
+# article is sent once. Checked 2026-10-24 (T105): each one answered with a valid feed, recent
+# articles, and a robots.txt that doesn't object to AI use.
 news_feeds:
+  # Omaha and Lincoln startup and tech news, with a weekly newsletter.
   - https://siliconprairienews.com/feed/
+  # University of Nebraska Omaha news: its IT college's events, cybersecurity talks,
+  # hackathons. Articles carry no dates of their own, so the newest 30 are read.
+  - https://www.unomaha.edu/news/index.rss
+  # Omaha business and community news.
+  - https://www.omahadailyrecord.com/rss.xml
+
+# Not included: the Nebraska Examiner (nebraskaexaminer.com/feed/). Its robots.txt allows general
+# crawlers but blocks every AI crawler and says ai-train=no; this finder sends articles to an AI,
+# so it stays out. TechOmaha (techomaha.com) answers automated requests with 403, and its feed's
+# last post is from 2023.
