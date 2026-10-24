@@ -290,6 +290,7 @@ NOT_SOURCES = [
     "https://cms.erepublic.com/common/events/add_event_to_calendar/144627",
     "https://slcg.nebraska.gov/docs/cybersecurity-plan.pdf",
     "https://www.digitallincoln.co.uk/",
+    "https://www.omahaaa.org/meetings",  # Alcoholics Anonymous meetings, found by a gap check
 ]
 
 
