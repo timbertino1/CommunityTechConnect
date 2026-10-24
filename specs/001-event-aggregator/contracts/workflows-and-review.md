@@ -10,7 +10,7 @@
 | `review-pr.yml` | `push` to `main` changing `data/review/queue.json` + manual | `contents: read` (writes via App token) | GitHub App key | Open, update or close the **review PR** from main's queue, so items a run finds are listed once its data PR merges |
 | `apply-review.yml` | `push` to `main` | `contents: read` (writes via App token) | GitHub App key | Look up the merged PR for the pushed commit; if it is the `review/open` PR authored by the App and merged by an admin, apply its decisions; otherwise exit |
 | `deploy.yml` | `push` to `main` | `contents: read`, `deployments: write` | Cloudflare Pages token | Build static site and deploy |
-| `deploy-workers.yml` | `push` to `main` changing `workers/**` | `contents: read` | Cloudflare Workers token (Environment `production`) | Test and deploy both Workers |
+| `deploy-workers.yml` | `push` to `main` changing `workers/**` + manual | `contents: read` | Cloudflare Workers token (Environment `production`) | Test and deploy both Workers |
 
 Rules: all third-party actions pinned to full commit SHA; no `pull_request_target`; fork PR
 workflows require approval; scheduled jobs use `concurrency` groups so runs never overlap; each
