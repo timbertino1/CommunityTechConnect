@@ -43,5 +43,51 @@
     "title": "Angular Community Meetup - En Español",
     "tz_assumed": true,
     "visibility": "shown"
+  },
+  {
+    "all_day": true,
+    "area": "other_ne",
+    "categories": [
+      "general-tech"
+    ],
+    "end": "2027-04-24T05:00:00Z",
+    "first_seen": "2026-10-24T14:11:30Z",
+    "id": "evt_4ed98769a272",
+    "inferred": [
+      "categories",
+      "source_tz",
+      "area"
+    ],
+    "last_verified": "2026-10-24T14:11:30Z",
+    "listings": [
+      {
+        "content_hash": "bc9616da8db074f6ea6ed394ad1497a9143e02148d0e90103a6e7518fc50ec78",
+        "external_id": "10714-1808352000-1808524799@netasite.org",
+        "last_seen": "2026-10-24T14:11:30Z",
+        "missing_runs": 1,
+        "source_id": "src_netasite-org",
+        "url": "https://netasite.org/event/neta/"
+      }
+    ],
+    "location": {
+      "address": "NE",
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": "NE"
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://netasite.org/event/neta/",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "neta-2027-04-22",
+    "source_tz": "America/Chicago",
+    "start": "2027-04-22T05:00:00Z",
+    "status": "scheduled",
+    "summary": "Submit a proposal to present at Spring NETA 2027! Registration will be scheduled soon. Younes Convention Center, Kearney, NE",
+    "title": "NETA",
+    "tz_assumed": true,
+    "visibility": "shown"
   }
 ]
