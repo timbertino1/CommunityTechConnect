@@ -213,11 +213,15 @@ def _discover_sources(args: argparse.Namespace) -> int:
                 inbox: KvInbox | None = KvInbox.from_env(api)
             except InboxError:
                 inbox = None
+            try:
+                suggestions: KvInbox | None = KvInbox.suggestions_from_env(api)
+            except InboxError:
+                suggestions = None
             with SafeHttp(site_domain=domain) as http:
                 report = discover_sources(
                     store, http, connectors, now=now, search=search,
                     ai=ai if client is not None else None, news_feeds=config.news_feeds,
-                    inbox=inbox, dry_run=args.dry_run,
+                    inbox=inbox, suggestions=suggestions, dry_run=args.dry_run,
                 )  # fmt: skip
             api.close()
     except (StorageError, RuntimeError) as exc:

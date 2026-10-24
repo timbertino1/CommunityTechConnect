@@ -1,6 +1,8 @@
 """`netc discover-sources`: the weekly hunt for groups and events nobody told us about (T094;
 research R6, R7; FR-010-FR-015).
 
+0. Visitors' suggestions are read from KV (T133) and join the candidates first, so they are
+   evaluated before anything a finder turns up.
 1. Each finder runs in turn (web search, links on known pages, event platforms, news feeds,
    newsletters, coverage gaps). A
    finder that crashes is recorded and skipped; the others still run. Each one sees what the
@@ -12,14 +14,16 @@ research R6, R7; FR-010-FR-015).
    nothing); the rest wait for the next run.
 4. Known groups record when they were last searched and gain the new sources.
 
-Writes candidates.json, mentions.json, new source files, known_groups.yaml, the search usage and
-the AI cache; nothing else. Newsletters the run is done with are then deleted from the inbox,
-so an email is never lost to a crash. In a dry run nothing is written or deleted. Each finder
+Writes candidates.json, mentions.json, new source files, known_groups.yaml, the search usage,
+the AI cache, and review items for suggestions it couldn't decide; nothing else. A suggestion's
+note stays in memory. Newsletters and suggestions the run is done with are then deleted from KV,
+so nothing is lost to a crash. In a dry run nothing is written or deleted. Each finder
 and stage logs its time, and each evaluation its result, as JSON lines.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import time
 from collections import Counter
@@ -38,7 +42,8 @@ from netc.finders.newsletter import NewsletterFinder
 from netc.finders.platform import PlatformFinder
 from netc.finders.web_search import WebSearchFinder
 from netc.inbox.kv import Inbox, InboxError
-from netc.models import CandidateSource, KnownGroup, Source
+from netc.inbox.suggestions import read_suggestions
+from netc.models import CandidateSource, KnownGroup, ReviewItem, Source
 from netc.pipeline.ai import Ai
 from netc.pipeline.evaluate import evaluate_candidates
 from netc.pipeline.resolve import resolve_mentions
@@ -84,6 +89,11 @@ class DiscoverSourcesReport:
     """The time budget ran out during evaluation; deferred candidates wait for the next run."""
     inbox_deleted: int = 0
     inbox_delete_errors: int = 0
+    suggestions_read: int = 0
+    suggestions_for_review: int = 0
+    """Suggestions sent to the review queue: not a source page, or not decidable automatically."""
+    suggestions_deleted: int = 0
+    suggestions_error: str | None = None
     written: bool = False
 
 
@@ -98,6 +108,7 @@ def discover_sources(
     news_feeds: Sequence[str] = (),
     finders: Sequence[Finder] | None = None,
     inbox: Inbox | None = None,
+    suggestions: Inbox | None = None,
     dry_run: bool = False,
     log: LogSink = stderr_sink,
     time_budget_seconds: float = RUN_TIME_BUDGET_SECONDS,
@@ -139,6 +150,20 @@ def discover_sources(
     searched: dict[str, datetime] = {}
     found: Counter[str] = Counter()
     processed: list[str] = []
+
+    suggested_done: list[str] = []
+    set_aside_suggestions: list[tuple[str, str]] = []
+    if suggestions is not None:
+        try:
+            read = read_suggestions(suggestions, now=now)
+        except InboxError as exc:
+            report.suggestions_error = str(exc)
+            log(json.dumps({"event": "suggestions_failed", "error": type(exc).__name__}))
+        else:
+            report.suggestions_read = len(read.done)
+            suggested_done = read.done
+            set_aside_suggestions = [(s.url, s.reason) for s in read.for_review]
+            _add_candidates(ctx, read.candidates, found)
     for finder in finders if finders is not None else default_finders(inbox):
         finder_started = clock()
         try:
@@ -214,6 +239,26 @@ def discover_sources(
         if after is not before and after.result in ("rejected", "needs_review", "blocked_by_terms")
     ]
     groups = _update_groups(groups, searched, evaluation.added)
+    undecided = set_aside_suggestions + [
+        (c.url, c.reason)
+        for c in report.set_aside
+        if c.found_via == "suggestion" and c.result == "needs_review"
+    ]
+    queue = store.read_review_queue()
+    queued = {r.id for r in queue}
+    reviews: list[ReviewItem] = []
+    for url, reason in undecided:
+        review = ReviewItem(
+            id=_suggestion_review_id(url),
+            kind="suggestion",
+            ref=url,
+            reason=f"visitor suggestion: {reason}"[:280],
+            created=now,
+        )
+        if review.id not in queued:
+            queued.add(review.id)
+            reviews.append(review)
+    report.suggestions_for_review = len(reviews)
 
     if search is not None:
         report.searches_used = search.usage.used - used_before
@@ -227,6 +272,8 @@ def discover_sources(
         for source in evaluation.added:
             store.write_source(source)
         store.write_known_groups(groups)
+        if reviews:
+            store.write_review_queue([*queue, *reviews])
         if search is not None:
             store.write_search_usage(search.usage)
         if ai is not None:
@@ -239,9 +286,20 @@ def discover_sources(
                     report.inbox_deleted += 1
                 except InboxError:
                     report.inbox_delete_errors += 1  # read again next run; the AI cache answers
+        if suggestions is not None:
+            for key in suggested_done:
+                try:
+                    suggestions.delete(key)
+                    report.suggestions_deleted += 1
+                except InboxError:
+                    pass  # read again next run: the site is then known, so nothing is redone
     if ai is not None and ai.client is not None:
         report.ai_spent_usd = ai.cache.spent_usd()
     return report
+
+
+def _suggestion_review_id(url: str) -> str:
+    return "rev_" + hashlib.sha256(f"suggestion:{url}".encode()).hexdigest()[:12]
 
 
 def _add_candidates(
