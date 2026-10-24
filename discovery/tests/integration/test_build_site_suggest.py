@@ -156,4 +156,5 @@ def test_the_header_nav_links_to_the_form_on_every_page(site: Path) -> None:
     current = page(site, "suggest").css_first('header nav a[href="/suggest/"]')
     assert current.attributes.get("aria-current") == "page"
     home = LexborHTMLParser((site / "index.html").read_text(encoding="utf-8"))
-    assert home.css_first('header nav a[href="/suggest/"]').attributes.get("aria-current") is None
+    on_home = home.css_first('header nav a[href="/suggest/"]')
+    assert on_home is not None and on_home.attributes.get("aria-current") is None
