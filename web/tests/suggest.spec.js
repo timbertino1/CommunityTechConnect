@@ -129,3 +129,15 @@ test("on a phone the form fits", async ({ page }) => {
   await open(page);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
 });
+
+test("the header links to the form, and on a phone it still fits", async ({ page }) => {
+  await page.goto("/past/");
+  const link = page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Suggest a group" });
+  await expect(link).toBeVisible();
+  await page.setViewportSize({ width: 360, height: 800 });
+  await expect(link).toHaveText(/Suggest/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
+  await link.click();
+  await expect(page).toHaveURL(/\/suggest\/$/);
+  await expect(link).toHaveAttribute("aria-current", "page");
+});

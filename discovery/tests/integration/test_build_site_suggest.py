@@ -144,3 +144,16 @@ def test_an_endpoint_must_be_https(tmp_path: Path, capsys: pytest.CaptureFixture
     args = ["build-site", "--data", str(data(tmp_path)), "--out", str(out), "--web", str(WEB)]
     assert main([*args, "--now", NOW, "--suggest-endpoint", "http://w.example/suggest"]) == 1
     assert "https" in capsys.readouterr().err
+
+
+def test_the_header_nav_links_to_the_form_on_every_page(site: Path) -> None:
+    for name, text in html_files(site).items():
+        if name.startswith("calendar/index"):
+            continue  # a redirect page
+        link = LexborHTMLParser(text).css_first('header nav a[href="/suggest/"]')
+        assert link is not None, name
+        assert "Suggest a group" in " ".join(link.text().split()), name
+    current = page(site, "suggest").css_first('header nav a[href="/suggest/"]')
+    assert current.attributes.get("aria-current") == "page"
+    home = LexborHTMLParser((site / "index.html").read_text(encoding="utf-8"))
+    assert home.css_first('header nav a[href="/suggest/"]').attributes.get("aria-current") is None

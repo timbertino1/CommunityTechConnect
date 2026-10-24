@@ -152,7 +152,7 @@ def build_site(
     if suggest_endpoint:
         _write(
             out_dir / "suggest" / "index.html",
-            env.get_template("suggest.html").render(nav="", **common),
+            env.get_template("suggest.html").render(nav="suggest", **common),
         )
         pages += 1
     pages += _calendar_pages(env, out_dir, public, views, now, common)
