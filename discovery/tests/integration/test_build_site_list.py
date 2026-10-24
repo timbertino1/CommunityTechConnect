@@ -276,12 +276,19 @@ def test_each_card_has_a_date_block_hidden_from_screen_readers(site: Path) -> No
     assert flat(block) == "NOV 10 Tue"
 
 
-def test_the_filter_form_waits_for_its_script(site: Path) -> None:
+def test_the_filter_form_is_there_from_the_start_and_hidden_only_without_javascript(
+    site: Path,
+) -> None:
     page = home(site)
     form = page.css_first("form[data-filters]")
     assert form.attributes["role"] == "search"
-    assert "hidden" in form.attributes  # filters.js shows it; without JavaScript it stays hidden
-    assert "Filters need JavaScript" in flat(page.css_first("noscript"))
+    # Shown from the first paint, so nothing jumps when filters.js starts (T138: the month page's
+    # layout shift was 0.279); a stylesheet inside <noscript> hides it when JavaScript is off.
+    assert "hidden" not in form.attributes
+    nojs = page.css_first('head noscript link[rel="stylesheet"]')
+    assert nojs is not None and nojs.attributes["href"] == "/css/nojs.css"
+    assert ".filters" in (site / "css" / "nojs.css").read_text(encoding="utf-8")
+    assert "Filters need JavaScript" in flat(page.css_first("body noscript"))
     [legend] = form.css("fieldset legend")
     assert flat(legend) == "Area"
     areas = {
