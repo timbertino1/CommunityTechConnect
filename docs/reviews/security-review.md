@@ -9,7 +9,7 @@
 independent reviewer a map, not to replace them.
 
 **Result: no critical or high findings.** One medium and two low findings, listed at the end,
-with what to do about each. The medium one (M1) was fixed the same day.
+with what to do about each. All three were resolved on 2026-10-24.
 
 ## Automated checks
 
@@ -47,8 +47,8 @@ From `specs/001-event-aggregator/plan.md`, "Threat summary".
 | # | Severity | Finding | Recommendation |
 |---|---|---|---|
 | M1 | Medium (**fixed 2026-10-24**) | **"Site (browser tests)" was not a required check** on `main`. The other five are. A PR, including an automatic data PR, could merge with failing browser, accessibility or Content-Security-Policy tests. The site build itself would still have to succeed to deploy. | **Done** with the owner's OK: "Protect main" now requires all six checks (Python, Web, Workers, gitleaks, "Bot PRs change only data/", "Site (browser tests)"), still with no bypass. |
-| L1 | Low | **2FA on the owner's GitHub account can't be verified** with the CLI's token. The plan requires it. | Owner confirms GitHub → Settings → Password and authentication shows two-factor authentication enabled, ideally with a passkey or app rather than SMS. |
-| L2 | Low | **Workers are deployed from the owner's machine** with `wrangler`'s login, which can do much more than deploy these two Workers. | T147/T148: a token limited to Workers Scripts edit and KV read, in the `production` environment, used only by a deploy workflow. Then sign wrangler out on the laptop, or leave it for emergencies. |
+| L1 | Low (**resolved 2026-10-24**) | **2FA on the owner's GitHub account couldn't be verified** with the CLI's token. The plan requires it. | **Done:** the owner confirmed two-factor authentication is on. |
+| L2 | Low (**fixed 2026-10-24**) | **Workers were deployed from the owner's machine** with `wrangler`'s login, which can do much more than deploy these two Workers. | **Done:** T147/T148. `CLOUDFLARE_WORKERS_TOKEN` (Workers Scripts edit and Workers KV read, this account only) lives in the `production` environment and is used only by `deploy-workers.yml`. Its first run (40135156680) deployed both Workers, and the suggest Worker answered as before. The laptop's login is now needed only for setting Worker secrets. |
 | I1 | Info | Cloudflare Pages sends `Access-Control-Allow-Origin: *` on every response. | No action: the site and its JSON are public and cookie-free, so other origins can read only what anyone can. |
 | I2 | Info | `KV_SUGGESTIONS_ID` is an unused secret in the `discovery` environment; the workflow passes the public id directly. | Delete it to keep the inventory exact (T146). |
 | I3 | Info | The `main` ruleset needs no approving review, and branches needn't be up to date before merging. | Fine for a single maintainer who merges every code PR. Revisit if more people get write access. |
