@@ -18,6 +18,7 @@ import pytest
 from netc.cli import main
 from netc.connectors import default_connectors
 from netc.fetch import FixtureHttp
+from netc.github.review_pr import build_review_pr
 from netc.models import KnownGroup, Organizer, SearchUsage
 from netc.pipeline.discover_sources import DiscoverSourcesReport, discover_sources
 from netc.pipeline.sources_report import render_sources_markdown
@@ -211,3 +212,128 @@ def test_mentions_stop_at_their_own_budget_and_the_report_says_so(data: Path) ->
     report = run(data, clock=lambda: float(next(ticks)), mentions_budget_seconds=10 * 60)
     assert report.mentions["deferred"] > 0
     assert "wait for the next run" in render_sources_markdown(report).split("### Mentions")[1]
+
+
+# --- Visitors' suggestions (T133; FR-020, FR-022)
+
+NOTE = "Private note: ask Pat about the Tuesday group"
+SUGGESTED = {
+    "https://heartlandrust.example.org/": "added",
+    "https://yoga.example.org/": "rejected",
+    "https://nowhere.example.org/": "needs_review",  # can't be read: a person decides
+    "https://www.facebook.com/omaha-tech": None,  # not a source page: straight to review
+}
+
+
+class FakeSuggestions:
+    def __init__(self, urls: list[str], *, failing: bool = False) -> None:
+        self.values = {
+            f"suggestion:{i:08d}-0000-4000-8000-000000000000": json.dumps(
+                {"url": url, "note": NOTE, "received_at": "2026-10-19T09:00:00Z"}
+            ).encode()
+            for i, url in enumerate(urls)
+        }
+        self.failing = failing
+        self.deleted: list[str] = []
+
+    def keys(self) -> list[str]:
+        if self.failing:
+            from netc.inbox.kv import InboxError
+
+            raise InboxError("could not list the inbox (HTTP 403)")
+        return list(self.values)
+
+    def read(self, key: str) -> bytes | None:
+        return self.values.get(key)
+
+    def delete(self, key: str) -> None:
+        self.deleted.append(key)
+
+
+def suggest(data: Path, **kw: Any) -> tuple[DiscoverSourcesReport, FakeSuggestions]:
+    inbox = FakeSuggestions(list(SUGGESTED))
+    return run(data, finders=[], suggestions=inbox, **kw), inbox
+
+
+def test_suggestions_are_evaluated_like_any_other_candidate(data: Path) -> None:
+    report, inbox = suggest(data)
+    results = {c.url: c.result for c in DataStore(data).read_candidates()}
+    for url, expected in SUGGESTED.items():
+        if expected is not None:
+            assert results[url] == expected, url
+    [added] = report.added
+    assert (added.id, added.origin, added.found_via) == (
+        "src_heartlandrust-example-org",
+        "suggested",
+        "suggestion",
+    )
+    assert sorted(inbox.deleted) == sorted(inbox.values)
+    assert (report.suggestions_read, report.suggestions_deleted) == (4, 4)
+
+
+def test_suggestions_that_need_a_person_go_to_the_review_queue(data: Path) -> None:
+    report, _ = suggest(data)
+    queue = DataStore(data).read_review_queue()
+    assert sorted((r.kind, r.ref) for r in queue) == [
+        ("suggestion", "https://nowhere.example.org/"),
+        ("suggestion", "https://www.facebook.com/omaha-tech"),
+    ]
+    assert report.suggestions_for_review == 2
+    # A second run with the same suggestions adds no duplicate review items.
+    suggest(data)
+    assert len(DataStore(data).read_review_queue()) == 2
+
+
+def test_a_note_never_reaches_a_file_or_the_review_pr(data: Path) -> None:
+    suggest(data)
+    for path in data.rglob("*"):
+        if path.is_file():
+            text = path.read_text(encoding="utf-8", errors="replace")
+            assert "Pat" not in text and "Tuesday group" not in text, path
+    store = DataStore(data)
+    pr = build_review_pr(
+        store.read_review_queue(), store.read_events(), store.read_sources(),
+        categories={}, areas={}, now=NOW,
+    )  # fmt: skip
+    assert pr is not None
+    assert "nowhere.example.org" in pr.body
+    assert "Pat" not in pr.body and "Tuesday" not in pr.body
+
+
+def test_the_report_says_what_came_of_the_suggestions(data: Path) -> None:
+    report, _ = suggest(data)
+    text = render_sources_markdown(report)
+    assert "**Visitor suggestions:** 4 read, 2 sent to review, 4 cleared from KV." in text
+
+
+def test_suggestions_are_evaluated_before_anything_else(data: Path) -> None:
+    from netc.finders.base import make_candidate
+    from netc.pipeline.evaluate import evaluate_candidates
+
+    store = DataStore(data)
+    areas = store.read_areas()
+    assert areas is not None
+    found = make_candidate(
+        "https://yoga.example.org/", found_via="web_search", evidence=[], now=NOW
+    )
+    asked = make_candidate(
+        "https://heartlandrust.example.org/", found_via="suggestion", evidence=[], now=NOW
+    )
+    result = evaluate_candidates(
+        [found, asked], http=FixtureHttp(FIXTURES), connectors=default_connectors(lambda: NOW),
+        sources=[], categories=store.read_categories(), areas=areas, now=NOW, max_evaluations=1,
+    )  # fmt: skip
+    assert [c.result for c in result.candidates] == ["pending", "added"]
+
+
+def test_a_dry_run_keeps_the_suggestions(data: Path) -> None:
+    report, inbox = suggest(data, dry_run=True)
+    assert inbox.deleted == [] and DataStore(data).read_review_queue() == []
+    assert report.suggestions_read == 4
+
+
+def test_suggestions_that_cannot_be_listed_do_not_stop_the_run(data: Path) -> None:
+    report = run(data, finders=[], suggestions=FakeSuggestions([], failing=True))
+    assert report.written
+    assert report.suggestions_error is not None and "403" in report.suggestions_error
+    assert "could not be read" in render_sources_markdown(report)

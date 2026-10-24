@@ -178,9 +178,11 @@ def _quick_verdict(candidate: CandidateSource) -> _Verdict | None:
 
 
 def _promise(candidate: CandidateSource) -> int:
-    """Lower goes first: 0, an event platform group page naming a Nebraska place (most local
-    groups are on Meetup or Luma); 1, any other page naming one; 2, another platform group
-    page; 3, anything else."""
+    """Lower goes first: -1, a visitor's suggestion (someone asked); 0, an event platform group
+    page naming a Nebraska place (most local groups are on Meetup or Luma); 1, any other page
+    naming one; 2, another platform group page; 3, anything else."""
+    if candidate.found_via == "suggestion":
+        return -1
     results = [e for e in candidate.evidence if not e.startswith("web search:")]
     local = _NEBRASKA.search(" ".join([candidate.url, *results])) is not None
     host = (urlsplit(candidate.url).hostname or "").removeprefix("www.")
