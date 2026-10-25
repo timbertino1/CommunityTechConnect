@@ -1,12 +1,14 @@
 # Self security review
 
 **Date:** 2026-10-24
-**Task:** T139 (before the independent review, T140)
+**Task:** T139 (SC-008)
 **Scope:** everything in this repository and what it runs: the discovery pipeline
 (`discovery/`), the static site and its headers (`web/`, Cloudflare Pages), the two Workers
 (`workers/`), the GitHub workflows and repository settings, at `main` after #105.
-**Reviewer:** the builder (Claude, for the owner). This is a self-review: its job is to give the
-independent reviewer a map, not to replace them.
+**Reviewer:** the builder (Claude, for the owner). This was planned as a map for an independent
+reviewer (T140). On 2026-10-25 the owner withdrew that review: the site has no user accounts,
+logins or personal data, and its only public input is the suggest form. This review, with the
+automated security checks on every pull request, is now the pre-launch review for SC-008.
 
 **Result: no critical or high findings.** One medium and two low findings, listed at the end,
 with what to do about each. All three were resolved on 2026-10-24.
@@ -53,7 +55,7 @@ From `specs/001-event-aggregator/plan.md`, "Threat summary".
 | I2 | Info | `KV_SUGGESTIONS_ID` is an unused secret in the `discovery` environment; the workflow passes the public id directly. | Delete it to keep the inventory exact (T146). |
 | I3 | Info | The `main` ruleset needs no approving review, and branches needn't be up to date before merging. | Fine for a single maintainer who merges every code PR. Revisit if more people get write access. |
 
-## For the independent reviewer (T140)
+## For anyone reviewing it later
 
 Good places to start:
 - `discovery/src/netc/fetch/` (SSRF and limits)

@@ -464,8 +464,11 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   typical broadband or 4G connection.
 - **SC-007**: A failure of any single source causes no outage of the public site and no loss of
   events from other sources.
-- **SC-008**: An independent security assessment before launch finds no critical or high-severity
+- **SC-008**: A security review before launch (the builder's review of every item in the plan's
+  threat summary, with the automated security checks) finds no critical or high-severity
   vulnerabilities, and no scripted content from any source can execute in visitors' browsers.
+  *Changed 2026-10-25 by the owner: an independent review is no longer required. The site has
+  no user accounts, logins or personal data; its only public input is the suggest form.*
 - **SC-009**: An automated and manual accessibility audit of list and calendar views finds no
   WCAG 2.2 AA failures.
 - **SC-010**: Ongoing administration (reviewing held items and responding to failing sources)
