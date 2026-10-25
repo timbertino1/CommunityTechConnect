@@ -2078,12 +2078,12 @@ Then I noticed the form was only linked from the footer. It's in the header now.
 
   <section>
     <div class="section-head">
-      <p class="eyebrow">Phase 10 &middot; Launch prep &middot; Oct 24, 2026</p>
+      <p class="eyebrow">Phase 10 &middot; Launch prep &middot; Oct 24&ndash;25, 2026</p>
       <h2>Checking it all before telling anyone</h2>
     </div>
     <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review by me and then by someone else, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
     <div class="stats">
-      <div class="stat"><span class="n">8<small> of 15</small></span><p>Phase 10 tasks done. Most of the rest need someone other than the builder.</p></div>
+      <div class="stat"><span class="n">11<small> of 15</small></span><p>Phase 10 tasks done. The other four wait on a reviewer, two weeks of costs, or launch day.</p></div>
       <div class="stat"><span class="n">171<small> of 171</small></span><p>Files of the live site rebuilt byte for byte from a fresh copy of the repository.</p></div>
       <div class="stat"><span class="n">1.83<small> s</small></span><p>Until the main content shows on a simulated slow phone, from 1.97 s, after trimming the fonts.</p></div>
     </div>
@@ -2093,8 +2093,10 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>My own security review</b><small>Every risk in the plan checked against the code. No critical or high findings; the one medium fixed the same day. PRs #106, #107.</small></div><span class="ids">T139</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Backup, tested</b><small>A fresh clone rebuilt the live site exactly, and a runbook covers every way to restore it. PR #113.</small></div><span class="ids">T141</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Routines</b><small>A monthly metrics log, a quarterly coverage check, a watchdog for switched-off schedules, and the full runbook. PRs #114&ndash;#117.</small></div><span class="ids">T143&ndash;T146</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A person with a screen reader</b><small>I went through every kind of page with Windows Narrator, and a script tabbed through them by keyboard and at 200% zoom. Nothing to fix. PR #125.</small></div><span class="ids">T137</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Workers deploy themselves</b><small>A merged change to either Worker is tested and deployed by GitHub, with a token that can do nothing else. No more deploys from my laptop. PR #119.</small></div><span class="ids">T147&ndash;T148</span></li>
       <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>An independent security review</b><small>Someone who didn't build it reviews it. Launch waits for this.</small></div><span class="ids">T140</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Still to come</b><small>A screen-reader pass by a person, a deploy token so Workers stop deploying from my laptop, the cost check after two weeks of live runs, the final end-to-end run, and netechconnect.com.</small></div><span class="ids">6 tasks</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Still to come</b><small>The cost check after two weeks of live runs, the final end-to-end run, and netechconnect.com.</small></div><span class="ids">3 tasks</span></li>
     </ul>
   </section>
 
@@ -2114,6 +2116,20 @@ Then I noticed the form was only linked from the footer. It's in the header now.
   </section>
 
   <section>
+    <div class="section-head">
+      <p class="eyebrow">Meanwhile, the weekly hunt</p>
+      <h2>Teaching it where to look</h2>
+    </div>
+    <p class="lede">One checkpoint from Phase 4 is still open: new groups found through at least three different kinds of channel. Two manual runs on Oct 24 and 25 showed why it hadn't happened yet, and each one turned up something to fix.</p>
+    <div class="notes">
+      <div class="note hi"><div><h3>41 groups from TechOmaha</h3><p>TechOmaha keeps the longest list of Omaha user groups, but its site turns bots away. So I pasted the list in. Matched against TechOmaha's open dataset for links and cleaned by hand, it added 41 groups the site didn't know, 22 of them on Meetup. Five a week get checked. The first five had nothing scheduled: four look dormant, and Omaha AWS meets monthly but hadn't posted its next one yet. It gets another look in 30 days.</p></div></div>
+      <div class="note"><div><h3>A feed that said no</h3><p>I added the University of Nebraska Omaha's news feed after checking its robots.txt by eye. The bot's own fetcher read it properly, found "no .rss files for any bot", and refused. The fetcher was right, and the feed came out the same day. Now I check feeds with the bot's fetcher, not by eye.</p></div></div>
+      <div class="note hi"><div><h3>Ten groups shelved for running out of time</h3><p>Meetup allows the bot 50 requests a run. Checking a group took 4, and on Oct 24 the bot ran out partway through, then set 10 groups aside for a month as if they'd failed. Now a check takes 3, and a group that runs out of requests simply waits for the next run.</p></div></div>
+      <div class="note"><div><h3>Cricket, for "Omaha cloud user group"</h3><p>The search engine answered two of 35 searches with cricket schedules and Dayton flight times. They cost nothing to reject, but each one took a slot a real group could have had. Now a search result has to name a Nebraska place. Checked against every past result: all 8 that became sources did, and 149 of 311 didn't.</p></div></div>
+    </div>
+  </section>
+
+  <section>
     <div class="share">
       <div class="share-head"><h3>Share Phase 10 so far</h3><button class="btn" type="button" data-copy="post-phase-10">Copy post</button></div>
       <label class="eyebrow" for="post-phase-10">Suggested post (edit freely)</label>
@@ -2122,6 +2138,8 @@ Accessibility: automated checks on every kind of page, at phone and desktop widt
 Speed: the calendar jumped as it loaded (fixed), and trimming the fonts took the main content on a slow phone from 1.97 to 1.83 seconds. Same look.
 Security: my own review found nothing critical or high, and one medium I fixed the same day. Next, someone who didn't build it reviews it.
 Backup: a fresh copy of the repository rebuilt the live site byte for byte, all 171 files.
+And a person with a screen reader went through every kind of page. Nothing to fix.
+Meanwhile, the weekly hunt for new groups got smarter: 41 Omaha groups from TechOmaha's list, a fairer budget for Meetup, and search results that must name a Nebraska place. (One search for "Omaha cloud user group" came back with cricket schedules.)
 Then: launch, and netechconnect.com.
 #BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
       <span class="count" data-count-for="post-phase-10"></span>
@@ -2131,7 +2149,7 @@ Then: launch, and netechconnect.com.
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Oct 24, 2026</span>
+  <span>NETechConnect build log &middot; updated Oct 25, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
