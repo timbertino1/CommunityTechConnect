@@ -40,7 +40,7 @@ from selectolax.lexbor import LexborHTMLParser
 from netc.connectors.base import Connector, RawPayload
 from netc.connectors.detect import Detection, detect
 from netc.connectors.eventbrite_org import organizer_id
-from netc.fetch import FetchError, HttpClient
+from netc.fetch import BudgetExceededError, FetchError, HttpClient
 from netc.finders.base import PLATFORMS, luma_calendar_feed, not_a_source, site_key
 from netc.models import AreaConfig, CandidateSource, Category, FollowLinks, Source
 from netc.pipeline.ai import Ai
@@ -51,6 +51,17 @@ from netc.pipeline.sanitize import to_plain_text
 
 MAX_EVALUATIONS: Final = 75
 MAX_SAMPLE: Final = 8
+MEETUP_SAMPLE_PAGES: Final = 2
+"""Event pages read to judge a Meetup group (the group's events page has no event data of its
+own). Each group then costs 3 requests of Meetup's per-run budget (gate V1), not 4; a group that
+is added reads 3 event pages a day as usual."""
+
+
+class _OutOfBudgetError(Exception):
+    """The site's request budget for this run is used up: the candidate waits for the next run
+    instead of being set aside for RECHECK_AFTER."""
+
+
 RECHECK_AFTER: Final = timedelta(days=30)
 TERMS_BLOCKED: Final = frozenset(
     {
@@ -115,10 +126,15 @@ def evaluate_candidates(
         if quick is not None:
             _record(result, i, candidates[i], quick, now)
     done = 0
+    out_of_budget: set[str] = set()
     for i in sorted(due, key=lambda i: _promise(candidates[i])):
         candidate = candidates[i]
         if result.candidates[i] is not candidate:
             continue  # settled above
+        host = urlsplit(candidate.url).hostname or ""
+        if host in out_of_budget:
+            result.counts["deferred"] += 1
+            continue
         if done >= max_evaluations:
             result.counts["deferred"] += 1
             continue
@@ -130,6 +146,14 @@ def evaluate_candidates(
         started = clock()
         try:
             verdict = _evaluate(candidate, http, connectors, categories, areas, now, ai, taken)
+        except _OutOfBudgetError:
+            # Not this candidate's fault: it stays pending, and its site is left for next run.
+            out_of_budget.add(host)
+            done -= 1
+            result.counts["deferred"] += 1
+            if log is not None:
+                log(json.dumps({"event": "candidate_deferred", "host": host, "why": "budget"}))
+            continue
         except Exception as exc:  # one strange site must not stop the run (and lose its work)
             verdict = _Verdict("needs_review", f"could not be evaluated: {type(exc).__name__}")
         if log is not None:
@@ -265,6 +289,8 @@ def _evaluate(
         )
     else:
         found: Detection = detect(candidate.url, http)
+        if "BudgetExceededError" in found.reason:
+            raise _OutOfBudgetError(host)
         if found.kind == "none":
             if "RobotsDisallowedError" in found.reason:
                 return _Verdict("blocked_by_terms", "robots.txt disallows reading it")
@@ -287,12 +313,20 @@ def _evaluate(
     connector = connectors.get(source.connector)
     if connector is None:
         return _Verdict("needs_review", f"no reader for {source.connector} yet")
+    sampled = source
+    if host == "meetup.com" and source.follow_links is not None:
+        pages = source.follow_links.model_copy(update={"max_pages": MEETUP_SAMPLE_PAGES})
+        sampled = source.model_copy(update={"follow_links": pages})
     try:
-        payload = connector.fetch(source, http)
+        payload = connector.fetch(sampled, http)
+    except BudgetExceededError as exc:
+        raise _OutOfBudgetError(host) from exc
     except FetchError as exc:
         if "RobotsDisallowed" in type(exc).__name__:
             return _Verdict("blocked_by_terms", "robots.txt disallows reading it")
         return _Verdict("needs_review", f"sample events could not be read: {type(exc).__name__}")
+    if any("BudgetExceededError" in w for w in payload.warnings):
+        raise _OutOfBudgetError(host)  # some sample pages were refused: too little to judge
     if host == "meetup.com":
         source = source.model_copy(update={"name": _name(_page_title(payload), "") or source.name})
     elif source.connector == "ical" and source.name == host:

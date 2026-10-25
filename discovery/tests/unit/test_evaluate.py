@@ -424,3 +424,88 @@ def test_without_the_token_an_eventbrite_organizer_needs_review(tmp_path: Path) 
         connectors=eventbrite_connectors(FakeEventbriteApi(), with_token=False),
     )
     assert candidate.result == "needs_review"
+
+
+# --- Meetup's per-run request budget (gate V1)
+
+
+def _event_page(group: str, n: int) -> str:
+    event = {
+        "@context": "https://schema.org", "@type": "Event",
+        "name": f"Python night {n}: testing and packaging",
+        "startDate": f"2026-11-{10 + n}T18:00:00-06:00",
+        "url": f"https://www.meetup.com/{group}/events/31234567{n}/",
+        "location": {"@type": "Place", "name": "AIM Institute",
+                     "address": "1905 Harney St, Omaha, NE 68102"},
+    }  # fmt: skip
+    return (
+        f'<html><head><script type="application/ld+json">{json.dumps(event)}</script></head></html>'
+    )
+
+
+class FakeMeetup:
+    """Meetup group pages linking to four event pages each; the event pages hold the event data,
+    as on meetup.com. ``budget`` meetup.com requests are allowed, then BudgetExceededError."""
+
+    def __init__(self, budget: int = 1000) -> None:
+        self.budget = budget
+        self.requested: list[str] = []
+
+    def get(
+        self,
+        url: str,
+        *,
+        kind: FetchKind = "page",
+        allowed_types: Collection[str] | None = None,
+        delay_seconds: float | None = None,
+    ) -> FetchResponse:
+        from netc.fetch import BudgetExceededError
+
+        host = url.split("/")[2]
+        if host == "www.meetup.com":
+            if self.budget <= 0:
+                raise BudgetExceededError(f"the budget for {host} is used up")
+            self.budget -= 1
+        self.requested.append(url)
+        parts = url.split("/")
+        group = parts[3]
+        if url.endswith("/events/"):
+            links = "".join(
+                f'<a href="https://www.meetup.com/{group}/events/31234567{n}/">e{n}</a>'
+                for n in range(1, 5)
+            )
+            body = f"<html><head><title>{group} | Meetup</title></head><body>{links}</body></html>"
+        else:
+            body = _event_page(group, int(parts[5][-1]))
+        return FetchResponse(url, 200, "text/html", "utf-8", {}, body.encode())
+
+
+def test_a_meetup_group_is_judged_on_two_event_pages(tmp_path: Path) -> None:
+    client = FakeMeetup()
+    candidate, result = one(tmp_path, "https://www.meetup.com/omaha-python/", client=client)
+    assert candidate.result == "added"
+    assert len(client.requested) == 3  # the events page and two event pages
+    [source] = result.added
+    assert source.follow_links is not None and source.follow_links.max_pages == 3  # daily reads
+
+
+def test_out_of_meetup_budget_waits_for_the_next_run_not_30_days(tmp_path: Path) -> None:
+    groups = [pending(f"https://www.meetup.com/group-{n}/") for n in range(4)]
+    other = pending("https://heartlandrust.example.org/")
+    client = FakeMeetup(budget=4)  # one group (3 requests) and a bit
+    fixtures = http(tmp_path)
+
+    class Both:
+        def get(self, url: str, **kw: Any) -> FetchResponse:
+            return (client if "meetup.com" in url else fixtures).get(url, **kw)
+
+    result = evaluate(tmp_path, [*groups, other], client=Both())
+    by_url = {c.url: c for c in result.candidates}
+    assert by_url["https://www.meetup.com/group-0/"].result == "added"
+    for n in (1, 2, 3):
+        waiting = by_url[f"https://www.meetup.com/group-{n}/"]
+        assert waiting.result == "pending" and waiting.last_evaluated == groups[n].last_evaluated
+    assert by_url["https://heartlandrust.example.org/"].result == "added"  # other sites go on
+    meetup_asks = [u for u in client.requested if "meetup.com" in u]
+    assert len(meetup_asks) == 4  # nothing more is asked of Meetup after it said no
+    assert result.counts["deferred"] == 3
