@@ -459,5 +459,5 @@ everything else on free tiers.
 
 ## Phase 11: Convergence
 
-- [ ] T165 Record the quarterly security review (`docs/reviews/quarterly-security.md`, and the `security-review` reminder in `discovery/src/netc/github/health.py` for the first week of January, April, July and October) in spec.md and plan.md as the owner's ongoing replacement for the withdrawn independent review, or remove it, per SC-008 (unrequested)
-- [ ] T166 Record the Suggest link in every page's header (`.nav-suggest` in `discovery/src/netc/site/templates/base.html`) alongside the footer link the suggest-form tasks specify, or remove it, per FR-020 (unrequested)
+- [X] T165 Record the quarterly security review (`docs/reviews/quarterly-security.md`, and the `security-review` reminder in `discovery/src/netc/github/health.py` for the first week of January, April, July and October) in spec.md and plan.md as the owner's ongoing replacement for the withdrawn independent review, or remove it, per SC-008 (unrequested) *Done (Oct 25, 2026): recorded in spec.md (SC-008's note) and plan.md (after the threat summary).*
+- [X] T166 Record the Suggest link in every page's header (`.nav-suggest` in `discovery/src/netc/site/templates/base.html`) alongside the footer link the suggest-form tasks specify, or remove it, per FR-020 (unrequested) *Done (Oct 25, 2026): both the header and the footer link are recorded in contracts/site-urls.md; neither was specified before.*
