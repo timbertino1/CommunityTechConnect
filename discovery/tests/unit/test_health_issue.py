@@ -9,6 +9,7 @@ import pytest
 
 from netc.github.health import (
     ALERT_AFTER_FAILURES,
+    CENTRAL,
     HEALTH_TITLE,
     Health,
     LastAlert,
@@ -454,3 +455,45 @@ def test_schedules_that_could_not_be_checked_are_said_without_an_alert() -> None
 def test_odd_states_are_not_copied_into_the_issue() -> None:
     h = watched({**ACTIVE, "discover-events.yml": "<b>@everyone</b>"})
     assert "@everyone" not in h.body and "<b>" not in h.body
+
+
+# --- The quarterly security review
+
+
+@pytest.mark.parametrize(
+    ("now", "due"),
+    [
+        (utc(2027, 1, 1, 12), True),  # Jan 1, 6 AM Central
+        (utc(2027, 4, 7, 23), True),  # Apr 7, 6 PM Central
+        (utc(2027, 7, 3, 11), True),
+        (utc(2026, 10, 2, 11), True),
+        (utc(2027, 1, 8, 12), False),
+        (utc(2026, 11, 1, 11), False),  # a monthly check, not a quarterly one
+        (utc(2027, 1, 1, 3), False),  # Dec 31, 9 PM Central
+    ],
+)
+def test_the_first_week_of_a_quarter_asks_for_the_security_review(now: datetime, due: bool) -> None:
+    h = health(now=now)
+    assert ("security-review" in keys(h)) is due
+    if due:
+        [note] = [a.text for a in h.attention if a.key == "security-review"]
+        assert "docs/reviews/quarterly-security.md" in note
+        assert f"{now.astimezone(CENTRAL):%B}" in note
+
+
+def test_the_security_review_is_always_listed_with_the_monthly_check() -> None:
+    text = section(health().body, "Monthly check")
+    assert "docs/reviews/quarterly-security.md" in text
+    assert "January, April, July and October" in text
+
+
+def test_the_security_review_reminder_is_posted_once_and_kept_apart() -> None:
+    first = health(now=utc(2027, 1, 1, 12))
+    comment = alert_comment(first, owner=OWNER, last=None, now=utc(2027, 1, 1, 12))
+    assert comment is not None and "security review" in comment
+    assert "<!-- netc-health-alert:" in comment and "security-review" in comment
+    later = health(now=utc(2027, 1, 2, 12))
+    again = alert_comment(
+        later, owner=OWNER, last=LastAlert(utc(2027, 1, 1, 12), comment), now=utc(2027, 1, 2, 12)
+    )
+    assert again is None

@@ -3,7 +3,9 @@
 The runbook: what runs when, the secrets and how to rotate them, how to pause things, and how
 NETechConnect is backed up and restored. Day-to-day admin (reviews, overrides, sources) is in
 [`admin-guide.md`](admin-guide.md). The monthly and quarterly checks are in
-[`operations/metrics.md`](operations/metrics.md) and [`coverage/`](coverage/README.md).
+[`operations/metrics.md`](operations/metrics.md), [`coverage/`](coverage/README.md) and
+[`reviews/quarterly-security.md`](reviews/quarterly-security.md) (the security review, first
+week of January, April, July and October; the health issue reminds you).
 
 ## What runs when
 

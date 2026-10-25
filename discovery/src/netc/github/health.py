@@ -50,6 +50,10 @@ _SWITCHED_OFF: Final = {
 METRICS_LOG: Final = "docs/operations/metrics.md"
 METRICS_DAYS: Final = 7
 """The monthly check (T143) is asked for in the first days of each month, Central Time."""
+SECURITY_REVIEW: Final = "docs/reviews/quarterly-security.md"
+SECURITY_REVIEW_MONTHS: Final = (1, 4, 7, 10)
+"""The quarterly security review is asked for in the same first days of these months. The
+owner kept internal review when the independent one (T140) was withdrawn."""
 MAX_LISTED: Final = 25
 MAX_BODY_CHARS: Final = 60_000
 """GitHub caps an issue description at 65,536 characters."""
@@ -58,7 +62,7 @@ CENTRAL: Final = ZoneInfo("America/Chicago")
 _LOGIN: Final = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$")
 _MARKER: Final = re.compile(r"<!-- netc-health-alert: ([a-z0-9:_ -]*) -->")
 _KEY: Final = re.compile(
-    r"^(?:review|schedule|ai-budget|metrics|workflows|failing:src_[a-z0-9-]+)$"
+    r"^(?:review|schedule|ai-budget|metrics|security-review|workflows|failing:src_[a-z0-9-]+)$"
 )
 
 ORIGIN_LABELS: Final = {
@@ -174,6 +178,15 @@ def build_health(
                 "the sources discovery added).",
             )
         )
+        if local.month in SECURITY_REVIEW_MONTHS:
+            attention.append(
+                Attention(
+                    "security-review",
+                    f"It's the first week of {local:%B}: time for the quarterly security review "
+                    f"in `{SECURITY_REVIEW}`. Ask Claude Code to run it; it takes about an hour "
+                    "and needs you only to check two dashboards.",
+                )
+            )
 
     lines = [f"## {HEALTH_TITLE} · {_when(now)}", ""]
     if attention:
@@ -306,7 +319,8 @@ def _monthly(sources: list[Source]) -> list[str]:
     by_channel = ", ".join(f"{label} {counts[label]}" for label in sorted(counts)) or "none yet"
     noun = "1 active source" if len(found) == 1 else f"{len(found)} active sources"
     return [
-        f"In the first week of each month, add a row to `{METRICS_LOG}`.",
+        f"In the first week of each month, add a row to `{METRICS_LOG}`. In the first week of "
+        f"January, April, July and October, also run the security review in `{SECURITY_REVIEW}`.",
         "",
         f"{noun} added by discovery ({len(counts)} kinds of channel): {by_channel}.",
     ]
