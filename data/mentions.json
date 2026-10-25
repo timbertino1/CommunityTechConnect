@@ -64,7 +64,7 @@
     ],
     "organizer_hint": "Big Idea Buffalo County",
     "place_hint": "Kearney",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Pitch competition by Big Idea Buffalo County"
   },
   {
@@ -96,6 +96,20 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_0f9faf6fa7b8",
+    "links": [
+      "https://www.npdodge.com/blog/2019/08/meet-new-people-omaha"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "How to Meet New People in Omaha"
+  },
+  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -110,7 +124,7 @@
     "title": "On the Silicon Prairie: Omaha's Cybersecurity Leaders to ..."
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -150,7 +164,7 @@
     "title": "2027 Nebraska Women in STEM Conference"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -164,7 +178,7 @@
     "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -178,7 +192,7 @@
     "title": "Top 18 Mobile App Development Companies in Lincoln ..."
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -204,7 +218,7 @@
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -228,11 +242,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -256,7 +270,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "How Nebraska's business ecosystem is learning and ..."
   },
   {
@@ -288,7 +302,7 @@
     "title": "Nucamp"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -948,6 +962,20 @@
     "place_hint": "Lincoln, NE",
     "resolution": "unresolved",
     "title": "University students wanting to showcase their research have until Saturday, Oct. 31, to register"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_ce1a65104a7f",
+    "links": [
+      "https://www.ll.mit.edu/news/cybersecurity-technology-mixes-memory-thwart-attacks"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Cybersecurity technology mixes up memory to thwart attacks | MIT Lincoln Laboratory"
   },
   {
     "attempts": 0,
