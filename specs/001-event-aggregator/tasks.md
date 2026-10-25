@@ -456,3 +456,8 @@ everything else on free tiers.
   14-day rule (`exclude-newer-package`) to pick up the fix for GHSA-6q48-6c7w-9gw2 (2026.10.19).
   On or after **2026-11-03**, delete that line, run `uv lock`, and confirm certifi stays at
   2026.10.19 or later.
+
+## Phase 11: Convergence
+
+- [ ] T165 Record the quarterly security review (`docs/reviews/quarterly-security.md`, and the `security-review` reminder in `discovery/src/netc/github/health.py` for the first week of January, April, July and October) in spec.md and plan.md as the owner's ongoing replacement for the withdrawn independent review, or remove it, per SC-008 (unrequested)
+- [ ] T166 Record the Suggest link in every page's header (`.nav-suggest` in `discovery/src/netc/site/templates/base.html`) alongside the footer link the suggest-form tasks specify, or remove it, per FR-020 (unrequested)
