@@ -73,9 +73,9 @@
       "result: Airlines Serving James M Cox Dayton International Airport - KDAY - DAY | Airport Guide.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://airportguide.com/airport/airlines/DAY"
   },
   {
@@ -184,6 +184,18 @@
   },
   {
     "evidence": [
+      "web search: Omaha cybersecurity user group",
+      "result: Co-Managed IT Services Omaha - Ascend Technology Group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://ascendtg.com/cybersecurity-services"
+  },
+  {
+    "evidence": [
       "web search: Omaha AI meetup",
       "result: AI O.NE"
     ],
@@ -232,9 +244,9 @@
       "result: What Airlines Flies Into Dayton Ohio - blog.entomologist.net"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://blog.entomologist.net/which-airlines-operate-flights-to-dayton-ohio.html"
   },
   {
@@ -294,6 +306,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://bsky.app/profile/nebraskajs.dev"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cloud user group",
+      "result: Top Lincoln, NE Cloud Companies 2026"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://builtin.com/companies/location/lincoln/type/cloud-companies"
   },
   {
     "evidence": [
@@ -487,6 +510,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://cybergl.com/nebraska"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cybersecurity meetup",
+      "result: Community Resources | Cybersecurity at UCCS"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://cybersecurity.uccs.edu/resources/community-members"
   },
   {
     "evidence": [
@@ -756,12 +790,13 @@
   {
     "evidence": [
       "web search: Lincoln tech conference",
-      "result: Dayton International Airport - Easy to and Through"
+      "result: Dayton International Airport - Easy to and Through",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://flydayton.com/"
   },
   {
@@ -888,6 +923,17 @@
     "reason": "relevant Nebraska tech events",
     "result": "added",
     "url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cybersecurity meetup",
+      "result: Bay Area Cyber Security MeetUp"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
+    "url": "https://infosecmap.com/group/bay-area-cyber-security-meetup"
   },
   {
     "evidence": [
@@ -1275,6 +1321,17 @@
   },
   {
     "evidence": [
+      "linked from https://nebraskajs.com/",
+      "link text: View All Events"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
+    "result": "needs_review",
+    "url": "https://lu.ma/nebraskajs/"
+  },
+  {
+    "evidence": [
       "web search: Nebraska cloud meetup",
       "result: Boston Alt Cloud Meetup (May 2026)"
     ],
@@ -1283,6 +1340,28 @@
     "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
     "result": "needs_review",
     "url": "https://luma.com/6iz5in7x/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln data meetup",
+      "result: Data Engineer Things NYC Meetup · Events Calendar"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
+    "result": "needs_review",
+    "url": "https://luma.com/det-meetup-nyc/"
+  },
+  {
+    "evidence": [
+      "linked from https://nebraskajs.com/",
+      "link text: Register on Luma"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
+    "result": "needs_review",
+    "url": "https://luma.com/nebras-ohnz/"
   },
   {
     "evidence": [
@@ -1310,12 +1389,13 @@
   {
     "evidence": [
       "web search: Nebraska tech conference",
-      "result: MarkeTech Conference Home Page - MarkeTech Conference"
+      "result: MarkeTech Conference Home Page - MarkeTech Conference",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://marketechconference.com/"
   },
   {
@@ -1897,12 +1977,13 @@
   {
     "evidence": [
       "web search: Nebraska data meetup",
-      "result: Data for Social Good Mission-Driven Meetup - Roux Institute"
+      "result: Data for Social Good Mission-Driven Meetup - Roux Institute",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://roux.northeastern.edu/event/data-for-social-good-mission-driven-meetup"
   },
   {
@@ -2001,9 +2082,9 @@
       "result: Asian Games 2026 India Schedule: Date, Venue, Fixtures, Squads, Timetable - NDTV India"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://sports.ndtv.com/asian-games-2026/india-at-asian-games/schedule"
   },
   {
@@ -2320,6 +2401,17 @@
   },
   {
     "evidence": [
+      "web search: Lincoln cloud user group",
+      "result: Welcoming Week - Lincoln & Lancaster County Welcoming Plan"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "sample events could not be read: ContentTypeNotAllowedError",
+    "result": "needs_review",
+    "url": "https://welcominglnk.org/welcoming-week"
+  },
+  {
+    "evidence": [
       "web search: Omaha programming user group",
       "result: OmahaPythonUserGroup - Python Wiki"
     ],
@@ -2365,12 +2457,13 @@
   {
     "evidence": [
       "web search: Lincoln tech conference",
-      "result: Flights from Dayton (DAY) — 127 Routes on 20 Airlines"
+      "result: Flights from Dayton (DAY) — 127 Routes on 20 Airlines",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.airportoverview.com/routes/DAY"
   },
   {
@@ -2401,9 +2494,9 @@
       "result: Matches"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.bcci.tv/matches"
   },
   {
@@ -2500,9 +2593,9 @@
       "result: Cloud Foundry Events – Meetups, Webinars, Summits & More"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.cloudfoundry.org/events"
   },
   {
@@ -2544,9 +2637,9 @@
       "result: Cricket Schedule - International, domestic and T20 matches - Cricbuzz | Cricbuzz.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://www.cricbuzz.com/cricket-schedule/upcoming-series/all"
   },
   {
@@ -2555,9 +2648,9 @@
       "result: India Cricket Team Schedule, Results & Timetable"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://www.cricinfo.com/team/india-6/match-schedule-fixtures-and-results"
   },
   {
@@ -2589,9 +2682,9 @@
       "result: Meet Ups — Data in the D"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "robots.txt disallows reading it",
+    "result": "blocked_by_terms",
     "url": "https://www.datainthed.org/meet-ups"
   },
   {
@@ -2600,20 +2693,21 @@
       "result: DataScienceWeekly"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T01:24:40Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.datascienceweekly.org/data-science-resources/data-science-meetups"
   },
   {
     "evidence": [
       "web search: Omaha cloud meetup",
-      "result: Datum Events – Meetups, Conferences & Community Gatherings"
+      "result: Datum Events – Meetups, Conferences & Community Gatherings",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.datum.net/events"
   },
   {
@@ -2656,9 +2750,9 @@
       "result: Direct flights from Dayton - 14 destinations - DAY, USA - Directflights.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://www.directflights.com/DAY"
   },
   {
@@ -2713,9 +2807,9 @@
       "result: India Cricket Team Scores, Matches, Schedule, News, Players | ESPN.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.espn.com/cricket/team/_/id/6/india"
   },
   {
@@ -2746,9 +2840,9 @@
       "result: Cybersecurity Events | Meetups | Evolve Security"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.evolvesecurity.com/events"
   },
   {
@@ -2757,9 +2851,9 @@
       "result: Direct (non-stop) flights from James M Cox Dayton (DAY) - FlightsFrom.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://www.flightsfrom.com/DAY"
   },
   {
@@ -2791,20 +2885,21 @@
       "result: Flathead AI Meetup: Meet the 24/7 AI Receptionist - Flathead Valley Community College"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T01:24:40Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "robots.txt disallows reading it",
+    "result": "blocked_by_terms",
     "url": "https://www.fvcc.edu/event/flathead-ai-meetup-meet-the-24-7-ai-receptionist"
   },
   {
     "evidence": [
       "web search: Lincoln cybersecurity meetup",
-      "result: Glow Events & Webinars | Cybersecurity Meetups"
+      "result: Glow Events & Webinars | Cybersecurity Meetups",
+      "sample: 0 of 8 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "its upcoming events are outside Nebraska",
+    "result": "rejected",
     "url": "https://www.glow.io/events"
   },
   {
@@ -2836,9 +2931,9 @@
       "result: Heartland Women's Network"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "sample events could not be read: ContentTypeNotAllowedError",
+    "result": "needs_review",
     "url": "https://www.heartlandwomensnetwork.com/"
   },
   {
@@ -2847,9 +2942,9 @@
       "result: Airlines at James M Cox Dayton International Airport | iFly.com"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
     "url": "https://www.ifly.com/airports/james-m-cox-dayton-international-airport/airlines-served"
   },
   {
@@ -2866,12 +2961,13 @@
   {
     "evidence": [
       "web search: Lincoln data meetup",
-      "result: Data Archives"
+      "result: Data Archives",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.iomeetups.com/topic/data"
   },
   {
@@ -2937,9 +3033,9 @@
       "result: Cybersecurity Summit and Tabletop Exercise Events"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.lblesd.gov/cybersecurity-summit-and-tabletop-exercise-events"
   },
   {
@@ -2959,9 +3055,9 @@
       "result: Technology Department"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.lincnet.org/technology"
   },
   {
@@ -3172,10 +3268,21 @@
       "result: Guiding Principles of AI Use in LPS | Computing Services"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-22T01:24:40Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.lps.org/o/cs/page/guiding-principles-of-ai-use-in-lps"
+  },
+  {
+    "evidence": [
+      "listed for the known group Agile for Defense",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/agile-for-defense/"
   },
   {
     "evidence": [
@@ -3200,6 +3307,18 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://www.meetup.com/application-development-in-the-cloud-meetup/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln AI user group",
+      "result: Boston AI/ML User Group | Meetup",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/boston-ai-ml-user-group/"
   },
   {
     "evidence": [
@@ -3239,6 +3358,18 @@
   },
   {
     "evidence": [
+      "web search: Lincoln cloud meetup",
+      "result: Cloud Native + Kubernetes Edinburgh | Meetup",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/cloud-native-kubernetes-edinburgh/"
+  },
+  {
+    "evidence": [
       "web search: Nebraska cloud meetup",
       "result: Cloud Native PDX",
       "sample: 0 of 0 upcoming events relevant (2026-10-24)"
@@ -3260,6 +3391,18 @@
     "reason": "its events need a person to judge",
     "result": "needs_review",
     "url": "https://www.meetup.com/cloudnh/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cybersecurity meetup",
+      "result: Cover6 Community | Meetup",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/cover6community/"
   },
   {
     "evidence": [
@@ -3331,6 +3474,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://www.meetup.com/en-au/"
+  },
+  {
+    "evidence": [
+      "web search: Omaha AI meetup",
+      "result: AI Omaha"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "not an event source: the platform's own home page",
+    "result": "rejected",
+    "url": "https://www.meetup.com/es-es/"
   },
   {
     "evidence": [
@@ -3465,6 +3619,17 @@
   },
   {
     "evidence": [
+      "listed for the known group IoT Midlands",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/meetup-group-hdqqvvht/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cloud user group",
       "result: Cloud Security Insiders | Meetup"
     ],
@@ -3495,6 +3660,18 @@
     "reason": "sample events could not be read: BudgetExceededError",
     "result": "needs_review",
     "url": "https://www.meetup.com/microsoft-data-platform-continuity-virtual-group/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln cybersecurity user group",
+      "result: Microsoft Security User Group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/microsoft-security-user-group/"
   },
   {
     "evidence": [
@@ -3557,6 +3734,17 @@
   },
   {
     "evidence": [
+      "listed for the known group Nebraska JS",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/nebraskajs/"
+  },
+  {
+    "evidence": [
       "web search: Omaha networking meetup",
       "result: Network After Work - Omaha Networking Events | Meetup",
       "sample: 0 of 0 upcoming events relevant (2026-10-23)"
@@ -3569,6 +3757,18 @@
   },
   {
     "evidence": [
+      "web search: Lincoln data meetup",
+      "result: NYC Data Science",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/nyc-data-science/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln AI user group",
       "result: New York AI User Group | Meetup"
     ],
@@ -3577,6 +3777,28 @@
     "reason": "sample events could not be read: BudgetExceededError",
     "result": "needs_review",
     "url": "https://www.meetup.com/nycaiu/"
+  },
+  {
+    "evidence": [
+      "listed for the known group Omaha Amazon Web Services",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-amazon-web-services-meetup/"
+  },
+  {
+    "evidence": [
+      "listed for the known group Data Science and Big Data Omaha",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-big-data-meetup-midwest-big-data-hub/"
   },
   {
     "evidence": [
@@ -3652,6 +3874,30 @@
   },
   {
     "evidence": [
+      "web search: Omaha data meetup",
+      "result: Omaha Women in Machine Learning & Data Science",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-women-in-machine-learning-and-data-science/"
+  },
+  {
+    "evidence": [
+      "web search: Omaha IT meetup",
+      "result: Young Omaha Millennials (20's and 30's)",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omahafun/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cloud meetup",
       "result: San Francisco Cloud Native & Kubernetes Meetup | Meetup"
     ],
@@ -3705,6 +3951,18 @@
     "reason": "relevant Nebraska tech events",
     "result": "added",
     "url": "https://www.meetup.com/the-claude-code-developers-night-out/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln networking user group",
+      "result: TX Networking User Group, Central",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/tx-nug-central/"
   },
   {
     "evidence": [
@@ -3767,9 +4025,9 @@
       "result: NCW Cyber Meetup - How to Plan and Execute ..."
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "sample events could not be read: ContentTypeNotAllowedError",
+    "result": "needs_review",
     "url": "https://www.ncesd.org/event/ncw-cyber-meetup-how-to-plan-and-execute-a-cybersecurity-program"
   },
   {
@@ -3789,9 +4047,9 @@
       "result: NDN-CR"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-23T01:35:09Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.ndncr.com/"
   },
   {
@@ -3946,9 +4204,9 @@
       "result: DevOps User Groups and Meetups | Join the Conversation"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.releaseteam.com/devops-user-groups"
   },
   {
@@ -3991,9 +4249,9 @@
       "result: Welcome to the Sioux Falls Developer's Group!"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.sfdevs.com/"
   },
   {
@@ -4010,13 +4268,26 @@
   {
     "evidence": [
       "web search: Omaha cloud user group",
-      "result: India ODI Schedule Till 2027 World Cup – Full Match List, Dates & Venues"
+      "result: India ODI Schedule Till 2027 World Cup – Full Match List, Dates & Venues",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.sportpreferred.com/cricket/india-odi-schedule-till-2027/4131"
+  },
+  {
+    "evidence": [
+      "web search: Omaha programming meetup",
+      "result: Senior Meetups Omaha",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.stitch.net/st-senior-meetups-omaha"
   },
   {
     "evidence": [
@@ -4036,9 +4307,9 @@
       "result: Cybersecurity Meetup"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.theatlis.org/events/cybersecurity-meetup9-22-2026"
   },
   {
@@ -4055,12 +4326,13 @@
   {
     "evidence": [
       "web search: Omaha cloud user group",
-      "result: India's Schedule At Asian Games 2026 September 23: Full List Of Events, Timing, Medal Action | Times Now"
+      "result: India's Schedule At Asian Games 2026 September 23: Full List Of Events, Timing, Medal Action | Times Now",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-24T22:06:27Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.timesnownews.com/sports/indias-schedule-at-asian-games-2026-september-23-full-list-of-events-timing-medal-action-article-156204058"
   },
   {
@@ -4113,9 +4385,9 @@
       "result: AI Weekly Meetup | UW-Stout Polytechnic"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-23T00:12:04Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
     "url": "https://www.uwstout.edu/ai-weekly-meetup"
   },
   {
@@ -4133,12 +4405,13 @@
   {
     "evidence": [
       "web search: Omaha networking meetup",
-      "result: Networking Events - West O Chamber"
+      "result: Networking Events - West O Chamber",
+      "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
     "found_via": "web_search",
-    "last_evaluated": "2026-10-21T02:04:10Z",
-    "reason": "awaiting evaluation",
-    "result": "pending",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
     "url": "https://www.westochamber.org/networking-events"
   },
   {
@@ -4163,6 +4436,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://www.worldatlas.com/maps/united-states/nebraska"
+  },
+  {
+    "evidence": [
+      "web search: Omaha cybersecurity meetup",
+      "result: WOWT | Nebraska Breaking News, Weather, Sports | Omaha, NE"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-10-25T13:16:02Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.wowt.com/"
   },
   {
     "evidence": [
