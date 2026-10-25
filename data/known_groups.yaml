@@ -10,6 +10,16 @@
   source_ids:
   - src_nenug
   status: active
+- aliases:
+  - AGILE FOR DEFENSE
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Agile-for-Defense/
+  name: Agile for Defense
+  source_ids: []
+  status: active
 - aliases: []
   area: omaha
   cadence_days: null
@@ -41,6 +51,17 @@
   name: AIM Institute
   source_ids: []
   status: active
+- aliases:
+  - BEER && CODE
+  - Beer and Code
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.beerandcode.org/
+  name: Beer && Code
+  source_ids: []
+  status: active
 - aliases: []
   area: omaha
   cadence_days: null
@@ -65,6 +86,27 @@
   name: Creighton University
   source_ids: []
   status: active
+- aliases:
+  - DATA SCIENCE AND BIG DATA OMAHA
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Big-Data-Meetup-Midwest-Big-Data-Hub/
+  name: Data Science and Big Data Omaha
+  source_ids: []
+  status: active
+- aliases:
+  - DEFCON 402/OMAHA HACKERS
+  - DC402
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://dc402.org/
+  name: DEF CON 402 (Omaha Hackers)
+  source_ids: []
+  status: active
 - aliases: []
   area: lincoln
   cadence_days: null
@@ -85,6 +127,15 @@
   name: Drupal Nebraska
   source_ids:
   - src_drupal-nebraska
+  status: active
+- aliases:
+  - ENTERPRISE ARCHITECTURE COMMUNITY
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Enterprise Architecture Community
+  source_ids: []
   status: active
 - aliases: []
   area: omaha
@@ -113,6 +164,17 @@
   name: GCP Meetup - Omaha
   source_ids: []
   status: active
+- aliases:
+  - OMAHA GOOGLE DEVELOPER GROUP (ANDROID)
+  - GDG Omaha
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/GDGOmaha/
+  name: Google Developer Group Omaha
+  source_ids: []
+  status: active
 - aliases: []
   area: null
   cadence_days: null
@@ -127,6 +189,16 @@
   last_searched: '2026-10-21T02:04:10Z'
   links: []
   name: Greater Omaha Chamber
+  source_ids: []
+  status: active
+- aliases:
+  - HEARTLAND ORACLE USER GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://heartlandoug.org/
+  name: Heartland Oracle User Group
   source_ids: []
   status: active
 - aliases: []
@@ -146,6 +218,16 @@
   name: INTERFACE Omaha
   source_ids:
   - src_infosec-conferences-com
+  status: active
+- aliases:
+  - IoT MIDLANDS
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/meetup-group-hDqQvvhT/
+  name: IoT Midlands
+  source_ids: []
   status: active
 - aliases:
   - ISACA Omaha Chapter
@@ -202,6 +284,16 @@
   source_ids:
   - src_allevents-in
   status: active
+- aliases:
+  - NEBRASKA CERT
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.nebraskacert.com/
+  name: Nebraska CERT
+  source_ids: []
+  status: active
 - aliases: []
   area: lincoln
   cadence_days: null
@@ -245,6 +337,18 @@
   name: Nebraska Innovation Campus
   source_ids:
   - src_unl-nic
+  status: active
+- aliases:
+  - NEBRASKA JS
+  - NebraskaJS
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://nebraskajs.com/
+  - https://www.meetup.com/nebraskajs/
+  name: Nebraska JS
+  source_ids: []
   status: active
 - aliases: []
   area: omaha
@@ -294,6 +398,35 @@
   source_ids:
   - src_netasite-org
   status: active
+- aliases:
+  - OMAHA AMAZON WEB SERVICES
+  - Omaha AWS
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Amazon-Web-Services-Meetup/
+  name: Omaha Amazon Web Services
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha Apache Kafka Meetup
+  source_ids: []
+  status: active
+- aliases:
+  - VMUG - OMAHA AREA VMWARE USER GROUP
+  - Omaha VMUG
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha Area VMware User Group
+  source_ids: []
+  status: active
 - aliases: []
   area: omaha
   cadence_days: null
@@ -304,6 +437,98 @@
   source_ids:
   - src_omaha-azure
   status: active
+- aliases:
+  - OMAHA CODING WOMEN
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://omahacodingwomen.com/
+  name: Omaha Coding Women
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA COFFEE AND CODE
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/coffeeandcode/
+  name: Omaha Coffee and Code
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA DATA SCIENCE
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha Data Science
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA DEVOPS
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-DevOps-Meetup/
+  name: Omaha DevOps
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA EMERGING DEVELOPERS
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/omaha-emerging-developers/
+  name: Omaha Emerging Developers
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA GAME DEVELOPERS ASSOCIATION
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://omahagamedev.com/
+  name: Omaha Game Developers Association
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA HASHICORP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-HashiCorp-User-Group/
+  name: Omaha HashiCorp User Group
+  source_ids: []
+  status: active
+- aliases:
+  - OJUG - OMAHA JAVA USER GROUP
+  - OJUG
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://ojug.org/
+  - https://www.meetup.com/omahajava/
+  name: Omaha Java User Group
+  source_ids: []
+  status: active
+- aliases:
+  - OLUG - OMAHA LINUX USER GROUP
+  - OLUG
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.olug.org/
+  name: Omaha Linux User Group
+  source_ids: []
+  status: active
 - aliases: []
   area: omaha
   cadence_days: null
@@ -311,6 +536,46 @@
   links:
   - https://omahamakergroup.org/
   name: Omaha Maker Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA MICROSOFT TECHNOLOGY GROUP/.NET
+  - Omaha MTG
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://omahamtg.com/
+  name: Omaha Microsoft Technology Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA MOBILE GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha Mobile Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA POWERSHELL USER GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha PowerShell User Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA PYTHON USERS GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.omahapython.org/
+  - https://www.meetup.com/Omahas-Python-Users-Group/
+  name: Omaha Python Users Group
   source_ids: []
   status: active
 - aliases:
@@ -323,6 +588,114 @@
   name: Omaha Red Hat User Group
   source_ids:
   - src_omaha-rhug
+  status: active
+- aliases:
+  - OMAHA RUBY & OPEN SOURCE MEETUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Ruby-Meetup/
+  name: Omaha Ruby & Open Source Meetup
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA SOFTWARE DEVELOPMENT PUBLIC SPEAKING MEETUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Software-Development-Public-Speaking-Meetup/
+  name: Omaha Software Development Public Speaking Meetup
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA SOFTWARE TESTING & QA
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Software-Testing-and-QA/
+  name: Omaha Software Testing & QA
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA SPRING USERS GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Spring-Users-Group/
+  name: Omaha Spring Users Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA SQL/BI USER GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.omahasql.com/
+  name: Omaha SQL/BI User Group
+  source_ids: []
+  status: active
+- aliases: []
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha STEM Ecosystem
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA TECHCONNECT
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://omahatechconnect.org/
+  name: Omaha TechConnect
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA UNITY 3D
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-Unity-3D/
+  name: Omaha Unity 3D
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA UX GROUP
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/Omaha-UX-Group/
+  name: Omaha UX Group
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA WINE && CODE
+  - Wine and Code
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/wine-and-code/
+  name: Omaha Wine && Code
+  source_ids: []
+  status: active
+- aliases:
+  - OMAHA WOMEN IN MACHINE LEARNING
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Omaha Women in Machine Learning
+  source_ids: []
   status: active
 - aliases:
   - Omaha Web Developers
@@ -353,12 +726,32 @@
   - src_prairie-python
   status: active
 - aliases:
+  - PROJECT 18
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links: []
+  name: Project 18
+  source_ids: []
+  status: active
+- aliases:
   - Omaha Salesforce Developers
   area: omaha
   cadence_days: null
   last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Salesforce Developer Group, Omaha
+  source_ids: []
+  status: active
+- aliases:
+  - SIDE PROJECTS CLUB
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://sideprojectsclub.com/
+  - https://www.meetup.com/Side-Projects-Club/
+  name: Side Projects Club
   source_ids: []
   status: active
 - aliases: []
@@ -413,6 +806,16 @@
   - src_unl-computing
   status: active
 - aliases:
+  - UX HAPPY HOUR BOOK CLUB
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://www.meetup.com/UX-Happy-Hour-Book-Club/
+  name: UX Happy Hour Book Club
+  source_ids: []
+  status: active
+- aliases:
   - Women in CyberSecurity Nebraska
   area: null
   cadence_days: null
@@ -428,5 +831,17 @@
   last_searched: '2026-10-22T00:34:52Z'
   links: []
   name: Women in Technology of the Heartland
+  source_ids: []
+  status: active
+- aliases:
+  - WP OMAHA (WORDPRESS)
+  - WordPress Omaha
+  area: omaha
+  cadence_days: null
+  last_searched: null
+  links:
+  - https://wpomaha.org/
+  - https://www.meetup.com/WP-Omaha/
+  name: WP Omaha
   source_ids: []
   status: active
