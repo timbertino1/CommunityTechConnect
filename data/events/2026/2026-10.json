@@ -195,13 +195,13 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-23T17:40:38Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "a499113c0cfe99b3b2630a1557661c25a37212dd073c551abdf5fca59c7c0a10",
         "external_id": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/",
-        "last_seen": "2026-10-23T17:40:38Z",
-        "missing_runs": 2,
+        "last_seen": "2026-10-25T14:42:52Z",
+        "missing_runs": 0,
         "source_id": "src_the-claude-code-developers-night-out",
         "url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/"
       }
@@ -221,7 +221,7 @@
     "slug": "lincoln-unlock-ai-productivity-with-claude-code-2026-10-24",
     "source_tz": "America/Chicago",
     "start": "2026-10-24T13:50:00Z",
-    "status": "unverified",
+    "status": "scheduled",
     "summary": "We are hosting a casual evening for local developers interested in getting hands-on with Claude Code. If you have been curious about how to integrate AI di",
     "title": "Lincoln Unlock AI Productivity with Claude Code",
     "tz_assumed": true,
@@ -330,13 +330,13 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-23T17:40:38Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "ca99962ff57ba1bd52829d19c47369ad4c9e6b7ed731ccefa1c0d580a0364f2e",
         "external_id": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/",
-        "last_seen": "2026-10-23T17:40:38Z",
-        "missing_runs": 2,
+        "last_seen": "2026-10-25T14:42:52Z",
+        "missing_runs": 1,
         "source_id": "src_the-claude-code-developers-night-out",
         "url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/"
       }
@@ -356,7 +356,7 @@
     "slug": "lincoln-automate-your-workflow-with-claude-2026-10-25",
     "source_tz": "America/Chicago",
     "start": "2026-10-25T23:50:00Z",
-    "status": "unverified",
+    "status": "scheduled",
     "summary": "Join us for a hands-on evening focused on practical ways to integrate Claude into your daily coding workflow. This session is designed for local developers",
     "title": "Lincoln Automate Your Workflow with Claude",
     "tz_assumed": true,
@@ -375,12 +375,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-24T14:11:30Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "d0781a509fa113686cbff2908d9a5bfacaa02100217413991ccb8143f3855683",
         "external_id": "10000033-1792972800-1793145599@www.ippathways.com",
-        "last_seen": "2026-10-24T14:11:30Z",
+        "last_seen": "2026-10-25T14:42:52Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/ohio-cybershare-summit/"
@@ -465,12 +465,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-24T14:11:30Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "352d7976656ea3645bf386ab9f7eb4f4d4a77a02acb07388975faa2a02af2475",
         "external_id": "10000021-1793088000-1793120400@www.ippathways.com",
-        "last_seen": "2026-10-24T14:11:30Z",
+        "last_seen": "2026-10-25T14:42:52Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/iba-technology-conference-2026/"
@@ -510,12 +510,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-24T14:11:30Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "8c008340dbe3621b9cf4e6dcd0a15220323cfb5ba73c87ea09b6e559ec0a36aa",
         "external_id": "10711-1793088000-1793116800@netasite.org",
-        "last_seen": "2026-10-24T14:11:30Z",
+        "last_seen": "2026-10-25T14:42:52Z",
         "missing_runs": 1,
         "source_id": "src_netasite-org",
         "url": "https://netasite.org/event/nefetc/"
@@ -689,12 +689,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-24T14:11:30Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "3f98e6b8c9e940715a0cb57693d48b60eea5dbe50ea14fb642e00642a5026d2f",
         "external_id": "https://www.meetup.com/lincoln-code/events/317024050/",
-        "last_seen": "2026-10-24T14:11:30Z",
+        "last_seen": "2026-10-25T14:42:52Z",
         "missing_runs": 1,
         "source_id": "src_lincoln-code",
         "url": "https://www.meetup.com/lincoln-code/events/317024050/"
@@ -824,12 +824,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-24T14:11:30Z",
+    "last_verified": "2026-10-25T14:42:52Z",
     "listings": [
       {
         "content_hash": "b3741f1362e5c877a880eff2e4f8e4165a9be31d7cf8d7a8e68a5cbb24598f0b",
         "external_id": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
-        "last_seen": "2026-10-24T14:11:30Z",
+        "last_seen": "2026-10-25T14:42:52Z",
         "missing_runs": 1,
         "source_id": "src_omaha-azure",
         "url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/"
