@@ -2081,9 +2081,9 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <p class="eyebrow">Phase 10 &middot; Launch prep &middot; Oct 24&ndash;25, 2026</p>
       <h2>Checking it all before telling anyone</h2>
     </div>
-    <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review by me and then by someone else, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
+    <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
     <div class="stats">
-      <div class="stat"><span class="n">11<small> of 15</small></span><p>Phase 10 tasks done. The other four wait on a reviewer, two weeks of costs, or launch day.</p></div>
+      <div class="stat"><span class="n">12<small> of 15</small></span><p>Phase 10 tasks settled. The other three wait on two weeks of costs, or launch day.</p></div>
       <div class="stat"><span class="n">171<small> of 171</small></span><p>Files of the live site rebuilt byte for byte from a fresh copy of the repository.</p></div>
       <div class="stat"><span class="n">1.83<small> s</small></span><p>Until the main content shows on a simulated slow phone, from 1.97 s, after trimming the fonts.</p></div>
     </div>
@@ -2095,7 +2095,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Routines</b><small>A monthly metrics log, a quarterly coverage check, a watchdog for switched-off schedules, and the full runbook. PRs #114&ndash;#117.</small></div><span class="ids">T143&ndash;T146</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A person with a screen reader</b><small>I went through every kind of page with Windows Narrator, and a script tabbed through them by keyboard and at 200% zoom. Nothing to fix. PR #125.</small></div><span class="ids">T137</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Workers deploy themselves</b><small>A merged change to either Worker is tested and deployed by GitHub, with a token that can do nothing else. No more deploys from my laptop. PR #119.</small></div><span class="ids">T147&ndash;T148</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>An independent security review</b><small>Someone who didn't build it reviews it. Launch waits for this.</small></div><span class="ids">T140</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A second security review, dropped</b><small>The plan called for someone else to review it too. I decided against it: the site has no accounts, logins or personal data, and its only input from strangers is the suggest form. My own review and the automated checks stand.</small></div><span class="ids">T140</span></li>
       <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Still to come</b><small>The cost check after two weeks of live runs, the final end-to-end run, and netechconnect.com.</small></div><span class="ids">3 tasks</span></li>
     </ul>
   </section>
@@ -2136,7 +2136,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <textarea id="post-phase-10">NETechConnect build log, Phase 10: every feature is built, so now I'm checking it all before launch.
 Accessibility: automated checks on every kind of page, at phone and desktop widths, light and dark. One bug: on a phone, the About page scrolled sideways because a GitHub link was one long unbreakable word.
 Speed: the calendar jumped as it loaded (fixed), and trimming the fonts took the main content on a slow phone from 1.97 to 1.83 seconds. Same look.
-Security: my own review found nothing critical or high, and one medium I fixed the same day. Next, someone who didn't build it reviews it.
+Security: my own review found nothing critical or high, and one medium I fixed the same day. No accounts, no logins, no personal data: that review and the automated checks are enough for a site like this.
 Backup: a fresh copy of the repository rebuilt the live site byte for byte, all 171 files.
 And a person with a screen reader went through every kind of page. Nothing to fix.
 Meanwhile, the weekly hunt for new groups got smarter: 41 Omaha groups from TechOmaha's list, a fairer budget for Meetup, and search results that must name a Nebraska place. (One search for "Omaha cloud user group" came back with cricket schedules.)
