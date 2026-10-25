@@ -349,7 +349,7 @@ automatically.
 - [X] T146 Update `README.md` and `docs/operations.md` with the final runbook: schedules, secrets inventory (names only), how to rotate each secret, and how to pause discovery.
 - [X] T147 [OWNER] Workers deploy token: Cloudflare **My Profile → API Tokens → Create Token** with only *Account → Workers Scripts → Edit* and *Account → Workers KV Storage → Read*; add it as `CLOUDFLARE_WORKERS_TOKEN` in the `production` Environment.
 - [X] T148 Create `.github/workflows/deploy-workers.yml`: on `push` to `main` with `paths: ["workers/**"]` plus `workflow_dispatch`; `environment: production`; `permissions: contents: read`; runs `npm ci`, `tsc --noEmit`, `vitest run`, then `wrangler deploy --env suggest` and `wrangler deploy --env inbox` using `CLOUDFLARE_WORKERS_TOKEN`; SHA-pinned actions; document it in `docs/operations.md`.
-- [ ] T149 Run every quickstart.md scenario (1–7) plus the security and accessibility validations end to end, and record the results in `docs/checkpoints/final.md`.
+- [X] T149 Run every quickstart.md scenario (1–7) plus the security and accessibility validations end to end, and record the results in `docs/checkpoints/final.md`. *Done (Oct 25, 2026): every scenario and check passed; two quickstart wordings corrected.*
 
 ---
 
