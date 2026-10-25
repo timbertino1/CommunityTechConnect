@@ -12,7 +12,7 @@ bookmarked links (FR-038) must keep working.
 | `/calendar/<YYYY>/<MM>/` | Month view; `/calendar/` redirects to the current month (FR-033) | Yes |
 | `/calendar/<YYYY>/week/<WW>/` | ISO week view | Yes |
 | `/events/<slug>/` | Event detail: essentials + **primary link to original page** (FR-024, FR-025) | Yes |
-| `/suggest/` | Source suggestion form (FR-020) — posts to the Worker | Needs JS for Turnstile |
+| `/suggest/` | Source suggestion form (FR-020) — posts to the Worker. Linked from every page's header ("Suggest a group", shortened to "Suggest" beside the name on phones; owner request, 2026-10-24) and footer, when the Worker is configured | Needs JS for Turnstile |
 | `/about/` | About, bot identity/contact for site owners, how events are found, privacy note | Yes |
 
 Every event card and detail page links to `original_url` with visible text such as

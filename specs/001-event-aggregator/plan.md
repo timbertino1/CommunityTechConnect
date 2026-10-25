@@ -86,6 +86,12 @@ Complexity Tracking, as Principle VII requires.
 | Admin actions | Account takeover; unauthorized approvals | Required 2FA, admin-only merge on review branches, `apply-review` verifies author/merger, full history |
 | Deployed site | Defacement via bad data | Data PRs gated by schema + CI; deploy only from `main` |
 
+**Ongoing review (added 2026-10-25, with SC-008's change):** the threats above are rechecked
+every quarter with the checklist in `docs/reviews/quarterly-security.md` (automated checks,
+changes since the last review, pins, the live site and Workers, GitHub settings, and the owner's
+Cloudflare and GitHub token dashboards). `netc health-issue` raises a `security-review` attention
+item in the first week of January, April, July and October (Central Time) and comments once.
+
 ## Project Structure
 
 ### Documentation (this feature)

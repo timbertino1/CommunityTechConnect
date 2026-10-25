@@ -468,7 +468,11 @@ enters the review queue; submit many suggestions rapidly and confirm they are ra
   threat summary, with the automated security checks) finds no critical or high-severity
   vulnerabilities, and no scripted content from any source can execute in visitors' browsers.
   *Changed 2026-10-25 by the owner: an independent review is no longer required. The site has
-  no user accounts, logins or personal data; its only public input is the suggest form.*
+  no user accounts, logins or personal data; its only public input is the suggest form. In
+  its place the owner asked for constant internal review: the automated security checks on
+  every change, a security pass by the builder on every code change, and a quarterly security
+  review (`docs/reviews/quarterly-security.md`) that the Discovery health issue asks for in the
+  first week of January, April, July and October.*
 - **SC-009**: An automated and manual accessibility audit of list and calendar views finds no
   WCAG 2.2 AA failures.
 - **SC-010**: Ongoing administration (reviewing held items and responding to failing sources)
