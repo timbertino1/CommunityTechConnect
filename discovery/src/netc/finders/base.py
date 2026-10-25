@@ -30,7 +30,7 @@ from netc.models import (
     Source,
 )
 from netc.pipeline.ai import Ai
-from netc.pipeline.places import match_place
+from netc.pipeline.places import PlaceMatch, match_place
 from netc.pipeline.sanitize import safe_url, to_plain_text
 from netc.search.base import BudgetedSearch, SearchResult
 
@@ -351,6 +351,11 @@ def lead_from_result(
     place = match_place(text, areas)
     if place.out_of_state and place.area is None:
         return None
+    if found_via == "web_search" and not _names_nebraska(place, text, url, areas):
+        # A topic x place query can still return pages about anything (cricket schedules for
+        # "Omaha cloud user group", Dayton flights for "Lincoln tech conference"). Gap checks
+        # are exempt: their queries name the group itself.
+        return None
     if host not in PLATFORMS and _ARTICLE.search(urlsplit(url).path):
         return make_mention(result.title, [url], channel="web_search")
     target = candidate_url(url)
@@ -359,6 +364,15 @@ def lead_from_result(
     return make_candidate(
         target, found_via=found_via, now=now, evidence=[evidence, f"result: {result.title}"]
     )
+
+
+def _names_nebraska(place: PlaceMatch, text: str, url: str, areas: AreaConfig) -> bool:
+    """The result's title, snippet or address names a Nebraska place."""
+    if place.area is not None or place.state == "NE" or "nebraska" in text.casefold():
+        return True
+    words = re.sub(r"[^A-Za-z]+", " ", urlsplit(url).netloc + " " + urlsplit(url).path)
+    found = match_place(words, areas)
+    return found.area is not None or "nebraska" in words.casefold()
 
 
 def merge_leads(

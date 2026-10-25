@@ -124,6 +124,52 @@ def test_results_that_name_another_state_are_skipped() -> None:
     )
 
 
+@pytest.mark.parametrize(
+    ("title", "url", "snippet"),
+    [
+        # Real results from the Oct 25 run: "Omaha cloud user group" and "Lincoln tech conference".
+        ("India Cricket Team Schedule, Results & Timetable",
+         "https://www.cricinfo.com/team/india-6/match-schedule-fixtures-and-results",
+         "Upcoming matches, series and fixtures."),
+        ("Dayton International Airport - Easy to and Through", "https://flydayton.com/",
+         "Nonstop flights to 14 destinations."),
+        ("Cloud Native Days", "https://news.example.com/2026/10/cloud-native-days",
+         "A conference for platform engineers."),
+    ],
+)  # fmt: skip
+def test_results_that_name_no_nebraska_place_are_skipped(
+    title: str, url: str, snippet: str
+) -> None:
+    assert lead(title, url, snippet) is None
+
+
+@pytest.mark.parametrize(
+    ("title", "url", "snippet"),
+    [
+        ("Data engineers meetup", "https://www.meetup.com/omaha-data-engineers/", ""),
+        ("Python Users Group", "https://pyugs.example.org/", "Monthly talks in Lincoln, NE."),
+        ("Heartland Rust Users", "https://rust.example.org/", "Rust meetups across Nebraska."),
+        ("Kearney Coders", "https://kearneycoders.example.org/", "Coffee and code."),
+    ],
+)  # fmt: skip
+def test_a_nebraska_place_in_the_title_snippet_or_address_is_enough(
+    title: str, url: str, snippet: str
+) -> None:
+    assert lead(title, url, snippet) is not None
+
+
+def test_gap_check_results_need_no_place(  # their queries name the group itself
+) -> None:
+    found = lead_from_result(
+        SearchResult("Heartland Rust Users", "https://rust.example.org/", "Monthly meetups."),
+        found_via="gap",
+        evidence="gap: Heartland Rust Users",
+        now=NOW,
+        areas=AREAS,
+    )
+    assert isinstance(found, CandidateSource)
+
+
 def test_news_articles_become_mentions_not_sources() -> None:
     found = lead(
         "Cyber Night at The Mill (News)",
