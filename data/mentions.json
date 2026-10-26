@@ -96,7 +96,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -134,7 +134,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Hackathon aims to create kinder, braver online world"
   },
   {
@@ -174,11 +174,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "How Nebraska’s business ecosystem is learning and leveraging AI - Silicon Prairie News"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -192,7 +192,7 @@
     "title": "Top 18 Mobile App Development Companies in Lincoln ..."
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -218,7 +218,7 @@
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -246,7 +246,7 @@
     "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -302,7 +302,7 @@
     "title": "Nucamp"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -330,7 +330,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -342,7 +342,7 @@
     "title": "In ‘rug pull,’ DED delayed new BIA contracts for months and left startups with few answers"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "news",
     "date_hint": "Thu, Oct 29",
     "event_id": null,
@@ -368,7 +368,7 @@
     "title": "Cyber Roadmap: 2025 and beyond - Lincoln International LLC"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,

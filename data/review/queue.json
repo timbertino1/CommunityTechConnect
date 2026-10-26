@@ -574,5 +574,14 @@
     "kind": "event",
     "reason": "needs review: no tech keywords",
     "ref": "evt_4ed98769a272"
+  },
+  {
+    "created": "2026-10-26T18:31:22Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_8430a99d0242",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: no upcoming events to judge it by",
+    "ref": "https://theozcon.com/"
   }
 ]
