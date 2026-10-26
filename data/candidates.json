@@ -274,6 +274,17 @@
   },
   {
     "evidence": [
+      "linked from https://www.omahasql.com/",
+      "link text: Careers"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://bndspn.com/join-meetup"
+  },
+  {
+    "evidence": [
       "web search: Lincoln IT user group",
       "result: Lincoln .NET User Group–On the Road with Prism",
       "sample: 0 of 0 upcoming events relevant (2026-10-22)"
@@ -2250,6 +2261,17 @@
   },
   {
     "evidence": [
+      "suggested by a visitor",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "suggestion",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://theozcon.com/"
+  },
+  {
+    "evidence": [
       "web search: Omaha data meetup",
       "result: 25 Best & Fun Things To Do In Omaha (NE) - The Tourist Checklist",
       "sample: 0 of 0 upcoming events relevant (2026-10-24)"
@@ -3394,6 +3416,17 @@
   },
   {
     "evidence": [
+      "listed for the known group Omaha Coffee and Code",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/coffeeandcode/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cybersecurity meetup",
       "result: Cover6 Community | Meetup",
       "sample: 0 of 0 upcoming events relevant (2026-10-25)"
@@ -3571,6 +3604,17 @@
   },
   {
     "evidence": [
+      "linked from https://www.omahasql.com/",
+      "link text: License attribution"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "sample events could not be read: ContentTypeNotAllowedError",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/license-attribution/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln AI meetup",
       "result: Lincoln AI",
       "sample: 0 of 0 upcoming events relevant (2026-10-23)"
@@ -3627,6 +3671,18 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://www.meetup.com/meetup-group-hdqqvvht/"
+  },
+  {
+    "evidence": [
+      "linked from https://www.omahasql.com/",
+      "link text: Meetup Pro",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/meetup-pro/"
   },
   {
     "evidence": [
@@ -3814,6 +3870,17 @@
   },
   {
     "evidence": [
+      "listed for the known group Omaha DevOps",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-devops-meetup/"
+  },
+  {
+    "evidence": [
       "linked from https://groups.drupal.org/nebraska",
       "link text: Omaha Drupal Meetup",
       "sample: 0 of 0 upcoming events relevant (2026-10-23)"
@@ -3826,6 +3893,17 @@
   },
   {
     "evidence": [
+      "listed for the known group Omaha Emerging Developers",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-emerging-developers/"
+  },
+  {
+    "evidence": [
       "web search: Omaha cybersecurity meetup",
       "result: Omaha Hackers",
       "sample: 0 of 0 upcoming events relevant (2026-10-21)"
@@ -3835,6 +3913,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://www.meetup.com/omaha-hackers/"
+  },
+  {
+    "evidence": [
+      "listed for the known group Omaha HashiCorp User Group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-hashicorp-user-group/"
   },
   {
     "evidence": [
@@ -3898,6 +3987,17 @@
   },
   {
     "evidence": [
+      "listed for the known group Omaha Java User Group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omahajava/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln cloud meetup",
       "result: San Francisco Cloud Native & Kubernetes Meetup | Meetup"
     ],
@@ -3909,6 +4009,18 @@
   },
   {
     "evidence": [
+      "linked from https://www.omahasql.com/",
+      "link text: Sitemap",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/sitemap/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln web development meetup",
       "result: Software and Web Development Mastermind"
     ],
@@ -3917,6 +4029,18 @@
     "reason": "sample events could not be read: BudgetExceededError",
     "result": "needs_review",
     "url": "https://www.meetup.com/software-and-web-development-mastermind/"
+  },
+  {
+    "evidence": [
+      "linked from https://www.omahasql.com/",
+      "link text: Start a new group",
+      "sample: 0 of 0 upcoming events relevant (2026-10-26)"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-10-26T18:31:22Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/start/"
   },
   {
     "evidence": [
