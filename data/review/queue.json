@@ -583,5 +583,14 @@
     "kind": "suggestion",
     "reason": "visitor suggestion: no upcoming events to judge it by",
     "ref": "https://theozcon.com/"
+  },
+  {
+    "created": "2026-10-27T16:08:27Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_f1a983740b89",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_7a10d3833910"
   }
 ]

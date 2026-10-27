@@ -375,12 +375,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-26T17:04:58Z",
+    "last_verified": "2026-10-27T16:08:27Z",
     "listings": [
       {
         "content_hash": "d0781a509fa113686cbff2908d9a5bfacaa02100217413991ccb8143f3855683",
         "external_id": "10000033-1792972800-1793145599@www.ippathways.com",
-        "last_seen": "2026-10-26T17:04:58Z",
+        "last_seen": "2026-10-27T16:08:27Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/ohio-cybershare-summit/"
@@ -465,12 +465,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-26T17:04:58Z",
+    "last_verified": "2026-10-27T16:08:27Z",
     "listings": [
       {
         "content_hash": "352d7976656ea3645bf386ab9f7eb4f4d4a77a02acb07388975faa2a02af2475",
         "external_id": "10000021-1793088000-1793120400@www.ippathways.com",
-        "last_seen": "2026-10-26T17:04:58Z",
+        "last_seen": "2026-10-27T16:08:27Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/iba-technology-conference-2026/"
@@ -510,12 +510,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-26T17:04:58Z",
+    "last_verified": "2026-10-27T16:08:27Z",
     "listings": [
       {
         "content_hash": "8c008340dbe3621b9cf4e6dcd0a15220323cfb5ba73c87ea09b6e559ec0a36aa",
         "external_id": "10711-1793088000-1793116800@netasite.org",
-        "last_seen": "2026-10-26T17:04:58Z",
+        "last_seen": "2026-10-27T16:08:27Z",
         "missing_runs": 1,
         "source_id": "src_netasite-org",
         "url": "https://netasite.org/event/nefetc/"
@@ -689,12 +689,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-26T17:04:58Z",
+    "last_verified": "2026-10-27T16:08:27Z",
     "listings": [
       {
         "content_hash": "3f98e6b8c9e940715a0cb57693d48b60eea5dbe50ea14fb642e00642a5026d2f",
         "external_id": "https://www.meetup.com/lincoln-code/events/317024050/",
-        "last_seen": "2026-10-26T17:04:58Z",
+        "last_seen": "2026-10-27T16:08:27Z",
         "missing_runs": 1,
         "source_id": "src_lincoln-code",
         "url": "https://www.meetup.com/lincoln-code/events/317024050/"
@@ -768,6 +768,53 @@
   },
   {
     "all_day": false,
+    "area": "other_ne",
+    "categories": [
+      "networking-infra",
+      "security",
+      "cloud-devops"
+    ],
+    "end": "2026-10-28T19:00:00Z",
+    "first_seen": "2026-10-27T16:08:27Z",
+    "id": "evt_7a10d3833910",
+    "inferred": [
+      "categories",
+      "area"
+    ],
+    "last_verified": "2026-10-27T16:08:27Z",
+    "listings": [
+      {
+        "content_hash": "bc564059103a8ad46e5db44629bc63e16a868b9f8f133b47bdaad2b9610d4124",
+        "external_id": "10000050-1793174400-1793199600@www.ippathways.com",
+        "last_seen": "2026-10-27T16:08:27Z",
+        "missing_runs": 1,
+        "source_id": "src_ippathways-com",
+        "url": "https://www.ippathways.com/event/oarnet-day-2026/"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": false,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": null,
+    "original_unavailable": false,
+    "original_url": "https://www.ippathways.com/event/oarnet-day-2026/",
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "vmware-carahsoft-oarnet-day-2026-10-28",
+    "source_tz": "America/New_York",
+    "start": "2026-10-28T12:00:00Z",
+    "status": "scheduled",
+    "summary": "IP Pathways is proud to sponsor the 2026 Ohio VMware & Carahsoft OARnet Day! This event brings together IT leaders from Ohio’s education, research, and public sector communities to explore the latest in VMware solutions. Stop by and connect with our team to learn how we help Ohio organizations modernize their infrastructure with cloud, virtualization, managed IT, and cybersecurity services. We look forward to seeing you there!",
+    "title": "VMware & Carahsoft OARnet Day",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "omaha",
     "categories": [
       "general-tech"
@@ -824,12 +871,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-26T17:04:58Z",
+    "last_verified": "2026-10-27T16:08:27Z",
     "listings": [
       {
         "content_hash": "b3741f1362e5c877a880eff2e4f8e4165a9be31d7cf8d7a8e68a5cbb24598f0b",
         "external_id": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
-        "last_seen": "2026-10-26T17:04:58Z",
+        "last_seen": "2026-10-27T16:08:27Z",
         "missing_runs": 1,
         "source_id": "src_omaha-azure",
         "url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/"
