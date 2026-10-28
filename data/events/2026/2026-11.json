@@ -103,12 +103,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "5bfe44e90de1872a33cfdb509035d39b5bc433663ee44be4dc58c20c5b1d891d",
         "external_id": "10000051-1793707200-1793709000@www.ippathways.com",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/the-2026-it-hardware-crunch-webinar/"
@@ -225,6 +225,51 @@
     "visibility": "shown"
   },
   {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "cloud-devops"
+    ],
+    "end": "2026-11-05T01:15:00Z",
+    "first_seen": "2026-10-23T15:34:41Z",
+    "id": "evt_37cbb870a38d",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-28T14:53:01Z",
+    "listings": [
+      {
+        "content_hash": "78e26e5e1528e5e67597f4939fc5764a89ac2d41e288f5693ece1c316b05076a",
+        "external_id": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
+        "last_seen": "2026-10-28T14:53:01Z",
+        "missing_runs": 1,
+        "source_id": "src_omaha-azure",
+        "url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/"
+      }
+    ],
+    "location": {
+      "address": "Farm Credit Services, 4949 S. 118th St., Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Farm Credit Services"
+    },
+    "organizer_id": "org_omaha-azure",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/omaha-azure-user-group/events/317100382/",
+    "review_state": "published",
+    "series_key": null,
+    "slug": "your-agent-works-on-your-laptop-now-what-2026-10-28",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-04T23:45:00Z",
+    "status": "scheduled",
+    "summary": "Evaluations, observability, cost control, and failure modes like tool loops, hallucinated tool calls, and runaway tokens. This one draws from real producti",
+    "title": "Your Agent Works on Your Laptop. Now What?",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
     "all_day": true,
     "area": "omaha",
     "categories": [
@@ -238,12 +283,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "51a0431b79751d486c60c3b5e29d448643b0edd2e99d81df2df6777a7a4140d4",
         "external_id": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_infosec-conferences-com",
         "url": "https://infosec-conferences.com/event/20261105-interface-omaha-2026/"
@@ -284,12 +329,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "a81cc1f219eb6027407b16cde06a7d63cc426ac7991f3d709a94ba0ddd20451e",
         "external_id": "10000048-1793867400-1793896200@www.ippathways.com",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/interface-omaha-2026/"
@@ -329,12 +374,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "d8756740266c405f186cd2808de0da51f1bfc4002f769667495e6f2e93f6ae76",
         "external_id": "https://www.meetup.com/ai_omaha/events/317053693/",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_ai-omaha",
         "url": "https://www.meetup.com/ai_omaha/events/317053693/"
@@ -677,6 +722,52 @@
   },
   {
     "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "software-dev",
+      "networking-infra"
+    ],
+    "end": "2026-11-11T01:00:00Z",
+    "first_seen": "2026-10-28T14:53:01Z",
+    "id": "evt_ab1b83e43d8e",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-10-28T14:53:01Z",
+    "listings": [
+      {
+        "content_hash": "11476baf02ff70d37fabc62c0d906aa8931ed801c75eb00b6383131254de98d0",
+        "external_id": "https://www.meetup.com/prairie-python/events/317169161/",
+        "last_seen": "2026-10-28T14:53:01Z",
+        "missing_runs": 1,
+        "source_id": "src_prairie-python",
+        "url": "https://www.meetup.com/prairie-python/events/317169161/"
+      }
+    ],
+    "location": {
+      "address": "Improving, 18881 W Dodge Road Suite 120E, Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Improving"
+    },
+    "organizer_id": "org_prairie-python",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/prairie-python/events/317169161/",
+    "review_state": "published",
+    "series_key": null,
+    "slug": "prairie-python-meetup-2026-11-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-10T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Our next meeting is Tuesday, November 10th! Schedule: Social Networking 5:30pm - 6pm Talk 6pm - 6:30pm More networking! 6:30pm - 7pm November's talk is b",
+    "title": "Prairie Python Meetup",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "online",
     "categories": [
       "web-mobile"
@@ -778,12 +869,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
@@ -1002,12 +1093,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "2cb5acb7d9426cd033ed691f38a9814203cc8b3fd937fdd562ee61a395bf6339",
         "external_id": "10000022-1795075200-1795107600@www.ippathways.com",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_ippathways-com",
         "url": "https://www.ippathways.com/event/iba-compliance-conference-2026/"
@@ -1047,12 +1138,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T14:53:01Z",
     "listings": [
       {
         "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
         "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-        "last_seen": "2026-10-27T16:08:27Z",
+        "last_seen": "2026-10-28T14:53:01Z",
         "missing_runs": 1,
         "source_id": "src_nebraska-data-analytics-forum",
         "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
