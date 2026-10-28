@@ -311,7 +311,7 @@ class Source(_Model):
     default_area: Area | None = None
     approved_count: NonNegativeInt = 0
     rejected_count: NonNegativeInt = 0
-    check_interval_hours: Annotated[int, Field(ge=1, le=24)] = 24
+    check_interval_hours: Annotated[int, Field(ge=1, le=24)] = 12
     rate_limit_seconds: Annotated[int, Field(ge=1, le=3600)] = 5
     html_rules: HtmlRules | None = None
     follow_links: FollowLinks | None = None

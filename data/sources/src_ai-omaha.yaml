@@ -1,6 +1,6 @@
 added_at: '2026-10-19'
 approved_count: 0
-check_interval_hours: 24
+check_interval_hours: 12
 connector: jsonld
 default_area: omaha
 feed_url: null

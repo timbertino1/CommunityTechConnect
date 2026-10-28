@@ -1,6 +1,6 @@
 added_at: '2026-10-17'
 approved_count: 0
-check_interval_hours: 24
+check_interval_hours: 12
 connector: ical
 default_area: omaha
 feed_url: https://groups.drupal.org/ical/4145

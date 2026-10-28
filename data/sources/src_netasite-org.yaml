@@ -1,6 +1,6 @@
 added_at: '2026-10-23'
 approved_count: 1
-check_interval_hours: 24
+check_interval_hours: 12
 connector: ical
 default_area: other_ne
 feed_url: https://netasite.org/events-old/?ical=1

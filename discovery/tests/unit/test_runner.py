@@ -298,7 +298,7 @@ def test_sources_checked_recently_are_not_due() -> None:
             last_attempt=NOW - timedelta(hours=6), last_success=NOW - timedelta(hours=6)
         )
     }
-    result, _ = run(sources("src_a"), connector, previous)
+    result, _ = run(sources("src_a", check_interval_hours=24), connector, previous)
     assert connector.calls == []
     assert result.outcomes[0].skipped_reason == "not_due"
 
@@ -315,6 +315,15 @@ def test_a_source_is_due_if_waiting_for_the_next_run_would_make_it_late(age: tim
     # Runs are 12 hours apart: a 24-hour source skipped now would go unread for over a day.
     connector = FakeConnector()
     previous = {"src_a": SourceStatus(last_attempt=NOW - age)}
+    run(sources("src_a", check_interval_hours=24), connector, previous)
+    assert connector.calls == ["src_a"]
+
+
+def test_default_sources_are_read_at_every_scheduled_run() -> None:
+    # 16:08 to 01:50 UTC, Oct 27-28, 2026: a late morning run and an on-time evening one. With
+    # a 24-hour interval the evening run skipped Prairie Python and missed a new meetup.
+    connector = FakeConnector()
+    previous = {"src_a": SourceStatus(last_attempt=NOW - timedelta(hours=9, minutes=42))}
     run(sources("src_a"), connector, previous)
     assert connector.calls == ["src_a"]
 
