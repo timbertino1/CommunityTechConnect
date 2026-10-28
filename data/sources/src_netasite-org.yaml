@@ -1,5 +1,5 @@
 added_at: '2026-10-23'
-approved_count: 1
+approved_count: 2
 check_interval_hours: 12
 connector: ical
 default_area: other_ne
@@ -17,5 +17,5 @@ rate_limit_seconds: 5
 rejected_count: 0
 status: active
 trust: probationary
-updated_at: '2026-10-23'
+updated_at: '2026-10-28'
 url: https://netasite.org/

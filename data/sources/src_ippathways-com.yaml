@@ -13,8 +13,8 @@ notes: 'Discovered via web search: the page links an iCal feed.'
 organizer_id: null
 origin: discovered
 rate_limit_seconds: 5
-rejected_count: 0
-status: active
+rejected_count: 6
+status: paused
 trust: probationary
-updated_at: null
+updated_at: '2026-10-28'
 url: https://www.ippathways.com/event/tech-nebraska-summit
