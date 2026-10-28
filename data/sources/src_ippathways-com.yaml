@@ -1,6 +1,6 @@
 added_at: '2026-10-24'
 approved_count: 0
-check_interval_hours: 24
+check_interval_hours: 12
 connector: ical
 default_area: other_ne
 feed_url: https://www.ippathways.com/events/?ical=1

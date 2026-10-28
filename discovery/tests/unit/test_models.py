@@ -324,7 +324,7 @@ def test_assignments_are_validated() -> None:
 
 def test_source_defaults() -> None:
     model = Source.model_validate(source())
-    assert model.check_interval_hours == 24
+    assert model.check_interval_hours == 12
     assert model.rate_limit_seconds == 5
     assert model.added_at == date(2026, 10, 17)
 

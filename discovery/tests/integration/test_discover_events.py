@@ -119,9 +119,18 @@ def test_the_broken_source_is_recorded_and_the_run_succeeds(
     assert '"event": "source_failed"' in out
 
 
+def read_daily(data: Path) -> None:
+    """Sources read once a day, so a run right after another finds none due (the default
+    interval is 12 hours, which makes every run read every source)."""
+    store = DataStore(data)
+    for source in store.read_sources():
+        store.write_source(source.model_copy(update={"check_interval_hours": 24}))
+
+
 def test_a_second_run_at_the_same_time_changes_nothing(
     data: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    read_daily(data)
     discover(data, capsys)
     before = {p: p.read_bytes() for p in sorted(data.rglob("*")) if p.is_file()}
     discover(data, capsys)
@@ -150,6 +159,7 @@ def test_the_run_report_describes_the_run(
 def test_the_report_explains_a_run_where_nothing_was_due(
     data: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    read_daily(data)
     discover(data, capsys)
     path = tmp_path / "report.md"
     discover(data, capsys, "--report", str(path))
