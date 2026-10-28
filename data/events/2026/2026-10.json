@@ -510,13 +510,13 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-10-27T16:08:27Z",
+    "last_verified": "2026-10-28T16:56:24Z",
     "listings": [
       {
         "content_hash": "8c008340dbe3621b9cf4e6dcd0a15220323cfb5ba73c87ea09b6e559ec0a36aa",
         "external_id": "10711-1793088000-1793116800@netasite.org",
-        "last_seen": "2026-10-27T16:08:27Z",
-        "missing_runs": 1,
+        "last_seen": "2026-10-28T16:56:24Z",
+        "missing_runs": 0,
         "source_id": "src_netasite-org",
         "url": "https://netasite.org/event/nefetc/"
       }
@@ -689,12 +689,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-10-28T14:53:01Z",
+    "last_verified": "2026-10-28T16:56:24Z",
     "listings": [
       {
         "content_hash": "3f98e6b8c9e940715a0cb57693d48b60eea5dbe50ea14fb642e00642a5026d2f",
         "external_id": "https://www.meetup.com/lincoln-code/events/317024050/",
-        "last_seen": "2026-10-28T14:53:01Z",
+        "last_seen": "2026-10-28T16:56:24Z",
         "missing_runs": 0,
         "source_id": "src_lincoln-code",
         "url": "https://www.meetup.com/lincoln-code/events/317024050/"
