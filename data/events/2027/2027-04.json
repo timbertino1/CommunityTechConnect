@@ -58,12 +58,12 @@
       "source_tz",
       "area"
     ],
-    "last_verified": "2026-11-01T01:34:32Z",
+    "last_verified": "2026-11-01T16:58:39Z",
     "listings": [
       {
         "content_hash": "bc9616da8db074f6ea6ed394ad1497a9143e02148d0e90103a6e7518fc50ec78",
         "external_id": "10714-1808352000-1808524799@netasite.org",
-        "last_seen": "2026-11-01T01:34:32Z",
+        "last_seen": "2026-11-01T16:58:39Z",
         "missing_runs": 1,
         "source_id": "src_netasite-org",
         "url": "https://netasite.org/event/neta/"
