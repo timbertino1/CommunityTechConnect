@@ -595,8 +595,8 @@
   },
   {
     "created": "2026-11-04T02:46:15Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 161,
+    "decision": "rejected",
     "id": "rev_9877966f0860",
     "kind": "event",
     "reason": "needs review: no tech keywords",
