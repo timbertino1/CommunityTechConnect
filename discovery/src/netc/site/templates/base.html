@@ -9,6 +9,7 @@
 <link rel="preload" href="/fonts/inter-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/site.css">
 <noscript><link rel="stylesheet" href="/css/nojs.css"></noscript>
+<link rel="alternate" type="application/atom+xml" title="NETechConnect: all events" href="/feeds/all.xml">
 {% block head %}{% endblock %}
 </head>
 <body>
@@ -42,6 +43,7 @@
     <nav aria-label="Footer">
       <ul class="footer-nav">
         <li><a href="/about/">About</a></li>
+        <li><a href="/feeds/"{% if nav == "feeds" %} aria-current="page"{% endif %}>Follow</a></li>
         {% if suggest %}<li><a href="/suggest/">Suggest a group</a></li>{% endif %}
         <li><a href="{{ repo_url }}" rel="noopener external">Source on GitHub</a></li>
       </ul>
