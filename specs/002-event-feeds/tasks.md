@@ -26,7 +26,7 @@ templates `discovery/src/netc/site/templates/`, static assets and browser tests 
 
 **Purpose**: FR-014 / research R8. The code PRs are checked against the amended text.
 
-- [ ] T001 Amend `.specify/memory/constitution.md` to 1.1.1 (PATCH): add to Principle II the bullet "Read-only web feeds (e.g. Atom) of listed events are permitted: they carry only the listing summary and link each event to its original page. They are not calendar subscriptions." Leave the prohibition bullet unchanged; add a Sync Impact Report comment at the top (version 1.1.0 → 1.1.1, rationale: clarification, no change in meaning; templates needing updates: none); set **Last Amended** to the merge date. Open as its own PR (`docs/constitution-feeds`) and merge before T004.
+- [X] T001 Amend `.specify/memory/constitution.md` to 1.1.1 (PATCH): add to Principle II the bullet "Read-only web feeds (e.g. Atom) of listed events are permitted: they carry only the listing summary and link each event to its original page. They are not calendar subscriptions." Leave the prohibition bullet unchanged; put the Sync Impact Report (version 1.1.0 → 1.1.1, rationale: clarification, no change in meaning; templates needing updates: none) in the PR description, as the 1.1.0 amendment did; set **Last Amended**. Open as its own PR (`docs/constitution-feeds`) and merge before T004.
 
 **Checkpoint**: Constitution 1.1.1 on `main`.
 
