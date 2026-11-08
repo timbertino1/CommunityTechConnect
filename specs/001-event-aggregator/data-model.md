@@ -60,6 +60,8 @@ One event occurrence, possibly merged from several Source Listings.
 | `first_seen` | datetime (UTC) | |
 | `last_verified` | datetime (UTC) | Updated whenever any listing is re-read successfully (FR-030) |
 | `original_unavailable` | bool | Default `false`; set by the monthly link check when the original page returns 404/410 |
+| `published_at` | datetime (UTC) \| null | When the event first became public; for the event feeds. See `specs/002-event-feeds/data-model.md` |
+| `changed_at` | datetime (UTC) \| null | When title, time, place or cancellation last changed after publishing; for the event feeds (002) |
 
 **Derived (not stored)**: `is_upcoming` = now < (`end` or `start`) (FR-035); display times in
 `America/Chicago` (FR-027). An event is publicly visible only when `review_state = published`

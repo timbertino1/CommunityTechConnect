@@ -10,7 +10,7 @@ organizer's own page over an event platform, and a platform over an aggregator.
 from __future__ import annotations
 
 from collections.abc import Iterable
-from datetime import timedelta
+from datetime import datetime, timedelta
 from typing import Final
 from urllib.parse import urlsplit
 
@@ -87,8 +87,31 @@ def merge(primary: Event, other: Event) -> Event:
             "categories": categories,
             "first_seen": min(primary.first_seen, other.first_seen),
             "last_verified": max(primary.last_verified, other.last_verified),
+            **_merged_times(primary, other),
         }
     )
+
+
+def _merged_times(primary: Event, other: Event) -> dict[str, datetime | None]:
+    """The earliest publish time and the latest change (feature 002). A public event stored
+    before ``published_at`` existed counts as published when first seen; a change older than
+    the merged publish time is one no follower saw, so it is dropped. Two events that both
+    lack ``published_at`` keep it null (the feed then falls back to ``first_seen``)."""
+
+    def published(e: Event) -> datetime | None:
+        if e.published_at is not None:
+            return e.published_at
+        return e.first_seen if e.review_state == "published" else None
+
+    times = [t for t in (published(primary), published(other)) if t is not None]
+    changes = [t for t in (primary.changed_at, other.changed_at) if t is not None]
+    published_at = min(times) if times else None
+    if primary.published_at is None and other.published_at is None:
+        published_at = None
+    changed_at = max(changes) if changes else None
+    if published_at is not None and changed_at is not None and changed_at < published_at:
+        changed_at = None
+    return {"published_at": published_at, "changed_at": changed_at}
 
 
 def link_rank(url: str) -> int:

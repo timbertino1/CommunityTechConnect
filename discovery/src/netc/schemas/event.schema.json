@@ -240,6 +240,28 @@
     "original_unavailable": {
       "type": "boolean",
       "default": false
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/utc"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "When the event first became public (feature 002)."
+    },
+    "changed_at": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/utc"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "When title, time, place or status last changed after publishing (feature 002)."
     }
   }
 }

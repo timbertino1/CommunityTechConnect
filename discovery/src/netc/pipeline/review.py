@@ -129,7 +129,10 @@ def apply_decisions(
             continue
         result.titles[item.id] = event.title
         state = "published" if decision == "approved" else "rejected"
-        events[event.id] = event.model_copy(update={"review_state": state})
+        update: dict[str, object] = {"review_state": state}
+        if state == "published" and event.published_at is None:
+            update["published_at"] = now  # feature 002: listed from now on
+        events[event.id] = event.model_copy(update=update)
         events_changed = True
         for source_id in _source_ids(event):
             source = counted.get(source_id) or sources.get(source_id)

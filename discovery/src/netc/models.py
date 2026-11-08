@@ -245,11 +245,23 @@ class Event(_Model):
     first_seen: UtcDatetime
     last_verified: UtcDatetime
     original_unavailable: bool = False
+    published_at: UtcDatetime | None = None
+    """When the event first became public (feature 002); null on events stored before it."""
+    changed_at: UtcDatetime | None = None
+    """When its title, time, place or status last changed after publishing (feature 002)."""
 
     @model_validator(mode="after")
     def _end_after_start(self) -> Self:
         if self.end is not None and self.end < self.start:
             raise ValueError("end must not be before start")
+        if self.published_at is not None and self.published_at < self.first_seen:
+            raise ValueError("published_at must not be before first_seen")
+        if (
+            self.published_at is not None
+            and self.changed_at is not None
+            and self.changed_at < self.published_at
+        ):
+            raise ValueError("changed_at must not be before published_at")
         return self
 
     @property
