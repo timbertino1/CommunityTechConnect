@@ -130,6 +130,19 @@ was looked at and turned down.
 Web search uses at most 400 of Tavily's 1,000 free monthly searches; the AI shares the $1.00
 monthly budget with the daily runs. Both totals are in the health issue.
 
+## Event feeds
+
+The site publishes Atom feeds of upcoming events: `/feeds/all.xml` and one per category
+(`/feeds/<category-id>.xml`), listed on the `/feeds/` page. There's nothing to run or look after:
+they're rebuilt with the site on every deploy, from the same published events.
+
+- A category added to `data/categories.yaml` gets its feed at the next deploy; a removed one's
+  feed disappears (followers then get a "not found").
+- Hiding an event with an override removes it from every feed. Correcting a detail with an
+  override changes what the feed shows but doesn't mark the entry as updated; changes the bot
+  picks up from the organizer's page (title, time, place, cancellation) do.
+- Feed addresses must never change: people's apps are subscribed to them.
+
 ## Reading the health issue
 
 The pinned issue **Discovery health** is rewritten after every run. Editing it is pointless, and

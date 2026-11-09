@@ -24,6 +24,7 @@ from netc.models import AreaConfig, Event
 from netc.pipeline.overrides import apply_overrides
 from netc.pipeline.timeutil import clock_time, format_central, short_day, to_central
 from netc.site import calendar as cal
+from netc.site.feeds import atom_feed, entry_for
 from netc.storage import DataStore, atomic_write, dump_json
 
 PUBLIC_FIELDS: Final = (
@@ -156,6 +157,7 @@ def build_site(
         )
         pages += 1
     pages += _calendar_pages(env, out_dir, public, views, now, common)
+    pages += _feeds(env, out_dir, upcoming, views, categories, site_domain, common)
     # Without 404.html, Cloudflare Pages serves index.html with a 200 for every unknown path.
     _write(out_dir / "404.html", env.get_template("404.html").render(nav="", **common))
     pages += 1
@@ -185,6 +187,37 @@ def build_site(
     for year, records in by_year.items():
         atomic_write(out_dir / "data" / "past" / f"{year}.json", dump_json(records))
     return BuildReport(pages=pages, events_listed=len(upcoming))
+
+
+def _feeds(
+    env: Environment,
+    out_dir: Path,
+    upcoming: list[Event],
+    views: dict[str, dict[str, Any]],
+    categories: dict[str, str],
+    site_domain: str,
+    common: dict[str, Any],
+) -> int:
+    """Feature 002: /feeds/all.xml, /feeds/<category>.xml and the /feeds/ page."""
+    site_url = f"https://{site_domain}"
+    entries = {e.id: entry_for(e, views[e.id], site_url) for e in upcoming}
+    feeds = [("all", "All events", list(entries.values()))] + [
+        (cid, label, [entries[e.id] for e in upcoming if cid in e.categories])
+        for cid, label in categories.items()
+    ]
+    listed = []
+    for key, label, chosen in feeds:
+        title = "NETechConnect: all events" if key == "all" else f"NETechConnect: {label}"
+        data = atom_feed(key=key, title=title, site_url=site_url, entries=chosen)
+        atomic_write(out_dir / "feeds" / f"{key}.xml", data)
+        listed.append(
+            {"key": key, "label": label, "title": title, "url": f"{site_url}/feeds/{key}.xml"}
+        )
+    _write(
+        out_dir / "feeds" / "index.html",
+        env.get_template("feeds.html").render(nav="feeds", feeds=listed, **common),
+    )
+    return 1
 
 
 MONTH_NAMES: Final = (

@@ -1,6 +1,6 @@
 // axe-core on every kind of page (T136; SC-009, WCAG 2.2 AA), at phone and desktop widths and in
 // both color schemes, on the fixture site (tests/support/site.js): it has upcoming and past
-// events, an event page and the suggestion form. CI runs this with the other browser tests.
+// events, an event page, the suggestion form and the feeds page (feature 002). CI runs this with the other browser tests.
 
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
@@ -13,6 +13,7 @@ const PAGES = {
   event: "/events/lincoln-ai-security-summit-2026-11-20/",
   suggest: "/suggest/",
   about: "/about/",
+  feeds: "/feeds/",
 };
 // 320 px is where WCAG 2.2 "Reflow" (1.4.10) is measured; 360 px and 1280 px are T136's widths.
 const WIDTHS = [320, 360, 1280];

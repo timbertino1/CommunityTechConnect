@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Follow new events{% endblock %}
+{% block description %}Follow new Nebraska tech events in a feed reader, Slack or another app: one feed for every event, or one per topic.{% endblock %}
+{% block head %}
+{% for f in feeds if f.key != "all" %}
+<link rel="alternate" type="application/atom+xml" title="{{ f.title }}" href="/feeds/{{ f.key }}.xml">
+{% endfor %}
+{% endblock %}
+{% block content %}
+<div class="prose">
+<h1>Follow new events</h1>
+<p class="lede">Get new events as they're listed, in an app you already use.</p>
+<p>A feed is a web address that apps can check for new items. Copy one of the addresses below into a feed reader or another app that follows feeds, and it shows you each new event with a link to the organizer's page. There's nothing to sign up for here: NETechConnect doesn't collect email addresses or know who follows a feed.</p>
+
+<h2>Feeds</h2>
+<ul class="feed-list">
+{% for f in feeds %}
+  <li><span class="feed-name">{{ f.label }}</span> <a href="{{ f.url }}">{{ f.url }}</a></li>
+{% endfor %}
+</ul>
+<p>Each feed lists upcoming events, newest first. A cancelled event stays in its feed with "Cancelled" in the title until its date passes.</p>
+
+<h2>Ways to use a feed</h2>
+<ul>
+  <li><strong>A feed reader</strong> (an app or website for following feeds): add the address as a new feed or subscription.</li>
+  <li><strong>Slack</strong>: in a channel, type <code>/feed subscribe</code> followed by the address.</li>
+  <li><strong>Classic Outlook for Windows</strong>: right-click <em>RSS Subscriptions</em>, choose <em>Add a New RSS Feed</em>, and paste the address.</li>
+  <li><strong>Email</strong>: services that turn feeds into emails can send you new events. You sign up with the service you choose, not with NETechConnect.</li>
+</ul>
+</div>
+{% endblock %}

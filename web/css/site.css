@@ -245,6 +245,9 @@ main:focus { outline: none; }
   text-decoration: none;
 }
 .hero-cta:hover { text-decoration: underline; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+.hero-follow { color: var(--band-muted); font-weight: 600; text-underline-offset: 0.2em; }
+.hero-follow:hover { color: #ffffff; }
 .hero-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }
 .counts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; }
 .count { display: flex; flex-direction: column; }
@@ -534,6 +537,12 @@ code { font-size: 0.9em; background: var(--accent-bg); padding: 0.05rem 0.35rem;
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; padding-block: 2rem; }
 .footer-inner p { margin: 0 0 0.5rem; max-width: 60ch; }
 .footer-nav { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+
+/* Feeds page (feature 002) */
+.feed-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.75rem; }
+.feed-list li { display: flex; flex-direction: column; gap: 0.15rem; }
+.feed-name { font-weight: 600; }
+.feed-list a { overflow-wrap: anywhere; font-family: var(--font-mono); font-size: 0.9em; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

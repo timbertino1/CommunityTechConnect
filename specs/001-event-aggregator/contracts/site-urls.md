@@ -14,6 +14,7 @@ bookmarked links (FR-038) must keep working.
 | `/events/<slug>/` | Event detail: essentials + **primary link to original page** (FR-024, FR-025) | Yes |
 | `/suggest/` | Source suggestion form (FR-020) — posts to the Worker. Linked from every page's header ("Suggest a group", shortened to "Suggest" beside the name on phones; owner request, 2026-10-24) and footer, when the Worker is configured | Needs JS for Turnstile |
 | `/about/` | About, bot identity/contact for site owners, how events are found, privacy note | Yes |
+| `/feeds/` | Feeds page: every event feed and how to use one; linked as "Follow" from every page's footer and from the home page (feature 002, `specs/002-event-feeds/contracts/feeds.md`) | Yes |
 
 Every event card and detail page links to `original_url` with visible text such as
 "View and register on <host>" — this is the primary call to action. No page offers calendar
@@ -39,6 +40,8 @@ events are shown and a notice explains filters need JavaScript.
 | `/data/upcoming.json` | All publicly visible upcoming events (public fields only) |
 | `/data/past/<YYYY>.json` | Publicly visible past events for a year |
 | `/data/meta.json` | Categories, areas, `generated_at` |
+| `/feeds/all.xml` | Atom feed of all public upcoming events, newest-listed first, ≤ 100 (feature 002) |
+| `/feeds/<category-id>.xml` | Atom feed of one category's public upcoming events (feature 002) |
 | `/data/map.json` | For the home page header map: `towns` (every `{name, lat, lon}` in `data/areas.yaml` `points`) and `pins` (`{city, lat, lon, events}` for each city with upcoming in-person, not cancelled events; a city not in `points` gets no pin) |
 
 Public event fields: `id, slug, title, start, end, all_day, area, location, organizer,
