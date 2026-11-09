@@ -1,5 +1,17 @@
 [
   {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Tuesday, Nov. 10",
+    "event_id": null,
+    "id": "men_00fca1e0aef2",
+    "links": [],
+    "organizer_hint": "APEX Accelerators of Nebraska, Iowa and South Dakota",
+    "place_hint": "South Sioux City",
+    "resolution": "unresolved",
+    "title": "APEX Accelerators joint initiative event (Nebraska, Iowa, South Dakota)"
+  },
+  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -96,7 +108,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -110,7 +122,7 @@
     "title": "Registration still open for the Tech Nebraska Summit on ..."
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -178,7 +190,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI | Digital Lincoln — Digital Lincoln"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -228,11 +240,11 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Top 18 Mobile App Development Companies in Lincoln ..."
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -258,6 +270,20 @@
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1ee9a8324bac",
+    "links": [
+      "https://www.lincolninternational.com/perspectives/articles/qa-with-lincoln-tmt-managing-director-don-more-hacking-cybersecurity-investment"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Q&A with Lincoln TMT Managing Director Don More"
+  },
+  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -268,7 +294,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "On the Silicon Prairie: Omaha’s Cybersecurity Leaders to Watch"
   },
   {
@@ -286,7 +312,7 @@
     "title": "Registration still open for the Tech Nebraska Summit on Oct. 21 - Silicon Prairie News"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -362,11 +388,11 @@
     "links": [],
     "organizer_hint": null,
     "place_hint": "Online",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "JumpStart Challenge reverse pitch competition overview (virtual)"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -496,8 +522,20 @@
     "links": [],
     "organizer_hint": "Open Range; Events Manager Jocelyn Stange; sponsors First National Bank of Omaha and Olsson; ecosystem problem by Lincoln Chamber of Commerce; Don’t Panic Labs; NUtech Ventures; Secret Penguin; Silico",
     "place_hint": "Virtual overview kickoff; dedicated workday and mentorship on Nov. 7 at DPL; Silicon Prairie Startup Week 2025 reference in Lincoln",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "JumpStart Challenge – Startup Week 2026"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Monday, November 9",
+    "event_id": null,
+    "id": "men_4dfb482283f2",
+    "links": [],
+    "organizer_hint": "Latino Connect",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "2026 Latino Connect Excellence in Business Awards"
   },
   {
     "attempts": 0,
@@ -512,6 +550,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "7 Nebraska Web Development Scholarships And Funding ..."
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_533b272ee4ce",
+    "links": [
+      "https://python-groups.blogspot.com/2007/06/omaha-python-users-group-june-14.html"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Happenings in Python Usergroups: Omaha Python Users Group, June 14 -- Meeting Notes"
   },
   {
     "attempts": 0,
@@ -538,8 +590,20 @@
     ],
     "organizer_hint": "PowerPath Collective",
     "place_hint": "Catalyst Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "PowerPath Collective AI skills event"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 18",
+    "event_id": null,
+    "id": "men_5cb76ed835aa",
+    "links": [],
+    "organizer_hint": "Pipeline Entrepreneurs",
+    "place_hint": "Nebraska, Kansas and Missouri (Pipeline Fellows and Pathfinders programs)",
+    "resolution": "unresolved",
+    "title": "Founders have until Nov. 18 to apply for 2027 Pipeline programs"
   },
   {
     "attempts": 1,
@@ -566,6 +630,30 @@
     "place_hint": "Scott Conference Center on UNO’s campus",
     "resolution": "discarded",
     "title": "2026 Innovation Awards winners celebration"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_654b13eddb14",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Five Things: 2026 Tech Nebraska Summit"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Tuesday, Nov. 10",
+    "event_id": null,
+    "id": "men_66d837b2b1c2",
+    "links": [],
+    "organizer_hint": "UNO (with Omaha-based business and tech leaders)",
+    "place_hint": "Omaha",
+    "resolution": "unresolved",
+    "title": "public discussion on the value and usage of AI in an organization"
   },
   {
     "attempts": 0,
@@ -676,6 +764,18 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Thursday, Nov. 5",
+    "event_id": null,
+    "id": "men_76fa1be86c66",
+    "links": [],
+    "organizer_hint": "AI Omaha",
+    "place_hint": "Omaha",
+    "resolution": "discarded",
+    "title": "AI Omaha monthly meetup"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Nov. 16-21",
     "event_id": null,
     "id": "men_78d315e716df",
@@ -700,6 +800,18 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "The Nebraska Women in Tech Summit is back for its second year to celebrate and support women in technology roles - Silicon Prairie News"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_7ba9f1ec2329",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "The JumpStart Challenge returns to give everyday entrepreneurs the chance to connect, build and earn"
   },
   {
     "attempts": 2,
@@ -818,6 +930,20 @@
     "place_hint": "Prairie Portrait Five Things",
     "resolution": "discarded",
     "title": "Hustle Conference 2026"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_930af79a6713",
+    "links": [
+      "https://siliconprairienews.com/2014/10/startup-week-lincoln-highlights"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Here are daily highlights for a packed Startup Week Lincoln"
   },
   {
     "attempts": 3,
@@ -945,6 +1071,20 @@
   },
   {
     "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_a850574b6ec2",
+    "links": [
+      "https://nebraskapublicmedia.org/en/news/news-articles/omaha-officials-announce-four-affordable-housing-projects-as-part-of-40-million-investment"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Omaha officials announce four affordable housing projects as part of $40 million investment | Nebraska Public Media"
+  },
+  {
+    "attempts": 0,
     "channel": "news",
     "date_hint": "Thu, Oct 29",
     "event_id": null,
@@ -964,7 +1104,7 @@
     "links": [],
     "organizer_hint": "PowerPath Collective",
     "place_hint": "Catalyst Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "PowerPath Collective free event to meet with local business support resources and learn basic AI skills"
   },
   {
@@ -990,7 +1130,7 @@
     "links": [],
     "organizer_hint": null,
     "place_hint": "Grand Island",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Big Idea Grand Island"
   },
   {
@@ -1048,6 +1188,18 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "University of Lincoln Artificial Intelligence Policy - CDN"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thursday, Nov. 5",
+    "event_id": null,
+    "id": "men_bf6efbcfd3bf",
+    "links": [],
+    "organizer_hint": "TS Bank",
+    "place_hint": "Council Bluffs",
+    "resolution": "discarded",
+    "title": "TS Bank REV – Small Business Pitch Competition"
   },
   {
     "attempts": 3,
@@ -1166,6 +1318,18 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "NO UPCOMING TECH EVENTS FOUND"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17-18",
+    "event_id": null,
+    "id": "men_d6603bb3e055",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "AgConverge conference back on Nov. 17-18"
   },
   {
     "attempts": 0,
@@ -1314,6 +1478,18 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Enterprise Architecture Communities: It Takes A Village"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17-18",
+    "event_id": null,
+    "id": "men_f256b21e6dd6",
+    "links": [],
+    "organizer_hint": "Spur Ventures",
+    "place_hint": "Nebraska (Lincoln, NE)",
+    "resolution": "unresolved",
+    "title": "Spur AgConverge conference"
   },
   {
     "attempts": 0,
