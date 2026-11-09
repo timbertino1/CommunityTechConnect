@@ -43,3 +43,15 @@
   id: org_uno
   name: University of Nebraska Omaha
   url: https://www.unomaha.edu/
+- aliases:
+  - Omaha AWS
+  home_city: Omaha
+  id: org_omaha-aws
+  name: Omaha Amazon Web Services
+  url: https://www.meetup.com/omaha-amazon-web-services-meetup/
+- aliases:
+  - WiTH
+  home_city: Omaha
+  id: org_with
+  name: Women in Technology of the Heartland
+  url: https://www.meetup.com/women-in-technology-of-the-heartland/
