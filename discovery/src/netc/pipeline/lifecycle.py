@@ -5,13 +5,15 @@ Given the stored events and the events built from this run's listings:
 - an incoming event that matches a stored one (same id, or the de-duplication rule) updates it:
   fresh details, merged listings, ``last_verified`` now; its id, slug, first-seen date, review
   state, and visibility are kept, and ``scheduled`` comes back if it had become ``unverified``;
+  ``changed_at`` becomes now when a published event's title, time, place or status changed
+  (feature 002);
 - a source that says "cancelled" makes the event ``cancelled``;
 - a listing missing from a source that was read successfully this run counts one missed run;
   an upcoming event whose every listing has missed two runs becomes ``unverified``. Sources
   that failed or were skipped never count as missing, and past events are left alone;
-- a new event is ``published`` when any of its sources is trusted, otherwise it waits for
-  review (``pending_review`` plus a Review Item); a held event (e.g. undecided relevance) also
-  waits for review;
+- a new event is ``published`` (``published_at`` now) when any of its sources is trusted,
+  otherwise it waits for review (``pending_review`` plus a Review Item); a held event (e.g.
+  undecided relevance) also waits for review;
 - an event whose only listings come from Eventbrite is deleted once it has ended (Eventbrite's
   API terms, gate V2), rather than kept for the past-events archive.
 """
@@ -28,6 +30,9 @@ from netc.models import Event, ReviewItem, Source
 from netc.pipeline.dedupe import merge, same_event
 
 UNVERIFIED_AFTER_MISSED_RUNS: Final = 2
+FOLLOWED_FIELDS: Final = ("title", "start", "end", "all_day", "location")
+"""Details a feed follower is told about when they change (feature 002, ``changed_at``), along
+with being cancelled or un-cancelled. (Unverified and back is not news: feeds don't show it.)"""
 PROBATIONARY_REASON: Final = "new event from a probationary source"
 
 
@@ -79,7 +84,9 @@ def apply_run(
         ):
             reason = PROBATIONARY_REASON
         if reason is None:
-            events[fresh.id] = fresh.model_copy(update={"review_state": "published"})
+            events[fresh.id] = fresh.model_copy(
+                update={"review_state": "published", "published_at": now}
+            )
             continue
         events[fresh.id] = fresh.model_copy(update={"review_state": "pending_review"})
         review_id = review_id_for(fresh.id)
@@ -116,8 +123,13 @@ def _ended_eventbrite_only(event: Event, sources: Mapping[str, Source], now: dat
 def _update(stored: Event, fresh: Event, now: datetime) -> Event:
     combined = merge(stored, fresh)
     status = "cancelled" if fresh.status == "cancelled" else "scheduled"
+    changed = stored.review_state == "published" and (
+        any(getattr(stored, f) != getattr(fresh, f) for f in FOLLOWED_FIELDS)
+        or (stored.status == "cancelled") != (status == "cancelled")
+    )
     return combined.model_copy(
         update={
+            "changed_at": now if changed else combined.changed_at,
             "title": fresh.title,
             "summary": fresh.summary,
             "start": fresh.start,
