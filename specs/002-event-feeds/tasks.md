@@ -126,8 +126,8 @@ for every feed depend on these. Merging this early lets live events start record
 - [X] T028 [P] Add `/feeds/`, `/feeds/all.xml` and `/feeds/<category-id>.xml` rows to `specs/001-event-aggregator/contracts/site-urls.md`, pointing to `specs/002-event-feeds/contracts/feeds.md`.
 - [X] T029 [P] Add a short "Feeds" section to `docs/admin-guide.md`: feeds rebuild with the site, nothing to administer; a category added in `data/categories.yaml` gets a feed automatically; overrides don't move an entry's `updated` time.
 - [X] T030 Security pass on the feeds PR diff (memory: ongoing security review): confirm research R9 mitigations are each covered by a test, no new input/storage/cookie/form (SC-005), CSP/headers unchanged except the feeds content type; run `uv run pytest -q -m security`, `npm audit`, `pip-audit`; write what was checked in the PR description. Open the feeds PR (US1–US3 + T028–T029).
-- [ ] T031 Checkpoint on live after deploy, per `specs/002-event-feeds/quickstart.md` §2–§4: W3C validator, `curl -sI` headers (record the actual content type; R6 deviation allowed), reader autodiscovery from the home page, Slack `/feed subscribe`, classic Outlook if the owner has it, then after a discovery run that publishes an event: exactly one new item. Record in `docs/checkpoints/feeds.md`.
-- [ ] T032 Update the build log `docs/journey/build-log.html` with a Feeds tab/section (stats, checklist with PR numbers, notes) and republish the artifact https://claude.ai/artifact/XFAsLsB9NCfo6eCKFAvnbb.
+- [X] T031 Checkpoint on live after deploy, per `specs/002-event-feeds/quickstart.md` §2–§4: W3C validator, `curl -sI` headers (record the actual content type; R6 deviation allowed), reader autodiscovery from the home page, Slack `/feed subscribe`, classic Outlook if the owner has it, then after a discovery run that publishes an event: exactly one new item. Record in `docs/checkpoints/feeds.md`.
+- [X] T032 Update the build log `docs/journey/build-log.html` with a Feeds tab/section (stats, checklist with PR numbers, notes) and republish the artifact https://claude.ai/artifact/XFAsLsB9NCfo6eCKFAvnbb.
 
 ---
 

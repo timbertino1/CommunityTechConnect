@@ -307,7 +307,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Now in <strong>Phase 10 of 10</strong> (8 of 15) &middot; Phases 1&ndash;3 and 5&ndash;9 done &middot; Phase 4 waits on its live checkpoint</span>
+    <span>Live at <a href="https://netechconnect.com"><strong>netechconnect.com</strong></a> since Oct 25 &middot; Phases 1&ndash;3 and 5&ndash;10 done &middot; Phase 4 waits on its live checkpoint &middot; New: event feeds</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -322,9 +322,9 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li class="done"><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>08</b>Admin tools</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
-      <li class="now"><div class="bar"><span style="width:53%"></span></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 10, and Phase 4's live checkpoint)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4's live checkpoint)</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -340,7 +340,8 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-phase-7" aria-controls="phase-7" aria-selected="false" tabindex="-1">Phase 7 &middot; Past events <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-8" aria-controls="phase-8" aria-selected="false" tabindex="-1">Phase 8 &middot; Review tools <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-9" aria-controls="phase-9" aria-selected="false" tabindex="-1">Phase 9 &middot; Suggestions <span class="pill ok">done</span></button>
-  <button class="tab" role="tab" id="tab-phase-10" aria-controls="phase-10" aria-selected="false" tabindex="-1">Phase 10 &middot; Launch prep <span class="pill now">now</span></button>
+  <button class="tab" role="tab" id="tab-phase-10" aria-controls="phase-10" aria-selected="false" tabindex="-1">Phase 10 &middot; Launch <span class="pill ok">done</span></button>
+  <button class="tab" role="tab" id="tab-feeds" aria-controls="feeds" aria-selected="false" tabindex="-1">Event feeds <span class="pill ok">new</span></button>
 </div>
 
 <!-- ======================================================= THE PROJECT -->
@@ -546,7 +547,8 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
           <tr><td class="num">07</td><td><b>Past events.</b> An archive of what already happened.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">08</td><td><b>Admin tools.</b> Review new sources, hide or correct events, watch for failing sources.</td><td><span class="status done">Done (early)</span></td></tr>
           <tr><td class="num">09</td><td><b>Suggestions.</b> Visitors can suggest a group or calendar; discovery evaluates it.</td><td><span class="status done">Done</span></td></tr>
-          <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews, a tested backup, then launch on netechconnect.com.</td><td><span class="status now">In progress</span></td></tr>
+          <tr><td class="num">10</td><td><b>Polish and launch.</b> Accessibility, performance and security reviews, a tested backup, then launch on netechconnect.com.</td><td><span class="status done">Done</span></td></tr>
+          <tr><td class="num">&middot;</td><td><b>Event feeds.</b> Follow new events in a feed reader: one feed for everything, one per topic. No sign-up, no personal data.</td><td><span class="status done">Done</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -2078,12 +2080,12 @@ Then I noticed the form was only linked from the footer. It's in the header now.
 
   <section>
     <div class="section-head">
-      <p class="eyebrow">Phase 10 &middot; Launch prep &middot; Oct 24&ndash;25, 2026</p>
-      <h2>Checking it all before telling anyone</h2>
+      <p class="eyebrow">Phase 10 &middot; Launch &middot; Oct 24&ndash;25, 2026</p>
+      <h2>Checking it all, then netechconnect.com</h2>
     </div>
     <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
     <div class="stats">
-      <div class="stat"><span class="n">12<small> of 15</small></span><p>Phase 10 tasks settled. The other three wait on two weeks of costs, or launch day.</p></div>
+      <div class="stat"><span class="n">14<small> of 15</small></span><p>Phase 10 tasks settled. The last, a cost check after two weeks live, is under way.</p></div>
       <div class="stat"><span class="n">171<small> of 171</small></span><p>Files of the live site rebuilt byte for byte from a fresh copy of the repository.</p></div>
       <div class="stat"><span class="n">1.83<small> s</small></span><p>Until the main content shows on a simulated slow phone, from 1.97 s, after trimming the fonts.</p></div>
     </div>
@@ -2096,7 +2098,9 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A person with a screen reader</b><small>I went through every kind of page with Windows Narrator, and a script tabbed through them by keyboard and at 200% zoom. Nothing to fix. PR #125.</small></div><span class="ids">T137</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Workers deploy themselves</b><small>A merged change to either Worker is tested and deployed by GitHub, with a token that can do nothing else. No more deploys from my laptop. PR #119.</small></div><span class="ids">T147&ndash;T148</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A second security review, dropped</b><small>The plan called for someone else to review it too. I decided against it: the site has no accounts, logins or personal data, and its only input from strangers is the suggest form. My own review and the automated checks stand.</small></div><span class="ids">T140</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Still to come</b><small>The cost check after two weeks of live runs, the final end-to-end run, and netechconnect.com.</small></div><span class="ids">3 tasks</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The final run, end to end</b><small>Every quickstart scenario again on the live system, from discovery to the page. PR #130.</small></div><span class="ids">T149</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>netechconnect.com</b><small>Live on Oct 25: the domain, a www redirect, the suggest form's spam check updated, and the security headers checked on the new address.</small></div><span class="ids">T156</span></li>
+      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Cost check</b><small>Two weeks of live runs measured against the ~$5 budget. So far: about a cent of AI a month, and everything else on free plans.</small></div><span class="ids">T142</span></li>
     </ul>
   </section>
 
@@ -2146,17 +2150,69 @@ Then: launch, and netechconnect.com.
     </div>
   </section>
 </div>
+
+<!-- ======================================================= EVENT FEEDS (feature 002) -->
+<div class="panel" role="tabpanel" id="feeds" aria-labelledby="tab-feeds" hidden>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">After launch &middot; Event feeds &middot; Nov 7&ndash;9, 2026</p>
+      <h2>Follow new events, without giving anyone your email</h2>
+    </div>
+    <p class="lede">The first request after launch: "can I get an email when new events are added?" Email means keeping a list of addresses, and the site has never stored anything personal. So instead it publishes feeds: a public file that apps check for new items. You follow a feed in a reader, or in a service that turns feeds into email. NETechConnect never learns who follows.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">12</span><p>Feeds: one for every event, and one for each of the 11 topics.</p></div>
+      <div class="stat"><span class="n">0</span><p>Email addresses, sign-ups, cookies or forms added. Every reader gets the same file.</p></div>
+      <div class="stat"><span class="n">0<small> errors</small></span><p>From the W3C feed validator on the live feeds, and 0 warnings.</p></div>
+      <div class="stat"><span class="n">1,515</span><p>Automated tests, all passing, plus 102 in a real browser.</p></div>
+    </div>
+    <ul class="checklist">
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A new spec, the same process</b><small>Spec, research, plan and 32 tasks before any code, and a one-line clarification to the project's rules: feeds are allowed, calendar subscriptions still aren't. PR #174.</small></div><span class="ids">T001</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>When was it listed? When did it change?</b><small>Each event now records when it went public, and when its title, time, place or cancellation last changed. PR #175.</small></div><span class="ids">T002&ndash;T009</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The feeds and the Follow page</b><small><code>/feeds/all.xml</code>, one feed per topic, a <a href="https://netechconnect.com/feeds/">Follow page</a> that explains them in plain words, and a Follow link on every page. PR #179.</small></div><span class="ids">T010&ndash;T030</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checked on the live site</b><small>The validator, the security headers, all 12 addresses, and the link that lets a feed reader find the feed from just the site's address. The first new event to appear is still to watch for.</small></div><span class="ids">T031</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Along the way</p>
+      <h2>What happened</h2>
+    </div>
+    <div class="notes">
+      <div class="note hi"><div><h3>Text that can't become code</h3><p>Feed readers show what a feed says, and event titles come from other websites. RSS, the older format, leaves it to each reader whether a description is HTML, which is how feed injection bugs happen. Atom can say "this is plain text", so every title and description is marked that way and written by a proper XML library, never pasted into a template. Tests try <code>&lt;script&gt;</code>, a fake closing tag, an entity trick and characters XML forbids: all come out as harmless text.</p></div></div>
+      <div class="note hi"><div><h3>The same file, unless something changed</h3><p>If a feed changed every time the site rebuilt, readers would keep showing old events as new. Nothing in a feed depends on when it was built, so two builds from the same data are identical to the byte. That needed two new dates on each event: when it was listed, and when something a follower cares about changed. A new wording of the description doesn't count.</p></div></div>
+      <div class="note"><div><h3>Listed is not found</h3><p>The site already knew when it first found each event. For a group on probation that can be days before I approve it, so "first found" would put a newly approved event in the wrong place. It now records the moment it actually went public.</p></div></div>
+      <div class="note"><div><h3>Outlook dropped feeds</h3><p>The plan named Outlook as one place to read feeds. Only the classic Windows app still can; the new Outlook and Outlook on the web dropped them. The Follow page mentions classic Outlook as an option, but the checks are on ordinary feed readers.</p></div></div>
+      <div class="note"><div><h3>Meanwhile: a group's home went dark</h3><p>Drupal Nebraska's calendar lived on groups.drupal.org, which failed 29 runs in a row. Every request, even robots.txt, got a 503. It turned out the Drupal Association had taken the site offline for good: old software at end of life. The source is paused until the group finds a new home.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="share">
+      <div class="share-head"><h3>Share event feeds</h3><button class="btn" type="button" data-copy="post-feeds">Copy post</button></div>
+      <label class="eyebrow" for="post-feeds">Suggested post (edit freely)</label>
+      <textarea id="post-feeds">You can now follow new Nebraska tech events on NETechConnect, without giving anyone your email.
+The first request after launch was "can I get an email when new events show up?" Email means keeping a list of addresses, and this site has never stored anything personal. So it publishes feeds instead: one for every event, and one per topic (AI, security, cloud, data and more).
+Paste one into a feed reader, a Slack channel, or a service that turns feeds into email. You sign up with the app you choose; NETechConnect never learns who follows.
+Two details I'm happy with: event text from other sites is marked as plain text, so it can't turn into code in your reader, and a feed only changes when an event does, so nothing shows up as new twice.
+netechconnect.com/feeds/
+#BuildInPublic #Nebraska #OmahaTech #LincolnTech</textarea>
+      <span class="count" data-count-for="post-feeds"></span>
+    </div>
+  </section>
+</div>
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Oct 25, 2026</span>
+  <span>NETechConnect build log &middot; updated Nov 9, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
 
 <script>
 (() => {
-  /* ---------- Tabs with deep links (#project, #phase-1 ... #phase-10, #design-b) ---------- */
+  /* ---------- Tabs with deep links (#project, #phase-1 ... #phase-10, #design-b, #feeds) ---------- */
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
   const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
 
