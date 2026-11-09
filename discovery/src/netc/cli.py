@@ -279,7 +279,8 @@ def _discover(args: argparse.Namespace) -> int:
     listings = ", ".join(f"{k} {v}" for k, v in sorted(report.listings.items())) or "none"
     print(
         f"Sources: {report.sources}. Listings: {listings}. "
-        f"Events stored: {report.events_total}. New review items: {report.new_reviews}."
+        f"Events stored: {report.events_total}. New review items: {report.new_reviews}. "
+        f"Expired review items: {report.expired_reviews}."
         + ("" if report.written else " (dry run: nothing written)")
     )
     if args.report is not None:

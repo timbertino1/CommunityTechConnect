@@ -13,7 +13,10 @@ Given the stored events and the events built from this run's listings:
   that failed or were skipped never count as missing, and past events are left alone;
 - a new event is ``published`` (``published_at`` now) when any of its sources is trusted,
   otherwise it waits for review (``pending_review`` plus a Review Item); a held event (e.g.
-  undecided relevance) also waits for review;
+  undecided relevance) also waits for review. One that is already over when first found gets
+  no Review Item: there is nothing left to decide, so it is never listed;
+- a pending event Review Item whose event is over, gone, or no longer waiting is ``expired``:
+  nothing is left to decide. Expired items count as neither approved nor rejected;
 - an event whose only listings come from Eventbrite is deleted once it has ended (Eventbrite's
   API terms, gate V2), rather than kept for the past-events archive.
 """
@@ -49,6 +52,8 @@ class LifecycleResult:
     new_reviews: list[ReviewItem] = field(default_factory=list)
     removed: list[str] = field(default_factory=list)
     """Ids of events deleted this run (ended, and known only from Eventbrite)."""
+    expired: list[str] = field(default_factory=list)
+    """Ids of pending event review items with nothing left to decide (see expire_reviews)."""
 
 
 def review_id_for(event_id: str) -> str:
@@ -65,6 +70,7 @@ def apply_run(
     now: datetime,
 ) -> LifecycleResult:
     events: dict[str, Event] = {e.id: e for e in existing}
+    queue = list(queue)
     queued = {r.id for r in queue}
     new_reviews: list[ReviewItem] = []
 
@@ -89,6 +95,8 @@ def apply_run(
             )
             continue
         events[fresh.id] = fresh.model_copy(update={"review_state": "pending_review"})
+        if _over(fresh, now):
+            continue  # found too late to review: never listed, so no item to clutter the queue
         review_id = review_id_for(fresh.id)
         if review_id not in queued:
             queued.add(review_id)
@@ -106,7 +114,32 @@ def apply_run(
         else:
             updated.append(_count_missing(event, refreshed_sources, now))
     updated.sort(key=lambda e: (e.start, e.id))
-    return LifecycleResult(updated, new_reviews, removed)
+    expired = expire_reviews(queue, updated, now=now)
+    return LifecycleResult(updated, new_reviews, removed, expired)
+
+
+def expire_reviews(
+    queue: Iterable[ReviewItem], events: Iterable[Event], *, now: datetime
+) -> list[str]:
+    """Ids of pending event items with nothing left to decide: the event is over, was
+    deleted, or no longer waits for review. These are exactly the event items the review PR
+    leaves out (``netc.github.review_pr.pending_items``), so without this they'd stay pending
+    for good."""
+    by_id = {e.id: e for e in events}
+    expired: list[str] = []
+    for item in queue:
+        if item.kind != "event" or item.decision != "pending":
+            continue
+        event = by_id.get(item.ref)
+        if event is None or event.review_state != "pending_review" or _over(event, now):
+            expired.append(item.id)
+    return expired
+
+
+def _over(event: Event, now: datetime) -> bool:
+    """The rule the review PR uses (and FR-035's ``is_upcoming``): over once its end, or its
+    start when it has no end, has passed."""
+    return (event.end or event.start) <= now
 
 
 def _ended_eventbrite_only(event: Event, sources: Mapping[str, Source], now: datetime) -> bool:

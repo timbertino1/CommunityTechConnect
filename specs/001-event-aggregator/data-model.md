@@ -164,7 +164,7 @@ directly (FR-014).
 | `ref` | string | Event id, source id, or candidate URL |
 | `reason` | string | Why it is held (e.g., "probationary source", "low confidence: location") |
 | `created` | datetime | |
-| `decision` | enum | `pending` \| `approved` \| `rejected` |
+| `decision` | enum | `pending` \| `approved` \| `rejected` \| `expired` (set by a discovery run when an event item's event is over, gone, or no longer pending before anyone decided; counts as neither approved nor rejected. An event already over when first found gets no item) |
 | `decided_in_pr` | int \| null | PR number (audit trail, FR-046) |
 
 ### Override
