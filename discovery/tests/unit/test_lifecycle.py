@@ -209,3 +209,51 @@ def test_events_are_returned_soonest_first() -> None:
     sooner = seen(ev(url="https://example.org/sooner"))
     result = run([], [later, sooner])
     assert [e.start for e in result.events] == [START, START + timedelta(days=3)]
+
+
+# --- Items with nothing left to decide (expired)
+
+
+def test_an_event_already_over_when_first_found_gets_no_review_item() -> None:
+    event = seen(ev("src_probation", start=NOW - timedelta(hours=3)))
+    result = run([], [event])
+    assert only(result).review_state == "pending_review"  # never published
+    assert result.new_reviews == []
+    assert result.expired == []
+
+
+def test_an_event_with_no_end_is_over_once_it_starts() -> None:
+    event = seen(ev("src_probation", start=NOW, end=None))
+    assert run([], [event]).new_reviews == []
+
+
+def test_an_event_still_running_when_found_is_reviewed() -> None:
+    event = seen(ev("src_probation", start=NOW - timedelta(hours=1), end=NOW + timedelta(hours=1)))
+    assert len(run([], [event]).new_reviews) == 1
+
+
+def test_a_pending_item_expires_once_its_event_is_over() -> None:
+    event = ev("src_probation", start=NOW - timedelta(days=1), review_state="pending_review")
+    item = make_review(review_id_for(event.id), ref=event.id)
+    assert run([event], [], queue=[item]).expired == [item.id]
+
+
+def test_a_pending_item_for_an_upcoming_event_stays_pending() -> None:
+    event = ev("src_probation", review_state="pending_review")
+    item = make_review(review_id_for(event.id), ref=event.id)
+    assert run([event], [], queue=[item]).expired == []
+
+
+def test_a_pending_item_whose_event_is_gone_or_no_longer_waiting_expires() -> None:
+    published = ev("src_probation", url="https://example.org/e/2")
+    gone = make_review("rev_00000000000a", ref="evt_00000000000a")
+    moot = make_review("rev_00000000000b", ref=published.id)
+    assert run([published], [], queue=[gone, moot]).expired == [gone.id, moot.id]
+
+
+@pytest.mark.parametrize("decision", ["approved", "rejected", "expired"])
+def test_decided_items_and_other_kinds_are_left_alone(decision: str) -> None:
+    past = ev("src_probation", start=NOW - timedelta(days=1), review_state="pending_review")
+    decided = make_review(review_id_for(past.id), ref=past.id, decision=decision)
+    source_item = make_review("rev_00000000000c", kind="source", ref="src_probation")
+    assert run([past], [], queue=[decided, source_item]).expired == []

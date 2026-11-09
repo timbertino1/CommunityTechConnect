@@ -52,7 +52,8 @@ Held: new source · sample events: 3
   it into mentions, links or images. The PR is never rewritten once any box is ticked.
 - At merge: **approve** ticked → approved; **reject** ticked → rejected; neither or both ticked →
   stays pending and reappears in the next review PR. Closing without merge leaves everything
-  pending.
+  pending. An event item whose event ends first is marked `expired` by the next discovery run
+  (nothing left to decide) and drops out; it counts as neither approved nor rejected.
 - `apply-review.yml` (on `push` to `main`, so it can use the `main`-only Environment) finds the
   merged PR for the commit and validates: PR head branch is `review/open`, PR author is the App,
   merger has admin role, the description was not edited after the merge, each `rev_` id is in
