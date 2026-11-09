@@ -6,6 +6,7 @@
       "ai-ml",
       "web-mobile"
     ],
+    "changed_at": null,
     "end": "2026-10-22T01:30:00Z",
     "first_seen": "2026-10-19T00:33:52Z",
     "id": "evt_22ea791e1566",
@@ -34,6 +35,7 @@
     "organizer_id": "org_drupal-nebraska",
     "original_unavailable": false,
     "original_url": "https://groups.drupal.org/node/537358",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "drupal-nebraska-oct-2026-us-central-timezone-quarterly-meeting-ai-2026-10-21",
@@ -51,6 +53,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_ef5e77cd1abf",
@@ -79,6 +82,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/diventures-travel-night/200030838573817",
+    "published_at": null,
     "review_state": "pending_review",
     "series_key": null,
     "slug": "diventures-travel-night-2026-10-22",
@@ -97,6 +101,7 @@
       "ai-ml",
       "security"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_09f665033646",
@@ -125,6 +130,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://events.govtech.com/Nebraska-Public-Sector-Cybersecurity-Summit",
+    "published_at": null,
     "review_state": "pending_review",
     "series_key": null,
     "slug": "nebraska-public-sector-cybersecurity-ai-summit-2026-2026-10-22",
@@ -142,6 +148,7 @@
     "categories": [
       "software-dev"
     ],
+    "changed_at": null,
     "end": "2026-10-23T09:15:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_91a44c5b89e3",
@@ -170,6 +177,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316722290/",
+    "published_at": null,
     "review_state": "pending_review",
     "series_key": null,
     "slug": "lincoln-claude-code-hands-on-workshop-2026-10-23",
@@ -188,6 +196,7 @@
       "ai-ml",
       "software-dev"
     ],
+    "changed_at": null,
     "end": "2026-10-24T14:50:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_3f2daf6dd009",
@@ -216,6 +225,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316700840/",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "lincoln-unlock-ai-productivity-with-claude-code-2026-10-24",
@@ -233,6 +243,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_798c26645827",
@@ -261,6 +272,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/divers-and-drip/200030838573513",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "divers-drip-2026-10-25",
@@ -278,6 +290,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_986ed2cee556",
@@ -306,6 +319,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/monthly-book-club/200030772219858",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "monthly-book-club-2026-10-25",
@@ -323,6 +337,7 @@
     "categories": [
       "software-dev"
     ],
+    "changed_at": null,
     "end": "2026-10-26T00:50:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_4b1f77b7ce67",
@@ -351,6 +366,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/the-claude-code-developers-night-out/events/316710706/",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "lincoln-automate-your-workflow-with-claude-2026-10-25",
@@ -368,6 +384,7 @@
     "categories": [
       "security"
     ],
+    "changed_at": null,
     "end": "2026-10-27T23:59:59Z",
     "first_seen": "2026-10-24T14:11:30Z",
     "id": "evt_ab4b5f38d7c3",
@@ -396,6 +413,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.ippathways.com/event/ohio-cybershare-summit/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "ohio-cybershare-summit-2026-10-25",
@@ -413,6 +431,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": "2026-10-26T20:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_2dba596e514e",
@@ -441,6 +460,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-10-26/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-10-26",
@@ -458,6 +478,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": "2026-10-27T17:00:00Z",
     "first_seen": "2026-10-24T14:11:30Z",
     "id": "evt_1eafe3770146",
@@ -486,6 +507,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.ippathways.com/event/iba-technology-conference-2026/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "iowa-bankers-association-technology-conference-2026-10-27",
@@ -503,6 +525,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": "2026-10-27T21:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_1b7f3ff01cf0",
@@ -531,6 +554,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://netasite.org/event/nefetc/",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "nefetc-2026-10-27",
@@ -549,6 +573,7 @@
       "cloud-devops",
       "software-dev"
     ],
+    "changed_at": null,
     "end": "2026-10-27T20:30:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_03f6fb9d20ae",
@@ -577,6 +602,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/digitallincoln/events/316883219/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "intelligent-document-processing-on-aws-2026-10-27",
@@ -594,6 +620,7 @@
     "categories": [
       "hardware-iot-makers"
     ],
+    "changed_at": null,
     "end": "2026-10-28T01:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_558c8230b7b6",
@@ -621,6 +648,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/industrial-pumpkin-carving/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "industrial-pumpkin-carving-2026-10-27",
@@ -638,6 +666,7 @@
     "categories": [
       "hardware-iot-makers"
     ],
+    "changed_at": null,
     "end": "2026-10-28T01:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_d8df1563ce37",
@@ -665,6 +694,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/open-house-community-hangout-4/2026-10-27/",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "open-house-community-hangout-2026-10-27",
@@ -682,6 +712,7 @@
     "categories": [
       "ai-ml"
     ],
+    "changed_at": null,
     "end": "2026-10-28T01:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_d974e9ab2b81",
@@ -710,6 +741,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.meetup.com/lincoln-code/events/317024050/",
+    "published_at": null,
     "review_state": "published",
     "series_key": null,
     "slug": "when-should-ai-stop-and-hand-the-work-back-to-a-human-2026-10-27",
@@ -727,6 +759,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_3e7f4642fc22",
@@ -755,6 +788,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/veteran-coffee-hour/200030772221807",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "veteran-coffee-hour-2026-10-28",
@@ -774,6 +808,7 @@
       "security",
       "cloud-devops"
     ],
+    "changed_at": null,
     "end": "2026-10-28T19:00:00Z",
     "first_seen": "2026-10-27T16:08:27Z",
     "id": "evt_7a10d3833910",
@@ -802,6 +837,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://www.ippathways.com/event/oarnet-day-2026/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "vmware-carahsoft-oarnet-day-2026-10-28",
@@ -819,6 +855,7 @@
     "categories": [
       "general-tech"
     ],
+    "changed_at": null,
     "end": "2026-10-28T20:00:00Z",
     "first_seen": "2026-10-23T17:40:38Z",
     "id": "evt_8fff5eb48051",
@@ -847,6 +884,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://madenewomaha.com/event/oss-welding/2026-10-28/",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "oss-welding-2026-10-28",
@@ -864,6 +902,7 @@
     "categories": [
       "networking-infra"
     ],
+    "changed_at": null,
     "end": null,
     "first_seen": "2026-10-22T15:45:41Z",
     "id": "evt_89bd2436fb8e",
@@ -892,6 +931,7 @@
     "organizer_id": null,
     "original_unavailable": false,
     "original_url": "https://allevents.in/lincoln/networking/200030770413701",
+    "published_at": null,
     "review_state": "rejected",
     "series_key": null,
     "slug": "networking-2026-10-29",
