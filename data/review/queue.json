@@ -601,5 +601,32 @@
     "kind": "event",
     "reason": "needs review: no tech keywords",
     "ref": "evt_622668fe2a83"
+  },
+  {
+    "created": "2026-11-09T21:57:27Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_3d8fd622b3cc",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/women-in-technology-of-the-heartland/"
+  },
+  {
+    "created": "2026-11-09T21:57:27Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_416e7bbeb040",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/omaha-amazon-web-services-meetup/"
+  },
+  {
+    "created": "2026-11-09T21:57:27Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_ac6648a2ad8c",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
+    "ref": "https://omahamtg.com/"
   }
 ]
