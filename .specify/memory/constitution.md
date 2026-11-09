@@ -35,6 +35,8 @@ own event page; it is never the system of record for an event.
   call to action for details, registration, and RSVP.
 - The service MUST NOT create calendar invites, generate iCal/.ics files or calendar
   subscriptions, send event reminders, or handle registration, RSVP, ticketing, or payments.
+- Read-only web feeds (e.g. Atom) of listed events are permitted: they carry only the listing
+  summary and link each event to its original page. They are not calendar subscriptions.
 - The service MUST NOT host or author event content beyond the summary needed for listing
   (title, date/time, location, organizer, short description, source link).
 - Where the original event page and NETechConnect disagree, the original page is authoritative
@@ -161,4 +163,4 @@ small, simple system is easier to secure and maintain.
 - Compliance is verified at plan time (Constitution Check), at review time (every PR), and
   through a periodic review of the constitution at least once per year.
 
-**Version**: 1.1.0 | **Ratified**: 2026-10-16 | **Last Amended**: 2026-10-16
+**Version**: 1.1.1 | **Ratified**: 2026-10-16 | **Last Amended**: 2026-11-07
