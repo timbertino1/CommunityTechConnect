@@ -628,5 +628,14 @@
     "kind": "suggestion",
     "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
     "ref": "https://omahamtg.com/"
+  },
+  {
+    "created": "2026-11-10T16:36:25Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_4ccba19b3c33",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_c9c811e7ebfa"
   }
 ]

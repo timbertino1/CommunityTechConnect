@@ -767,12 +767,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-10T04:23:50Z",
+    "last_verified": "2026-11-10T16:36:25Z",
     "listings": [
       {
         "content_hash": "11476baf02ff70d37fabc62c0d906aa8931ed801c75eb00b6383131254de98d0",
         "external_id": "https://www.meetup.com/prairie-python/events/317169161/",
-        "last_seen": "2026-11-10T04:23:50Z",
+        "last_seen": "2026-11-10T16:36:25Z",
         "missing_runs": 1,
         "source_id": "src_prairie-python",
         "url": "https://www.meetup.com/prairie-python/events/317169161/"
@@ -907,12 +907,12 @@
       "categories",
       "area"
     ],
-    "last_verified": "2026-11-10T04:23:50Z",
+    "last_verified": "2026-11-10T16:36:25Z",
     "listings": [
       {
         "content_hash": "7b06cdd638dbf9086333c3ae7831180b108e3f80194ce898bdf4f03d8fd1554a",
         "external_id": "203958@events.unl.edu",
-        "last_seen": "2026-11-10T04:23:50Z",
+        "last_seen": "2026-11-10T16:36:25Z",
         "missing_runs": 1,
         "source_id": "src_unl-computing",
         "url": "https://events.unl.edu/cse/2026/11/11/203958/"
@@ -955,12 +955,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-10T04:23:50Z",
+    "last_verified": "2026-11-10T16:36:25Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-11-10T04:23:50Z",
+        "last_seen": "2026-11-10T16:36:25Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
@@ -1079,6 +1079,53 @@
     "status": "scheduled",
     "summary": "",
     "title": "Stacks of Facts: Tuesday Trivia! @ Bennett Martin Public Library | For Adults",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "career-networking"
+    ],
+    "changed_at": null,
+    "end": "2026-11-18T00:45:00Z",
+    "first_seen": "2026-11-10T16:36:25Z",
+    "id": "evt_c9c811e7ebfa",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-11-10T16:36:25Z",
+    "listings": [
+      {
+        "content_hash": "14a4ef79c713887c0fd01ed6b613f6cc88a19b5cc06fc12004ff40c46c671808",
+        "external_id": "https://www.meetup.com/witheartland/events/317284888/",
+        "last_seen": "2026-11-10T16:36:25Z",
+        "missing_runs": 1,
+        "source_id": "src_with",
+        "url": "https://www.meetup.com/witheartland/events/317284888/"
+      }
+    ],
+    "location": {
+      "address": "1212 North 96th Street, 1212 N 96th St, Omaha, NE 68114, USA, Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "1212 North 96th Street"
+    },
+    "organizer_id": "org_with",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/witheartland/events/317284888/",
+    "published_at": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "launching-a-women-in-tech-erg-from-idea-to-impact-2026-11-17",
+    "source_tz": "America/Chicago",
+    "start": "2026-11-17T23:00:00Z",
+    "status": "scheduled",
+    "summary": "Big ideas need a starting point. Sometimes, it’s “What if we built a community?” RSVP on Meetup and join us as we hear from: **Alex Wood**, Director of Ta",
+    "title": "Launching a Women in Tech ERG — from Idea to Impact",
     "tz_assumed": true,
     "visibility": "shown"
   },
@@ -1236,12 +1283,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-10T04:23:50Z",
+    "last_verified": "2026-11-10T16:36:25Z",
     "listings": [
       {
         "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
         "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-        "last_seen": "2026-11-10T04:23:50Z",
+        "last_seen": "2026-11-10T16:36:25Z",
         "missing_runs": 1,
         "source_id": "src_nebraska-data-analytics-forum",
         "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
