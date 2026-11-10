@@ -1,17 +1,5 @@
 [
   {
-    "attempts": 0,
-    "channel": "news",
-    "date_hint": "Tuesday, Nov. 10",
-    "event_id": null,
-    "id": "men_00fca1e0aef2",
-    "links": [],
-    "organizer_hint": "APEX Accelerators of Nebraska, Iowa and South Dakota",
-    "place_hint": "South Sioux City",
-    "resolution": "unresolved",
-    "title": "APEX Accelerators joint initiative event (Nebraska, Iowa, South Dakota)"
-  },
-  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -38,6 +26,18 @@
     "place_hint": null,
     "resolution": "discarded",
     "title": "A Look Back at the Tech Builders Challenge"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17-18",
+    "event_id": null,
+    "id": "men_02f08243e2fe",
+    "links": [],
+    "organizer_hint": "Spur Ventures / Tony Schultz / Nebraska Small Business Development Center? (mentioned as Tony Schultz, State Director; SBDC)",
+    "place_hint": "Nebraska",
+    "resolution": "unresolved",
+    "title": "AgConverge conference is back on Nov. 17-18"
   },
   {
     "attempts": 1,
@@ -340,6 +340,20 @@
     "title": "How Nebraska's business ecosystem is learning and ..."
   },
   {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Deadline: Wednesday, Nov. 18",
+    "event_id": null,
+    "id": "men_2eb180969cd8",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Pipeline Entrepreneurs",
+    "place_hint": "Kansas City-based organization, serving Nebraska, Kansas and Missouri",
+    "resolution": "unresolved",
+    "title": "Founders have until Nov. 18 to apply for 2027 Pipeline programs"
+  },
+  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -594,18 +608,6 @@
     "title": "PowerPath Collective AI skills event"
   },
   {
-    "attempts": 0,
-    "channel": "news",
-    "date_hint": "Nov. 18",
-    "event_id": null,
-    "id": "men_5cb76ed835aa",
-    "links": [],
-    "organizer_hint": "Pipeline Entrepreneurs",
-    "place_hint": "Nebraska, Kansas and Missouri (Pipeline Fellows and Pathfinders programs)",
-    "resolution": "unresolved",
-    "title": "Founders have until Nov. 18 to apply for 2027 Pipeline programs"
-  },
-  {
     "attempts": 1,
     "channel": "news",
     "date_hint": "March 2-3",
@@ -642,18 +644,6 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Five Things: 2026 Tech Nebraska Summit"
-  },
-  {
-    "attempts": 0,
-    "channel": "news",
-    "date_hint": "Tuesday, Nov. 10",
-    "event_id": null,
-    "id": "men_66d837b2b1c2",
-    "links": [],
-    "organizer_hint": "UNO (with Omaha-based business and tech leaders)",
-    "place_hint": "Omaha",
-    "resolution": "unresolved",
-    "title": "public discussion on the value and usage of AI in an organization"
   },
   {
     "attempts": 0,
@@ -769,7 +759,7 @@
     "id": "men_76fa1be86c66",
     "links": [],
     "organizer_hint": "AI Omaha",
-    "place_hint": "Omaha",
+    "place_hint": "Werner Enterprises in Omaha",
     "resolution": "discarded",
     "title": "AI Omaha monthly meetup"
   },
@@ -972,6 +962,18 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Residents, developer push back on Omaha over mall site's ..."
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 16-21",
+    "event_id": null,
+    "id": "men_98a7531cd523",
+    "links": [],
+    "organizer_hint": "Startup Week",
+    "place_hint": "Omaha, Lincoln and Ashland",
+    "resolution": "unresolved",
+    "title": "Startup Week festivities"
   },
   {
     "attempts": 2,
@@ -1196,7 +1198,7 @@
     "event_id": null,
     "id": "men_bf6efbcfd3bf",
     "links": [],
-    "organizer_hint": "TS Bank",
+    "organizer_hint": "TS Bank REV",
     "place_hint": "Council Bluffs",
     "resolution": "discarded",
     "title": "TS Bank REV – Small Business Pitch Competition"
@@ -1321,18 +1323,6 @@
   },
   {
     "attempts": 0,
-    "channel": "news",
-    "date_hint": "Nov. 17-18",
-    "event_id": null,
-    "id": "men_d6603bb3e055",
-    "links": [],
-    "organizer_hint": null,
-    "place_hint": null,
-    "resolution": "unresolved",
-    "title": "AgConverge conference back on Nov. 17-18"
-  },
-  {
-    "attempts": 0,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -1415,6 +1405,18 @@
   },
   {
     "attempts": 0,
+    "channel": "news",
+    "date_hint": "Tuesday, Nov. 10",
+    "event_id": null,
+    "id": "men_e46dc44398df",
+    "links": [],
+    "organizer_hint": "APEX Accelerators of Nebraska, Iowa and South Dakota",
+    "place_hint": "South Sioux City",
+    "resolution": "unresolved",
+    "title": "APEX Accelerators event with Offutt AFB & Iowa National Guard"
+  },
+  {
+    "attempts": 0,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -1487,7 +1489,7 @@
     "id": "men_f256b21e6dd6",
     "links": [],
     "organizer_hint": "Spur Ventures",
-    "place_hint": "Nebraska (Lincoln, NE)",
+    "place_hint": null,
     "resolution": "unresolved",
     "title": "Spur AgConverge conference"
   },
