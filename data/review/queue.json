@@ -92,7 +92,7 @@
   {
     "created": "2026-10-22T15:45:41Z",
     "decided_in_pr": null,
-    "decision": "pending",
+    "decision": "expired",
     "id": "rev_26bec290c628",
     "kind": "event",
     "reason": "needs review: no tech keywords",
@@ -191,7 +191,7 @@
   {
     "created": "2026-10-22T15:45:41Z",
     "decided_in_pr": null,
-    "decision": "pending",
+    "decision": "expired",
     "id": "rev_b392742f212b",
     "kind": "event",
     "reason": "new event from a probationary source",
@@ -434,7 +434,7 @@
   {
     "created": "2026-10-23T17:40:38Z",
     "decided_in_pr": null,
-    "decision": "pending",
+    "decision": "expired",
     "id": "rev_c73112c9485e",
     "kind": "event",
     "reason": "new event from a probationary source",
