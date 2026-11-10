@@ -631,8 +631,8 @@
   },
   {
     "created": "2026-11-10T16:36:25Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 191,
+    "decision": "approved",
     "id": "rev_4ccba19b3c33",
     "kind": "event",
     "reason": "new event from a probationary source",
