@@ -9,7 +9,7 @@ import pytest
 
 from netc.cli import main
 from netc.storage import DataStore
-from tests.data_samples import make_event, make_override, make_source, utc
+from tests.data_samples import make_event, make_override, make_review, make_source, utc
 
 pytestmark = pytest.mark.integration
 
@@ -229,3 +229,30 @@ def test_other_days_do_not_check_links(
     assert code == 0, out
     assert "original pages" not in report.read_text(encoding="utf-8")
     assert "link_check_done" not in out
+
+
+def test_stale_review_items_are_marked_expired(
+    data: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """An item whose event ended before anyone decided is closed as expired, and a decided
+    item is untouched (the leftovers found on 2026-11-09)."""
+    store = DataStore(data)
+    past = make_event(
+        start=utc(2026, 10, 1, 23),
+        url="https://partner.example.org/past",
+        source_id="src_partner",
+        review_state="pending_review",
+    )
+    store.write_events([past])
+    stale = make_review("rev_0000000000aa", ref=past.id)
+    decided = make_review("rev_0000000000bb", ref=past.id, decision="rejected", decided_in_pr=7)
+    store.write_review_queue([stale, decided])
+
+    code, out = discover(data, capsys)
+    assert code == 0, out
+    assert "Expired review items: 1." in out
+    queue = {r.id: r for r in DataStore(data).read_review_queue()}
+    assert queue[stale.id].decision == "expired"
+    assert queue[stale.id].decided_in_pr is None
+    assert queue[decided.id].decision == "rejected"
+    assert main(["validate-data", "--data-dir", str(data)]) == 0, capsys.readouterr().err

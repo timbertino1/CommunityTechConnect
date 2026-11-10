@@ -407,7 +407,9 @@ class ReviewItem(_Model):
     ref: Annotated[str, StringConstraints(min_length=1, max_length=2048), AfterValidator(_plain)]
     reason: Reason
     created: UtcDatetime
-    decision: Literal["pending", "approved", "rejected"] = "pending"
+    decision: Literal["pending", "approved", "rejected", "expired"] = "pending"
+    """``expired``: an event item whose event ended (or went) before anyone decided; it
+    counts as neither approved nor rejected."""
     decided_in_pr: PositiveInt | None = None
 
 

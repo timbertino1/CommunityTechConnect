@@ -72,6 +72,7 @@ class DiscoverReport:
     """What happened to each listing: kept, held, rejected, dropped."""
     events_total: int = 0
     new_reviews: int = 0
+    expired_reviews: int = 0
     written: bool = False
     now: datetime | None = None
     rows: list[SourceRow] = field(default_factory=list)
@@ -186,13 +187,19 @@ def discover_events(
         events, report.link_check = check_links(events, http, now=now, log=log)
     report.events_total = len(events)
     report.new_reviews = len(result.new_reviews)
+    report.expired_reviews = len(result.expired)
     report.changes = _changes(stored, events, {r.ref: r.reason for r in result.new_reviews})
 
     if not dry_run:
         store.write_events(events)
         store.write_source_status(run.statuses)
-        if result.new_reviews:
-            store.write_review_queue([*store.read_review_queue(), *result.new_reviews])
+        if result.new_reviews or result.expired:
+            expired = set(result.expired)
+            queue = [
+                r.model_copy(update={"decision": "expired"}) if r.id in expired else r
+                for r in store.read_review_queue()
+            ]
+            store.write_review_queue([*queue, *result.new_reviews])
         if ai is not None:
             ai.cache.save()
         report.written = True

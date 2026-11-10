@@ -407,7 +407,8 @@
   links:
   - https://www.meetup.com/Omaha-Amazon-Web-Services-Meetup/
   name: Omaha Amazon Web Services
-  source_ids: []
+  source_ids:
+  - src_omaha-aws
   status: active
 - aliases: []
   area: omaha
@@ -829,9 +830,11 @@
   area: omaha
   cadence_days: null
   last_searched: '2026-10-22T00:34:52Z'
-  links: []
+  links:
+  - https://www.meetup.com/women-in-technology-of-the-heartland/
   name: Women in Technology of the Heartland
-  source_ids: []
+  source_ids:
+  - src_with
   status: active
 - aliases:
   - WP OMAHA (WORDPRESS)

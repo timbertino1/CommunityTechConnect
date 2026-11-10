@@ -25,7 +25,9 @@ and events the rules couldn't decide on. The bot lists them in one pull request 
    - **Approve** publishes the event on the site.
    - **Reject** keeps it off the site for good.
    - Leave both unticked (or tick both) to decide later. The item comes back in the next
-     review PR.
+     review PR, unless the event is over by then: an event that ends while it waits is marked
+     *expired* and dropped, counting as neither an approval nor a rejection. (An event the bot
+     only finds after it has ended never comes to you at all.)
 3. **Merge** the PR. A minute later the bot opens a small follow-up PR, `Apply review #N`, that
    applies your decisions and merges itself.
 

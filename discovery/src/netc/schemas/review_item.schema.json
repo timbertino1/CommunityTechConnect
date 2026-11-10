@@ -12,7 +12,7 @@
     "ref": { "type": "string", "minLength": 1, "maxLength": 2048 },
     "reason": { "type": "string", "minLength": 1, "maxLength": 280 },
     "created": { "type": "string", "format": "date-time", "pattern": "Z$" },
-    "decision": { "enum": ["pending", "approved", "rejected"] },
+    "decision": { "enum": ["pending", "approved", "rejected", "expired"] },
     "decided_in_pr": { "type": ["integer", "null"], "minimum": 1 }
   }
 }
