@@ -6,7 +6,7 @@ default_area: omaha
 feed_url: null
 follow_links:
   max_pages: 3
-  path_glob: /women-in-technology-of-the-heartland/events/[0-9]*
+  path_glob: /witheartland/events/[0-9]*
 found_via: suggestion
 html_rules: null
 id: src_with
@@ -20,4 +20,4 @@ rejected_count: 0
 status: active
 trust: probationary
 updated_at: null
-url: https://www.meetup.com/women-in-technology-of-the-heartland/events/
+url: https://www.meetup.com/witheartland/events/
