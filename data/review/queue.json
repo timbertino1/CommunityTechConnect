@@ -604,8 +604,8 @@
   },
   {
     "created": "2026-11-09T21:57:27Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 183,
+    "decision": "approved",
     "id": "rev_3d8fd622b3cc",
     "kind": "suggestion",
     "reason": "visitor suggestion: no upcoming events to judge it by",
@@ -613,8 +613,8 @@
   },
   {
     "created": "2026-11-09T21:57:27Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 183,
+    "decision": "approved",
     "id": "rev_416e7bbeb040",
     "kind": "suggestion",
     "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
@@ -622,8 +622,8 @@
   },
   {
     "created": "2026-11-09T21:57:27Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 183,
+    "decision": "approved",
     "id": "rev_ac6648a2ad8c",
     "kind": "suggestion",
     "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
