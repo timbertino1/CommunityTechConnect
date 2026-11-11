@@ -637,5 +637,23 @@
     "kind": "event",
     "reason": "new event from a probationary source",
     "ref": "evt_c9c811e7ebfa"
+  },
+  {
+    "created": "2026-11-11T18:16:02Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_36dbc6e14649",
+    "kind": "event",
+    "reason": "needs review: no tech keywords",
+    "ref": "evt_c95c0f06c18e"
+  },
+  {
+    "created": "2026-11-11T18:16:02Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_853e9bac3917",
+    "kind": "event",
+    "reason": "needs review: no tech keywords",
+    "ref": "evt_3e69342d9cfd"
   }
 ]
