@@ -375,6 +375,52 @@
   },
   {
     "all_day": false,
+    "area": "online",
+    "categories": [
+      "general-tech"
+    ],
+    "changed_at": null,
+    "end": "2026-12-11T00:30:00Z",
+    "first_seen": "2026-11-11T18:16:02Z",
+    "id": "evt_c95c0f06c18e",
+    "inferred": [
+      "categories"
+    ],
+    "last_verified": "2026-11-11T18:16:02Z",
+    "listings": [
+      {
+        "content_hash": "9374fa7f40b5a5d80d8ecdfaf65328a3e40f0973cf0a64357478a497d3b455b6",
+        "external_id": "204148@events.unl.edu",
+        "last_seen": "2026-11-11T18:16:02Z",
+        "missing_runs": 1,
+        "source_id": "src_unl-computing",
+        "url": "https://events.unl.edu/cse/2026/12/10/204148/"
+      }
+    ],
+    "location": {
+      "address": "Online (https://events.vtools.ieee.org/m/591560)",
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": "Online (https://events.vtools.ieee.org/m/591560)"
+    },
+    "organizer_id": "org_unl-computing",
+    "original_unavailable": false,
+    "original_url": "https://events.unl.edu/cse/2026/12/10/204148/",
+    "published_at": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "colloquium-dr-carrick-detweiler-2026-12-10",
+    "source_tz": "UTC",
+    "start": "2026-12-10T23:30:00Z",
+    "status": "scheduled",
+    "summary": "Abstract: Decades of putting fires out, instead of allowing natural low-intensity burns, combined with a changing climate that has further dried out our forests has led to the extreme wildfires that are devastating our environment and putting people and property at risk. We have developed an integrated drone system for aerial ignition and forest fire mapping. The drone-base system allows firefighters to remotely ignite backburns and prescribed burns while staying out of harm's way. By…",
+    "title": "Colloquium: Dr. Carrick Detweiler",
+    "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "omaha",
     "categories": [
       "general-tech"
