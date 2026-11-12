@@ -955,12 +955,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-12T03:27:43Z",
+    "last_verified": "2026-11-12T18:40:05Z",
     "listings": [
       {
         "content_hash": "b2db95059868b3db99aaf1ce267e77402cafd2cd1f6368975f9cb0afa0314840",
         "external_id": "https://www.usnua.com/live/nenug-omaha-fall-event-2026",
-        "last_seen": "2026-11-12T03:27:43Z",
+        "last_seen": "2026-11-12T18:40:05Z",
         "missing_runs": 1,
         "source_id": "src_nenug",
         "url": "https://www.usnua.com/live/nenug-omaha-fall-event-2026"
@@ -1096,12 +1096,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-12T03:27:43Z",
+    "last_verified": "2026-11-12T18:40:05Z",
     "listings": [
       {
         "content_hash": "14a4ef79c713887c0fd01ed6b613f6cc88a19b5cc06fc12004ff40c46c671808",
         "external_id": "https://www.meetup.com/witheartland/events/317284888/",
-        "last_seen": "2026-11-12T03:27:43Z",
+        "last_seen": "2026-11-12T18:40:05Z",
         "missing_runs": 1,
         "source_id": "src_with",
         "url": "https://www.meetup.com/witheartland/events/317284888/"
@@ -1283,12 +1283,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-12T03:27:43Z",
+    "last_verified": "2026-11-12T18:40:05Z",
     "listings": [
       {
         "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
         "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-        "last_seen": "2026-11-12T03:27:43Z",
+        "last_seen": "2026-11-12T18:40:05Z",
         "missing_runs": 1,
         "source_id": "src_nebraska-data-analytics-forum",
         "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
@@ -1376,12 +1376,12 @@
     "inferred": [
       "categories"
     ],
-    "last_verified": "2026-11-11T18:16:02Z",
+    "last_verified": "2026-11-12T18:40:05Z",
     "listings": [
       {
         "content_hash": "585958e0964de43d1b2f3ac9bb54486461c77af9d4cb70d6bffd0b27cd2324b4",
         "external_id": "204147@events.unl.edu",
-        "last_seen": "2026-11-11T18:16:02Z",
+        "last_seen": "2026-11-12T18:40:05Z",
         "missing_runs": 1,
         "source_id": "src_unl-computing",
         "url": "https://events.unl.edu/cse/2026/11/20/204147/"
