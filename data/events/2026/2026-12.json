@@ -386,12 +386,12 @@
     "inferred": [
       "categories"
     ],
-    "last_verified": "2026-11-14T02:45:43Z",
+    "last_verified": "2026-11-14T16:48:45Z",
     "listings": [
       {
         "content_hash": "9374fa7f40b5a5d80d8ecdfaf65328a3e40f0973cf0a64357478a497d3b455b6",
         "external_id": "204148@events.unl.edu",
-        "last_seen": "2026-11-14T02:45:43Z",
+        "last_seen": "2026-11-14T16:48:45Z",
         "missing_runs": 1,
         "source_id": "src_unl-computing",
         "url": "https://events.unl.edu/cse/2026/12/10/204148/"
