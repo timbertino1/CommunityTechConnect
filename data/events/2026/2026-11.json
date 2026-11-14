@@ -1102,7 +1102,7 @@
         "content_hash": "14a4ef79c713887c0fd01ed6b613f6cc88a19b5cc06fc12004ff40c46c671808",
         "external_id": "https://www.meetup.com/witheartland/events/317284888/",
         "last_seen": "2026-11-13T18:19:28Z",
-        "missing_runs": 1,
+        "missing_runs": 2,
         "source_id": "src_with",
         "url": "https://www.meetup.com/witheartland/events/317284888/"
       }
@@ -1123,7 +1123,7 @@
     "slug": "launching-a-women-in-tech-erg-from-idea-to-impact-2026-11-17",
     "source_tz": "America/Chicago",
     "start": "2026-11-17T23:00:00Z",
-    "status": "scheduled",
+    "status": "unverified",
     "summary": "Big ideas need a starting point. Sometimes, it’s “What if we built a community?” RSVP on Meetup and join us as we hear from: **Alex Wood**, Director of Ta",
     "title": "Launching a Women in Tech ERG — from Idea to Impact",
     "tz_assumed": true,
@@ -1283,12 +1283,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-13T18:19:28Z",
+    "last_verified": "2026-11-14T02:45:43Z",
     "listings": [
       {
         "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
         "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-        "last_seen": "2026-11-13T18:19:28Z",
+        "last_seen": "2026-11-14T02:45:43Z",
         "missing_runs": 1,
         "source_id": "src_nebraska-data-analytics-forum",
         "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
@@ -1376,12 +1376,12 @@
     "inferred": [
       "categories"
     ],
-    "last_verified": "2026-11-13T18:19:28Z",
+    "last_verified": "2026-11-14T02:45:43Z",
     "listings": [
       {
         "content_hash": "585958e0964de43d1b2f3ac9bb54486461c77af9d4cb70d6bffd0b27cd2324b4",
         "external_id": "204147@events.unl.edu",
-        "last_seen": "2026-11-13T18:19:28Z",
+        "last_seen": "2026-11-14T02:45:43Z",
         "missing_runs": 1,
         "source_id": "src_unl-computing",
         "url": "https://events.unl.edu/cse/2026/11/20/204147/"
