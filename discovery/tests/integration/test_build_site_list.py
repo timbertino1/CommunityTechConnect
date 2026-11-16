@@ -245,7 +245,7 @@ def flat(node: Any) -> str:
 def test_the_hero_has_the_headline_and_real_counts(site: Path) -> None:
     page = home(site)
     hero = page.css_first(".home-hero")
-    assert flat(hero.css_first("h1")) == "Every Nebraska tech event, in one place."
+    assert flat(hero.css_first("h1")) == "Your map to Nebraska tech events."
     counts = {flat(c.css_first(".count-label")): flat(c.css_first(".count-n"))
               for c in hero.css(".count")}  # fmt: skip
     assert counts["upcoming events"] == str(len(cards(site)))

@@ -35,7 +35,7 @@ async function expectStill(page) {
 test("the map is decoration: hidden from assistive technology", async ({ page }) => {
   await page.goto("/");
   await expect(map(page)).toHaveAttribute("aria-hidden", "true");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Every Nebraska tech event, in one place.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Your map to Nebraska tech events.");
 });
 
 test("on a desktop the 3D map draws and animates", async ({ page }) => {

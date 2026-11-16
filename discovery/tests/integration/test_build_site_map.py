@@ -98,7 +98,7 @@ def test_the_home_page_has_a_hidden_decorative_map(tmp_path: Path) -> None:
         {"type": "module", "src": "/js/filters.js"},  # T113
     ]
     [h1] = home.css("h1")
-    assert " ".join(h1.text().split()) == "Every Nebraska tech event, in one place."
+    assert " ".join(h1.text().split()) == "Your map to Nebraska tech events."
 
 
 def test_other_pages_have_no_map(tmp_path: Path) -> None:
