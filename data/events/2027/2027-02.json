@@ -45,5 +45,52 @@
     "title": "Angular Community Meetup - En Español",
     "tz_assumed": true,
     "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "online",
+    "categories": [
+      "software-dev"
+    ],
+    "changed_at": null,
+    "end": "2027-02-12T02:30:00Z",
+    "first_seen": "2026-11-16T23:24:47Z",
+    "id": "evt_d80ea88474fb",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-11-16T23:24:47Z",
+    "listings": [
+      {
+        "content_hash": "dbcba7fb694330661340ef5d7199d8c80bb49e29e68a865a73396b76e9ba2c51",
+        "external_id": "https://www.meetup.com/ngda-omaha/events/nvvxftykcdbpb/",
+        "last_seen": "2026-11-16T23:24:47Z",
+        "missing_runs": 1,
+        "source_id": "src_ngda-omaha",
+        "url": "https://www.meetup.com/ngda-omaha/events/nvvxftykcdbpb/"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": "org_ngda-omaha",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/ngda-omaha/events/nvvxftykcdbpb/",
+    "published_at": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "omaha-game-developers-meetup-2027-02-11",
+    "source_tz": "America/Chicago",
+    "start": "2027-02-12T01:00:00Z",
+    "status": "scheduled",
+    "summary": "Bring what you have been working on and we can't wait to see you there! Check out our discord for up to date event info. You can also join via our discor",
+    "title": "Omaha Game Developers Meetup",
+    "tz_assumed": true,
+    "visibility": "shown"
   }
 ]
