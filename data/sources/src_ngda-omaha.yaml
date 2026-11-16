@@ -1,0 +1,23 @@
+added_at: '2026-11-16'
+approved_count: 0
+check_interval_hours: 12
+connector: jsonld
+default_area: omaha
+feed_url: null
+follow_links:
+  max_pages: 3
+  path_glob: /ngda-omaha/events/[0-9]*
+found_via: suggestion
+html_rules: null
+id: src_ngda-omaha
+name: Omaha Game Developers Association
+notes: 'Meetup (gate V1 decision): public event pages only, 10 s apart, no member data. Suggested via
+  the site and approved by the owner in #214, on probation like other hand-added sources.'
+organizer_id: org_ngda-omaha
+origin: suggested
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: probationary
+updated_at: '2026-11-16'
+url: https://www.meetup.com/ngda-omaha/events/

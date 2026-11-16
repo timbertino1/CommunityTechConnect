@@ -104,8 +104,10 @@
   last_searched: '2026-11-02T21:34:31Z'
   links:
   - https://dc402.org/
+  - https://www.meetup.com/omaha-hackers/
   name: DEF CON 402 (Omaha Hackers)
-  source_ids: []
+  source_ids:
+  - src_omaha-hackers
   status: active
 - aliases: []
   area: lincoln
@@ -173,7 +175,8 @@
   links:
   - https://www.meetup.com/GDGOmaha/
   name: Google Developer Group Omaha
-  source_ids: []
+  source_ids:
+  - src_gdg-omaha
   status: active
 - aliases: []
   area: null
@@ -364,9 +367,11 @@
   area: null
   cadence_days: null
   last_searched: '2026-10-22T00:34:52Z'
-  links: []
+  links:
+  - https://www.meetup.com/nebraska-women-of-color-in-tech-meetup-group/
   name: Nebraska Women of Color in Tech
-  source_ids: []
+  source_ids:
+  - src_ne-women-of-color-in-tech
   status: active
 - aliases:
   - Nebraska Code
@@ -494,8 +499,10 @@
   last_searched: '2026-11-09T22:21:27Z'
   links:
   - https://omahagamedev.com/
+  - https://www.meetup.com/ngda-omaha/
   name: Omaha Game Developers Association
-  source_ids: []
+  source_ids:
+  - src_ngda-omaha
   status: active
 - aliases:
   - OMAHA HASHICORP
