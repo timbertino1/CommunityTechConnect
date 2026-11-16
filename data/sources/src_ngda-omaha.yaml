@@ -1,5 +1,5 @@
 added_at: '2026-11-16'
-approved_count: 0
+approved_count: 3
 check_interval_hours: 12
 connector: jsonld
 default_area: omaha
@@ -18,6 +18,6 @@ origin: suggested
 rate_limit_seconds: 10
 rejected_count: 0
 status: active
-trust: probationary
+trust: trusted
 updated_at: '2026-11-16'
 url: https://www.meetup.com/ngda-omaha/events/
