@@ -736,5 +736,32 @@
     "kind": "suggestion",
     "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
     "ref": "https://www.meetup.com/gdgomaha/"
+  },
+  {
+    "created": "2026-11-16T23:24:47Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_1240246cca7e",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_8cb2e6fb6172"
+  },
+  {
+    "created": "2026-11-16T23:24:47Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_27a70958163f",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_5fe790db5d7b"
+  },
+  {
+    "created": "2026-11-16T23:24:47Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_77cb42884394",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_d80ea88474fb"
   }
 ]

@@ -421,6 +421,53 @@
   },
   {
     "all_day": false,
+    "area": "online",
+    "categories": [
+      "software-dev"
+    ],
+    "changed_at": null,
+    "end": "2026-12-11T02:30:00Z",
+    "first_seen": "2026-11-16T23:24:47Z",
+    "id": "evt_5fe790db5d7b",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-11-16T23:24:47Z",
+    "listings": [
+      {
+        "content_hash": "74cffbbda8a4172fa34b57971b5e339624e06b28b1e4e5785408338122ace80e",
+        "external_id": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/",
+        "last_seen": "2026-11-16T23:24:47Z",
+        "missing_runs": 1,
+        "source_id": "src_ngda-omaha",
+        "url": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/"
+      }
+    ],
+    "location": {
+      "address": null,
+      "city": null,
+      "online": true,
+      "state": null,
+      "venue": null
+    },
+    "organizer_id": "org_ngda-omaha",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/",
+    "published_at": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "omaha-game-developers-meetup-2026-12-10",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-11T01:00:00Z",
+    "status": "scheduled",
+    "summary": "Bring what you have been working on and we can't wait to see you there! Check out our discord for up to date event info. You can also join via our discor",
+    "title": "Omaha Game Developers Meetup",
+    "tz_assumed": true,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
     "area": "omaha",
     "categories": [
       "general-tech"
