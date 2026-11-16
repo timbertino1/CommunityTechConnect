@@ -739,8 +739,8 @@
   },
   {
     "created": "2026-11-16T23:24:47Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 223,
+    "decision": "approved",
     "id": "rev_1240246cca7e",
     "kind": "event",
     "reason": "new event from a probationary source",
@@ -748,8 +748,8 @@
   },
   {
     "created": "2026-11-16T23:24:47Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 223,
+    "decision": "approved",
     "id": "rev_27a70958163f",
     "kind": "event",
     "reason": "new event from a probationary source",
@@ -757,8 +757,8 @@
   },
   {
     "created": "2026-11-16T23:24:47Z",
-    "decided_in_pr": null,
-    "decision": "pending",
+    "decided_in_pr": 223,
+    "decision": "approved",
     "id": "rev_77cb42884394",
     "kind": "event",
     "reason": "new event from a probationary source",
