@@ -28,7 +28,7 @@
     "title": "A Look Back at the Tech Builders Challenge"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "news",
     "date_hint": "Nov. 17-18",
     "event_id": null,
@@ -36,7 +36,7 @@
     "links": [],
     "organizer_hint": "Spur Ventures / Tony Schultz / Nebraska Small Business Development Center? (mentioned as Tony Schultz, State Director; SBDC)",
     "place_hint": "Nebraska",
-    "resolution": "unresolved",
+    "resolution": "resolved",
     "title": "AgConverge conference is back on Nov. 17-18"
   },
   {
@@ -108,7 +108,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -122,7 +122,7 @@
     "title": "Registration still open for the Tech Nebraska Summit on ..."
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -190,7 +190,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI | Digital Lincoln — Digital Lincoln"
   },
   {
-    "attempts": 1,
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -254,8 +254,20 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Nebraskans can learn AI at free local trainings by UNO ..."
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Monday, Nov. 16",
+    "event_id": null,
+    "id": "men_1b6b2de4b8c4",
+    "links": [],
+    "organizer_hint": "Open Range",
+    "place_hint": "Ashland",
+    "resolution": "unresolved",
+    "title": "Startup Week Launch Party in Ashland"
   },
   {
     "attempts": 4,
@@ -270,7 +282,7 @@
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -282,6 +294,86 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Q&A with Lincoln TMT Managing Director Don More"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1f0f8d3b4e9a",
+    "links": [
+      "https://useworkshop.com/press/omaha-based-startup-workshop-raises-12m-to-streamline-internal-email-and-communications"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Omaha-based startup Workshop raises $12M to streamline internal email and communications | Workshop"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 16-21",
+    "event_id": null,
+    "id": "men_1f34433b4bea",
+    "links": [],
+    "organizer_hint": "Startup Week organizers",
+    "place_hint": "Omaha, Lincoln and Ashland",
+    "resolution": "unresolved",
+    "title": "Startup Week registrations and festivities across Omaha, Lincoln and Ashland"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2075b83cde15",
+    "links": [
+      "https://python-groups.blogspot.com/2007/05/omaha-python-users-group-may-10-user.html"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Happenings in Python Usergroups: Omaha Python Users Group, May 10 -- User Group Meeting Notes"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17",
+    "event_id": null,
+    "id": "men_27c184abd418",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week / Techstars",
+    "place_hint": "Omaha",
+    "resolution": "unresolved",
+    "title": "The Techstars Founder Catalyst Program Showcase"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_286506e412a5",
+    "links": [],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "No upcoming Nebraska tech events found in the provided text"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_2baee16bb8fd",
+    "links": [
+      "https://siliconprairienews.com/2025/06/registration-open-for-10th-annual-nebraska-code-conference-in-lincoln"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Registration open for 10th annual Nebraska.Code() conference in Lincoln - Silicon Prairie News"
   },
   {
     "attempts": 4,
@@ -322,7 +414,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "upcoming events, June 3"
   },
   {
@@ -340,7 +432,7 @@
     "title": "How Nebraska's business ecosystem is learning and ..."
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "news",
     "date_hint": "Deadline: Wednesday, Nov. 18",
     "event_id": null,
@@ -380,6 +472,20 @@
     "title": "registration for University students wanting to showcase their research"
   },
   {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_38ecedb272b0",
+    "links": [
+      "https://www.nucamp.co/blog/coding-bootcamp-omaha-ne-top-10-strategies-for-networking-your-way-into-omahas-tech-scene"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Top 10 Strategies for Networking Your Way into Omaha's Tech Scene"
+  },
+  {
     "attempts": 4,
     "channel": "web_search",
     "date_hint": null,
@@ -416,7 +522,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Workshop surpasses 100 employees as it nears five-year anniversary - Silicon Prairie News"
   },
   {
@@ -434,7 +540,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI"
   },
   {
-    "attempts": 3,
+    "attempts": 4,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -470,6 +576,20 @@
     "place_hint": null,
     "resolution": "discarded",
     "title": "Cyber Roadmap: 2025 and beyond - Lincoln International LLC"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_45cd2f3990ad",
+    "links": [
+      "https://news.unl.edu/article/computer-science-and-engineering-officially-becomes-school-of-computing"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Computer Science and Engineering officially becomes School of Computing | Nebraska Today"
   },
   {
     "attempts": 2,
@@ -548,7 +668,7 @@
     "links": [],
     "organizer_hint": "Latino Connect",
     "place_hint": "Lincoln",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "2026 Latino Connect Excellence in Business Awards"
   },
   {
@@ -636,6 +756,20 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Nov. 16-21",
+    "event_id": null,
+    "id": "men_63f84e060854",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Startup Week is back with ecosystem celebrations, networking and education"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": null,
     "event_id": null,
     "id": "men_654b13eddb14",
@@ -670,6 +804,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Nebraska Recurring Startup Events Guide - Updated for 2026 - Silicon Prairie News"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_6c85c8e719bd",
+    "links": [
+      "https://ruralinnovation.us/blog/building-innovation-in-rural-nebraska-a-look-back-at-the-tech-builders-challenge"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Building Innovation in Rural Nebraska: A Look Back at the Tech ..."
   },
   {
     "attempts": 0,
@@ -804,6 +952,30 @@
     "title": "The JumpStart Challenge returns to give everyday entrepreneurs the chance to connect, build and earn"
   },
   {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "September 2026",
+    "event_id": null,
+    "id": "men_7f9299163dc7",
+    "links": [],
+    "organizer_hint": "Don’t Panic Labs / Silicon Prairie News",
+    "place_hint": "Lincoln, NE",
+    "resolution": "unresolved",
+    "title": "Hustle Conference 2026 participation"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "September 2026",
+    "event_id": null,
+    "id": "men_7f99e763dae2",
+    "links": [],
+    "organizer_hint": "Don’t Panic Labs / Silicon Prairie News",
+    "place_hint": "Lincoln, NE",
+    "resolution": "unresolved",
+    "title": "Hustle Conference 2026"
+  },
+  {
     "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
@@ -880,7 +1052,7 @@
     "links": [],
     "organizer_hint": "SBA NE/IA",
     "place_hint": "Highlander Accelerator in Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "SBA NE/IA Veteran & Military Entrepreneur Resource Forum"
   },
   {
@@ -920,6 +1092,20 @@
     "place_hint": "Prairie Portrait Five Things",
     "resolution": "discarded",
     "title": "Hustle Conference 2026"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 20",
+    "event_id": null,
+    "id": "men_8f910497cc75",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week",
+    "place_hint": "Omaha",
+    "resolution": "unresolved",
+    "title": "Elevator Pitches and Prosecco"
   },
   {
     "attempts": 0,
@@ -1002,6 +1188,20 @@
     "title": "Spur AgConverge 2026"
   },
   {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17",
+    "event_id": null,
+    "id": "men_9bc90103ff59",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week / Open Range",
+    "place_hint": "Omaha (as part of Startup Week)",
+    "resolution": "unresolved",
+    "title": "The Innovation in Business Panel"
+  },
+  {
     "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
@@ -1028,6 +1228,30 @@
     "place_hint": null,
     "resolution": "discarded",
     "title": "Entering the Age of the AI Economy - Lincoln International LLC"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Tuesday, Nov. 17",
+    "event_id": null,
+    "id": "men_a1c3c31fe31a",
+    "links": [],
+    "organizer_hint": "Techstars",
+    "place_hint": "Millwork Commons",
+    "resolution": "unresolved",
+    "title": "Techstars Founder Catalyst Program Showcase"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 18",
+    "event_id": null,
+    "id": "men_a1d45c15a7b0",
+    "links": [],
+    "organizer_hint": "1 Million Cups Nebraska organizers and entrepreneurs from Omaha, Lincoln, Grand Island and Norfolk",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "1 Million Cups Nebraska"
   },
   {
     "attempts": 0,
@@ -1126,6 +1350,20 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Nov. 18",
+    "event_id": null,
+    "id": "men_b26e33619b0a",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week / 1 Million Cups Nebraska",
+    "place_hint": "Lincoln (startup networking events across Omaha, Lincoln, Norfolk and Grand Island join forces in Lincoln)",
+    "resolution": "unresolved",
+    "title": "A first ever 1 Million Cups Nebraska"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Monday, Nov. 2",
     "event_id": null,
     "id": "men_b292e5b10bd9",
@@ -1148,6 +1386,20 @@
     "place_hint": "Nebraska",
     "resolution": "discarded",
     "title": "Tech Nebraska Summit"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 19",
+    "event_id": null,
+    "id": "men_b3a3883c85c5",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week / UNeMed / panels",
+    "place_hint": "Omaha",
+    "resolution": "unresolved",
+    "title": "The Women’s Entrepreneurship Day"
   },
   {
     "attempts": 0,
@@ -1258,6 +1510,18 @@
     "title": "Mitel User Group (MUG) Event Lands in Omaha – A First- ..."
   },
   {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Fall 2026 semester",
+    "event_id": null,
+    "id": "men_c6edac4c769b",
+    "links": [],
+    "organizer_hint": "UNO College of Business Administration; Silicon Prairie News (reporting)",
+    "place_hint": "Mammel Hall, UNO campus",
+    "resolution": "unresolved",
+    "title": "UNO College of Business Administration launches entrepreneurship major (major pathways announced)"
+  },
+  {
     "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
@@ -1280,7 +1544,7 @@
     "links": [],
     "organizer_hint": "UNO",
     "place_hint": "Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "UNO public discussion on AI in organizations"
   },
   {
@@ -1406,13 +1670,41 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Nov. 19",
+    "event_id": null,
+    "id": "men_dce9b189f905",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week",
+    "place_hint": "Omaha",
+    "resolution": "unresolved",
+    "title": "A Healthtech Showcase"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_e12ac5343eea",
+    "links": [
+      "https://iclr.cc/virtual/2026/social/10020557"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "ICLR Social Women in Machine Learning (WiML) Social @ ICLR"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Tuesday, Nov. 10",
     "event_id": null,
     "id": "men_e46dc44398df",
     "links": [],
     "organizer_hint": "APEX Accelerators of Nebraska, Iowa and South Dakota",
     "place_hint": "South Sioux City",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "APEX Accelerators event with Offutt AFB & Iowa National Guard"
   },
   {
@@ -1454,6 +1746,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "Meet Breanna Hetland, Co-founder and CEO at Family Room, LLC and Associate Professor at UNMC College of Nursing, in the latest Prairie Portrait"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_ed725957aa8e",
+    "links": [
+      "https://business.unl.edu/news/sold-out-emerging-tech-conference-features-industry-innovators"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Sold Out Emerging Tech Conference Features Industry ..."
   },
   {
     "attempts": 0,
@@ -1510,6 +1816,20 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Nov. 18",
+    "event_id": null,
+    "id": "men_f697a71a54ab",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "An AgTech Showcase"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Thu, Oct 29",
     "event_id": null,
     "id": "men_f699bb97d32b",
@@ -1518,6 +1838,20 @@
     "place_hint": "Omaha (location not specified)",
     "resolution": "discarded",
     "title": "workshop on Thursday, Oct. 29, aimed at helping small businesses discover uses for artificial intelligence"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 21",
+    "event_id": null,
+    "id": "men_f75f9e2f804e",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week / Huskers game vs Ohio State",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "The Startup Week Tailgate"
   },
   {
     "attempts": 3,
