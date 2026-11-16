@@ -22,6 +22,10 @@
   reason: 'Owner 2026-10-24: Made New Makerspace''s weekly Open House is not a tech event and floods the
     list; source paused.'
   visibility: hidden
+- categories:
+  - career-networking
+  event_id: evt_9a0b1234ffd6
+  reason: 'Owner 2026-11-16: Tech Omaha Winter Party is professional networking, not computer networking.'
 - event_id: evt_a32291f5f3e3
   reason: 'Owner 2026-10-24: Made New Makerspace''s weekly Open House is not a tech event and floods the
     list; source paused.'
