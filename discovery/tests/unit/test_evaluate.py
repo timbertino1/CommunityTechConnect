@@ -112,7 +112,7 @@ def test_a_meetup_group_is_set_up_like_the_other_meetup_sources(tmp_path: Path) 
     assert source.url == "https://www.meetup.com/omaha-data-engineers/events/"
     assert source.connector == "jsonld" and source.rate_limit_seconds == 10
     assert source.follow_links is not None
-    assert source.follow_links.path_glob == "/omaha-data-engineers/events/[0-9]*"
+    assert source.follow_links.path_glob == "/omaha-data-engineers/events/[0-9a-z]*"
     assert source.name == "Omaha Data Engineers"
 
 

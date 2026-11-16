@@ -58,7 +58,9 @@ class JsonLdConnector:
 
         linked: list[RawPayload] = []
         warnings: list[str] = []
-        for url in _matching_links(response.url, response.text, source.follow_links):
+        for url in _matching_links(
+            response.url, response.text, source.follow_links, now=fetched_at
+        ):
             try:
                 page = http.get(url, kind="page", delay_seconds=source.rate_limit_seconds)
             except FetchError as exc:
@@ -101,9 +103,15 @@ class JsonLdConnector:
 _TEXT_URL: Final = re.compile(r"https://[A-Za-z0-9.-]+/[^\s\"'<>\\]*")
 
 
-def _matching_links(page_url: str, html: str, rule: FollowLinks) -> list[str]:
-    """Same-site https links whose path matches the glob, in page order: ``<a href>`` links
-    first, then absolute URLs written in the page text. Query and fragment are dropped."""
+def _matching_links(page_url: str, html: str, rule: FollowLinks, *, now: datetime) -> list[str]:
+    """Same-site https links whose path matches the glob, at most ``rule.max_pages``. Query and
+    fragment are dropped.
+
+    By default they come in page order: ``<a href>`` links first, then absolute URLs written in
+    the page text. When the page lists its events with dates in embedded data (Meetup), only
+    those events are followed: upcoming ones first, soonest first, then past ones newest first,
+    so the few pages we read aren't spent on past meetings (2026-11-16: a repeating series'
+    upcoming meetings sat after ten past ones and were never read)."""
     base = urlsplit(page_url)
     found: list[str] = []
     try:
@@ -119,9 +127,75 @@ def _matching_links(page_url: str, html: str, rule: FollowLinks) -> list[str]:
         url = urlunsplit(("https", parts.netloc, parts.path, "", ""))
         if url not in found:
             found.append(url)
-        if len(found) >= rule.max_pages:
+    dated = _embedded_event_dates(html)
+    listed = [url for url in found if _link_key(url) in dated]
+    if listed:
+        earliest = now - WINDOW_BEHIND
+        upcoming = sorted(
+            (url for url in listed if not _is_past(dated[_link_key(url)], earliest)),
+            key=lambda url: dated[_link_key(url)][0],
+        )
+        past = sorted(
+            (url for url in listed if _is_past(dated[_link_key(url)], earliest)),
+            key=lambda url: dated[_link_key(url)][0],
+            reverse=True,
+        )
+        found = [*upcoming, *past]
+    return found[: rule.max_pages]
+
+
+# Next.js pages (Meetup) embed their data as JSON in this script; Apollo's cache inside it holds
+# one entry per event with its address, start time and status.
+_NEXT_DATA: Final = re.compile(
+    r'<script[^>]*\bid="__NEXT_DATA__"[^>]*>(.*?)</script>', re.DOTALL | re.IGNORECASE
+)
+MAX_EMBEDDED_DATA_CHARS: Final = 3_000_000
+MAX_EMBEDDED_EVENTS: Final = 500
+
+
+def _link_key(url: str) -> str:
+    parts = urlsplit(url)
+    return f"{(parts.hostname or '').lower()}{parts.path.rstrip('/')}"
+
+
+def _is_past(entry: tuple[datetime, bool], earliest: datetime) -> bool:
+    start, marked_past = entry
+    return marked_past or start < earliest
+
+
+def _embedded_event_dates(html: str) -> dict[str, tuple[datetime, bool]]:
+    """Event address -> (start, marked past) from a page's embedded Apollo cache; empty when
+    the page has none or it can't be read. Untrusted: used only to order links that already
+    passed the same-site and glob checks."""
+    match = _NEXT_DATA.search(html)
+    if match is None or len(match.group(1)) > MAX_EMBEDDED_DATA_CHARS:
+        return {}
+    try:
+        data = json.loads(match.group(1))
+    except ValueError:
+        return {}
+    state: Any = data
+    for key in ("props", "pageProps", "__APOLLO_STATE__"):
+        state = state.get(key) if isinstance(state, dict) else None
+    if not isinstance(state, dict):
+        return {}
+    dated: dict[str, tuple[datetime, bool]] = {}
+    for entry in list(state.values())[: MAX_EMBEDDED_EVENTS * 4]:
+        if not isinstance(entry, dict) or entry.get("__typename") != "Event":
+            continue
+        url, when = entry.get("eventUrl"), entry.get("dateTime")
+        if not isinstance(url, str) or not isinstance(when, str):
+            continue
+        try:
+            start = datetime.fromisoformat(when)
+        except ValueError:
+            continue
+        if start.tzinfo is None:
+            continue
+        dated[_link_key(url)] = (start, entry.get("status") == "PAST")
+        if len(dated) >= MAX_EMBEDDED_EVENTS:
             break
-    return found
+    return dated
 
 
 # ---------------------------------------------------------------- page parsing

@@ -240,6 +240,74 @@ def test_follow_links_finds_urls_written_in_embedded_page_data() -> None:
     assert len(CONNECTOR.parse(source, fetched).listings) == 1
 
 
+MEETUP = "https://www.meetup.example/example-gamedev/events/"
+
+
+def meetup_source(max_pages: int):  # type: ignore[no-untyped-def]
+    return jsonld_source(
+        url=MEETUP, follow_links={"path_glob": "/example-gamedev/events/[0-9a-z]*",
+                                  "max_pages": max_pages},
+    )  # fmt: skip
+
+
+def followed(page: str, max_pages: int) -> list[str]:
+    with mocked_web("www.meetup.example") as web, make_http() as http:
+        web.get(MEETUP).respond(200, text=page, headers=HTML)
+        web.get(url__regex=r"https://www\.meetup\.example/.*").respond(
+            200, text=fixture_text("jsonld/event_page.html"), headers=HTML
+        )
+        fetched = CONNECTOR.fetch(meetup_source(max_pages), http)
+    return [p.url.removeprefix(MEETUP) for p in fetched.linked]
+
+
+def test_meetup_upcoming_meetings_are_followed_first_soonest_first() -> None:
+    # Repeating meetings have letter ids and come after the past ones on the page; with only
+    # 3 pages to read, page order would spend them all on past meetings (2026-11-16 bug).
+    assert followed(fixture_text("jsonld/meetup_listing.html"), 3) == [
+        "nvvxftyhcpbjb/",  # Nov 12
+        "nvvxftyjcqbnb/",  # Dec 10
+        "nvvxftykccbsb/",  # Jan 14
+    ]
+
+
+def test_meetup_past_meetings_only_fill_leftover_pages_newest_first() -> None:
+    # Past pages still feed the report's "latest past event" when there is room.
+    assert followed(fixture_text("jsonld/meetup_listing.html"), 6) == [
+        "nvvxftyhcpbjb/",
+        "nvvxftyjcqbnb/",
+        "nvvxftykccbsb/",
+        "nvvxftykcdbpb/",
+        "317112722/",
+        "316618800/",
+    ]
+
+
+def test_meetup_links_missing_from_the_embedded_list_are_not_followed() -> None:
+    # The calendar link matches the glob but isn't a meeting; broken entries are skipped.
+    got = followed(fixture_text("jsonld/meetup_listing.html"), 20)
+    assert "calendar" not in got and "broken1/" not in got
+    assert not any("other-group" in u or "offsite" in u for u in got)
+    assert len(got) == 7
+
+
+@pytest.mark.parametrize(
+    "data",
+    [
+        "{not json",
+        "[]",
+        '{"props": {"pageProps": {"__APOLLO_STATE__": []}}}',
+        '{"props": {"pageProps": {"__APOLLO_STATE__": {"Event:1": "x"}}}}',
+    ],
+)
+def test_without_usable_embedded_data_links_are_followed_in_page_order(data: str) -> None:
+    page = (
+        '<a href="/example-gamedev/events/111111111/">a</a>'
+        '<a href="/example-gamedev/events/222222222/">b</a>'
+        f'<script id="__NEXT_DATA__" type="application/json">{data}</script>'
+    )
+    assert followed(page, 5) == ["111111111/", "222222222/"]
+
+
 def test_events_outside_the_window_are_left_out() -> None:
     past = (
         '<script type="application/ld+json">{"@type":"Event","name":"Last year",'

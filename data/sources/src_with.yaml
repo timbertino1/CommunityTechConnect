@@ -6,7 +6,7 @@ default_area: omaha
 feed_url: null
 follow_links:
   max_pages: 3
-  path_glob: /witheartland/events/[0-9]*
+  path_glob: /witheartland/events/[0-9a-z]*
 found_via: suggestion
 html_rules: null
 id: src_with

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><title>Events | Example Game Developers | Meetup</title></head>
+<body>
+<!-- Shaped like a real Meetup group /events/ page (2026-11-16): the server-rendered list shows
+     past meetings (numeric ids) first; the upcoming meetings of a repeating series (letter ids)
+     come after them. Every meeting's date and status are in the embedded Apollo state. -->
+<a href="/example-gamedev/events/calendar">Calendar</a>
+<a href="/example-gamedev/events/317112722/">Past: October build night</a>
+<a href="/example-gamedev/events/316618800/">Past: September build night</a>
+<a href="/example-gamedev/events/316221096/">Past: August build night</a>
+<a href="/other-group/events/nvvxothergrp/">Someone else's meeting</a>
+<script id="__NEXT_DATA__" type="application/json">
+{"props":{"pageProps":{"__APOLLO_STATE__":{
+ "Group:1":{"__typename":"Group","urlname":"example-gamedev"},
+ "Event:317112722":{"__typename":"Event","id":"317112722","dateTime":"2026-10-08T19:00:00-05:00","status":"PAST","eventUrl":"https://www.meetup.example/example-gamedev/events/317112722/"},
+ "Event:316618800":{"__typename":"Event","id":"316618800","dateTime":"2026-09-10T19:00:00-05:00","status":"PAST","eventUrl":"https://www.meetup.example/example-gamedev/events/316618800/"},
+ "Event:316221096":{"__typename":"Event","id":"316221096","dateTime":"2026-08-13T19:00:00-05:00","status":"PAST","eventUrl":"https://www.meetup.example/example-gamedev/events/316221096/"},
+ "Event:nvvxftykccbsb":{"__typename":"Event","id":"nvvxftykccbsb","dateTime":"2027-01-14T19:00:00-06:00","status":"ACTIVE","eventUrl":"https://www.meetup.example/example-gamedev/events/nvvxftykccbsb/"},
+ "Event:nvvxftyjcqbnb":{"__typename":"Event","id":"nvvxftyjcqbnb","dateTime":"2026-12-10T19:00:00-06:00","status":"ACTIVE","eventUrl":"https://www.meetup.example/example-gamedev/events/nvvxftyjcqbnb/"},
+ "Event:nvvxftyhcpbjb":{"__typename":"Event","id":"nvvxftyhcpbjb","dateTime":"2026-11-12T19:00:00-06:00","status":"ACTIVE","eventUrl":"https://www.meetup.example/example-gamedev/events/nvvxftyhcpbjb/"},
+ "Event:nvvxftykcdbpb":{"__typename":"Event","id":"nvvxftykcdbpb","dateTime":"2027-02-11T19:00:00-06:00","status":"ACTIVE","eventUrl":"https://www.meetup.example/example-gamedev/events/nvvxftykcdbpb/"},
+ "Event:nvvxothergrp":{"__typename":"Event","id":"nvvxothergrp","dateTime":"2026-10-20T18:00:00-05:00","status":"ACTIVE","eventUrl":"https://www.meetup.example/other-group/events/nvvxothergrp/"},
+ "Event:broken1":{"__typename":"Event","id":"broken1","dateTime":"not a date","status":"ACTIVE","eventUrl":"https://www.meetup.example/example-gamedev/events/broken1/"},
+ "Event:broken2":{"__typename":"Event","id":"broken2","dateTime":"2026-12-01T19:00:00-06:00","status":"ACTIVE","eventUrl":42},
+ "Event:offsite":{"__typename":"Event","id":"offsite","dateTime":"2026-10-25T19:00:00-05:00","status":"ACTIVE","eventUrl":"https://evil.example/example-gamedev/events/offsite/"}
+}}}}
+</script>
+</body>
+</html>
