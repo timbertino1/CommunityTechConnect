@@ -137,6 +137,55 @@ def test_api_errors_fail_without_the_token(status: int) -> None:
     assert TOKEN not in str(caught.value) and str(status) in str(caught.value)
 
 
+def arguments_error(*names: str, code: str = "ARGUMENTS_ERROR") -> bytes:
+    return json.dumps({
+        "status_code": 400, "error": code, "error_description": f"bad {TOKEN}",
+        "error_detail": {code: {name: ["INVALID"] for name in names}},
+    }).encode()  # fmt: skip
+
+
+def test_a_refused_request_is_retried_once_with_only_status_live() -> None:
+    # T103 confirmed status=live alone works; the optional settings are what Eventbrite may refuse.
+    api = FakeApi((400, arguments_error("page_size")), (200, recorded()))
+    payload = connector(api).fetch(source(), NeverFetch())
+    assert len(api.calls) == 2
+    retry = api.calls[1][0]
+    assert retry == EVENTS_URL + "?status=live"
+    assert json.loads(payload.content)["events"]
+    assert any("ARGUMENTS_ERROR" in w and "page_size" in w for w in payload.warnings)
+    assert all(TOKEN not in w for w in payload.warnings)
+
+
+def test_a_second_refusal_fails_with_eventbrites_code_but_never_its_text() -> None:
+    api = FakeApi((400, arguments_error("expand")), (400, arguments_error("status")))
+    with pytest.raises(FetchError) as caught:
+        connector(api).fetch(source(), NeverFetch())
+    message = str(caught.value)
+    assert "HTTP 400" in message and "ARGUMENTS_ERROR" in message and "status" in message
+    assert TOKEN not in message and "bad" not in message
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        json.dumps({"error": "ABCDEF123TOKENLIKE", "error_detail": {}}).encode(),
+        json.dumps({"error": "ARGUMENTS_ERROR",
+                    "error_detail": {"ARGUMENTS_ERROR": {"ABCDEF123TOKENLIKE": ["X"]}}}).encode(),
+        json.dumps({"error": "ARGUMENTS_ERROR", "error_detail": {"ARGUMENTS_ERROR": {
+            "a" * 200: ["X"], "<script>": ["X"]}}}).encode(),
+        b"not json",
+        b"[]",
+    ],
+)  # fmt: skip
+def test_only_plain_error_codes_and_setting_names_are_repeated(body: bytes) -> None:
+    api = FakeApi((400, body), (400, body))
+    with pytest.raises(FetchError) as caught:
+        connector(api).fetch(source(), NeverFetch())
+    message = str(caught.value)
+    assert "ABCDEF123TOKENLIKE" not in message and "<script>" not in message
+    assert "a" * 41 not in message and "HTTP 400" in message
+
+
 def test_calls_stop_well_under_the_hourly_limit() -> None:
     api = FakeApi(*[(200, b'{"events": []}')] * (MAX_CALLS_PER_RUN + 5))
     eb = connector(api)

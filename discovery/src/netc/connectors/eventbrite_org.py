@@ -42,6 +42,42 @@ MAX_WARNINGS: Final = 50
 
 _ORGANIZER_PATH: Final = re.compile(r"/o/(?:[^/]*-)?(\d{5,20})/?")
 
+FULL_QUERY: Final[Mapping[str, str]] = {
+    "status": "live", "order_by": "start_asc", "expand": "venue", "page_size": str(PAGE_SIZE),
+}  # fmt: skip
+MINIMAL_QUERY: Final[Mapping[str, str]] = {"status": "live"}
+
+# What may be repeated from an Eventbrite error body. Its free text (error_description) never
+# is: it could echo anything. A code is UPPER_SNAKE with at least one underscore and a setting
+# name is lower case, so neither can be an Eventbrite token (upper case letters and digits).
+_ERROR_CODE: Final = re.compile(r"[A-Z]{2,20}(?:_[A-Z]{2,20}){1,3}")
+_SETTING_NAME: Final = re.compile(r"[a-z][a-z_.]{0,39}")
+MAX_SETTINGS_NAMED: Final = 5
+
+
+def _events_url(organizer: str, query: Mapping[str, str]) -> str:
+    return f"{EVENTBRITE_API}/organizers/{organizer}/events/?{urlencode(query)}"
+
+
+def _error_summary(content: bytes) -> str:
+    """Eventbrite's error code and the settings it named, or 'no error code'."""
+    try:
+        body = json.loads(content)
+    except ValueError:
+        return "no error code"
+    if not isinstance(body, dict):
+        return "no error code"
+    code = body.get("error")
+    if not isinstance(code, str) or not _ERROR_CODE.fullmatch(code):
+        return "no error code"
+    detail = body.get("error_detail")
+    named = detail.get(code) if isinstance(detail, dict) else None
+    settings = sorted(
+        name for name in (named if isinstance(named, dict) else {})
+        if isinstance(name, str) and _SETTING_NAME.fullmatch(name)
+    )[:MAX_SETTINGS_NAMED]  # fmt: skip
+    return f"{code}: {', '.join(settings)}" if settings else code
+
 
 class ApiGetter(Protocol):
     def get(
@@ -90,24 +126,36 @@ class EventbriteOrgConnector:
             raise FetchError(f"{source.url} is not an Eventbrite organizer page")
         if self._api is None:
             self._api = SafeApi()
+        api = self._api
         fetched_at = self._clock()
         first_url = ""
         events: list[Any] = []
         warnings: list[str] = []
         continuation: str | None = None
+        query_base = FULL_QUERY
         for _ in range(MAX_PAGES_PER_SOURCE):
-            if self.calls >= MAX_CALLS_PER_RUN:
-                raise FetchError(f"the Eventbrite call limit for this run ({MAX_CALLS_PER_RUN})")
-            query = {"status": "live", "order_by": "start_asc", "expand": "venue",
-                     "page_size": str(PAGE_SIZE)}  # fmt: skip
+            query = dict(query_base)
             if continuation:
                 query["continuation"] = continuation
-            url = f"{EVENTBRITE_API}/organizers/{organizer}/events/?{urlencode(query)}"
-            first_url = first_url or url
-            self.calls += 1
-            response = self._api.get(url, headers={"Authorization": f"Bearer {token}"})
+            response = self._get(api, organizer, query, token)
+            if response.status == 400 and query_base is FULL_QUERY:
+                # T103 confirmed status=live alone works; the optional settings are what
+                # Eventbrite may refuse. Retry once without them and say so in the report.
+                warnings.append(
+                    f"Eventbrite refused the full request ({_error_summary(response.content)}); "
+                    "read with status=live only"
+                )
+                query_base = MINIMAL_QUERY
+                query = dict(query_base)
+                if continuation:
+                    query["continuation"] = continuation
+                response = self._get(api, organizer, query, token)
+            first_url = first_url or _events_url(organizer, query)
             if response.status >= 400:
-                raise FetchError(f"Eventbrite returned HTTP {response.status}")
+                raise FetchError(
+                    f"Eventbrite returned HTTP {response.status} "
+                    f"({_error_summary(response.content)})"
+                )
             try:
                 page = json.loads(response.content)
             except ValueError:
@@ -135,6 +183,14 @@ class EventbriteOrgConnector:
             ),
             warnings=tuple(warnings),
         )
+
+    def _get(
+        self, api: ApiGetter, organizer: str, query: Mapping[str, str], token: str
+    ) -> RawApiResponse:
+        if self.calls >= MAX_CALLS_PER_RUN:
+            raise FetchError(f"the Eventbrite call limit for this run ({MAX_CALLS_PER_RUN})")
+        self.calls += 1
+        return api.get(_events_url(organizer, query), headers={"Authorization": f"Bearer {token}"})
 
     def parse(self, source: Source, payload: RawPayload) -> ParseResult:
         warnings = list(payload.warnings)
