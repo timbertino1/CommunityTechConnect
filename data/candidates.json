@@ -58,6 +58,17 @@
   },
   {
     "evidence": [
+      "web search: Omaha programming user group",
+      "result: Omaha Macintosh User Group - How is Omaha Macintosh User Group abbreviated?"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
+    "url": "https://acronyms.thefreedictionary.com/Omaha+Macintosh+User+Group"
+  },
+  {
+    "evidence": [
       "web search: Lincoln tech conference",
       "result: ACTE's National Work-Based Learning Conference 2026: Lincoln Tech High School Share, Career C..."
     ],
@@ -160,6 +171,17 @@
   },
   {
     "evidence": [
+      "web search: Nebraska tech hackathon",
+      "result: Top Technology Hackathons for the Curious and Creative 2026"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://allhackathons.com/themes/technology"
+  },
+  {
+    "evidence": [
       "web search: Nebraska data meetup",
       "result: All Things Nebraska",
       "sample: 0 of 0 upcoming events relevant (2026-10-22)"
@@ -249,6 +271,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://azure.microsoft.com/en-us/products/devops"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha Wine && Code\" Omaha",
+      "result: Must-Visit Wine Bar in Omaha, NE | Barroco Wine Bar"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://barrocowinebar.com/"
   },
   {
     "evidence": [
@@ -645,6 +678,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://csguide.cs.princeton.edu/account/groups"
+  },
+  {
+    "evidence": [
+      "web search: Nebraska cybersecurity user group",
+      "result: Cyber Strong Nebraska"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://csneb.org/"
   },
   {
     "evidence": [
@@ -1049,6 +1093,17 @@
   },
   {
     "evidence": [
+      "linked from https://infosec-conferences.com/event/20261105-interface-omaha-2026",
+      "link text:"
+    ],
+    "found_via": "link_graph",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://go.infosec.events/rsa-conference-2027"
+  },
+  {
+    "evidence": [
       "web search: Omaha tech workshop",
       "result: Tech & Talent Transformation – Go Big Future – NCF",
       "sample: 0 of 0 upcoming events relevant (2026-10-22)"
@@ -1127,6 +1182,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://heartlandoug.wordpress.com/"
+  },
+  {
+    "evidence": [
+      "web search: Lincoln tech hackathon",
+      "result: Events | Career Center | UNC Charlotte"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://hireaniner.charlotte.edu/4120"
   },
   {
     "evidence": [
@@ -1321,6 +1387,16 @@
   },
   {
     "evidence": [
+      "suggested by a visitor"
+    ],
+    "found_via": "suggestion",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://isc2omaha.org/"
+  },
+  {
+    "evidence": [
       "gap check: known group with no source: \"Enterprise Architecture Community\" Omaha",
       "result: Enterprise Architecture (EA) – Information Technology",
       "sample: 0 of 0 upcoming events relevant (2026-11-02)"
@@ -1408,6 +1484,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://kafka.apache.org/community/events"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Project 18\" Omaha",
+      "result: Projects :: Keep Omaha Moving"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://keepomahamoving.com/projects"
   },
   {
     "evidence": [
@@ -1721,6 +1808,17 @@
       "link text: Register on Luma"
     ],
     "found_via": "link_graph",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
+    "result": "needs_review",
+    "url": "https://luma.com/nebras-1l0a/"
+  },
+  {
+    "evidence": [
+      "linked from https://nebraskajs.com/",
+      "link text: Register on Luma"
+    ],
+    "found_via": "link_graph",
     "last_evaluated": "2026-10-25T13:16:02Z",
     "reason": "Luma pages are not read (gate V3); add the calendar's iCal feed (on Luma: the calendar, then Add iCal Subscription) to the group's links in known_groups.yaml",
     "result": "needs_review",
@@ -1966,6 +2064,17 @@
   },
   {
     "evidence": [
+      "web search: Nebraska networking meetup",
+      "result: Business Networking Events in Omaha, NE"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://networkafterwork.com/cities/omaha"
+  },
+  {
+    "evidence": [
       "web search: Nebraska networking user group",
       "result: Network Nebraska"
     ],
@@ -2193,6 +2302,17 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Omaha Wine && Code\" Omaha",
+      "result: Omaha Wine Company | Bringing Napa to Omaha"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "sample events could not be read: FetchError",
+    "result": "needs_review",
+    "url": "https://omahawine.com/"
+  },
+  {
+    "evidence": [
       "gap check: known group with no source: \"NEbraskaCERT\" Omaha",
       "result: Resource Library | Omaha ONEBiz | Omaha ONEBiz"
     ],
@@ -2340,6 +2460,17 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Omaha Unity 3D\" Omaha",
+      "result: Omaha Police Department - Home"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
+    "url": "https://police.cityofomaha.org/"
+  },
+  {
+    "evidence": [
       "web search: Omaha cybersecurity meetup",
       "result: CYBERSECURITY TRAINING WITH PEDCO & UNO – Omaha",
       "sample: 0 of 0 upcoming events relevant (2026-10-21)"
@@ -2396,6 +2527,17 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Project 18\" Omaha",
+      "result: Projects - Public works"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "page returned HTTP 403",
+    "result": "needs_review",
+    "url": "https://publicworks.omaha.gov/projects"
+  },
+  {
+    "evidence": [
       "web search: Omaha programming meetup",
       "result: Omaha Meetups"
     ],
@@ -2404,6 +2546,17 @@
     "reason": "page returned HTTP 403",
     "result": "needs_review",
     "url": "https://purecommunity.purestorage.com/category/north-america-omaha/events/omaha-meetups"
+  },
+  {
+    "evidence": [
+      "resolved mention: AgConverge conference is back on Nov. 17-18",
+      "event page: https://raisingnebraska.net/event/unl-spur-agconverge-conference/"
+    ],
+    "found_via": "news",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "sample events could not be read: FetchError",
+    "result": "needs_review",
+    "url": "https://raisingnebraska.net/"
   },
   {
     "evidence": [
@@ -2550,6 +2703,17 @@
     "reason": "page returned HTTP 403",
     "result": "needs_review",
     "url": "https://sports.ndtv.com/asian-games-2026/india-at-asian-games/schedule"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha TechConnect\" Omaha",
+      "result: Square On Technology | Omaha IT Support, Phones & Cybersecurity"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://squareontech.com/"
   },
   {
     "evidence": [
@@ -2770,6 +2934,18 @@
   },
   {
     "evidence": [
+      "web search: Omaha tech workshop",
+      "result: Scale Omaha – 2x Technical Founder w/ Ben Stevinson, Co ...",
+      "sample: 0 of 0 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://ticket.eventvesta.com/events/2x-technical-founder-w-ben-stevinson-co-founder-of-workshop-2-20-2025"
+  },
+  {
+    "evidence": [
       "web search: Omaha programming user group",
       "result: Salesforce Developer Group, Omaha, United States",
       "sample: 0 of 0 upcoming events relevant (2026-10-21)"
@@ -2790,6 +2966,17 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://trailhead.salesforce.com/trailblazer-community/groups/0F94V0000002E6ISAU"
+  },
+  {
+    "evidence": [
+      "web search: Omaha programming user group",
+      "result: PHP Programming Training Classes Omaha, Nebraska - Certstaffix Training"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "robots.txt disallows reading it",
+    "result": "blocked_by_terms",
+    "url": "https://training.certstaff.com/catalog/206/PHP-Programming/211/Omaha-Nebraska"
   },
   {
     "evidence": [
@@ -3377,6 +3564,18 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Side Projects Club\" Omaha",
+      "result: Side Project Inc. - Center for Nonprofits",
+      "sample: 0 of 0 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.dosomeorganizing.org/"
+  },
+  {
+    "evidence": [
       "linked from https://groups.drupal.org/nebraska",
       "link text: Drupal community events"
     ],
@@ -3480,6 +3679,17 @@
   },
   {
     "evidence": [
+      "web search: Omaha tech workshop",
+      "result: Tech Omaha - Eventbrite"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "sample events could not be read: FetchError",
+    "result": "needs_review",
+    "url": "https://www.eventbrite.com/o/tech-omaha-18062423055/"
+  },
+  {
+    "evidence": [
       "web search: Lincoln programming meetup",
       "result: Lincoln Level Up Coding with Claude - evntally",
       "sample: 0 of 0 upcoming events relevant (2026-11-09)"
@@ -3511,6 +3721,17 @@
     "reason": "page returned HTTP 403",
     "result": "needs_review",
     "url": "https://www.flightsfrom.com/DAY"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha Unity 3D\" Omaha",
+      "result: Unity Fest - Freedomtainment"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.freedomtainment.com/unity-fest"
   },
   {
     "evidence": [
@@ -3950,6 +4171,18 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://www.lps.org/o/cs/page/guiding-principles-of-ai-use-in-lps"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha STEM Ecosystem\" Omaha",
+      "result: Omaha STEM Ecosystem Op-Ed Reaches 182,770 Readers | Lukas Partners",
+      "sample: 0 of 0 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.lukaspartners.com/post/omaha-stem-ecosystem-op-ed"
   },
   {
     "evidence": [
@@ -4549,6 +4782,18 @@
   },
   {
     "evidence": [
+      "web search: Omaha programming user group",
+      "result: Omaha Azure User Group | Meetup",
+      "sample: 0 of 0 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/omaha-azure-user-group-meetup/"
+  },
+  {
+    "evidence": [
       "listed for the known group Data Science and Big Data Omaha",
       "sample: 0 of 0 upcoming events relevant (2026-10-25)"
     ],
@@ -4923,6 +5168,17 @@
   },
   {
     "evidence": [
+      "listed for the known group WP Omaha",
+      "sample: 0 of 0 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "platform",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no upcoming events to judge it by",
+    "result": "needs_review",
+    "url": "https://www.meetup.com/wp-omaha/"
+  },
+  {
+    "evidence": [
       "web search: Nebraska networking user group",
       "result: Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"
     ],
@@ -5066,6 +5322,18 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Omaha Wine && Code\" Omaha",
+      "result: Old Vine Wine & Spirits: Home",
+      "sample: 0 of 2 upcoming events relevant (2026-11-16)"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no tech events among 2 upcoming",
+    "result": "rejected",
+    "url": "https://www.oldvinewineomaha.com/"
+  },
+  {
+    "evidence": [
       "web search: Omaha IT user group",
       "result: Omaha Linux User Group"
     ],
@@ -5098,6 +5366,17 @@
     "reason": "no upcoming events to judge it by",
     "result": "needs_review",
     "url": "https://www.omahachamber.org/events-programs/events/networking"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha Women in Machine Learning\" Omaha",
+      "result: Nebraska-Omaha Embraces AI Academically, Offering Degrees and Building Security Programs | Omaha Daily Record"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.omahadailyrecord.com/content/nebraska-omaha-embraces-ai-academically-offering-degrees-and-building-security-programs"
   },
   {
     "evidence": [
@@ -5146,6 +5425,17 @@
   },
   {
     "evidence": [
+      "gap check: known group with no source: \"Omaha Wine && Code\" Omaha",
+      "result: Omaha Steaks Wine"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.omahasteakswine.com/"
+  },
+  {
+    "evidence": [
       "web search: Nebraska web development user group",
       "result: Nebraska IT Leadership Forum"
     ],
@@ -5165,6 +5455,17 @@
     "reason": "not an event source",
     "result": "rejected",
     "url": "https://www.princetonreview.com/college/creighton-university-1023809"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Side Projects Club\" Omaha",
+      "result: Project Project - About"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "page could not be read: FetchTimeoutError",
+    "result": "needs_review",
+    "url": "https://www.projectprojectomaha.com/about"
   },
   {
     "evidence": [
@@ -5234,6 +5535,17 @@
   },
   {
     "evidence": [
+      "web search: Nebraska cloud user group",
+      "result: SAS User Groups | SAS"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "robots.txt disallows reading it",
+    "result": "blocked_by_terms",
+    "url": "https://www.sas.com/en_us/connect/user-groups.html"
+  },
+  {
+    "evidence": [
       "web search: Lincoln networking meetup",
       "result: LPED | Communities"
     ],
@@ -5265,6 +5577,28 @@
     "reason": "no calendar feed, event data or RSS/Atom feed found",
     "result": "needs_review",
     "url": "https://www.sfdevs.com/"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Side Projects Club\" Omaha",
+      "result: Side Project Brewing"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.sideprojectbrewing.com/"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Side Projects Club\" Omaha",
+      "result: — SIDE PROJECTS"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.sideprojects.film/home"
   },
   {
     "evidence": [
@@ -5449,6 +5783,17 @@
   },
   {
     "evidence": [
+      "web search: Nebraska cloud meetup",
+      "result: Events | Red Cloud, Nebraska"
+    ],
+    "found_via": "web_search",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.visitredcloud.com/community/events"
+  },
+  {
+    "evidence": [
       "web search: Omaha networking meetup",
       "result: Networking Events - West O Chamber",
       "sample: 0 of 0 upcoming events relevant (2026-10-25)"
@@ -5470,6 +5815,17 @@
     "reason": "its events need a person to judge",
     "result": "needs_review",
     "url": "https://www.wicys.org/events/wicys-2026/wicys-2026-kenotes"
+  },
+  {
+    "evidence": [
+      "gap check: known group with no source: \"Omaha Women in Machine Learning\" Omaha",
+      "result: Women in Machine Learning | WiML"
+    ],
+    "found_via": "gap",
+    "last_evaluated": "2026-11-16T21:49:54Z",
+    "reason": "no calendar feed, event data or RSS/Atom feed found",
+    "result": "needs_review",
+    "url": "https://www.wiml.org/"
   },
   {
     "evidence": [

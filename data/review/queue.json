@@ -655,5 +655,86 @@
     "kind": "event",
     "reason": "needs review: no tech keywords",
     "ref": "evt_3e69342d9cfd"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_0a3e56797612",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/ngda-omaha/"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_0ce43d85d3ba",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/omaha-hackers/"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_0f3f52b427f0",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
+    "ref": "https://www.nebraskacert.org/CSF"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_1129a9b5074d",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/nebraska-women-of-color-in-tech-meetup-group/"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_627ff29853b0",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
+    "ref": "https://gdg.community.dev/gdg-omaha"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_74523a13ea36",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: suggested, but not a page we can read events from",
+    "ref": "https://www.eventbrite.com/e/tech-omaha-winter-party-2026-tickets-2004136839236"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_914b05891c42",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: no calendar feed, event data or RSS/Atom feed found",
+    "ref": "https://isc2omaha.org/"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_a3e5a54f3ac2",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no calendar feed, event data or RSS/Atom feed found",
+    "ref": "https://usergroups.databricks.com/omaha-databricks-user-group"
+  },
+  {
+    "created": "2026-11-16T21:49:54Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_e8d6f1e5951f",
+    "kind": "suggestion",
+    "reason": "visitor suggestion: already looked at: no upcoming events to judge it by",
+    "ref": "https://www.meetup.com/gdgomaha/"
   }
 ]
