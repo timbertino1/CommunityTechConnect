@@ -7,12 +7,12 @@ from datetime import UTC, date, datetime, timedelta, timezone
 import pytest
 
 from netc.connectors.jsonld import JsonLdConnector
-from tests.connector_support import by_title, fixture_text, jsonld_source, payload
+from tests.connector_support import FETCHED_AT, by_title, fixture_text, jsonld_source, payload
 from tests.fetch_support import make_http, mocked_web
 
 pytestmark = pytest.mark.contract
 
-CONNECTOR = JsonLdConnector()
+CONNECTOR = JsonLdConnector(clock=lambda: FETCHED_AT)  # fixed clock: fixture dates must not age out
 CST = timezone(timedelta(hours=-6))
 HTML = {"content-type": "text/html; charset=utf-8"}
 
