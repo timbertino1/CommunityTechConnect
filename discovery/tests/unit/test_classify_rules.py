@@ -133,6 +133,42 @@ def test_non_tech_and_sales_events_are_rejected(title: str, summary: str) -> Non
     assert result.categories == []
 
 
+@pytest.mark.parametrize(
+    ("title", "summary", "organizer"),
+    [
+        # Live Tech Omaha listing, 2026-11-16: rejected as "excluded: happy hour" from its
+        # description, though it's a tech community's networking event (FR: career-networking).
+        (
+            "Tech Omaha Winter Party 2026",
+            "A networking happy hour for the local tech community. "
+            "This event is FREE for anyone who works in tech or loves tech.",
+            "Tech Omaha",
+        ),
+        ("Kubernetes in production", "Talks at 6, then happy hour next door.", None),
+        ("Lightning talks: Python tooling", "Trivia night follows the talks.", None),
+    ],
+)
+def test_social_phrases_in_the_description_alone_do_not_exclude(
+    title: str, summary: str, organizer: str | None
+) -> None:
+    # Socials (venue calendars) are excluded by their title; a tech event that mentions a
+    # happy hour in its description is not.
+    result = run(item(title, summary, organizer=organizer))
+    assert not result.reason.startswith("excluded")
+    assert result.relevant is not False
+
+
+def test_social_phrases_in_the_title_still_exclude() -> None:
+    for title in ("Happy Hour at Barred Owl", "Tuesday Trivia Night", "Tech trivia night"):
+        result = run(item(title, "Meet other makers and innovators."))
+        assert result.relevant is False and result.reason.startswith("excluded")
+
+
+def test_other_exclusions_still_apply_to_the_description() -> None:
+    result = run(item("Cloud tools night", "Bring questions; a mortgage advisor will present."))
+    assert result.relevant is False and result.reason == "excluded: mortgage"
+
+
 # --- Nebraska connection (FR-003)
 
 

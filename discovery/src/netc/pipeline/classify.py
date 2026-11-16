@@ -29,8 +29,8 @@ GENERAL: Final = "general-tech"
 EXCLUSIONS: Final = (
     "real estate", "mortgage", "insurance seminar", "webinar demo", "product demo", "book a demo",
     "free demo", "sales pitch", "investment opportunity", "get rich", "mlm", "realtor",
-    # Socials and services with no tech content (venue calendars)
-    "happy hour", "trivia night", "blood drive", "massage",
+    # Services with no tech content (venue calendars)
+    "blood drive", "massage",
     # Academic calendars (university feeds)
     "semester break", "student holiday", "priority registration", "last day to", "last day of",
     "final exam", "finals", "commencement",
@@ -41,6 +41,11 @@ EXCLUSIONS: Final = (
     "graduate information", "nvolvement fair", "student advisory board",
     "run with the school of computing", "school of computing showcase",
 )  # fmt: skip
+
+# Socials from venue calendars. Checked in the title only: a tech community's networking party
+# or a talk with a happy hour afterwards mentions one in its description and stays in scope
+# (career-networking; owner decision 2026-11-16, Tech Omaha Winter Party).
+TITLE_ONLY_EXCLUSIONS: Final = ("happy hour", "trivia night")
 
 
 @dataclass(frozen=True)
@@ -90,6 +95,9 @@ def classify(
 
     for phrase in EXCLUSIONS:
         if _has(title, phrase) or _has(body, phrase):
+            return Classification(False, None, item.area, [], 0.9, "rules", f"excluded: {phrase}")
+    for phrase in TITLE_ONLY_EXCLUSIONS:
+        if _has(title, phrase):
             return Classification(False, None, item.area, [], 0.9, "rules", f"excluded: {phrase}")
 
     scores = _score(title, body, categories)
