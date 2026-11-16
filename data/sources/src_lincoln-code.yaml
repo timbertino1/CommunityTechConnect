@@ -6,7 +6,7 @@ default_area: lincoln
 feed_url: null
 follow_links:
   max_pages: 3
-  path_glob: /lincoln-code/events/[0-9]*
+  path_glob: /lincoln-code/events/[0-9a-z]*
 found_via: web_search
 html_rules: null
 id: src_lincoln-code

@@ -263,7 +263,7 @@ def _evaluate(
                 "connector": "jsonld",
                 "url": f"https://www.meetup.com/{group}/events/",
                 "rate_limit_seconds": 10,
-                "follow_links": FollowLinks(path_glob=f"/{group}/events/[0-9]*", max_pages=3),
+                "follow_links": FollowLinks(path_glob=f"/{group}/events/[0-9a-z]*", max_pages=3),
                 "notes": (
                     "Discovered. Meetup (gate V1): public event pages only, 10 s apart, "
                     "no member data."
