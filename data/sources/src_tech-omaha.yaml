@@ -1,0 +1,22 @@
+added_at: '2026-11-16'
+approved_count: 0
+check_interval_hours: 12
+connector: eventbrite_org
+default_area: omaha
+feed_url: null
+follow_links: null
+found_via: suggestion
+html_rules: null
+id: src_tech-omaha
+name: Tech Omaha
+notes: 'Eventbrite (gate V2): read through the API; ended Eventbrite-only events are deleted. Suggested
+  via the site (Winter Party ticket page) and added by the owner 2026-11-16 as the organizer page, on
+  probation like other hand-added sources. techomaha.com itself refuses bots (403).'
+organizer_id: org_tech-omaha
+origin: suggested
+rate_limit_seconds: 10
+rejected_count: 0
+status: active
+trust: probationary
+updated_at: '2026-11-16'
+url: https://www.eventbrite.com/o/18062423055

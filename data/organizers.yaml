@@ -13,6 +13,12 @@
   id: org_nenug
   name: (NE)NUG Nebraska Networking User Group
   url: https://www.usnua.com/
+- aliases:
+  - Omaha AWS
+  home_city: Omaha
+  id: org_omaha-aws
+  name: Omaha Amazon Web Services
+  url: https://www.meetup.com/omaha-amazon-web-services-meetup/
 - aliases: []
   home_city: Omaha
   id: org_omaha-azure
@@ -28,6 +34,12 @@
   id: org_prairie-python
   name: Prairie Python
   url: https://www.meetup.com/prairie-python/
+- aliases:
+  - TechOmaha
+  home_city: Omaha
+  id: org_tech-omaha
+  name: Tech Omaha
+  url: https://www.eventbrite.com/o/18062423055
 - aliases: []
   home_city: Lincoln
   id: org_unl-computing
@@ -43,12 +55,6 @@
   id: org_uno
   name: University of Nebraska Omaha
   url: https://www.unomaha.edu/
-- aliases:
-  - Omaha AWS
-  home_city: Omaha
-  id: org_omaha-aws
-  name: Omaha Amazon Web Services
-  url: https://www.meetup.com/omaha-amazon-web-services-meetup/
 - aliases:
   - WiTH
   home_city: Omaha
