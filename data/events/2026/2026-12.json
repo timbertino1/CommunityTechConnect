@@ -330,7 +330,6 @@
     "all_day": false,
     "area": "omaha",
     "categories": [
-      "networking-infra",
       "career-networking"
     ],
     "changed_at": null,
@@ -338,15 +337,14 @@
     "first_seen": "2026-11-16T23:45:31Z",
     "id": "evt_9a0b1234ffd6",
     "inferred": [
-      "categories",
       "area"
     ],
-    "last_verified": "2026-11-16T23:45:31Z",
+    "last_verified": "2026-11-17T04:50:14Z",
     "listings": [
       {
         "content_hash": "1ddfcab243c90f64befb835bf937009c042d9e2e4cf4d27f5e1cd5afbd488e0b",
         "external_id": "2004136839236",
-        "last_seen": "2026-11-16T23:45:31Z",
+        "last_seen": "2026-11-17T04:50:14Z",
         "missing_runs": 1,
         "source_id": "src_tech-omaha",
         "url": "https://www.eventbrite.com/e/tech-omaha-winter-party-2026-tickets-2004136839236"
@@ -481,12 +479,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-16T23:45:31Z",
+    "last_verified": "2026-11-17T04:50:14Z",
     "listings": [
       {
         "content_hash": "74cffbbda8a4172fa34b57971b5e339624e06b28b1e4e5785408338122ace80e",
         "external_id": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/",
-        "last_seen": "2026-11-16T23:45:31Z",
+        "last_seen": "2026-11-17T04:50:14Z",
         "missing_runs": 1,
         "source_id": "src_ngda-omaha",
         "url": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/"
