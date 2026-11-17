@@ -1,5 +1,5 @@
 added_at: '2026-11-16'
-approved_count: 0
+approved_count: 1
 check_interval_hours: 12
 connector: eventbrite_org
 default_area: omaha
@@ -18,5 +18,5 @@ rate_limit_seconds: 10
 rejected_count: 0
 status: active
 trust: probationary
-updated_at: '2026-11-16'
+updated_at: '2026-11-17'
 url: https://www.eventbrite.com/o/18062423055
