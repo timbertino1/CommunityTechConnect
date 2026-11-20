@@ -1283,12 +1283,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-20T03:45:42Z",
+    "last_verified": "2026-11-20T18:55:50Z",
     "listings": [
       {
         "content_hash": "073f3619ed38cf3b726ff6f5997fcb8c443da07617b40885bac70c65c94679a5",
         "external_id": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/",
-        "last_seen": "2026-11-20T03:45:42Z",
+        "last_seen": "2026-11-20T18:55:50Z",
         "missing_runs": 0,
         "source_id": "src_nebraska-data-analytics-forum",
         "url": "https://www.meetup.com/nebraska-data-analytics-forum/events/317060689/"
@@ -1517,12 +1517,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-20T03:45:42Z",
+    "last_verified": "2026-11-20T18:55:50Z",
     "listings": [
       {
         "content_hash": "d50916e56490c76dab93d9f595db4df3080c0e3f990d231a1637f0f641e92fb7",
         "external_id": "https://www.meetup.com/lincoln-code/events/317499692/",
-        "last_seen": "2026-11-20T03:45:42Z",
+        "last_seen": "2026-11-20T18:55:50Z",
         "missing_runs": 1,
         "source_id": "src_lincoln-code",
         "url": "https://www.meetup.com/lincoln-code/events/317499692/"
