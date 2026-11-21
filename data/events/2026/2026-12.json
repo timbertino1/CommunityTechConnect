@@ -153,12 +153,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-20T18:55:50Z",
+    "last_verified": "2026-11-21T03:35:26Z",
     "listings": [
       {
         "content_hash": "99403ef16d03a472ec9d783dafb89507870728467fa71fec5982506830a3c2bd",
         "external_id": "https://www.meetup.com/ai_omaha/events/317492877/",
-        "last_seen": "2026-11-20T18:55:50Z",
+        "last_seen": "2026-11-21T03:35:26Z",
         "missing_runs": 1,
         "source_id": "src_ai-omaha",
         "url": "https://www.meetup.com/ai_omaha/events/317492877/"
@@ -386,12 +386,12 @@
     "inferred": [
       "area"
     ],
-    "last_verified": "2026-11-20T18:55:50Z",
+    "last_verified": "2026-11-21T03:35:26Z",
     "listings": [
       {
         "content_hash": "1ddfcab243c90f64befb835bf937009c042d9e2e4cf4d27f5e1cd5afbd488e0b",
         "external_id": "2004136839236",
-        "last_seen": "2026-11-20T18:55:50Z",
+        "last_seen": "2026-11-21T03:35:26Z",
         "missing_runs": 1,
         "source_id": "src_tech-omaha",
         "url": "https://www.eventbrite.com/e/tech-omaha-winter-party-2026-tickets-2004136839236"
@@ -526,15 +526,23 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-20T18:55:50Z",
+    "last_verified": "2026-11-21T03:35:26Z",
     "listings": [
       {
         "content_hash": "74cffbbda8a4172fa34b57971b5e339624e06b28b1e4e5785408338122ace80e",
         "external_id": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/",
         "last_seen": "2026-11-20T18:55:50Z",
-        "missing_runs": 1,
+        "missing_runs": 2,
         "source_id": "src_ngda-omaha",
         "url": "https://www.meetup.com/ngda-omaha/events/nvvxftyjcqbnb/"
+      },
+      {
+        "content_hash": "76d3fce6f1c3706593643a1cc849e726aa6db89022e212968699f1aaf95c93cb",
+        "external_id": "https://www.meetup.com/ngda-omaha/events/317521337/",
+        "last_seen": "2026-11-21T03:35:26Z",
+        "missing_runs": 1,
+        "source_id": "src_ngda-omaha",
+        "url": "https://www.meetup.com/ngda-omaha/events/317521337/"
       }
     ],
     "location": {
@@ -604,6 +612,53 @@
     "summary": "We’ve partnered with Omaha Street School to offer a welding class to a group of high school students. This class takes place most Mondays and Wednesdays in September through December. During this class, the welding shop will be reserved and won’t be available to members. The rest of the facility will be available to our members.",
     "title": "OSS Welding",
     "tz_assumed": false,
+    "visibility": "shown"
+  },
+  {
+    "all_day": false,
+    "area": "omaha",
+    "categories": [
+      "general-tech"
+    ],
+    "changed_at": null,
+    "end": "2026-12-16T01:00:00Z",
+    "first_seen": "2026-11-21T03:35:26Z",
+    "id": "evt_c1af6f095194",
+    "inferred": [
+      "categories",
+      "source_tz"
+    ],
+    "last_verified": "2026-11-21T03:35:26Z",
+    "listings": [
+      {
+        "content_hash": "9082520c09934489bb14baac73b98cb479f2d0238b9594777ac3b75302c3d0da",
+        "external_id": "https://www.meetup.com/witheartland/events/317505151/",
+        "last_seen": "2026-11-21T03:35:26Z",
+        "missing_runs": 1,
+        "source_id": "src_with",
+        "url": "https://www.meetup.com/witheartland/events/317505151/"
+      }
+    ],
+    "location": {
+      "address": "Cunningham's Pub and Grill, 10904 W Dodge Rd, Omaha, NE",
+      "city": "Omaha",
+      "online": false,
+      "state": "NE",
+      "venue": "Cunningham's Pub and Grill"
+    },
+    "organizer_id": "org_with",
+    "original_unavailable": false,
+    "original_url": "https://www.meetup.com/witheartland/events/317505151/",
+    "published_at": null,
+    "review_state": "pending_review",
+    "series_key": null,
+    "slug": "jingle-mingle-2026-a-time-for-fellowship-fun-and-giving-back-2026-12-15",
+    "source_tz": "America/Chicago",
+    "start": "2026-12-15T23:00:00Z",
+    "status": "scheduled",
+    "summary": "Holiday lights, tech vibes, and community spirit, Jingle Mingle 2026 is here! Join Women in Technology of the Heartland for our annual Jingle Mingle, a jo",
+    "title": "Jingle Mingle 2026! A Time for Fellowship, Fun and Giving Back",
+    "tz_assumed": true,
     "visibility": "shown"
   },
   {
