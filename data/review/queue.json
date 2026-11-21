@@ -781,5 +781,14 @@
     "kind": "event",
     "reason": "new event from a probationary source",
     "ref": "evt_1e97163a4f57"
+  },
+  {
+    "created": "2026-11-21T03:35:26Z",
+    "decided_in_pr": null,
+    "decision": "pending",
+    "id": "rev_976f352dafd5",
+    "kind": "event",
+    "reason": "new event from a probationary source",
+    "ref": "evt_c1af6f095194"
   }
 ]
