@@ -1517,12 +1517,12 @@
       "categories",
       "source_tz"
     ],
-    "last_verified": "2026-11-24T06:32:40Z",
+    "last_verified": "2026-11-24T20:57:32Z",
     "listings": [
       {
         "content_hash": "d50916e56490c76dab93d9f595db4df3080c0e3f990d231a1637f0f641e92fb7",
         "external_id": "https://www.meetup.com/lincoln-code/events/317499692/",
-        "last_seen": "2026-11-24T06:32:40Z",
+        "last_seen": "2026-11-24T20:57:32Z",
         "missing_runs": 1,
         "source_id": "src_lincoln-code",
         "url": "https://www.meetup.com/lincoln-code/events/317499692/"
