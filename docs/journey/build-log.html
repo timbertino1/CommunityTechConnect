@@ -1599,6 +1599,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <div class="notes">
       <div class="note hi"><div><h3>Oct 23&ndash;24: the hunt starts finding real groups</h3><p>With the mention step capped at 10 minutes, obvious non-sources (job boards, encyclopedias, social media) skipped before any fetch, the most promising candidates checked first, and one malformed link no longer able to crash the run, the weekly hunt found Lincoln.Code, the Nebraska Data and Analytics Forum, NETA, the Claude Code Developers Night Out and the Tech Nebraska Summit, among others.</p></div></div>
+      <div class="note hi"><div><h3>Nov 24: the checkpoint closes, and the hunt goes quiet</h3><p>A month of weekly runs added 12 sources through three kinds of channel, turned away out-of-state and non-tech sites, and never published a loose mention. No single run did all three, and none has added anything since Oct 24. I checked whether that was a bug: the Meetup reader read upcoming meetings for two active groups fine, and six Omaha groups it had flagged really have nothing scheduled. The hunt found the easy groups in its first week. I called the checkpoint passed.</p></div></div>
       <div class="note"><div><h3>Lincoln, England</h3><p>One "Lincoln" group it found meets in Lincoln, England. Its event pages said so (country: GB); the reader just didn't look. Now any event whose page names a country other than the US is dropped (PR #82).</p></div></div>
       <div class="note"><div><h3>Not every Omaha calendar is about tech</h3><p>A gap check added "Meetings | OmahaAA.org": the Omaha area's Alcoholics Anonymous meetings calendar. It was removed before any of its meetings reached review, and the site is now on the list of addresses discovery skips (PR #100).</p></div></div>
       <div class="note hi"><div><h3>The inbox that threw everything away</h3><p>I subscribed the new newsletter inbox to Silicon Prairie News and waited. Nothing arrived. The inbox only accepts mail from senders on an allow-list, and the list was empty, so it had been quietly dropping every email, including the ones I was waiting for. One line of configuration and a redeploy later, it's listening.</p></div></div>
@@ -2124,7 +2125,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <p class="eyebrow">Meanwhile, the weekly hunt</p>
       <h2>Teaching it where to look</h2>
     </div>
-    <p class="lede">One checkpoint from Phase 4 is still open: new groups found through at least three different kinds of channel. Two manual runs on Oct 24 and 25 showed why it hadn't happened yet, and each one turned up something to fix.</p>
+    <p class="lede">One checkpoint from Phase 4 was still open then (it closed Nov 24): new groups found through at least three different kinds of channel. Two manual runs on Oct 24 and 25 showed why it hadn't happened yet, and each one turned up something to fix.</p>
     <div class="notes">
       <div class="note hi"><div><h3>41 groups from TechOmaha</h3><p>TechOmaha keeps the longest list of Omaha user groups, but its site turns bots away. So I pasted the list in. Matched against TechOmaha's open dataset for links and cleaned by hand, it added 41 groups the site didn't know, 22 of them on Meetup. Five a week get checked. The first five had nothing scheduled: four look dormant, and Omaha AWS meets monthly but hadn't posted its next one yet. It gets another look in 30 days.</p></div></div>
       <div class="note"><div><h3>A feed that said no</h3><p>I added the University of Nebraska Omaha's news feed after checking its robots.txt by eye. The bot's own fetcher read it properly, found "no .rss files for any bot", and refused. The fetcher was right, and the feed came out the same day. Now I check feeds with the bot's fetcher, not by eye.</p></div></div>
@@ -2205,7 +2206,7 @@ netechconnect.com/feeds/
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Nov 9, 2026</span>
+  <span>NETechConnect build log &middot; updated Nov 24, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
