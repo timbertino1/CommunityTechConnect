@@ -2,7 +2,8 @@
 
 **Date:** 2026-10-21 (America/Chicago evening; times below are UTC)
 **Task:** T105
-**Result:** Offline scenario passed (after one fix). The live run worked end to end but did **not**
+**Result (final, 2026-11-24): passed on the evidence of all live runs, closed by the owner. See
+"Closing review" at the end.** First result (Oct 21): offline scenario passed (after one fix). The live run worked end to end but did **not**
 meet the checkpoint: new sources came from two channel types, not three, and no candidate was
 rejected. The main cause is a missing setting, not code: `OPENAI_API_KEY` was never added to the
 `discovery` Environment (T073), so the AI has not run live. T105 stays open until a live run
@@ -108,6 +109,39 @@ then other group pages, then everything else. The per-run limit rises from 25 to
 and the first 18 to be evaluated are real Nebraska groups' pages (Lincoln AI, Lincoln Code,
 Omaha SQL User Group, Nebraska UX, NEB-RUG and others). The erepublic source is paused.
 
-## To pass
+## Closing review (Nov 24, 2026)
 
-Run `discover-sources` once more and check the three criteria. Record that run here.
+Fifteen live `discover-sources` runs have produced a data PR since Oct 21 (#37 to #249), most
+recently the scheduled run of Nov 23 (45290561899, PR #249). Instead of one more run, this review
+looks at all of them.
+
+| Criterion | Result |
+|---|---|
+| New probationary sources from ≥ 3 channel types | **Met across runs, never within one run.** Web search added 8 (dev.events, allevents.in, NETA, DigitalLincoln, Lincoln Code, Nebraska Data Analytics Forum, The Claude Code Developers Night Out, IP Pathways' Tech Nebraska Summit), gap checks 2 (events.govtech.com, infosec-conferences.com) and links on known pages 2 (cms.erepublic.com, madenewomaha.com), all between Oct 21 and Oct 24. All were added `probationary`; 6 were later paused by the trust rules or by hand |
+| Out-of-state and non-tech candidates rejected | **Met.** Outside Nebraska: glow.io (PR #126), govtra.com Fort Wayne (#182, #185). Not tech: sober.com (#98), ohmyomaha.com (#74), oldvinewineomaha.com (#213), events.unmc.edu (#249) |
+| Unresolved mentions not published | **Met.** Discovery never writes events, and no mention has been published |
+
+### Why no run has added a source since Oct 24
+
+The last 8 weekly runs added nothing. Of 537 candidates, 188 have no feed or event data, 168
+have no upcoming events, and most of the rest are noise. The 21 Meetup groups found through event
+platforms (Omaha Java, Omaha's Python Users Group, Omaha UX, Omaha DevOps, WP Omaha and others)
+were all marked "no upcoming events", mostly before the Meetup reading fix (#221, Nov 16), so the
+reader was re-checked on Nov 24, read-only, without AI and with nothing written:
+
+| Group | Result |
+|---|---|
+| Lincoln Code, NGDA Omaha (control: known upcoming meetings) | 1 and 2 upcoming meetings read |
+| NebraskaJS, Omaha DevOps, Omaha UX, Omaha Java, Omaha's Python Users Group, WP Omaha | 0 upcoming meetings |
+
+The reader works; those groups have nothing scheduled. Discovery found the easy sources in its
+first week and now mostly turns up dormant groups and noise. Each candidate that needs a look is
+re-checked every 30 days, so a dormant group that schedules a meeting can still be added later.
+
+**Lead for a person:** active groups that use Luma (NebraskaJS and two others) wait as "needs a
+look" because gate V3 reads Luma only through a calendar's iCal feed, which has to be added to
+`known_groups.yaml` by hand.
+
+**Decision:** the owner accepted the evidence across runs as passing T105 (2026-11-24). Each
+channel and rule has worked live; insisting on all three channels within one run would keep the
+checkpoint open with no change to make.

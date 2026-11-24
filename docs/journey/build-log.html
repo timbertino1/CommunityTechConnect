@@ -307,7 +307,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <p class="lede">I'm building NETechConnect in public: a free site that finds community tech events across Nebraska automatically and sends you to the organizer's page to sign up. This log follows the build one phase at a time.</p>
   <div class="meta">
     <span>Started <strong>Oct 16, 2026</strong></span>
-    <span>Live at <a href="https://netechconnect.com"><strong>netechconnect.com</strong></a> since Oct 25 &middot; Phases 1&ndash;3 and 5&ndash;10 done &middot; Phase 4 waits on its live checkpoint &middot; New: event feeds</span>
+    <span>Live at <a href="https://netechconnect.com"><strong>netechconnect.com</strong></a> since Oct 25 &middot; All ten phases done &middot; New: event feeds</span>
     <span>Repo <a href="https://github.com/timbertino1/CommunityTechConnect">timbertino1/CommunityTechConnect</a></span>
   </div>
 
@@ -316,7 +316,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li class="done"><div class="bar"></div><div class="lbl"><b>01</b>Setup</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>02</b>Foundation</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>03</b>Event list</div></li>
-      <li class="now"><div class="bar"><span style="width:94%"></span></div><div class="lbl"><b>04</b>Find new groups</div></li>
+      <li class="done"><div class="bar"></div><div class="lbl"><b>04</b>Find new groups</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>05</b>Calendar</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>06</b>Filters</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>07</b>Past events</div></li>
@@ -324,7 +324,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
       <li class="done"><div class="bar"></div><div class="lbl"><b>09</b>Suggestions</div></li>
       <li class="done"><div class="bar"></div><div class="lbl"><b>10</b>Polish &amp; launch</div></li>
     </ol>
-    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress (Phase 4's live checkpoint)</span><span><i></i>Up next</span></div>
+    <div class="rail-key"><span><i class="k-done"></i>Done</span><span><i class="k-now"></i>In progress</span><span><i></i>Up next</span></div>
   </nav>
 </header>
 
@@ -333,7 +333,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
   <button class="tab" role="tab" id="tab-phase-1" aria-controls="phase-1" aria-selected="false" tabindex="-1">Phase 1 &middot; Setup <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-2" aria-controls="phase-2" aria-selected="false" tabindex="-1">Phase 2 &middot; Foundation <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-3" aria-controls="phase-3" aria-selected="false" tabindex="-1">Phase 3 &middot; First live site <span class="pill ok">done</span></button>
-  <button class="tab" role="tab" id="tab-phase-4" aria-controls="phase-4" aria-selected="false" tabindex="-1">Phase 4 &middot; Find new groups <span class="pill now">now</span></button>
+  <button class="tab" role="tab" id="tab-phase-4" aria-controls="phase-4" aria-selected="false" tabindex="-1">Phase 4 &middot; Find new groups <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-design-b" aria-controls="design-b" aria-selected="false" tabindex="-1">New look <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-5" aria-controls="phase-5" aria-selected="false" tabindex="-1">Phase 5 &middot; Calendar <span class="pill ok">done</span></button>
   <button class="tab" role="tab" id="tab-phase-6" aria-controls="phase-6" aria-selected="false" tabindex="-1">Phase 6 &middot; Filters <span class="pill ok">done</span></button>
@@ -540,7 +540,7 @@ details.data table { margin-top: 8px; font-size: 0.85rem; }
           <tr><td class="num">01</td><td><b>Setup.</b> Repo, three projects, automatic checks, branch protection.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">02</td><td><b>Foundation.</b> Safe fetching, cleaning, data models and storage, time zones, the per-source runner, research checks.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">03</td><td><b>Browse upcoming events.</b> The first real site: a list of events from known sources. This is the MVP.</td><td><span class="status done">Done</span></td></tr>
-          <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status now">In progress</span></td></tr>
+          <tr><td class="num">04</td><td><b>Find unknown groups.</b> Web search, link-following, newsletters and gap checks discover new organizers.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">&middot;</td><td><b>New look.</b> Self-hosted type, a restyle, and a 3D map of Nebraska in the home page header.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">05</td><td><b>Calendar view.</b> Month and week views of the same events.</td><td><span class="status done">Done</span></td></tr>
           <tr><td class="num">06</td><td><b>Filters.</b> By area (Omaha, Lincoln, elsewhere in Nebraska, online), topic, dates and keyword.</td><td><span class="status done">Done</span></td></tr>
@@ -1564,7 +1564,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <p class="lede">So far the site only knows the groups I gave it. Phase 4 teaches it to find new ones every week: web searches, links from groups we already know, local news feeds, newsletters, and the event platforms. New finds start on probation, so nothing reaches the site until a person approves it.</p>
     <div class="stats">
-      <div class="stat"><span class="n">31<small> of 33</small></span><p>Phase 4 tasks done: everything but more newsletters and the live checkpoint.</p></div>
+      <div class="stat"><span class="n">32<small> of 33</small></span><p>Phase 4 tasks done. The last, more newsletters for the inbox, is on hold by choice.</p></div>
       <div class="stat"><span class="n">1,246</span><p>Automated tests across the project, all passing, plus 11 in a real browser.</p></div>
       <div class="stat"><span class="n">5</span><p>New secrets in the discovery environment: AI, search, and three for the newsletter inbox.</p></div>
     </div>
@@ -1575,7 +1575,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A second opinion from AI</b><small>Only for events the rules can't decide, and for reading newsletters. Fenced, cached, capped at $1 a month, and it can't publish anything. Merged in PR #35.</small></div><span class="ids">T079&ndash;T083</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Finders, evaluation and the weekly run</b><small>Four finders, a check for each candidate site, mentions matched to real event pages, and a Monday run with its own data PR.</small></div><span class="ids">T086&ndash;T095</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Newsletter inbox and platforms</b><small>events@netechconnect.com is live and subscribed to Silicon Prairie News. Meetup groups and Luma calendars are read through their public feeds, Eventbrite through its API. PRs #39&ndash;#42 and #51.</small></div><span class="ids">T096&ndash;T104</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Checkpoint: a real weekly run</b><small>Three fixes later (PRs #66, #68, #70) the hunt finishes in about 40 minutes and adds real Nebraska groups: 7 are active so far. But they came through only two kinds of channel, web search and gap checks, and the checkpoint asks for three.</small></div><span class="ids">T105</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>Checkpoint: a real weekly run</b><small>Passed on a month of live runs. It added 12 sources through three kinds of channel (web search, gap checks and links on pages we already knew), turned away out-of-state and non-tech sites, and never published a loose mention. No single run hit all three channels, and since late October it has found nothing new: mostly noise, and Omaha Meetup groups with nothing scheduled.</small></div><span class="ids">T105</span></li>
     </ul>
   </section>
 
@@ -1599,6 +1599,7 @@ The launch check caught one quiet bug: wrong addresses showed the home page inst
     </div>
     <div class="notes">
       <div class="note hi"><div><h3>Oct 23&ndash;24: the hunt starts finding real groups</h3><p>With the mention step capped at 10 minutes, obvious non-sources (job boards, encyclopedias, social media) skipped before any fetch, the most promising candidates checked first, and one malformed link no longer able to crash the run, the weekly hunt found Lincoln.Code, the Nebraska Data and Analytics Forum, NETA, the Claude Code Developers Night Out and the Tech Nebraska Summit, among others.</p></div></div>
+      <div class="note hi"><div><h3>Nov 24: the checkpoint closes, and the hunt goes quiet</h3><p>A month of weekly runs added 12 sources through three kinds of channel, turned away out-of-state and non-tech sites, and never published a loose mention. No single run did all three, and none has added anything since Oct 24. I checked whether that was a bug: the Meetup reader read upcoming meetings for two active groups fine, and six Omaha groups it had flagged really have nothing scheduled. The hunt found the easy groups in its first week. I called the checkpoint passed.</p></div></div>
       <div class="note"><div><h3>Lincoln, England</h3><p>One "Lincoln" group it found meets in Lincoln, England. Its event pages said so (country: GB); the reader just didn't look. Now any event whose page names a country other than the US is dropped (PR #82).</p></div></div>
       <div class="note"><div><h3>Not every Omaha calendar is about tech</h3><p>A gap check added "Meetings | OmahaAA.org": the Omaha area's Alcoholics Anonymous meetings calendar. It was removed before any of its meetings reached review, and the site is now on the list of addresses discovery skips (PR #100).</p></div></div>
       <div class="note hi"><div><h3>The inbox that threw everything away</h3><p>I subscribed the new newsletter inbox to Silicon Prairie News and waited. Nothing arrived. The inbox only accepts mail from senders on an allow-list, and the list was empty, so it had been quietly dropping every email, including the ones I was waiting for. One line of configuration and a redeploy later, it's listening.</p></div></div>
@@ -2085,7 +2086,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
     </div>
     <p class="lede">Every feature is built. Phase 10 checks the whole thing: accessibility on every page, speed on a slow phone, a security review, a tested backup, and the routines that keep it running. Then the launch, and the move to netechconnect.com.</p>
     <div class="stats">
-      <div class="stat"><span class="n">14<small> of 15</small></span><p>Phase 10 tasks settled. The last, a cost check after two weeks live, is under way.</p></div>
+      <div class="stat"><span class="n">15<small> of 15</small></span><p>Phase 10 tasks settled. The last, a cost check, was dropped: spending stayed far under budget.</p></div>
       <div class="stat"><span class="n">171<small> of 171</small></span><p>Files of the live site rebuilt byte for byte from a fresh copy of the repository.</p></div>
       <div class="stat"><span class="n">1.83<small> s</small></span><p>Until the main content shows on a simulated slow phone, from 1.97 s, after trimming the fonts.</p></div>
     </div>
@@ -2100,7 +2101,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A second security review, dropped</b><small>The plan called for someone else to review it too. I decided against it: the site has no accounts, logins or personal data, and its only input from strangers is the suggest form. My own review and the automated checks stand.</small></div><span class="ids">T140</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>The final run, end to end</b><small>Every quickstart scenario again on the live system, from discovery to the page. PR #130.</small></div><span class="ids">T149</span></li>
       <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>netechconnect.com</b><small>Live on Oct 25: the domain, a www redirect, the suggest form's spam check updated, and the security headers checked on the new address.</small></div><span class="ids">T156</span></li>
-      <li class="wait"><span class="mark" aria-hidden="true">&middot;</span><div><b>Cost check</b><small>Two weeks of live runs measured against the ~$5 budget. So far: about a cent of AI a month, and everything else on free plans.</small></div><span class="ids">T142</span></li>
+      <li class="done"><span class="mark" aria-hidden="true">&#10003;</span><div><b>A cost check, dropped</b><small>The plan called for measuring two weeks of live runs against the ~$5 budget. The early numbers made it moot: about a cent of AI a month, and everything else on free plans.</small></div><span class="ids">T142</span></li>
     </ul>
   </section>
 
@@ -2124,7 +2125,7 @@ Then I noticed the form was only linked from the footer. It's in the header now.
       <p class="eyebrow">Meanwhile, the weekly hunt</p>
       <h2>Teaching it where to look</h2>
     </div>
-    <p class="lede">One checkpoint from Phase 4 is still open: new groups found through at least three different kinds of channel. Two manual runs on Oct 24 and 25 showed why it hadn't happened yet, and each one turned up something to fix.</p>
+    <p class="lede">One checkpoint from Phase 4 was still open then (it closed Nov 24): new groups found through at least three different kinds of channel. Two manual runs on Oct 24 and 25 showed why it hadn't happened yet, and each one turned up something to fix.</p>
     <div class="notes">
       <div class="note hi"><div><h3>41 groups from TechOmaha</h3><p>TechOmaha keeps the longest list of Omaha user groups, but its site turns bots away. So I pasted the list in. Matched against TechOmaha's open dataset for links and cleaned by hand, it added 41 groups the site didn't know, 22 of them on Meetup. Five a week get checked. The first five had nothing scheduled: four look dormant, and Omaha AWS meets monthly but hadn't posted its next one yet. It gets another look in 30 days.</p></div></div>
       <div class="note"><div><h3>A feed that said no</h3><p>I added the University of Nebraska Omaha's news feed after checking its robots.txt by eye. The bot's own fetcher read it properly, found "no .rss files for any bot", and refused. The fetcher was right, and the feed came out the same day. Now I check feeds with the bot's fetcher, not by eye.</p></div></div>
@@ -2205,7 +2206,7 @@ netechconnect.com/feeds/
 </main>
 
 <footer class="foot">
-  <span>NETechConnect build log &middot; updated Nov 9, 2026</span>
+  <span>NETechConnect build log &middot; updated Nov 24, 2026</span>
   <span>Built in public with Claude Code</span>
 </footer>
 </div>
