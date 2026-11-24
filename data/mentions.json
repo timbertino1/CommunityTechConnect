@@ -108,7 +108,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI - Digital Lincoln"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -132,7 +132,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "How to Meet New People in Omaha"
   },
   {
@@ -190,7 +190,7 @@
     "title": "Chat AI Meetup – Exploring Generative AI | Digital Lincoln — Digital Lincoln"
   },
   {
-    "attempts": 2,
+    "attempts": 3,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -266,7 +266,7 @@
     "links": [],
     "organizer_hint": "Open Range",
     "place_hint": "Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week Launch Party in Ashland"
   },
   {
@@ -282,7 +282,21 @@
     "title": "The post updates from around the ecosystem, October 21 appeared first on Silicon Prairie News."
   },
   {
-    "attempts": 1,
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_1ec13932a0d4",
+    "links": [
+      "https://news.unl.edu/article/its-hosting-cybersecurity-awareness-month-events"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "ITS hosting cybersecurity awareness month events - Nebraska Today"
+  },
+  {
+    "attempts": 2,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -296,7 +310,7 @@
     "title": "Q&A with Lincoln TMT Managing Director Don More"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -318,11 +332,11 @@
     "links": [],
     "organizer_hint": "Startup Week organizers",
     "place_hint": "Omaha, Lincoln and Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week registrations and festivities across Omaha, Lincoln and Ashland"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -338,6 +352,18 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Wednesday, Dec. 9",
+    "event_id": null,
+    "id": "men_243128e71a73",
+    "links": [],
+    "organizer_hint": "Bio Nebraska with CISA",
+    "place_hint": "Lincoln? (unspecified)",
+    "resolution": "unresolved",
+    "title": "Lunch and Learn with CISA (Bio Nebraska)"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Nov. 17",
     "event_id": null,
     "id": "men_27c184abd418",
@@ -346,11 +372,11 @@
     ],
     "organizer_hint": "Startup Week / Techstars",
     "place_hint": "Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "The Techstars Founder Catalyst Program Showcase"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "news",
     "date_hint": null,
     "event_id": null,
@@ -362,7 +388,7 @@
     "title": "No upcoming Nebraska tech events found in the provided text"
   },
   {
-    "attempts": 0,
+    "attempts": 1,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -442,7 +468,7 @@
     ],
     "organizer_hint": "Pipeline Entrepreneurs",
     "place_hint": "Kansas City-based organization, serving Nebraska, Kansas and Missouri",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Founders have until Nov. 18 to apply for 2027 Pipeline programs"
   },
   {
@@ -548,7 +574,7 @@
     "links": [],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "In ‘rug pull,’ DED delayed new BIA contracts for months and left startups with few answers"
   },
   {
@@ -604,6 +630,20 @@
     "place_hint": null,
     "resolution": "unresolved",
     "title": "From hackathon idea to govtech startup serving Nebraska cities - Silicon Prairie News"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Monday during Startup Week",
+    "event_id": null,
+    "id": "men_467fc838bcbd",
+    "links": [
+      "https://siliconprairienews.com/"
+    ],
+    "organizer_hint": "Startup Week organizers (as referenced by SPN)",
+    "place_hint": "Ashland, Nebraska",
+    "resolution": "unresolved",
+    "title": "JumpStart Startup Week Launch Party"
   },
   {
     "attempts": 3,
@@ -687,6 +727,18 @@
   },
   {
     "attempts": 0,
+    "channel": "news",
+    "date_hint": "Saturday, Dec. 5",
+    "event_id": null,
+    "id": "men_510ea29707ce",
+    "links": [],
+    "organizer_hint": "Nebraska Innovation Campus",
+    "place_hint": "Nebraska Innovation Campus, Lincoln",
+    "resolution": "unresolved",
+    "title": "Hour of AI & Tech Fair"
+  },
+  {
+    "attempts": 0,
     "channel": "web_search",
     "date_hint": null,
     "event_id": null,
@@ -764,7 +816,7 @@
     ],
     "organizer_hint": null,
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week is back with ecosystem celebrations, networking and education"
   },
   {
@@ -868,7 +920,7 @@
     "links": [],
     "organizer_hint": "Open Range",
     "place_hint": "Omaha, Lincoln, Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week festivities across Omaha, Lincoln and Ashland during Startup Week"
   },
   {
@@ -922,7 +974,7 @@
     ],
     "organizer_hint": "Open Range",
     "place_hint": "Omaha, Lincoln and Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week festivities registration"
   },
   {
@@ -1064,7 +1116,7 @@
     "links": [],
     "organizer_hint": null,
     "place_hint": "University of Nebraska at Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "future of the Omaha STEM Ecosystem"
   },
   {
@@ -1104,7 +1156,7 @@
     ],
     "organizer_hint": "Startup Week",
     "place_hint": "Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Elevator Pitches and Prosecco"
   },
   {
@@ -1158,7 +1210,7 @@
     "links": [],
     "organizer_hint": "Startup Week",
     "place_hint": "Omaha, Lincoln and Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week festivities"
   },
   {
@@ -1184,7 +1236,7 @@
     "links": [],
     "organizer_hint": "Spur",
     "place_hint": "Grand Island, NE",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Spur AgConverge 2026"
   },
   {
@@ -1198,7 +1250,7 @@
     ],
     "organizer_hint": "Startup Week / Open Range",
     "place_hint": "Omaha (as part of Startup Week)",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "The Innovation in Business Panel"
   },
   {
@@ -1238,7 +1290,7 @@
     "links": [],
     "organizer_hint": "Techstars",
     "place_hint": "Millwork Commons",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Techstars Founder Catalyst Program Showcase"
   },
   {
@@ -1250,7 +1302,7 @@
     "links": [],
     "organizer_hint": "1 Million Cups Nebraska organizers and entrepreneurs from Omaha, Lincoln, Grand Island and Norfolk",
     "place_hint": "Lincoln",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "1 Million Cups Nebraska"
   },
   {
@@ -1358,7 +1410,7 @@
     ],
     "organizer_hint": "Startup Week / 1 Million Cups Nebraska",
     "place_hint": "Lincoln (startup networking events across Omaha, Lincoln, Norfolk and Grand Island join forces in Lincoln)",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "A first ever 1 Million Cups Nebraska"
   },
   {
@@ -1398,7 +1450,7 @@
     ],
     "organizer_hint": "Startup Week / UNeMed / panels",
     "place_hint": "Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "The Women’s Entrepreneurship Day"
   },
   {
@@ -1426,7 +1478,7 @@
     ],
     "organizer_hint": "Spur",
     "place_hint": "Grand Island",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Spur AgConverge 2026"
   },
   {
@@ -1608,7 +1660,7 @@
     "links": [],
     "organizer_hint": "Open Range",
     "place_hint": "Omaha, Lincoln and Ashland",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Startup Week festivities across Omaha, Lincoln and Ashland"
   },
   {
@@ -1678,7 +1730,7 @@
     ],
     "organizer_hint": "Startup Week",
     "place_hint": "Omaha",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "A Healthtech Showcase"
   },
   {
@@ -1698,6 +1750,18 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "Thursday, Nov. 19",
+    "event_id": null,
+    "id": "men_e140c9266f61",
+    "links": [],
+    "organizer_hint": "Open Range with UNeMed’s Idea Pub and various panels",
+    "place_hint": "Omaha",
+    "resolution": "discarded",
+    "title": "Women’s Entrepreneurship Day (Open Range’s Startup Week)"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Tuesday, Nov. 10",
     "event_id": null,
     "id": "men_e46dc44398df",
@@ -1706,6 +1770,30 @@
     "place_hint": "South Sioux City",
     "resolution": "discarded",
     "title": "APEX Accelerators event with Offutt AFB & Iowa National Guard"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Nov. 17-18, 2026",
+    "event_id": null,
+    "id": "men_e6a475770927",
+    "links": [],
+    "organizer_hint": "Spur Ventures / Spur (Ankit Chandra) and Silicon Prairie News coverage",
+    "place_hint": "Raising Nebraska agriculture education facility in Grand Island, Nebraska",
+    "resolution": "discarded",
+    "title": "Spur AgConverge 2026"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
+    "date_hint": "Thursday, Nov. 19",
+    "event_id": null,
+    "id": "men_e7ea28298cd6",
+    "links": [],
+    "organizer_hint": "Open Range/Startup Week events in Omaha",
+    "place_hint": "Omaha",
+    "resolution": "discarded",
+    "title": "Refugee and Immigrant Entrepreneur Summit"
   },
   {
     "attempts": 0,
@@ -1796,8 +1884,22 @@
     "links": [],
     "organizer_hint": "Spur Ventures",
     "place_hint": null,
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "Spur AgConverge conference"
+  },
+  {
+    "attempts": 0,
+    "channel": "web_search",
+    "date_hint": null,
+    "event_id": null,
+    "id": "men_f39214d222a2",
+    "links": [
+      "https://www.mitel.com/blog/mitel-user-group-event-lands-in-omaha"
+    ],
+    "organizer_hint": null,
+    "place_hint": null,
+    "resolution": "unresolved",
+    "title": "Mitel User Group (MUG) Event Lands in Omaha – A First-Time Success! | Mitel"
   },
   {
     "attempts": 0,
@@ -1816,6 +1918,18 @@
   {
     "attempts": 0,
     "channel": "news",
+    "date_hint": "June 12, 2027",
+    "event_id": null,
+    "id": "men_f6820f0364b9",
+    "links": [],
+    "organizer_hint": "Pitch Black Conference organizers",
+    "place_hint": "Lincoln",
+    "resolution": "unresolved",
+    "title": "Pitch Black Conference"
+  },
+  {
+    "attempts": 0,
+    "channel": "news",
     "date_hint": "Nov. 18",
     "event_id": null,
     "id": "men_f697a71a54ab",
@@ -1824,7 +1938,7 @@
     ],
     "organizer_hint": "Startup Week",
     "place_hint": "Lincoln",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "An AgTech Showcase"
   },
   {
@@ -1850,7 +1964,7 @@
     ],
     "organizer_hint": "Startup Week / Huskers game vs Ohio State",
     "place_hint": "Lincoln",
-    "resolution": "unresolved",
+    "resolution": "discarded",
     "title": "The Startup Week Tailgate"
   },
   {
